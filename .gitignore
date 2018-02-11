@@ -17,3 +17,6 @@
 
 # project files
 *.iml
+
+# target files
+target/
