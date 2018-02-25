@@ -42,16 +42,16 @@ pipeline {
                 }
             }
         }
-
-        post {
-             success {
-                  slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-                  slackSend(message: '', attachments: "[{'fallback': 'Link to SonarQube Report', color: '#FF00FF', 'actions': [{'type': 'button', 'text': 'SonarQube Report', 'url': 'http://ec2-18-220-143-170.us-east-2.compute.amazonaws.com:9000/dashboard?id=edu.northeastern.cs5500%3Acs5500-project-team207'}]}]")
-              }
-              failure {
-                  slackSend(color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-                  slackSend(message: '', attachments: "[{'fallback': 'Link to SonarQube Report', color: '#FF00FF', 'actions': [{'type': 'button', 'text': 'SonarQube Report', 'url': 'http://ec2-18-220-143-170.us-east-2.compute.amazonaws.com:9000/dashboard?id=edu.northeastern.cs5500%3Acs5500-project-team207'}]}]")
-              }
-        	}
    }
+
+    post {
+         success {
+              slackSend(color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+              slackSend(message: '', attachments: "[{'fallback': 'Link to SonarQube Report', color: '#FF00FF', 'actions': [{'type': 'button', 'text': 'SonarQube Report', 'url': 'http://ec2-18-220-143-170.us-east-2.compute.amazonaws.com:9000/dashboard?id=edu.northeastern.cs5500%3Acs5500-project-team207'}]}]")
+          }
+          failure {
+              slackSend(color: '#FF0000', message: "FAILED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+              slackSend(message: '', attachments: "[{'fallback': 'Link to SonarQube Report', color: '#FF00FF', 'actions': [{'type': 'button', 'text': 'SonarQube Report', 'url': 'http://ec2-18-220-143-170.us-east-2.compute.amazonaws.com:9000/dashboard?id=edu.northeastern.cs5500%3Acs5500-project-team207'}]}]")
+          }
+        }
 }
