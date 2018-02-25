@@ -7,9 +7,9 @@ pipeline {
    }
    stages {
        stage('Start') {
-            steps {
+           steps {
               slackSend(color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
-            }
+           }
        }
        stage('Build') {
            steps {
