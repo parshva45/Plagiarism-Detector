@@ -5,7 +5,11 @@ pipeline {
            args '-v /root/.m2:/root/.m2'
        }
    }
-
+   stage('Start') {
+        steps {
+          slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+        }
+   }
    stages {
        stage('Build') {
            steps {
