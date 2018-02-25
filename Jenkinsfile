@@ -19,7 +19,7 @@ pipeline {
                sh 'mvn test'
            }
        }
-        stage( 'SonarQube' ) {
+        stage('SonarQube') {
               	steps {
               		withSonarQubeEnv('SonarQube') {
               			sh ' mvn clean install '
@@ -28,10 +28,10 @@ pipeline {
               	}
               }
 
-        stage( 'Quality' ) {
+        stage('Quality') {
             steps {
                 sh 'sleep 30'
-                timeout(time: 10 , unit: 'SECONDS' ) {
+                timeout(time:10, unit:'SECONDS') {
                 retry(5) {
                     script {
                     def qg = waitForQualityGate()
