@@ -10,13 +10,13 @@ pipeline {
        stage('Build') {
            steps {
                echo "Building"
-               sh 'mvn compile'
+               sh 'mvn -f project/pom.xml compile'
            }
        }
        stage('Test'){
            steps {
                echo "Testing"
-               sh 'mvn test'
+               sh 'mvn -f project/pom.xml test'
            }
        }
        stage('Deploy') {
