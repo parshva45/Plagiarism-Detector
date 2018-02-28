@@ -20,3 +20,6 @@
 
 # target files
 target/
+
+#node packeges
+node_modules/
