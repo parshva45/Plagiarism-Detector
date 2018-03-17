@@ -1,0 +1,19 @@
+<ul class="list-group">
+    <li class="list-group-item text-muted">Activity <i class="fa fa-dashboard fa-1x"></i></li>
+    <li class="list-group-item text-right">
+        <span class="pull-left"><strong>Tickets</strong></span>
+        <span ng-bind="model.user.tickets.length"></span>
+    </li>
+    <li class="list-group-item text-right">
+        <span class="pull-left"><strong>Comments</strong></span>
+        <span ng-bind="model.user.comments.length"></span>
+    </li>
+    <li class="list-group-item text-right">
+        <span class="pull-left"><strong>Followers</strong></span>
+        <span ng-bind="model.user.followed.length"></span>
+    </li>
+    <li class="list-group-item text-right">
+        <span class="pull-left"><strong>Following</strong></span>
+        <span ng-bind="model.user.following.length"></span>
+    </li>
+</ul>

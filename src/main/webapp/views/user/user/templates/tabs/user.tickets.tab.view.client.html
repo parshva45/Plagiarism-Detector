@@ -1,0 +1,52 @@
+<br />
+<div ng-if="!model.user.tickets.length"> No Tickets </div>
+
+<div class="alert alert-danger" ng-show="error">
+    {{error}}
+</div>
+
+<div class="alert alert-success" ng-show="message">
+    {{message}}
+</div>
+
+<div class="timeline">
+    <div class="timeline-event" ng-repeat="ticket in model.user.tickets" ng-controller="TicketDetails as ticketModel"
+         ng-init="ticketModel.ticket=ticket; ticketModel.index=$index; ticketModel.render()">
+        <div class="card timeline-content">
+            <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" ng-src="{{ticketModel.imageSrc}}">
+            </div>
+            <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4" >
+                    {{ticketModel.ticketDetail.travelDate |  date:'M/d/yyyy'}}
+                    <i class="material-icons right">more_vert</i>
+                </span>
+                <span class="flow-text">
+                    {{ticketModel.ticketDetail.tripDetails.legs[0].origin}} -
+                    {{ticketModel.ticketDetail.tripDetails.legs[ticketModel.ticketDetail.tripDetails.legs.length-1].destination}}
+                </span>
+            </div>
+            <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">Flight Details<i class="material-icons right">close</i></span>
+                <div ng-bind="ticketModel.ticketDetail.travelDate |  date:'medium'"></div>
+                <div>
+                    <span>Price : </span>
+                    <span ng-bind="ticketModel.ticketDetail.price"></span>
+                </div>
+                <div>
+                    <span class="md-content2">Status</span>
+                    <span class="md-content2" ng-bind="ticketModel.ticketDetail.status"></span>
+                </div>
+                <br/>
+                <div>
+                    <a ng-click="model.open(ticketModel.ticketDetail.tripDetails)" class="btn btn-lg round green">Details</a>
+                </div>
+                <div ng-if="ticketModel.ticketDetail.status == 'CONFIRMED'">
+                    <a ng-click="model.cancelTicket(ticket)" class="btn btn-lg round red darken-4">Cancel</a>
+                </div>
+            </div>
+        </div>
+        <div class="timeline-badge blue white-text"><i class="material-icons">language</i></div>
+    </div>
+</div>
+

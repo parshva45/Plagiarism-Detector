@@ -1,0 +1,28 @@
+<div class="container">
+    <h1>Login</h1>
+
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
+    <a class="btn-floating btn-large waves-effect waves-light red pull-right" ng-href="/"><i class="material-icons">home</i></a>
+
+    <label for="username">Username</label>
+    <input ng-model="user.username"
+           id="username"
+           class="form-control"
+           placeholder="username"/>
+
+    <label for="password">Password</label>
+    <input ng-model="user.password"
+           id="password"
+           class="form-control"
+           type="password"
+           placeholder="password"/>
+
+    <a ng-click="model.login(user)" class="btn green darken-5">Login</a>
+    <a href="#register" class="btn  blue">Register</a>
+    <a href="/auth/google" class="btn red lighten-1">
+        <span class="fa fa-google-plus"></span>
+        Google
+    </a>
+</div>
