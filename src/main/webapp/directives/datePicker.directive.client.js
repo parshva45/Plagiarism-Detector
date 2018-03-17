@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module('BookYourTrip')
+        .module('PlagiarismDetector')
         .directive('bytDatetime', datetime);
 
     function datetime() {

@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("BookYourTrip")
+        .module("PlagiarismDetector")
         .controller("AdminCommentsDetails", commentLoader);
 
     function commentLoader(CommentsService, AirportService, UserService) {

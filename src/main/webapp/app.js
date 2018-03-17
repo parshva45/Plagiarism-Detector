@@ -1,4 +1,4 @@
 (function () {
     angular
-        .module("BookYourTrip", ["ngRoute", "textAngular", 'ngAnimate','ui.materialize', 'ui.bootstrap']);
+        .module("PlagiarismDetector", ["ngRoute", "textAngular", 'ngAnimate','ui.materialize', 'ui.bootstrap']);
 })();

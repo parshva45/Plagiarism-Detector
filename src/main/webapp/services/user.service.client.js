@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("BookYourTrip")
+        .module("PlagiarismDetector")
         .factory("UserService", userService);
 
     function userService($http) {
@@ -11,7 +11,6 @@
             "findUserById": findUserById,
             "createUser": register,
             "updateUser": updateUser,
-            "findUserByUserName": findUserByUserName,
             "deleteUser" : deleteUser,
             "isAdmin" :isAdmin,
             "updateProfile" :updateProfile,
@@ -78,10 +77,6 @@
                 .then(function (response) {
                     return response.data;
                 });
-        }
-
-        function findUserByUserName(username) {
-            return $http.get("/api/user?username="+username);
         }
 
         function updateUser(userId, newUser) {

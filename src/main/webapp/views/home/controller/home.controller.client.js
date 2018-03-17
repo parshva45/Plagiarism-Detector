@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("BookYourTrip")
+        .module("PlagiarismDetector")
         .controller("HomeController", homeController);
 
     function homeController(HomeService, $location, currentUser, UserService) {

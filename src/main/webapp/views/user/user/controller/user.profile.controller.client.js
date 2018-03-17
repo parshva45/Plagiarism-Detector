@@ -1,6 +1,6 @@
 (function() {
     angular
-        .module("BookYourTrip")
+        .module("PlagiarismDetector")
         .controller("UserProfileController", userProfileController);
 
     function userProfileController($location, $routeParams, UserService, currentUser) {

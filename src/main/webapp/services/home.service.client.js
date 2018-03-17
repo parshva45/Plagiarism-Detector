@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("BookYourTrip")
+        .module("PlagiarismDetector")
         .factory("HomeService", homeService);
 
     function homeService($http) {

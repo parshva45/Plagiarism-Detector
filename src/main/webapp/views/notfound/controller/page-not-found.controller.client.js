@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("BookYourTrip")
+        .module("PlagiarismDetector")
         .controller("NotFoundController", notFoundController);
 
     function notFoundController($location, currentUser, UserService) {

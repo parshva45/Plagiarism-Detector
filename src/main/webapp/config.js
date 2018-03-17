@@ -1,6 +1,6 @@
 (function(){
     angular
-        .module("BookYourTrip")
+        .module("PlagiarismDetector")
         .config(configuration);
 
     function configuration($routeProvider, $httpProvider) {

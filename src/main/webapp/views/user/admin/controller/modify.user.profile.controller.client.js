@@ -1,6 +1,6 @@
 (function() {
     angular
-        .module("BookYourTrip")
+        .module("PlagiarismDetector")
         .controller("ModifyProfileController", modifyProfileController);
 
     function modifyProfileController($location, $routeParams, UserService, adminUser, CommentsService) {

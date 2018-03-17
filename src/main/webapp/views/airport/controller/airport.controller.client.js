@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("BookYourTrip")
+        .module("PlagiarismDetector")
         .controller("AirportController", airportController);
 
     function airportController($routeParams, $location, AirportService, CommentsService, currentUser, UserService) {

@@ -1,6 +1,6 @@
 (function(){
     angular
-        .module("BookYourTrip")
+        .module("PlagiarismDetector")
         .controller("AdminController", adminController);
 
     function adminController($location, $uibModal, UserService, adminUser, CommentsService) {

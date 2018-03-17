@@ -1,4 +1,4 @@
-angular.module('BookYourTrip')
+angular.module('PlagiarismDetector')
     .directive('slider', slider);
 
 slider.$inject = ['$document'];
