@@ -26,22 +26,22 @@ public class RegisterEmail {
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication("spoiledtomatillos@gmail.com",
-                                "SpoiledTomatillosSpoiledTomatillos");
+                        return new PasswordAuthentication("msdteam207@gmail.com",
+                                "Spring2018Team207");
                     }
                 });
 
         try {
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("spoiledtomatillos@gmail.com"));
+            message.setFrom(new InternetAddress("msdteam207@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
 
                     InternetAddress.parse(email));
-            message.setSubject("Spoiled Tomatillos");
+            message.setSubject("PlagiarismDetector");
             message.setText("Dear " + name + ":" +
-                    "\n\n This is Spoiled Tomatillos! Thanks for using our products! :)" +
-                    "\n\n - Team 34");
+                    "\n\n This is PlagDetector! Thanks for Registering! :)" +
+                    "\n\n - Team 207");
 
             Transport.send(message);
 
