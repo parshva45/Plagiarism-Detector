@@ -8,8 +8,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>cs5500-plagarismdetector-team207</name>
-	<description>Plagarism Detector BackEnd</description>
+	<name>cs5500-plagiarismdetector-team207</name>
+	<description>Plagiarism Detector BackEnd</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
