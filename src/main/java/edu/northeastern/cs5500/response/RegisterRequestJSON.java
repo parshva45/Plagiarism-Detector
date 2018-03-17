@@ -6,7 +6,7 @@ package edu.northeastern.cs5500.response;
 public class RegisterRequestJSON {
     private String username;
     private String password;
-    private String email;
+    private String emailId;
 
     public String getUsername() {
         return username;
@@ -34,16 +34,16 @@ public class RegisterRequestJSON {
         return this;
     }
 
-    public String getEmail() {
-        return email;
+    public String getEmailId() {
+        return emailId;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmailId(String email) {
+        this.emailId = email;
     }
 
     public RegisterRequestJSON withEmail(String email) {
-        this.setEmail(email);
+        this.setEmailId(email);
         return this;
     }
 }
