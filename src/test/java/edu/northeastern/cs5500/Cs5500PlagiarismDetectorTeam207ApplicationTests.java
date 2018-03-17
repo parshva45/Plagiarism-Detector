@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class Cs5500ProjectApplicationTests {
+public class Cs5500PlagiarismDetectorTeam207ApplicationTests {
 
 	@Test
 	public void contextLoads() {

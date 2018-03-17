@@ -1,0 +1,40 @@
+<div class="page-flexbox-wrapper">
+    <header>
+        <nav class="nav-wrapper blue lighten-2" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" ng-click="isNavCollapsed = !isNavCollapsed">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar white"></span>
+                        <span class="icon-bar white"></span>
+                        <span class="icon-bar white"></span>
+                    </button>
+                    <a class="brand-logo" ng-href="#/">PlagFinder</a>
+                </div>
+                <div class="collapse navbar-collapse pull-right" uib-collapse="!isNavCollapsed">
+                    <div class="container-fluid blue lighten-2">
+                        <ul class="nav navbar-nav">
+                            <li ng-show="!model.currentUser"><a href="#/login">Login</a></li>
+                            <li ng-show="!model.currentUser"><a href="#/register">Register</a></li>
+                            <li ng-show="model.currentUser"><a href="#/profile">Profile</a></li>
+                            <li ng-show="model.currentUser"><a ng-click="model.logout()">LogOut</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container not-found">
+            <img class="my-img" ng-src="../../../images/404.png">
+    </main>
+
+    <footer class="page-footer blue lighten-2">
+        <div class="footer-copyright">
+            <div class="container-fluid">
+                Made with <i class="glyphicon glyphicon-heart"></i> at Northeastern University
+                <a class="grey-text text-lighten-4 right" ng-href="https://singh-praveen-webdev.herokuapp.com" target="_blank">Praveen Singh</a>
+            </div>
+        </div>
+    </footer>
+</div>

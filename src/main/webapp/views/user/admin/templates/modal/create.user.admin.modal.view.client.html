@@ -1,0 +1,41 @@
+<div class="modal-header">
+    <h3 class="modal-title">Create User</h3>
+</div>
+<div ng-show="model.message" class="alert alert-info">
+    {{model.message}}
+</div>
+<div ng-hide="model.message" class="modal-body">
+    <div class="container">
+
+        <div ng-show="model.error" class="alert alert-danger">
+            {{model.error}}
+        </div>
+
+        <label for="username">Username</label>
+        <input ng-model="user.username"
+               id="username"
+               class="form-control"
+               placeholder="username"/>
+
+        <label for="password">Password</label>
+        <input ng-model="user.password"
+               id="password"
+               class="form-control"
+               type="password"
+               placeholder="password"/>
+
+        <label for="password2">Validate Password</label>
+        <input id="password2"
+               ng-model="user.password2"
+               class="form-control"
+               type="password"
+               placeholder="password"/>
+
+        <a ng-click="model.createUser(user)" class="btn">Register</a>
+        <a ng-click="$close()" class="btn red">Cancel</a>
+
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="$close()">Close</button>
+</div>

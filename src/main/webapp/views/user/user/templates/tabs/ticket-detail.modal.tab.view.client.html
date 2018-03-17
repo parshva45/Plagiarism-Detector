@@ -1,0 +1,80 @@
+<div class="modal-header">
+    <h3 class="modal-title">Ticket Details</h3>
+</div>
+<div class="modal-body">
+    <div class="container">
+        <div class="row">
+            <div class=" col s6 m6 l6">
+                <span class="md-body-2">Source : {{trips.legs[0].origin}}</span>
+            </div>
+            <div class=" col s6 m6 l6">
+                <span class="md-body-2">Destination : {{trips.legs[trips.legs.length - 1].destination}}</span>
+            </div>
+
+
+            <div class=" col s6 m6 l6">
+                <span class="md-body-2">Departure : {{trips.legs[0].departureTime | date:'medium'}}</span>
+            </div>
+            <div class=" col s6 m6 l6">
+                <span class="md-body-2">Arrival : {{trips.legs[0].arrivalTime | date:'medium'}}</span>
+            </div>
+
+            <div class="col s6 m6 l6">
+                <span class="md-body-2">Stops : {{trips.stops}}</span>
+            </div>
+            <div class="col s6 m6 l6">
+                <span class="md-title">Price : ${{trips.price}}</span>
+            </div>
+
+            <div class="input-field col s12 m12 l12 center">
+                <span class="md-title">Flight Details</span>
+            </div>
+        </div>
+
+        <ul>
+            <li ng-repeat="leg in trips.legs">
+                <blockquote>
+                    <div class=" col s12 m12 l12">
+                        <span class="md-body-2">Origin : {{leg.origin}}</span>
+                    </div>
+                    <div class=" col s12 m12 l12">
+                        <span class="md-body-2">Origin Airport : <a ng-href="#/airport/{{leg.originCode}}">{{leg.originAirport}}</a></span>
+                    </div>
+                    <div class=" col s12 m12 l12">
+                        <span class="md-body-2">Origin Terminal : {{leg.originTerminal}}</span>
+                    </div>
+                    <div class=" col s12 m12 l12">
+                        <span class="md-body-2">Flight No. : {{leg.flightCode}}</span>
+                    </div>
+                    <div class=" col s12 m12 l12">
+                        <span class="md-body-2">Carrier : {{leg.carrier}}</span>
+                    </div>
+                    <div class=" col s12 m12 l12">
+                        <span class="md-body-2">Aircraft : {{leg.aircraft}}</span>
+                    </div>
+                    <div class=" col s12 m12 l12">
+                        <span class="md-body-2">Meal : {{leg.meal}}</span>
+                    </div>
+                    <div class=" col s12 m12 l12">
+                        <span class="md-body-2">Departure : {{leg.departureTime | date:'medium'}}</span>
+                    </div>
+                    <div class=" col s12 m12 l12">
+                        <span class="md-body-2">Destination. : {{leg.destination}}</span>
+                    </div>
+                    <div class=" col s12 m12 l12">
+                        <span class="md-body-2">Destination Airport : <a ng-href="#/airport/{{leg.destinationCode}}">{{leg.destinationAirport}}</a></span>
+                    </div>
+                    <div class=" col s12 m12 l12">
+                        <span class="md-body-2">Destination Terminal : {{leg.destinationTerminal}}</span>
+                    </div>
+                    <div class="col s12 m12 l12">
+                        <span class="md-body-2">Arrival : {{leg.arrivalTime | date:'medium'}}</span>
+                    </div>
+                </blockquote>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" type="button" ng-click="$close()">Close</button>
+</div>

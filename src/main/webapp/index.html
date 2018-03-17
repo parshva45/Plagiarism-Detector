@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="BookYourTrip" ng-cloak>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.1/themes/smoothness/jquery-ui.css"/>
+    <link href="css/styles.css" rel="stylesheet">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!--<script src="js/vendor/jquery-3.1.1.min.js"></script>-->
+    <!--<script src="js/vendor/jquery-ui.min.js"></script>-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>-->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>-->
+
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+    <!-- JavaScript for: jQuery, angular, materialize, and angular-materialize. All of which are needed. -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.2.2/angular-materialize.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <!-- Angular Material Library -->
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular-route.js"></script>
+    <script src="./js/ui-bootstrap-tpls-2.5.0.min.js"></script>
+
+    <script src="js/textAngular-sanitize.min.js"></script>
+    <script src="js/textAngular-rangy.min.js"></script>
+    <script src="js/textAngular.min.js"></script>
+    <link href="css/textAngular.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <script src="directives/datePicker.directive.client.js"></script>
+    <script src="directives/slider.directive.client.js"></script>
+
+    <script src="filters/user.details.filter.client.js"></script>
+    <script src="filters/airport.details.filter.client.js"></script>
+    <script src="filters/comments.details.filter.client.js"></script>
+    <script src="filters/tickets.details.filter.client.js"></script>
+
+    <script src="services/home.service.client.js"></script>
+    <script src="services/user.service.client.js"></script>
+    <script src="services/comments.service.client.js"></script>
+    <script src="services/airport.service.client.js"></script>
+    <script src="services/ticket.service.client.js"></script>
+
+    <script src="views/notfound/controller/page-not-found.controller.client.js"></script>
+
+    <script src="views/home/controller/home.controller.client.js"></script>
+    <script src="views/flights/controller/flightDetails.controller.client.js"></script>
+
+
+    <script src="views/user/user/controller/login.controller.client.js"></script>
+    <script src="views/user/user/controller/register.controller.client.js"></script>
+    <script src="views/user/user/controller/profile.controller.client.js"></script>
+    <script src="views/user/user/controller/user.profile.controller.client.js"></script>
+    <script src="views/user/admin/controller/admin.controller.client.js"></script>
+    <script src="views/user/admin/controller/all-comments.admin.controller.client.js"></script>
+    <script src="views/user/admin/controller/modify.user.profile.controller.client.js"></script>
+
+    <script src="views/airport/controller/airport.controller.client.js"></script>
+
+    <script src="views/ticket/controller/ticket.details.controller.client.js"></script>
+    <script src="views/ticket/controller/ticket.confirmed.controller.client.js"></script>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>Book Your Flight</title>
+</head>
+<body>
+<div ng-view></div>
+</body>
+</html>

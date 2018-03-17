@@ -1,0 +1,44 @@
+<div class="container">
+    <h1>Register</h1>
+
+    <div ng-show="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
+
+    <div ng-show="model.message" class="alert alert-info">
+        {{model.message}}
+    </div>
+
+    <a class="btn-floating btn-large waves-effect waves-light red pull-right" ng-href="/"><i class="material-icons">home</i></a>
+
+    <label for="username">Username</label>
+    <input ng-model="user.username"
+           id="username"
+           class="form-control"
+           type="text"
+           placeholder="username"/>
+
+    <label for="emailId">Email</label>
+    <input ng-model="user.emailId"
+           id="email"
+           class="form-control"
+           type="email"
+           placeholder="Email"/>
+
+    <label for="password">Password</label>
+    <input ng-model="user.password"
+           id="password"
+           class="form-control"
+           type="password"
+           placeholder="password"/>
+
+    <label for="password2">Validate Password</label>
+    <input id="password2"
+           ng-model="user.password2"
+           class="form-control"
+           type="password"
+           placeholder="password"/>
+
+    <a ng-click="model.createUser(user)" class="btn">Register</a>
+    <a href="#/login" class="btn red">Cancel</a>
+</div>

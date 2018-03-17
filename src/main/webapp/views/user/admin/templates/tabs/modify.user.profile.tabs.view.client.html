@@ -1,0 +1,46 @@
+<br/>
+<div class="container-fluid">
+    <label for="first">First Name</label>
+    <input ng-model="model.userProfile.firstName"
+           id="first"
+           class="form-control"
+           placeholder="First Name"/>
+
+    <label for="last">Last Name</label>
+    <input ng-model="model.userProfile.lastName"
+           id="last"
+           class="form-control"
+           placeholder="Last name"/>
+
+    <label for="email">Email</label>
+    <input ng-model="model.userProfile.email"
+           id="email"
+           type="email"
+           class="form-control"
+           placeholder="email@example.com"/>
+
+    <label for="username">Username</label>
+    <input ng-model="model.userProfile.username"
+           id="username"
+           class="form-control"
+           placeholder="john123"/>
+
+    <label for="password">Password</label>
+    <input id="password"
+           ng-model="model.userPassword"
+           class="form-control"
+           type="password"
+           placeholder="password"/>
+
+    <label for="password2">Validate Password</label>
+    <input id="password2"
+           ng-model="model.userPasswordConfirm"
+           class="form-control"
+           type="password"
+           placeholder="password"/>
+
+    <div class="center">
+        <a ng-click="model.update(model.userProfile)" class="btn green">Update</a>
+        <a ng-click="model.deleteUser(model.user)" class="btn red darken-4">Delete</a>
+    </div>
+</div>

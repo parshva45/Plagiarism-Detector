@@ -1,0 +1,15 @@
+<ul class="list-group">
+    <li class="list-group-item text-muted">Profile</li>
+    <li class="list-group-item text-right">
+        <span class="pull-left"><strong>Joined</strong></span>
+        <span ng-bind="model.user.dateCreated | date:'shortDate'"></span>
+    </li>
+    <li class="list-group-item text-right">
+        <span class="pull-left"><strong>First Name</strong></span>
+        <span ng-bind="model.user.firstName"></span>
+    </li>
+    <li class="list-group-item text-right">
+        <span class="pull-left"><strong>Last Name</strong></span>
+        <span ng-bind="model.user.lastName"></span>
+    </li>
+</ul>
