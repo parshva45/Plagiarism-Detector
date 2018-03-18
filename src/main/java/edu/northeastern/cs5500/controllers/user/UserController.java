@@ -51,7 +51,7 @@ public class UserController {
         User user = new User()
                 .withUsername(request.getUsername())
                 .withPassword(request.getPassword())
-                .withEmail(request.getEmailId())
+                .withEmail(request.getEmail())
                 .withCreateDate(now)
                 .withRole(1);
         userRepository.save(user);
