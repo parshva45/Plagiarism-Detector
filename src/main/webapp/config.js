@@ -50,7 +50,7 @@
             })
             .when("/profile/:userId", {
                 templateUrl: "views/user/user/templates/user.profile.view.client.html",
-                controller: "UserProfileController",
+                controller: "ProfileController",
                 controllerAs: "model"
             })
             .when("/user/:userId", {

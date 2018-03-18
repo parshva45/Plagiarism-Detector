@@ -55,10 +55,10 @@ public class UserController {
                 .withCreateDate(now)
                 .withRole(1);
         userRepository.save(user);
-//        RegisterEmail.sendEmail(user.getUsername(), user.getEmail());
+        RegisterEmail.sendEmail(user.getUsername(), user.getEmail());
         return ResponseEntity.ok().body(
                 new RegisterResponseJSON()
-//                        .withId(User.getId())
+                        .withId(user.getId())
                         .withMessage("user created")
         );
     }
@@ -68,11 +68,14 @@ public class UserController {
             @RequestParam(name = "id", required = false) String id,
             @RequestParam(name = "username", required = false) String username) {
         List<User> result = new ArrayList<>();
+        System.out.println("praveen1 " + result.size());
+
         if (id != null) {
             result.add(userRepository.findById(Integer.parseInt(id)));
         } else if (username != null) {
             result.addAll(userRepository.findByUsernameLike("%" + username + "%"));
         }
+        System.out.println("praveen2 " + result.size());
         return ResponseEntity.ok().body(
                 new GetUserResponseJSON()
                         .withResult(result)

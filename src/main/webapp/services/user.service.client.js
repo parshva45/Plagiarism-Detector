@@ -9,6 +9,7 @@
             "logout": logout,
             "findUserByCredentials": findUserByCredentials,
             "findUserById": findUserById,
+            "findByUserIdAndUserName" : findByUserIdAndUserName,
             "createUser": register,
             "updateUser": updateUser,
             "deleteUser" : deleteUser,
@@ -88,6 +89,16 @@
                 .then(function (response) {
                     return response.data;
                 });
+        }
+
+        function findByUserIdAndUserName(userId){
+            return $http({
+                url: "/api/user",
+                method: "GET",
+                params: {id: userId}
+            }).then(function (response) {
+                return response.data;
+            });
         }
 
         function findUserByUserId(userId) {

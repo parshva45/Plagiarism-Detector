@@ -39,13 +39,11 @@ public class RegisterEmail {
 
                     InternetAddress.parse(email));
             message.setSubject("PlagiarismDetector");
-            message.setText("Dear " + name + ":" +
+            message.setText("Dear " + name +
                     "\n\n This is PlagDetector! Thanks for Registering! :)" +
                     "\n\n - Team 207");
 
             Transport.send(message);
-
-            System.out.println("Done");
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
