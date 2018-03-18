@@ -3,11 +3,9 @@
         .module("PlagiarismDetector")
         .controller("HomeController", homeController);
 
-    function homeController(HomeService, $location, currentUser, UserService) {
+    function homeController(HomeService, $location) {
         var vm = this;
         vm.loading = false;
-        vm.currentUser = currentUser;
-        vm.logout = logout;
 
         // function logout() {
         //     UserService
