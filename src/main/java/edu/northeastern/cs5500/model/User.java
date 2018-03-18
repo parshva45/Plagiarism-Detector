@@ -30,6 +30,11 @@ public class User {
         this.id = id;
     }
 
+    public User withId(Integer id) {
+        this.setId(id);
+        return this;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -69,9 +74,9 @@ public class User {
         return this;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
+//    public Date getCreateDate() {
+//        return createDate;
+//    }
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;

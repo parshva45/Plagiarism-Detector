@@ -4,12 +4,12 @@ import edu.northeastern.cs5500.model.User;
 import edu.northeastern.cs5500.repository.UserRepository;
 import edu.northeastern.cs5500.response.*;
 import edu.northeastern.cs5500.service.RegisterEmail;
+import edu.northeastern.cs5500.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,8 +17,17 @@ import java.util.List;
  */
 @RestController
 public class UserController {
+    private final UserRepository userRepository;
+    private final RegisterEmail registerEmail;
+    private final UserService userService;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserController(UserRepository userRepository,
+                          RegisterEmail registerEmail, UserService userService) {
+        this.userRepository = userRepository;
+        this.registerEmail = registerEmail;
+        this.userService = userService;
+    }
 
     @RequestMapping(path = "/api/login", method = RequestMethod.POST)
     public ResponseEntity<LoginResponseJSON> login(@RequestBody LoginRequestJSON request) {
@@ -47,15 +56,9 @@ public class UserController {
                             .withMessage("username already exists")
             );
         }
-        Date now = new Date();
-        User user = new User()
-                .withUsername(request.getUsername())
-                .withPassword(request.getPassword())
-                .withEmail(request.getEmail())
-                .withCreateDate(now)
-                .withRole(1);
+        User user = userService.createUserObject(request);
         userRepository.save(user);
-        RegisterEmail.sendEmail(user.getUsername(), user.getEmail());
+        registerEmail.sendEmail(user.getUsername(), user.getEmail());
         return ResponseEntity.ok().body(
                 new RegisterResponseJSON()
                         .withId(user.getId())
@@ -64,18 +67,15 @@ public class UserController {
     }
 
     @RequestMapping(path = "/api/user", method = RequestMethod.GET)
-    public ResponseEntity<GetUserResponseJSON> getCustomer(
+    public ResponseEntity<GetUserResponseJSON> getUser(
             @RequestParam(name = "id", required = false) String id,
-            @RequestParam(name = "username", required = false) String username) {
+            @RequestParam(name = "username", required = false) String userName) {
         List<User> result = new ArrayList<>();
-        System.out.println("praveen1 " + result.size());
-
         if (id != null) {
             result.add(userRepository.findById(Integer.parseInt(id)));
-        } else if (username != null) {
-            result.addAll(userRepository.findByUsernameLike("%" + username + "%"));
+        } else if (userName != null) {
+            result.addAll(userRepository.findByUsernameLike("%" + userName + "%"));
         }
-        System.out.println("praveen2 " + result.size());
         return ResponseEntity.ok().body(
                 new GetUserResponseJSON()
                         .withResult(result)

@@ -15,6 +15,11 @@ public class LoginRequestJSON {
         this.username = username;
     }
 
+    public LoginRequestJSON withUsername(String username) {
+        this.setUsername(username);
+        return this;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -23,4 +28,8 @@ public class LoginRequestJSON {
         this.password = password;
     }
 
+    public LoginRequestJSON withPassword(String password) {
+        this.setPassword(password);
+        return this;
+    }
 }

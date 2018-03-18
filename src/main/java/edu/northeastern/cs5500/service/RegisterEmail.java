@@ -1,5 +1,7 @@
 package edu.northeastern.cs5500.service;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -13,8 +15,9 @@ import javax.mail.internet.MimeMessage;
 /**
  * @author Praveen Singh
  */
+@Component
 public class RegisterEmail {
-    public static void sendEmail(String name, String email) {
+    public void sendEmail(String name, String email) throws RuntimeException {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -25,6 +28,7 @@ public class RegisterEmail {
 
         Session session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
+                    @Override
                     protected PasswordAuthentication getPasswordAuthentication() {
                         return new PasswordAuthentication("msdteam207@gmail.com",
                                 "Spring2018Team207");

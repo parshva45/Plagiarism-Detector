@@ -16,6 +16,11 @@ public class RegisterRequestJSON {
         this.username = username;
     }
 
+    public RegisterRequestJSON withUsername(String username) {
+        this.setUsername(username);
+        return this;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -24,11 +29,21 @@ public class RegisterRequestJSON {
         this.password = password;
     }
 
+    public RegisterRequestJSON withPassword(String password) {
+        this.setPassword(password);
+        return this;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public RegisterRequestJSON withEmail(String email) {
+        this.setEmail(email);
+        return this;
     }
 }
