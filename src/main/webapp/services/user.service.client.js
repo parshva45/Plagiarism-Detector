@@ -25,7 +25,6 @@
                 });
         }
 
-
         function findByUserIdAndUserName(userId){
             return $http({
                 url: "/api/user",
