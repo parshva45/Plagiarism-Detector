@@ -3,8 +3,6 @@ package edu.northeastern.cs5500.service;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * @author Praveen Singh
  */
