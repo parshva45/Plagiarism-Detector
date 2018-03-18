@@ -1,11 +1,16 @@
 package edu.northeastern.cs5500.strategies.levenshtein;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class LevenshteinDistance {
-	
-	private String compOne;
+
+    private String compOne;
     private String compTwo;
+    
+    public LevenshteinDistance() {}
 
     public LevenshteinDistance(String s1, String s2) {
         compOne = s1;
@@ -45,6 +50,37 @@ public class LevenshteinDistance {
     
     public String longer(String s1, String s2) {
     	return s1.length() >= s2.length() ? s1 : s2;
+    }
+    
+    //Read file content into string
+    
+    public String readFile(String filePath)
+    {
+        
+    	// This will reference one line at a time
+        String line = null;
+        StringBuilder contentBuilder = new StringBuilder();
+    	
+    	try {
+            // FileReader reads text files in the default encoding.
+    	
+    		FileReader fileReader = new FileReader(filePath);
+
+            // Always wrap FileReader in BufferedReader.
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            while((line = bufferedReader.readLine()) != null) {
+            	if(line.trim().length() > 0)
+            		contentBuilder.append(line).append("\n");
+            }   
+
+            // Always close files.
+            bufferedReader.close();
+        }
+        catch(IOException ex) {
+            System.out.println("Unable to open file '" + filePath + "'");                
+        }
+    	return contentBuilder.toString();
     }
 
 }
