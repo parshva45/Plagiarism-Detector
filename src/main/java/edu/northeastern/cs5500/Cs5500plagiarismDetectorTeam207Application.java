@@ -10,11 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan("edu.northeastern.cs5500")
 public class Cs5500plagiarismDetectorTeam207Application extends SpringBootServletInitializer {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(Cs5500plagiarismDetectorTeam207Application.class);
-	}
-
 	public static void main(String[] args) {
 		SpringApplication.run(Cs5500plagiarismDetectorTeam207Application.class, args);
 	}
