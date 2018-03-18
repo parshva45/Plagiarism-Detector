@@ -1,6 +1,6 @@
 (function () {
     angular
-        .module("BookYourTrip")
+        .module("PlagiarismDetector")
         .controller("LoginController", loginController);
 
     function loginController(UserService, $location) {
@@ -12,10 +12,7 @@
                 .login(user)
                 .then(function (user) {
                     if(user) {
-                        if(user.role == 'ADMIN')
-                            $location.url('/admin');
-                        else
-                            $location.url('/profile');
+                        $location.url('/profile');
                     }else{
                         vm.error = "Enter valid username and password combination";
                     }
