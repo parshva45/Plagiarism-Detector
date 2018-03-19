@@ -139,12 +139,14 @@ public class UserControllerTest{
     public void getUserShouldReturnUserWhenValidIdGiven(){
         String id = "1";
         User user = new User().withId(1).withUsername("praveen");
-        when(userRepository.findById(Integer.parseInt(id))).thenReturn(user);
+        List<User> userList = new ArrayList<>();
+        userList.add(user);
+        when(userService.findUserByUserIdOrUserName(id, null)).thenReturn(userList);
 
         ResponseEntity responseEntity = userController.getUser(id, null);
         GetUserResponseJSON getUserResponseJSON = (GetUserResponseJSON) responseEntity.getBody();
 
-        verify(userRepository, times(1)).findById(Integer.parseInt(id));
+        verify(userService, times(1)).findUserByUserIdOrUserName(id, null);
         assertEquals("results fetched",
                 getUserResponseJSON.getMessage());
         assertFalse(getUserResponseJSON.getResult().isEmpty());
@@ -158,12 +160,12 @@ public class UserControllerTest{
         User user = new User().withId(1).withUsername("praveen");
         List<User> userList = new ArrayList<>();
         userList.add(user);
-        when(userRepository.findByUsernameLike("%" + userName + "%")).thenReturn(userList);
+        when(userService.findUserByUserIdOrUserName(null, userName)).thenReturn(userList);
 
         ResponseEntity responseEntity = userController.getUser(null, userName);
         GetUserResponseJSON getUserResponseJSON = (GetUserResponseJSON) responseEntity.getBody();
 
-        verify(userRepository, times(1)).findByUsernameLike("%" + userName + "%");
+        verify(userService, times(1)).findUserByUserIdOrUserName(null, userName );
         assertEquals("results fetched",
                 getUserResponseJSON.getMessage());
         assertFalse(getUserResponseJSON.getResult().isEmpty());
@@ -173,6 +175,9 @@ public class UserControllerTest{
 
     @Test
     public void getUserShouldReturnNotReturnAnyUserWhenIdOrUsernameNotGiven(){
+        when(userService.findUserByUserIdOrUserName(null, null))
+                .thenReturn(new ArrayList<>());
+
         ResponseEntity responseEntity = userController.getUser(null, null);
         GetUserResponseJSON getUserResponseJSON = (GetUserResponseJSON) responseEntity.getBody();
 

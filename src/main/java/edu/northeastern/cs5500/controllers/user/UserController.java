@@ -70,12 +70,7 @@ public class UserController {
     public ResponseEntity<GetUserResponseJSON> getUser(
             @RequestParam(name = "id", required = false) String id,
             @RequestParam(name = "username", required = false) String userName) {
-        List<User> result = new ArrayList<>();
-        if (id != null) {
-            result.add(userRepository.findById(Integer.parseInt(id)));
-        } else if (userName != null) {
-            result.addAll(userRepository.findByUsernameLike("%" + userName + "%"));
-        }
+        List<User> result = userService.findUserByUserIdOrUserName(id, userName);
         return ResponseEntity.ok().body(
                 new GetUserResponseJSON()
                         .withResult(result)
