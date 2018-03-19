@@ -17,10 +17,12 @@ import java.util.List;
 public class UserService{
 
     private final UserRepository userRepository;
+    private final RegisterEmail registerEmail;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RegisterEmail registerEmail) {
         this.userRepository = userRepository;
+        this.registerEmail = registerEmail;
     }
 
     public User createUserObject(RegisterRequestJSON registerRequestJSON){
@@ -42,6 +44,16 @@ public class UserService{
             result.addAll(userRepository.findByUsernameLike("%" + userName + "%"));
         }
         return result;
+    }
+
+    public User addUserAndSendEmail(User user){
+        userRepository.save(user);
+        registerEmail.sendEmail(user.getUsername(), user.getEmail());
+        return user;
+    }
+
+    public boolean checkIfUserExistsByUserName(String userName){
+        return userRepository.existsByUsername(userName);
     }
 
 }

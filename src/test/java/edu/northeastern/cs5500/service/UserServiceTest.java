@@ -8,17 +8,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * @author Praveen Singh
@@ -29,6 +29,9 @@ public class UserServiceTest{
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private RegisterEmail registerEmail;
+
     @InjectMocks
     private UserService userService;
 
@@ -37,6 +40,8 @@ public class UserServiceTest{
         RegisterRequestJSON registerRequestJSON = new RegisterRequestJSON()
                 .withUsername("praveen")
                 .withPassword("singh")
+                .withFirstName("a")
+                .withLastName("b")
                 .withEmail("team207@gmail.com");
 
         User user = userService.createUserObject(registerRequestJSON);
@@ -44,6 +49,8 @@ public class UserServiceTest{
         assertEquals(registerRequestJSON.getUsername(), user.getUsername());
         assertEquals(registerRequestJSON.getPassword(), user.getPassword());
         assertEquals(registerRequestJSON.getEmail(), user.getEmail());
+        assertEquals(registerRequestJSON.getLastName(), user.getLastName());
+        assertEquals(registerRequestJSON.getFirstName(), user.getFirstName());
         assertEquals(Integer.valueOf(1), user.getRole());
     }
 
@@ -78,6 +85,47 @@ public class UserServiceTest{
         verify(userRepository, times(1)).findByUsernameLike("%" + userName + "%");
         assertFalse(result.isEmpty());
         assertEquals(user, result.get(0));
+    }
+
+    @Test
+    public void checkIfUserExistsShouldReturnTrue(){
+        when(userRepository.existsByUsername("praveen")).thenReturn(true);
+
+        boolean res = userRepository.existsByUsername("praveen");
+
+        verify(userRepository, times(1)).existsByUsername("praveen");
+        assertTrue(res);
+    }
+
+    @Test
+    public void checkIfUserExistsShouldReturnFalse(){
+        when(userRepository.existsByUsername("praveen")).thenReturn(false);
+
+        boolean res = userService.checkIfUserExistsByUserName("praveen");
+
+        verify(userRepository, times(1)).existsByUsername("praveen");
+        assertFalse(res);
+    }
+
+    @Test
+    public void addUserAndSendEmailShouldWorkAsExpected(){
+        RegisterRequestJSON registerRequestJSON = new RegisterRequestJSON()
+                .withUsername("praveen")
+                .withPassword("singh")
+                .withFirstName("praveen")
+                .withLastName("singh")
+                .withEmail("team207@gmail.com");
+        User user = userService.createUserObject(registerRequestJSON);
+
+        when(userRepository.save(user)).thenReturn(user);
+        doNothing().when(registerEmail).sendEmail(registerRequestJSON.getUsername(),
+                registerRequestJSON.getEmail());
+
+        userService.addUserAndSendEmail(user);
+
+        verify(userRepository, times(1)).save(user);
+        verify(registerEmail, times(1)).sendEmail(registerRequestJSON.getUsername(),
+                registerRequestJSON.getEmail());
     }
 
 }
