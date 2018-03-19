@@ -28,6 +28,8 @@ public class UserService{
                .withUsername(registerRequestJSON.getUsername())
                .withPassword(registerRequestJSON.getPassword())
                .withEmail(registerRequestJSON.getEmail())
+               .withLastName(registerRequestJSON.getLastName())
+               .withFirstName(registerRequestJSON.getFirstName())
                .withCreateDate(new Date())
                .withRole(1);
     }

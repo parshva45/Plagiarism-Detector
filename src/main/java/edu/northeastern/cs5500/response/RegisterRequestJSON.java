@@ -7,6 +7,8 @@ public class RegisterRequestJSON {
     private String username;
     private String password;
     private String email;
+    private String firstName;
+    private String lastName;
 
     public String getUsername() {
         return username;
@@ -44,6 +46,32 @@ public class RegisterRequestJSON {
 
     public RegisterRequestJSON withEmail(String email) {
         this.setEmail(email);
+        return this;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public RegisterRequestJSON withFirstName(String firstName) {
+        this.setFirstName(email);
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public RegisterRequestJSON withLastName(String lastName) {
+        this.setLastName(lastName);
         return this;
     }
 }
