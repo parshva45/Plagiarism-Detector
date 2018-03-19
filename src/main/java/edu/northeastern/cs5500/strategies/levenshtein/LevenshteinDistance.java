@@ -53,17 +53,17 @@ public class LevenshteinDistance {
     public String longer(String s1, String s2) {
     	return s1.length() >= s2.length() ? s1 : s2;
     }
-    
-    //Read file content into string
-    
-    public String readFile(String filePath){
-    	// This will reference one line at a time
-        String line;
-        StringBuilder contentBuilder = new StringBuilder();
-        // FileReader reads text files in the default encoding.
 
+    /**
+     * Method to read file and return content as a string for comparison.
+     * @param filePath Path of File in string.
+     * @return Returns the file content as a String.
+     */
+    public String readFile(String filePath){
+        StringBuilder contentBuilder = new StringBuilder();
         try (FileReader fileReader = new FileReader(filePath);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            String line;
             while ((line = bufferedReader.readLine()) != null) {
                 if (line.trim().length() > 0)
                     contentBuilder.append(line).append("\n");
