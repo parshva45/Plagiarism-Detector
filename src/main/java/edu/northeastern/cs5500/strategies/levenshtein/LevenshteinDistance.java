@@ -12,6 +12,8 @@ public class LevenshteinDistance {
     private String compOne;
     private String compTwo;
 
+    LevenshteinDistance(){}
+
     LevenshteinDistance(String s1, String s2) {
         compOne = s1;
         compTwo = s2;

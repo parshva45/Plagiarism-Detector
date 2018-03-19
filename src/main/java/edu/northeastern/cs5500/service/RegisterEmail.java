@@ -2,22 +2,21 @@ package edu.northeastern.cs5500.service;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Properties;
-
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Praveen Singh
  */
 @Component
 public class RegisterEmail {
-    public void sendEmail(String name, String email) throws RuntimeException {
+    private static final Logger LOGGER = Logger.getLogger(RegisterEmail.class.getName());
+
+    public void sendEmail(String name, String email) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
@@ -50,7 +49,7 @@ public class RegisterEmail {
             Transport.send(message);
 
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            LOGGER.log(Level.ALL, "Exception sending email  : {0}", e.getMessage());
         }
     }
 }

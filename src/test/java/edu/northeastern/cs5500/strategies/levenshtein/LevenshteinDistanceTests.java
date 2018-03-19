@@ -1,8 +1,8 @@
 package edu.northeastern.cs5500.strategies.levenshtein;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class LevenshteinDistanceTests {
 	
@@ -47,7 +47,7 @@ public class LevenshteinDistanceTests {
 	
 	@Test
 	public void compares2s4Test() {
-		LevenshteinDistance ld5 = new LevenshteinDistance(s2,s4);
+		LevenshteinDistance ld5 = new LevenshteinDistance(s2, s4);
 		int levenshteinDistance = ld5.getDistance();
     	double similarityMeasure = (1-(double)levenshteinDistance/ld5.longer(s2,s4).length())*100;
     	assertEquals(95.392, similarityMeasure, 0.01);
