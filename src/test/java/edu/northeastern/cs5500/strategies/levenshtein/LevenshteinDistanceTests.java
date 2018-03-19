@@ -63,7 +63,7 @@ public class LevenshteinDistanceTests {
 
 	@Test
 	public void exceptionTest() {
-		ld.readFile(DIR+"submi.py");
+		ld.readFile(DIR+"submission5.py");
 	}
 
 
