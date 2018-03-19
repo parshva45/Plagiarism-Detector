@@ -7,11 +7,11 @@ import org.junit.Test;
 public class LevenshteinDistanceTests {
 	
 	LevenshteinDistance ld = new LevenshteinDistance();
-	public static final String DIR = System.getProperty("user.dir")+"\\src\\test\\java\\edu\\northeastern\\cs5500\\strategies\\levenshtein\\submission\\";
-    String s1 = ld.readFile(DIR+"submission1.py").trim();
-	String s2 = ld.readFile(DIR+"submission2.py").trim();
-	String s3 = ld.readFile(DIR+"submission3.py").trim();
-	String s4 = ld.readFile(DIR+"submission4.py").trim();
+	private static final String DIR = System.getProperty("user.dir")+"/src/test/java/edu/northeastern/cs5500/strategies/levenshtein/submission/";
+    private String s1 = ld.readFile(DIR+"submission1.py").trim();
+	private String s2 = ld.readFile(DIR+"submission2.py").trim();
+	private String s3 = ld.readFile(DIR+"submission3.py").trim();
+	private String s4 = ld.readFile(DIR+"submission4.py").trim();
 
 	@Test
 	public void compares1s2Test() {
