@@ -18,14 +18,13 @@ import java.util.List;
 @RestController
 public class UserController {
     private final UserRepository userRepository;
-    private final RegisterEmail registerEmail;
+
     private final UserService userService;
 
     @Autowired
     public UserController(UserRepository userRepository,
-                          RegisterEmail registerEmail, UserService userService) {
+                          UserService userService) {
         this.userRepository = userRepository;
-        this.registerEmail = registerEmail;
         this.userService = userService;
     }
 
@@ -50,15 +49,15 @@ public class UserController {
 
     @RequestMapping(path = "/api/register", method = RequestMethod.POST)
     public ResponseEntity<RegisterResponseJSON> register(@RequestBody RegisterRequestJSON request) {
-        if (userRepository.existsByUsername(request.getUsername())) {
+        if (userService.checkIfUserExistsByUserName(request.getUsername())) {
             return ResponseEntity.badRequest().body(
                     new RegisterResponseJSON()
                             .withMessage("username already exists")
             );
         }
         User user = userService.createUserObject(request);
-        userRepository.save(user);
-        registerEmail.sendEmail(user.getUsername(), user.getEmail());
+        userService.addUserAndSendEmail(user);
+
         return ResponseEntity.ok().body(
                 new RegisterResponseJSON()
                         .withId(user.getId())
@@ -70,12 +69,7 @@ public class UserController {
     public ResponseEntity<GetUserResponseJSON> getUser(
             @RequestParam(name = "id", required = false) String id,
             @RequestParam(name = "username", required = false) String userName) {
-        List<User> result = new ArrayList<>();
-        if (id != null) {
-            result.add(userRepository.findById(Integer.parseInt(id)));
-        } else if (userName != null) {
-            result.addAll(userRepository.findByUsernameLike("%" + userName + "%"));
-        }
+        List<User> result = userService.findUserByUserIdOrUserName(id, userName);
         return ResponseEntity.ok().body(
                 new GetUserResponseJSON()
                         .withResult(result)

@@ -18,6 +18,8 @@ public class User {
     private Integer id;
     private String username;
     private String password;
+    private String firstName;
+    private String lastName;
     private String email;
     private Date createDate;
     private Integer role;
@@ -74,11 +76,7 @@ public class User {
         return this;
     }
 
-//    public Date getCreateDate() {
-//        return createDate;
-//    }
-
-    public void setCreateDate(Date createDate) {
+    private void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
@@ -98,6 +96,32 @@ public class User {
 
     public User withRole(Integer level) {
         this.setRole(level);
+        return this;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public User withFirstName(String firstName){
+        this.setFirstName(firstName);
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public User withLastName(String lastName){
+        this.setLastName(lastName);
         return this;
     }
 
