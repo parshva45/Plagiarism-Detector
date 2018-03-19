@@ -23,3 +23,8 @@ target/
 
 #node packeges
 node_modules/
+
+#eclipse files
+.classpath
+.project
+.settings/
