@@ -1,4 +1,4 @@
-package edu.northeastern.cs5500.strategies.levenshtein;
+package edu.northeastern.cs5500.strategies;
 
 import org.springframework.stereotype.Component;
 
@@ -40,6 +40,10 @@ public class LevenshteinDistance {
     
     public String longer(String s1, String s2) {
     	return s1.length() >= s2.length() ? s1 : s2;
+    }
+
+    public double calculateSimilarity(String s1, String s2){
+
     }
 
 }

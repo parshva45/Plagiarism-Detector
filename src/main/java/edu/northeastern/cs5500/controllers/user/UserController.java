@@ -1,15 +1,12 @@
 package edu.northeastern.cs5500.controllers.user;
 
 import edu.northeastern.cs5500.model.User;
-import edu.northeastern.cs5500.repository.UserRepository;
 import edu.northeastern.cs5500.response.*;
-import edu.northeastern.cs5500.service.RegisterEmail;
 import edu.northeastern.cs5500.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

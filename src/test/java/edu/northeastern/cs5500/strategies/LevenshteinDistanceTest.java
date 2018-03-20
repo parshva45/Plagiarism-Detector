@@ -1,12 +1,10 @@
-package edu.northeastern.cs5500.strategies.levenshtein;
+package edu.northeastern.cs5500.strategies;
 
 import edu.northeastern.cs5500.Cs5500PlagiarismDetectorTeam207ApplicationTests;
 import edu.northeastern.cs5500.service.CompareFilesLevenshtein;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.io.File;
 import java.util.Objects;
