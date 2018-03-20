@@ -8,7 +8,7 @@ import org.junit.Test;
  */
 public class RegisterEmailTest {
 
-    RegisterEmail registerEmail;
+    private RegisterEmail registerEmail;
 
     @Before
     public void setUp(){

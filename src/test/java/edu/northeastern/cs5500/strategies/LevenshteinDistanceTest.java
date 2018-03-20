@@ -82,9 +82,8 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 	
 	@Test
 	public void compares3s4Test() {
-		int levenshteinDistance = levenshteinDistanceObj.getDistance(s3,s4);
-    	double similarityMeasure = (1-(double)levenshteinDistance/levenshteinDistanceObj
-				.longer(s3,s4).length())*100;
+    	double similarityMeasure = levenshteinDistanceObj.calculateSimilarity(
+				getFilePath("submission3.py"), getFilePath("submission4.py"));
     	assertEquals(95.392, similarityMeasure, 0.01);
 	}
 
@@ -93,5 +92,11 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 		pythonToStringParser.readFile("submission5.py");
 	}
 
+	@Test
+	public void calculateSimilarityShouldGiveCorrectResult(){
+		double res = levenshteinDistanceObj.calculateSimilarity(
+				getFilePath("submission3.py"), getFilePath("submission4.py"));
+		assertEquals(95.392, res, 0.01);
+	}
 
 }

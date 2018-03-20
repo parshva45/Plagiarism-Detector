@@ -1,4 +1,4 @@
-package edu.northeastern.cs5500.controllers.strategies;
+package edu.northeastern.cs5500.controllers.comparison;
 
 import edu.northeastern.cs5500.service.FileComparisonService;
 import org.json.simple.JSONObject;
@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.lang.String.*;
+import static java.lang.String.valueOf;
 
 /**
  * @author Praveen Singh
  */
 @RestController
-@RequestMapping("api/strategy/")
+@RequestMapping("api/comparison/")
 public class FileComparisonController {
 
     private final FileComparisonService fileComparisonService;

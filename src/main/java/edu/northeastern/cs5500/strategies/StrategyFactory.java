@@ -18,7 +18,7 @@ public class StrategyFactory {
     }
 
     public SimilarityStrategy getStrategyByStrategyType(String strategy){
-        if(strategy.equals(StrategyTypes.LEVENSHTEIN_DISTANCE.toString())){
+        if(StrategyTypes.LEVENSHTEIN_DISTANCE.toString().equals(strategy)){
             return levenshteinDistance;
         }
         return levenshteinDistance;
