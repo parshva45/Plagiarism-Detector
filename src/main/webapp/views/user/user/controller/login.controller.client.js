@@ -12,7 +12,7 @@
                 .login(user)
                 .then(function (user) {
                     if(user) {
-                        $location.url('/profile');
+                        $location.url('/profile/'+user.id);
                     }else{
                         vm.error = "Enter valid username and password combination";
                     }
