@@ -12,4 +12,5 @@ public class Cs5500plagiarismDetectorTeam207Application extends SpringBootServle
 	public static void main(String[] args) {
 		SpringApplication.run(Cs5500plagiarismDetectorTeam207Application.class, args);
 	}
+
 }

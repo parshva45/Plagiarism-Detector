@@ -17,22 +17,17 @@ import java.util.List;
  */
 @RestController
 public class UserController {
-    private final UserRepository userRepository;
-
     private final UserService userService;
 
     @Autowired
-    public UserController(UserRepository userRepository,
-                          UserService userService) {
-        this.userRepository = userRepository;
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @RequestMapping(path = "/api/login", method = RequestMethod.POST)
     public ResponseEntity<LoginResponseJSON> login(@RequestBody LoginRequestJSON request) {
-        List<User> result = userRepository.findByUsernameAndPassword(
-                request.getUsername(), request.getPassword()
-        );
+        List<User> result = userService.findUserByUserNameAndPassword(request.getUsername(), request.getPassword());
+
         if (result.isEmpty()) {
             return ResponseEntity.badRequest().body(
                     new LoginResponseJSON()

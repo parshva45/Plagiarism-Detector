@@ -56,4 +56,8 @@ public class UserService{
         return userRepository.existsByUsername(userName);
     }
 
+    public List<User> findUserByUserNameAndPassword(String userName, String password){
+        return userRepository.findByUsernameAndPassword(userName, password);
+    }
+
 }
