@@ -128,4 +128,21 @@ public class UserServiceTest{
                 registerRequestJSON.getEmail());
     }
 
+    @Test
+    public void findByUserNameAndPasswordShouldReturnValidResults(){
+        String userName = "praveen";
+        String password = "singh";
+        User user = new User().withUsername(userName).withPassword(password);
+        List<User> users = new ArrayList<>();
+        users.add(user);
+        when(userRepository.findByUsernameAndPassword(userName, password)).thenReturn(users);
+
+        List<User> userResult = userService.findUserByUserNameAndPassword(userName, password);
+
+        assertNotNull(userResult.get(0));
+        assertEquals(userName, userResult.get(0).getUsername());
+        assertEquals(password, userResult.get(0).getPassword());
+
+    }
+
 }

@@ -49,15 +49,15 @@ public class UserControllerTest{
     public void loginShouldPassWithValidInputs(){
         List<User> list = new ArrayList<>();
         list.add(new User().withUsername("praveen").withPassword("singh").withId(1));
-        when(userRepository.findByUsernameAndPassword(loginRequestJSON.getUsername(),
+        when(userService.findUserByUserNameAndPassword(loginRequestJSON.getUsername(),
                 loginRequestJSON.getPassword()))
                 .thenReturn(list);
 
         ResponseEntity responseEntity = userController.login(loginRequestJSON);
-        verify(userRepository, times(1)).findByUsernameAndPassword(loginRequestJSON.getUsername(),
-                loginRequestJSON.getPassword());
-
         LoginResponseJSON loginResponseJSON = (LoginResponseJSON) responseEntity.getBody();
+
+        verify(userService, times(1)).findUserByUserNameAndPassword(loginRequestJSON.getUsername(),
+                loginRequestJSON.getPassword());
         LoginResponseJSON loginResponseJSONExpected = new LoginResponseJSON()
                 .withId(1)
                 .withMessage("credential found");
@@ -69,14 +69,14 @@ public class UserControllerTest{
 
     @Test
     public void loginShouldFailWithInvalidInputs(){
-        when(userRepository.findByUsernameAndPassword(loginRequestJSON.getUsername(),
+        when(userService.findUserByUserNameAndPassword(loginRequestJSON.getUsername(),
                 loginRequestJSON.getPassword()))
                 .thenReturn(new ArrayList<>());
 
         ResponseEntity responseEntity = userController.login(loginRequestJSON);
         LoginResponseJSON loginResponseJSON = (LoginResponseJSON) responseEntity.getBody();
 
-        verify(userRepository, times(1)).findByUsernameAndPassword(loginRequestJSON.getUsername(),
+        verify(userService, times(1)).findUserByUserNameAndPassword(loginRequestJSON.getUsername(),
                 loginRequestJSON.getPassword());
         assertNotNull(loginResponseJSON);
         assertEquals("credential not found", loginResponseJSON.getMessage());
