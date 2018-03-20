@@ -1,28 +1,14 @@
 package edu.northeastern.cs5500.strategies.levenshtein;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import org.springframework.stereotype.Component;
+
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+@Component
 public class LevenshteinDistance {
-    private static final Logger LOGGER = Logger.getLogger(LevenshteinDistance.class.getName());
-    private String compOne;
-    private String compTwo;
 
-    LevenshteinDistance(){}
-
-    LevenshteinDistance(String s1, String s2) {
-        compOne = s1;
-        compTwo = s2;
-    }
-
-    public int getDistance() {
-
+    public int getDistance(String compOne, String compTwo) {
         int[][] matrix = new int[compOne.length() + 1][compTwo.length() + 1];
-     
         for (int i = 0; i <= compOne.length(); i++) {
             for (int j = 0; j <= compTwo.length(); j++) {
                 if (i == 0) {
@@ -54,26 +40,6 @@ public class LevenshteinDistance {
     
     public String longer(String s1, String s2) {
     	return s1.length() >= s2.length() ? s1 : s2;
-    }
-
-    /**
-     * Method to read file and return content as a string for comparison.
-     * @param filePath Path of File in string.
-     * @return Returns the file content as a String.
-     */
-    public String readFile(String filePath){
-        StringBuilder contentBuilder = new StringBuilder();
-        try (FileReader fileReader = new FileReader(filePath);
-             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-            String line;
-            while ((line = bufferedReader.readLine()) != null) {
-                if (line.trim().length() > 0)
-                    contentBuilder.append(line).append("\n");
-            }
-        } catch (IOException ex) {
-            LOGGER.log(Level.ALL, "Exception while reading file {0}", ex.getMessage());
-        }
-    	return contentBuilder.toString();
     }
 
 }
