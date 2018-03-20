@@ -7,13 +7,20 @@
         var vm = this;
         vm.userId = $routeParams['userId'];
         vm.user = undefined;
+        vm.userProfile = undefined;
 
         function init() {
-            console.log(vm.userId);
-            vm.user = UserService.findByUserIdAndUserName(vm.userId);
+            UserService.findByUserIdAndUserName(vm.userId)
+                .then(function(data){
+                    vm.user = data.result[0];
+                });
+
+            vm.userProfile = angular.copy(vm.user);
             console.log(vm.user)
         }
         init();
+
+
     }
 
 })();

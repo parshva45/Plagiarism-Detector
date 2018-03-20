@@ -24,7 +24,7 @@
                 controllerAs: "model"
             })
             .when("/profile/:userId", {
-                templateUrl: "views/user/user/templates/user.profile.view.client.html",
+                templateUrl: "views/user/user/templates/profile.view.client.html",
                 controller: "ProfileController",
                 controllerAs: "model"
             })

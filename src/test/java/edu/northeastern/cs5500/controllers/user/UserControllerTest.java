@@ -122,7 +122,7 @@ public class UserControllerTest{
     @Test
     public void getUserShouldReturnUserWhenValidIdGiven(){
         String id = "1";
-        User user = new User().withId(1).withUsername("praveen");
+        User user = new User().withId(1).withUsername("praveen").withCreateDate(new Date());
         List<User> userList = new ArrayList<>();
         userList.add(user);
         when(userService.findUserByUserIdOrUserName(id, null)).thenReturn(userList);
@@ -136,6 +136,7 @@ public class UserControllerTest{
         assertFalse(getUserResponseJSON.getResult().isEmpty());
         assertNotNull(getUserResponseJSON.getResult().get(0));
         assertEquals(user, getUserResponseJSON.getResult().get(0));
+        assertNotNull(getUserResponseJSON.getResult().get(0).getCreateDate());
     }
 
     @Test

@@ -125,4 +125,7 @@ public class User {
         return this;
     }
 
+    public Date getCreateDate() {
+        return createDate;
+    }
 }
