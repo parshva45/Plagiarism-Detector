@@ -1,7 +1,5 @@
-package edu.northeastern.cs5500.service;
+package edu.northeastern.cs5500.parsers;
 
-import edu.northeastern.cs5500.strategies.LevenshteinDistance;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -14,16 +12,8 @@ import java.util.logging.Logger;
  * @author Praveen Singh
  */
 @Component
-public class CompareFilesLevenshtein {
-    private static final Logger LOGGER = Logger.getLogger(CompareFilesLevenshtein.class.getName());
-
-    private final LevenshteinDistance levenshteinDistance;
-
-    @Autowired
-    public CompareFilesLevenshtein(LevenshteinDistance levenshteinDistance) {
-        this.levenshteinDistance = levenshteinDistance;
-    }
-
+public class PythonToStringParser {
+    private static final Logger LOGGER = Logger.getLogger(PythonToStringParser.class.getName());
     /**
      * Method to read file and return content as a string for comparison.
      * @param filePath Path of File in string.
@@ -42,15 +32,6 @@ public class CompareFilesLevenshtein {
             LOGGER.log(Level.ALL, "Exception while reading file {0}", ex.getMessage());
         }
         return contentBuilder.toString();
-    }
-
-    public double getSimilarityBetweenFiles(String file1, String file2){
-        String fileContentFile1 = readFile(file1).trim();
-        String fileContentFile2 = readFile(file2).trim();
-        int distance = levenshteinDistance.getDistance(fileContentFile1, fileContentFile2);
-        return  (1-(double)distance / levenshteinDistance
-                .longer(fileContentFile1, fileContentFile2).length()) * 100;
-
     }
 
 }

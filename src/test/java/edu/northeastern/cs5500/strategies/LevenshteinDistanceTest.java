@@ -1,7 +1,7 @@
 package edu.northeastern.cs5500.strategies;
 
 import edu.northeastern.cs5500.Cs5500PlagiarismDetectorTeam207ApplicationTests;
-import edu.northeastern.cs5500.service.CompareFilesLevenshtein;
+import edu.northeastern.cs5500.parsers.PythonToStringParser;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import static org.junit.Assert.assertEquals;
 public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	
 	@Autowired
-	CompareFilesLevenshtein compareFilesLevenshtein;
+	PythonToStringParser pythonToStringParser;
 	
 	@Autowired
 	LevenshteinDistance levenshteinDistanceObj;
@@ -26,10 +26,10 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 
 	@Before
 	public void setUp() {
-		s1 = compareFilesLevenshtein.readFile(getFilePath("submission1.py")).trim();
-		s2 = compareFilesLevenshtein.readFile(getFilePath("submission2.py")).trim();
-		s3 = compareFilesLevenshtein.readFile(getFilePath("submission3.py")).trim();
-		s4 = compareFilesLevenshtein.readFile(getFilePath("submission4.py")).trim();
+		s1 = pythonToStringParser.readFile(getFilePath("submission1.py")).trim();
+		s2 = pythonToStringParser.readFile(getFilePath("submission2.py")).trim();
+		s3 = pythonToStringParser.readFile(getFilePath("submission3.py")).trim();
+		s4 = pythonToStringParser.readFile(getFilePath("submission4.py")).trim();
 	}
 
 	public String getFilePath(String fileName){
@@ -89,7 +89,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 
 	@Test
 	public void exceptionTest() {
-		compareFilesLevenshtein.readFile("submission5.py");
+		pythonToStringParser.readFile("submission5.py");
 	}
 
 

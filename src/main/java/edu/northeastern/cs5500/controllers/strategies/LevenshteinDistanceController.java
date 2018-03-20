@@ -1,6 +1,8 @@
 package edu.northeastern.cs5500.controllers.strategies;
 
-import edu.northeastern.cs5500.service.CompareFilesLevenshtein;
+import edu.northeastern.cs5500.parsers.PythonToStringParser;
+import edu.northeastern.cs5500.strategies.LevenshteinDistance;
+import edu.northeastern.cs5500.strategies.SimilarityStrategy;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +20,11 @@ import java.util.Map;
 @RequestMapping("/strategy/levenshtein")
 public class LevenshteinDistanceController {
 
-    private final CompareFilesLevenshtein compareFilesLevenshtein;
+    private final SimilarityStrategy similarityStrategy;
 
     @Autowired
-    public LevenshteinDistanceController(CompareFilesLevenshtein compareFilesLevenshtein) {
-        this.compareFilesLevenshtein = compareFilesLevenshtein;
+    public LevenshteinDistanceController(LevenshteinDistance levenshteinDistance) {
+        this.similarityStrategy = levenshteinDistance;
     }
 
     @RequestMapping(path = "/compare2files", method = RequestMethod.GET)
@@ -31,7 +33,7 @@ public class LevenshteinDistanceController {
             @RequestParam(name = "secondFile") String secondFile) {
         Map<String, String> resultMap = new HashMap<>();
 
-        double similarity = compareFilesLevenshtein.getSimilarityBetweenFiles(firstFile, secondFile);
+        double similarity = similarityStrategy.calculateSimilarity(firstFile, secondFile);
 
         resultMap.put("similarity", String.valueOf(similarity));
         resultMap.put("response-code", "OK");
