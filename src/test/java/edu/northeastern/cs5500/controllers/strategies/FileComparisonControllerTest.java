@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 /**
  * @author Praveen Singh
  */
-public class LevenshteinDistanceControllerTest {
+public class FileComparisonControllerTest {
 
     @Test
     public void testLevenshteinDistanceForGivenFiles(){

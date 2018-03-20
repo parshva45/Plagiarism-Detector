@@ -1,13 +1,14 @@
-package edu.northeastern.cs5500.strategies;
+package edu.northeastern.cs5500.strategies.implementations;
 
 import edu.northeastern.cs5500.parsers.PythonToStringParser;
+import edu.northeastern.cs5500.strategies.SimilarityStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
 @Component
-public class LevenshteinDistance implements SimilarityStrategy{
+public class LevenshteinDistance implements SimilarityStrategy {
 
     private final PythonToStringParser pythonToStringParser;
 

@@ -8,6 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public interface SimilarityStrategy {
 
-    public double calculateSimilarity(String file1, String file2);
+    double calculateSimilarity(String file1, String file2);
 
 }
