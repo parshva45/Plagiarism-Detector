@@ -1,11 +1,21 @@
-package edu.northeastern.cs5500.strategies.levenshtein;
+package edu.northeastern.cs5500.strategies.implementations;
 
+import edu.northeastern.cs5500.parsers.PythonToStringParser;
+import edu.northeastern.cs5500.strategies.SimilarityStrategy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
 @Component
-public class LevenshteinDistance {
+public class LevenshteinDistance implements SimilarityStrategy {
+
+    private final PythonToStringParser pythonToStringParser;
+
+    @Autowired
+    public LevenshteinDistance(PythonToStringParser pythonToStringParser) {
+        this.pythonToStringParser = pythonToStringParser;
+    }
 
     public int getDistance(String compOne, String compTwo) {
         int[][] matrix = new int[compOne.length() + 1][compTwo.length() + 1];
@@ -40,6 +50,15 @@ public class LevenshteinDistance {
     
     public String longer(String s1, String s2) {
     	return s1.length() >= s2.length() ? s1 : s2;
+    }
+
+
+    @Override
+    public double calculateSimilarity(String file1, String file2){
+        String fileContentFile1 = pythonToStringParser.readFile(file1).trim();
+        String fileContentFile2 = pythonToStringParser.readFile(file2).trim();
+        int distance = getDistance(fileContentFile1, fileContentFile2);
+        return (1-(double)distance / longer(fileContentFile1, fileContentFile2).length()) * 100;
     }
 
 }

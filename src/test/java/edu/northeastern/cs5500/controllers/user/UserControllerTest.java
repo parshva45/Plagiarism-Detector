@@ -1,9 +1,7 @@
 package edu.northeastern.cs5500.controllers.user;
 
 import edu.northeastern.cs5500.model.User;
-import edu.northeastern.cs5500.repository.UserRepository;
 import edu.northeastern.cs5500.response.*;
-import edu.northeastern.cs5500.service.RegisterEmail;
 import edu.northeastern.cs5500.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,9 +23,6 @@ import static org.mockito.Mockito.*;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class UserControllerTest{
-
-    @Mock
-    private UserRepository userRepository;
 
     @Mock
     private UserService userService;

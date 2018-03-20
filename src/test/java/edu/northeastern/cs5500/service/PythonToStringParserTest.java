@@ -1,28 +1,25 @@
 package edu.northeastern.cs5500.service;
 
+import edu.northeastern.cs5500.parsers.PythonToStringParser;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.io.IOException;
-
-import static org.junit.Assert.*;
-
 /**
  * @author Praveen Singh
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class CompareFilesLevenshteinTest {
+public class PythonToStringParserTest {
 
     @Autowired
-    CompareFilesLevenshtein compareFilesLevenshtein;
+    PythonToStringParser pythonToStringParser;
 
     @Test
     public void test(){
-        compareFilesLevenshtein.readFile("hello.txt");
+        pythonToStringParser.readFile("hello.txt");
     }
 
 }

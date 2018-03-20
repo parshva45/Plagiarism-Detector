@@ -3,18 +3,13 @@ package edu.northeastern.cs5500.service;
 import edu.northeastern.cs5500.model.User;
 import edu.northeastern.cs5500.repository.UserRepository;
 import edu.northeastern.cs5500.response.RegisterRequestJSON;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import static org.junit.Assert.*;
