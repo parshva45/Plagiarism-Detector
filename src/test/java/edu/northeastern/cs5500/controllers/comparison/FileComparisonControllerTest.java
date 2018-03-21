@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.controllers.comparison;
 
+import edu.northeastern.cs5500.controllers.FileComparisonController;
 import edu.northeastern.cs5500.service.FileComparisonService;
 import edu.northeastern.cs5500.strategies.StrategyTypes;
 import org.json.simple.JSONObject;

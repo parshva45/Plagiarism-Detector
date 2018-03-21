@@ -1,9 +1,7 @@
 package edu.northeastern.cs5500.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,9 +10,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable{
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
     private String username;
     private String password;

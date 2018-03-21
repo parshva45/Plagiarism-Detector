@@ -1,4 +1,4 @@
-package edu.northeastern.cs5500.controllers.user;
+package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.model.User;
 import edu.northeastern.cs5500.response.*;
