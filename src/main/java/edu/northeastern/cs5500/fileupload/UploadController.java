@@ -10,9 +10,11 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 
 @RestController
+@RequestMapping("/api/homework")
 public class UploadController {
 
     private final Environment env;
@@ -38,6 +40,7 @@ public class UploadController {
             filepath = Paths.get(path, filename).toString();
 
             File file = new File(filepath);
+            Files.deleteIfExists(file.toPath());
             file.getParentFile().mkdirs();
 
             // Save the file locally
