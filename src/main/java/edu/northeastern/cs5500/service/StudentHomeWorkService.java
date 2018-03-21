@@ -39,4 +39,17 @@ public class StudentHomeWorkService {
         }
         return studentHomeWork;
     }
+
+    public static class HttpStatusException extends RuntimeException {
+        private final HttpStatus status;
+
+        HttpStatusException(final HttpStatus status, final String message) {
+            super(message);
+            this.status = status;
+        }
+
+        public HttpStatus getStatus() {
+            return status;
+        }
+    }
 }
