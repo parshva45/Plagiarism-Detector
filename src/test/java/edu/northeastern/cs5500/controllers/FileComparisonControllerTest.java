@@ -1,4 +1,4 @@
-package edu.northeastern.cs5500.controllers.comparison;
+package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.service.FileComparisonService;
 import edu.northeastern.cs5500.strategies.StrategyTypes;

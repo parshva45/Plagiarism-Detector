@@ -1,4 +1,4 @@
-package edu.northeastern.cs5500.controllers.user;
+package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.model.User;
 import edu.northeastern.cs5500.response.*;
@@ -43,7 +43,7 @@ public class UserControllerTest{
     @Test
     public void loginShouldPassWithValidInputs(){
         List<User> list = new ArrayList<>();
-        list.add(new User().withUsername("praveen").withPassword("singh").withId(1));
+        list.add(new User().withUserName("praveen").withPassword("singh").withId(1));
         when(userService.findUserByUserNameAndPassword(loginRequestJSON.getUsername(),
                 loginRequestJSON.getPassword()))
                 .thenReturn(list);
@@ -98,7 +98,7 @@ public class UserControllerTest{
                 .withPassword("singh")
                 .withEmail("team207@gmail.com");
         User user = new User()
-                .withUsername("praveen")
+                .withUserName("praveen")
                 .withPassword("singh")
                 .withEmail("team207@gmail.com")
                 .withRole(1)
@@ -122,7 +122,7 @@ public class UserControllerTest{
     @Test
     public void getUserShouldReturnUserWhenValidIdGiven(){
         String id = "1";
-        User user = new User().withId(1).withUsername("praveen").withCreateDate(new Date());
+        User user = new User().withId(1).withUserName("praveen").withCreateDate(new Date());
         List<User> userList = new ArrayList<>();
         userList.add(user);
         when(userService.findUserByUserIdOrUserName(id, null)).thenReturn(userList);
@@ -142,7 +142,7 @@ public class UserControllerTest{
     @Test
     public void getUserShouldReturnUserWhenValidUserNameGiven(){
         String userName = "praveen";
-        User user = new User().withId(1).withUsername("praveen");
+        User user = new User().withId(1).withUserName("praveen");
         List<User> userList = new ArrayList<>();
         userList.add(user);
         when(userService.findUserByUserIdOrUserName(null, userName)).thenReturn(userList);
