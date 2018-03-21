@@ -33,7 +33,7 @@ public class FileComparisonServiceTest {
     @Test
     public void getAllCategoriesShouldReturnCorrectValues(){
         List<StrategyTypes> actual = fileComparisonService.getAllStrategies();
-        StrategyTypes[] expected = {StrategyTypes.LEVENSHTEIN_DISTANCE, StrategyTypes.FILE_METADATA};
+        StrategyTypes[] expected = {StrategyTypes.LEVENSHTEIN_DISTANCE, StrategyTypes.LCS, StrategyTypes.FILE_METADATA};
         assertArrayEquals(expected, actual.toArray());
     }
 

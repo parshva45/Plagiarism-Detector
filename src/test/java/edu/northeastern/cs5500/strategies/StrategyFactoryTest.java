@@ -1,6 +1,7 @@
 package edu.northeastern.cs5500.strategies;
 
 import edu.northeastern.cs5500.strategies.implementations.LevenshteinDistance;
+import edu.northeastern.cs5500.strategies.implementations.LCS;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,23 +20,33 @@ public class StrategyFactoryTest{
     LevenshteinDistance levenshteinDistance;
 
     @Autowired
+    LCS lcs;
+
+    @Autowired
     StrategyFactory strategyFactory;
 
     @Test
-    public void getStrategyShouldReturnTheExpectedStrategy(){
+    public void getLevenshteinDistanceStrategyShouldReturnTheExpectedStrategy(){
         Assert.assertEquals(levenshteinDistance,
                 strategyFactory.getStrategyByStrategyType("LEVENSHTEIN_DISTANCE"));
     }
+    
+    @Test
+    public void getLCSStrategyShouldReturnTheExpectedStrategy(){
+        Assert.assertEquals(lcs,
+                strategyFactory.getStrategyByStrategyType("LCS"));
+    }
 
     @Test
-    public void getStrategyShouldReturnTheDefaultStrategyIfInvalidStrategyProvided(){
+    public void getLevenshteinDistanceStrategyShouldReturnTheDefaultStrategyIfInvalidStrategyProvided(){
         Assert.assertEquals(levenshteinDistance,
                 strategyFactory.getStrategyByStrategyType("INVALID"));
     }
 
     @Test
-    public void getStrategyShouldReturnDefaultStrategyWhenNullProvided(){
+    public void getLevenshteinDistanceStrategyShouldReturnDefaultStrategyWhenNullProvided(){
         Assert.assertEquals(levenshteinDistance, strategyFactory.getStrategyByStrategyType(null));
     }
+
 
 }
