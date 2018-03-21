@@ -19,6 +19,9 @@ public class StudentHomeWork implements Serializable {
     @Id
     @Column(name = "homeWorkId")
     private int homeWorkId;
+    @Id
+    @Column(name="courseId")
+    private int courseId;
 
     @Column(name = "filePath")
     private String filePath;
@@ -28,11 +31,35 @@ public class StudentHomeWork implements Serializable {
         // empty on purpose
     }
 
-    public StudentHomeWork(final int userId, final int homeWorkId, final String filePath) {
-        this();
+    public int getUserId() {
+        return userId;
+    }
 
+    public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public int getHomeWorkId() {
+        return homeWorkId;
+    }
+
+    public void setHomeWorkId(int homeWorkId) {
         this.homeWorkId = homeWorkId;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
 
@@ -41,6 +68,7 @@ public class StudentHomeWork implements Serializable {
 
         private int userId;
         private int homeWorkId;
+        private int courseId;
 
         public StudentHomeWorkKey() {
             // empty on purpose

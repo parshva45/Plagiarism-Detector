@@ -12,6 +12,7 @@ public class HomeWork implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
+    private int courseId;
     private int homeWorkNumber;
     private String description;
     private int professorId;
@@ -65,6 +66,19 @@ public class HomeWork implements Serializable {
 
     public HomeWork withProfessorId(Integer professorId){
         this.setProfessorId(professorId);
+        return this;
+    }
+
+    public int getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
+    }
+
+    public HomeWork withCourseId(Integer courseId){
+        this.setCourseId(courseId);
         return this;
     }
 }
