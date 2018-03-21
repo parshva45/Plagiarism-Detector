@@ -24,13 +24,13 @@ pipeline {
            }
        }
         stage('SonarQube') {
-              	steps {
-              		withSonarQubeEnv('SonarQube') {
-              			sh ' mvn clean install '
-              			sh ' mvn sonar:sonar '
-              		}
-              	}
-              }
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh ' mvn clean install '
+                    sh ' mvn sonar:sonar '
+                }
+            }
+        }
    }
 
     post {

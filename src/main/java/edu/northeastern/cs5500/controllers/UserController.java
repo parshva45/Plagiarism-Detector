@@ -41,7 +41,7 @@ public class UserController {
 
     @RequestMapping(path = "/api/register", method = RequestMethod.POST)
     public ResponseEntity<RegisterResponseJSON> register(@RequestBody RegisterRequestJSON request) {
-        if (userService.checkIfUserExistsByUserName(request.getUsername())) {
+        if (userService.checkIfUserExistsByUserName(request.getUserName())) {
             return ResponseEntity.badRequest().body(
                     new RegisterResponseJSON()
                             .withMessage("username already exists")
@@ -67,6 +67,23 @@ public class UserController {
                         .withResult(result)
                         .withMessage("results fetched")
         );
+    }
+
+    @RequestMapping(path = "/api/user/{userId}", method = RequestMethod.PUT)
+    public ResponseEntity<RegisterResponseJSON> updateUser(@RequestBody RegisterRequestJSON request,
+                                                           @PathVariable("userId") String userId) {
+        if(!userService.findUserByUserIdOrUserName(userId, null).isEmpty()){
+            User user = userService.createUserObject(request);
+            userService.updateUser(user);
+            return ResponseEntity.ok().body(
+                    new RegisterResponseJSON()
+                            .withId(user.getId())
+                            .withMessage("user Updated")
+            );
+        }
+        return ResponseEntity.badRequest().body(
+                new RegisterResponseJSON()
+                        .withMessage("user not found"));
     }
 
 

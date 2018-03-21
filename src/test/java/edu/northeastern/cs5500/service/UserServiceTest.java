@@ -33,7 +33,7 @@ public class UserServiceTest{
     @Test
     public void createUserShouldReturnAValidUserObject(){
         RegisterRequestJSON registerRequestJSON = new RegisterRequestJSON()
-                .withUsername("praveen")
+                .withUserName("praveen")
                 .withPassword("singh")
                 .withFirstName("a")
                 .withLastName("b")
@@ -41,7 +41,7 @@ public class UserServiceTest{
 
         User user = userService.createUserObject(registerRequestJSON);
 
-        assertEquals(registerRequestJSON.getUsername(), user.getUserName());
+        assertEquals(registerRequestJSON.getUserName(), user.getUserName());
         assertEquals(registerRequestJSON.getPassword(), user.getPassword());
         assertEquals(registerRequestJSON.getEmail(), user.getEmail());
         assertEquals(registerRequestJSON.getLastName(), user.getLastName());
@@ -105,7 +105,7 @@ public class UserServiceTest{
     @Test
     public void addUserAndSendEmailShouldWorkAsExpected(){
         RegisterRequestJSON registerRequestJSON = new RegisterRequestJSON()
-                .withUsername("praveen")
+                .withUserName("praveen")
                 .withPassword("singh")
                 .withFirstName("praveen")
                 .withLastName("singh")
@@ -113,13 +113,13 @@ public class UserServiceTest{
         User user = userService.createUserObject(registerRequestJSON);
 
         when(userRepository.save(user)).thenReturn(user);
-        doNothing().when(registerEmail).sendEmail(registerRequestJSON.getUsername(),
+        doNothing().when(registerEmail).sendEmail(registerRequestJSON.getUserName(),
                 registerRequestJSON.getEmail());
 
         userService.addUserAndSendEmail(user);
 
         verify(userRepository, times(1)).save(user);
-        verify(registerEmail, times(1)).sendEmail(registerRequestJSON.getUsername(),
+        verify(registerEmail, times(1)).sendEmail(registerRequestJSON.getUserName(),
                 registerRequestJSON.getEmail());
     }
 

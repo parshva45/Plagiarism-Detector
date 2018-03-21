@@ -79,7 +79,7 @@ public class UserControllerTest{
 
     @Test
     public void registerShouldNotWorkWhenUserNameExists(){
-        RegisterRequestJSON registerRequestJSON = new RegisterRequestJSON().withUsername("praveen");
+        RegisterRequestJSON registerRequestJSON = new RegisterRequestJSON().withUserName("praveen");
         when(userService.checkIfUserExistsByUserName(loginRequestJSON.getUsername()))
                 .thenReturn(true);
 
@@ -94,7 +94,7 @@ public class UserControllerTest{
     @Test
     public void registerShouldWorkWhenValidInputsGiven(){
         RegisterRequestJSON registerRequestJSON = new RegisterRequestJSON()
-                .withUsername("praveen")
+                .withUserName("praveen")
                 .withPassword("singh")
                 .withEmail("team207@gmail.com");
         User user = new User()
@@ -169,6 +169,37 @@ public class UserControllerTest{
         assertEquals("results fetched",
                 getUserResponseJSON.getMessage());
         assertTrue(getUserResponseJSON.getResult().isEmpty());
+    }
+
+    @Test
+    public void updateUserShouldWork(){
+        RegisterRequestJSON registerRequestJSON = new RegisterRequestJSON()
+                .withUserName("praveen")
+                .withPassword("singh")
+                .withEmail("team207@gmail.com");
+        User user = new User()
+                .withUserName("praveen")
+                .withPassword("singh")
+                .withEmail("team207@gmail.com")
+                .withRole(1)
+                .withCreateDate(new Date())
+                .withId(1);
+        List<User> userList = new ArrayList<>();
+        userList.add(user);
+        when(userService.findUserByUserIdOrUserName(String.valueOf(user.getId()), null))
+                .thenReturn(userList);
+        when(userService.createUserObject(registerRequestJSON)).thenReturn(user);
+        when(userService.updateUser(user)).thenReturn(user);
+
+        ResponseEntity responseEntity = userController.updateUser(registerRequestJSON, "1");
+        RegisterResponseJSON registerResponseJSON = (RegisterResponseJSON) responseEntity.getBody();
+
+        verify(userService, times(1)).createUserObject(registerRequestJSON);
+        verify(userService, times(1)).findUserByUserIdOrUserName(String.valueOf(user.getId()), null);
+        verify(userService, times(1)).updateUser(user);
+        assertNotNull(registerResponseJSON);
+        assertEquals("user Updated", registerResponseJSON.getMessage());
+        assertEquals(Integer.valueOf(1), registerResponseJSON.getId());
     }
 
 }

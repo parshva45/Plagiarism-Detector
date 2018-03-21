@@ -8,17 +8,40 @@
         vm.userId = $routeParams['userId'];
         vm.user = undefined;
         vm.userProfile = undefined;
+        vm.update = update;
 
         function init() {
             UserService.findByUserIdAndUserName(vm.userId)
                 .then(function(data){
                     vm.user = data.result[0];
+                    vm.userProfile = angular.copy(vm.user);
                 });
-
-            vm.userProfile = angular.copy(vm.user);
-            console.log(vm.user)
         }
         init();
+
+        function update (newUser) {
+            console.log(vm.user.id);
+            if(vm.userPassword !== undefined){
+                if(vm.userPassword === vm.userPasswordConfirm) {
+                    newUser.userPassword = vm.userPassword;
+                    newUser.userPasswordConfirm = vm.userPasswordConfirm;
+                    updateServiceWrapper(vm.user.id, newUser);
+                }else
+                    vm.error = "Passwords do not match";
+            }else
+                updateServiceWrapper(vm.user.id, newUser);
+        }
+
+        function updateServiceWrapper(userId, newUser){
+            UserService
+                .updateUser(userId, newUser)
+                .then(function (user) {
+                    angular.copy(vm.userProfile, vm.user);
+                    vm.message = "user successfully updated";
+                }, function (err) {
+                    vm.error = err.data;
+                });
+        }
 
 
     }
