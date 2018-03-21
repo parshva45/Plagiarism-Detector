@@ -27,7 +27,7 @@ public class UserService{
 
     public User createUserObject(RegisterRequestJSON registerRequestJSON){
        return new User()
-               .withUserName(registerRequestJSON.getUsername())
+               .withUserName(registerRequestJSON.getUserName())
                .withPassword(registerRequestJSON.getPassword())
                .withEmail(registerRequestJSON.getEmail())
                .withLastName(registerRequestJSON.getLastName())
@@ -58,6 +58,10 @@ public class UserService{
 
     public List<User> findUserByUserNameAndPassword(String userName, String password){
         return userRepository.findByUserNameAndPassword(userName, password);
+    }
+
+    public User updateUser(User user){
+        return userRepository.save(user);
     }
 
 }

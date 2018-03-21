@@ -7,7 +7,8 @@
         var api = {
             "login" : login,
             "findByUserIdAndUserName" : findByUserIdAndUserName,
-            "createUser": register
+            "createUser": register,
+            "updateUser": updateUser
         };
         return api;
 
@@ -33,6 +34,10 @@
             }).then(function (response) {
                 return response.data;
             });
+        }
+
+        function updateUser(userId, newUser) {
+            return $http.put("/api/user/"+userId, newUser);
         }
 
     }

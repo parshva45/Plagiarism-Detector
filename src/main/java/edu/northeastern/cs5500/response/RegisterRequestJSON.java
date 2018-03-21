@@ -10,16 +10,16 @@ public class RegisterRequestJSON {
     private String firstName;
     private String lastName;
 
-    public String getUsername() {
+    public String getUserName() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUserName(String username) {
         this.username = username;
     }
 
-    public RegisterRequestJSON withUsername(String username) {
-        this.setUsername(username);
+    public RegisterRequestJSON withUserName(String username) {
+        this.setUserName(username);
         return this;
     }
 
