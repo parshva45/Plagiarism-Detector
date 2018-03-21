@@ -30,13 +30,23 @@ public class StudentHomeWorkService {
         return studentHomeWorkRepository.findAllByCourseIdAndAndHomeWorkId(courseId, homeWorkId);
     }
 
-    public StudentHomeWork getHomeWorkByStudentIdCourseIdAndHomeWorkId(Integer userId,
+    public List<StudentHomeWork> getHomeWorkByStudentIdCourseIdAndHomeWorkId(Integer userId,
                    Integer courseId, Integer homeWorkId){
-        StudentHomeWork studentHomeWork = studentHomeWorkRepository
+        List<StudentHomeWork> studentHomeWork = studentHomeWorkRepository
                 .findByUserIdAndAndCourseIdAndHomeWorkId(userId, courseId, homeWorkId);
         if (studentHomeWork == null){
             throw new HttpStatusException(HttpStatus.BAD_REQUEST, "User did not submit assignment.");
         }
+        return studentHomeWork;
+    }
+
+    public StudentHomeWork submitHomeWork(Integer userId, Integer courseId, Integer homeWorkId, String path){
+        StudentHomeWork studentHomeWork = new StudentHomeWork()
+                .withHomeWorkId(homeWorkId)
+                .withCourseId(courseId)
+                .withUserId(userId)
+                .withPath(path);
+        studentHomeWorkRepository.save(studentHomeWork);
         return studentHomeWork;
     }
 

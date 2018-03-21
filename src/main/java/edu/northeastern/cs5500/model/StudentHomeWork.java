@@ -10,26 +10,23 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "studentHomework")
-@IdClass(value = StudentHomeWork.StudentHomeWorkKey.class)
 public class StudentHomeWork implements Serializable {
 
     @Id
-    @Column(name = "userId")
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private int id;
+
+    @Column(name = "userId", nullable = false)
     private int userId;
-    @Id
-    @Column(name = "homeWorkId")
+
+    @Column(name = "homeWorkId", nullable = false)
     private int homeWorkId;
-    @Id
-    @Column(name="courseId")
+
+    @Column(name="courseId", nullable = false)
     private int courseId;
 
     @Column(name = "filePath")
     private String filePath;
-
-    @PersistenceConstructor
-    private StudentHomeWork() {
-        // empty on purpose
-    }
 
     public int getUserId() {
         return userId;
@@ -37,6 +34,16 @@ public class StudentHomeWork implements Serializable {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    public StudentHomeWork withUserId(Integer userId){
+        this.setUserId(userId);
+        return this;
+    }
+
+    public StudentHomeWork withId(Integer id){
+        this.setId(id);
+        return this;
     }
 
     public int getHomeWorkId() {
@@ -47,12 +54,22 @@ public class StudentHomeWork implements Serializable {
         this.homeWorkId = homeWorkId;
     }
 
+    public StudentHomeWork withHomeWorkId(Integer homeWorkId){
+        this.setHomeWorkId(homeWorkId);
+        return this;
+    }
+
     public int getCourseId() {
         return courseId;
     }
 
     public void setCourseId(int courseId) {
         this.courseId = courseId;
+    }
+
+    public StudentHomeWork withCourseId(Integer courseId){
+        this.setCourseId(courseId);
+        return this;
     }
 
     public String getFilePath() {
@@ -63,21 +80,16 @@ public class StudentHomeWork implements Serializable {
         this.filePath = filePath;
     }
 
+    public StudentHomeWork withPath(String path){
+        this.setFilePath(path);
+        return this;
+    }
 
-    public static class StudentHomeWorkKey implements Serializable {
+    public int getId() {
+        return id;
+    }
 
-        private int userId;
-        private int homeWorkId;
-        private int courseId;
-
-        public StudentHomeWorkKey() {
-            // empty on purpose
-        }
-
-        public StudentHomeWorkKey(final int userId, final int homeWorkId) {
-            this();
-            this.userId = userId;
-            this.homeWorkId = homeWorkId;
-        }
+    public void setId(int id) {
+        this.id = id;
     }
 }
