@@ -1,4 +1,4 @@
-package edu.northeastern.cs5500.fileupload;
+package edu.northeastern.cs5500.controllers.fileupload;
 
 import edu.northeastern.cs5500.response.UploadFileJSON;
 import org.springframework.beans.factory.annotation.Autowired;
