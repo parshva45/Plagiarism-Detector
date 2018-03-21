@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Repository
 public interface StudentHomeWorkRepository extends JpaRepository<StudentHomeWork, Integer> {
-    StudentHomeWork findByUserIdAndAndCourseIdAndHomeWorkId(Integer userId,
+    List<StudentHomeWork> findByUserIdAndAndCourseIdAndHomeWorkId(Integer userId,
              Integer courseId, Integer homeWorkId);
     List<StudentHomeWork> findAllByUserId(Integer userId);
     List<StudentHomeWork> findAllByCourseIdAndAndHomeWorkId(Integer courseId, Integer homeWorkId);
