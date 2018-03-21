@@ -69,7 +69,7 @@ public class UserController {
         );
     }
 
-    @RequestMapping(path = "/api/register/{userId}", method = RequestMethod.PUT)
+    @RequestMapping(path = "/api/user/{userId}", method = RequestMethod.PUT)
     public ResponseEntity<RegisterResponseJSON> updateUser(@RequestBody RegisterRequestJSON request,
                                                            @PathVariable("userId") String userId) {
         if(!userService.findUserByUserIdOrUserName(userId, null).isEmpty()){
