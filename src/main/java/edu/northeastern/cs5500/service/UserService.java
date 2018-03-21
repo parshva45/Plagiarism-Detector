@@ -27,7 +27,7 @@ public class UserService{
 
     public User createUserObject(RegisterRequestJSON registerRequestJSON){
        return new User()
-               .withUsername(registerRequestJSON.getUsername())
+               .withUserName(registerRequestJSON.getUsername())
                .withPassword(registerRequestJSON.getPassword())
                .withEmail(registerRequestJSON.getEmail())
                .withLastName(registerRequestJSON.getLastName())
@@ -41,23 +41,23 @@ public class UserService{
         if (id != null) {
             result.add(userRepository.findById(Integer.parseInt(id)));
         } else if (userName != null) {
-            result.addAll(userRepository.findByUsernameLike("%" + userName + "%"));
+            result.addAll(userRepository.findByUserNameLike("%" + userName + "%"));
         }
         return result;
     }
 
     public User addUserAndSendEmail(User user){
         userRepository.save(user);
-        registerEmail.sendEmail(user.getUsername(), user.getEmail());
+        registerEmail.sendEmail(user.getUserName(), user.getEmail());
         return user;
     }
 
     public boolean checkIfUserExistsByUserName(String userName){
-        return userRepository.existsByUsername(userName);
+        return userRepository.existsByUserName(userName);
     }
 
     public List<User> findUserByUserNameAndPassword(String userName, String password){
-        return userRepository.findByUsernameAndPassword(userName, password);
+        return userRepository.findByUserNameAndPassword(userName, password);
     }
 
 }

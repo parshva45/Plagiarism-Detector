@@ -15,23 +15,23 @@ public class Course implements Serializable{
     @Id
     @GeneratedValue
     private int id;
-    private String name;
+    private String courseName;
 
     public Course withId(Integer id){
         this.setId(id);
         return this;
     }
 
-    public String getName() {
-        return name;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public Course withCourseName(String name){
-        this.setName(name);
+    public Course withCourseName(String courseName){
+        this.setCourseName(courseName);
         return this;
     }
 

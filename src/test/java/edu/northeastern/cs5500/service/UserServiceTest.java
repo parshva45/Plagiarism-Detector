@@ -41,7 +41,7 @@ public class UserServiceTest{
 
         User user = userService.createUserObject(registerRequestJSON);
 
-        assertEquals(registerRequestJSON.getUsername(), user.getUsername());
+        assertEquals(registerRequestJSON.getUsername(), user.getUserName());
         assertEquals(registerRequestJSON.getPassword(), user.getPassword());
         assertEquals(registerRequestJSON.getEmail(), user.getEmail());
         assertEquals(registerRequestJSON.getLastName(), user.getLastName());
@@ -57,7 +57,7 @@ public class UserServiceTest{
 
     @Test
     public void findUserByUserNameOrIdShouldReturnUserWhenIdIsPassed(){
-        User user = new User().withId(1).withUsername("praveen");
+        User user = new User().withId(1).withUserName("praveen");
         when(userRepository.findById(1)).thenReturn(user);
 
         List<User> result = userService.findUserByUserIdOrUserName("1", null);
@@ -70,35 +70,35 @@ public class UserServiceTest{
     @Test
     public void findUserByUserNameOrIdShouldReturnUserWhenUserNameIsPassed(){
         String userName = "praveen";
-        User user = new User().withId(1).withUsername("praveen");
+        User user = new User().withId(1).withUserName("praveen");
         List<User> userList = new ArrayList<>();
         userList.add(user);
-        when(userRepository.findByUsernameLike("%" + userName + "%")).thenReturn(userList);
+        when(userRepository.findByUserNameLike("%" + userName + "%")).thenReturn(userList);
 
         List<User> result = userService.findUserByUserIdOrUserName(null, userName);
 
-        verify(userRepository, times(1)).findByUsernameLike("%" + userName + "%");
+        verify(userRepository, times(1)).findByUserNameLike("%" + userName + "%");
         assertFalse(result.isEmpty());
         assertEquals(user, result.get(0));
     }
 
     @Test
     public void checkIfUserExistsShouldReturnTrue(){
-        when(userRepository.existsByUsername("praveen")).thenReturn(true);
+        when(userRepository.existsByUserName("praveen")).thenReturn(true);
 
-        boolean res = userRepository.existsByUsername("praveen");
+        boolean res = userRepository.existsByUserName("praveen");
 
-        verify(userRepository, times(1)).existsByUsername("praveen");
+        verify(userRepository, times(1)).existsByUserName("praveen");
         assertTrue(res);
     }
 
     @Test
     public void checkIfUserExistsShouldReturnFalse(){
-        when(userRepository.existsByUsername("praveen")).thenReturn(false);
+        when(userRepository.existsByUserName("praveen")).thenReturn(false);
 
         boolean res = userService.checkIfUserExistsByUserName("praveen");
 
-        verify(userRepository, times(1)).existsByUsername("praveen");
+        verify(userRepository, times(1)).existsByUserName("praveen");
         assertFalse(res);
     }
 
@@ -127,15 +127,15 @@ public class UserServiceTest{
     public void findByUserNameAndPasswordShouldReturnValidResults(){
         String userName = "praveen";
         String password = "singh";
-        User user = new User().withUsername(userName).withPassword(password);
+        User user = new User().withUserName(userName).withPassword(password);
         List<User> users = new ArrayList<>();
         users.add(user);
-        when(userRepository.findByUsernameAndPassword(userName, password)).thenReturn(users);
+        when(userRepository.findByUserNameAndPassword(userName, password)).thenReturn(users);
 
         List<User> userResult = userService.findUserByUserNameAndPassword(userName, password);
 
         assertNotNull(userResult.get(0));
-        assertEquals(userName, userResult.get(0).getUsername());
+        assertEquals(userName, userResult.get(0).getUserName());
         assertEquals(password, userResult.get(0).getPassword());
 
     }
