@@ -54,6 +54,7 @@ public class FileComparisonControllerTest {
     public void getAllServicesShouldReturnAllList(){
         List<StrategyTypes> strategyTypes = new ArrayList<>();
         strategyTypes.add(StrategyTypes.LEVENSHTEIN_DISTANCE);
+        strategyTypes.add(StrategyTypes.LCS);
         when(fileComparisonService.getAllStrategies()).thenReturn(strategyTypes);
 
         JSONObject jsonObject = fileComparisonController.getListOfStrategies();
