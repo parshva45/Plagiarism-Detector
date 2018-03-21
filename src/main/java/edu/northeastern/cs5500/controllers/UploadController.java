@@ -1,4 +1,4 @@
-package edu.northeastern.cs5500.controllers.fileupload;
+package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.response.UploadFileJSON;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +24,7 @@ public class UploadController {
         this.env = env;
     }
 
-    @RequestMapping(value = "/uploadFile", method = RequestMethod.POST)
+    @RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
     @ResponseBody
     public ResponseEntity<UploadFileJSON> uploadFile(@RequestParam("uploadFile") MultipartFile uploadFile,
                                                      @RequestParam("userId") int userId,

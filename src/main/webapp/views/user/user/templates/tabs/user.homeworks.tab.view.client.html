@@ -10,12 +10,12 @@
 <br/>
 <div class="container-fluid">
 
-    <form action="/api/user/upload"  method="post" enctype="multipart/form-data">
-        <input  name="uploadFile"    type="file" class="form-control"/>
-        <input  name="userId"    value="{{model.userProfile.id}}"  style="display: none"/>
-        <input  name="hwId"        value="{{model.hwId}}"   style="display: none"/>
-        <input  name="courseId"        value="{{model.courseId}}"   style="display: none"/>
-        <button type="submit"    class="btn btn-block blue">Upload Image</button>
+    <form action="/api/homework/uploadFile"  method="post" enctype="multipart/form-data">
+        <input  name="uploadFile"  type="file" class="form-control"/>
+        <input  name="userId" value="{{model.userProfile.id}}" style="display: none"/>
+        <input  name="hwId" value="{{model.hwId}}" style="display: none"/>
+        <input  name="courseId" value="{{model.courseId}}" style="display: none"/>
+        <button type="submit" class="btn btn-block blue">Upload File</button>
     </form>
     <br/>
 
