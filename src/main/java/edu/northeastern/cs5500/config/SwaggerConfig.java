@@ -11,6 +11,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 /**
  * @author Praveen Singh
+ * Swagger Config File, for loading all the API's in swagger
  */
 @Configuration
 @EnableSwagger2

@@ -1,6 +1,6 @@
 (function(){
     angular
-        .module("BookYourTrip")
+        .module("PlagiarismDetector")
         .controller("AdminController", adminController);
 
     function adminController($location, $uibModal, $routeParams, UserService) {
@@ -8,7 +8,8 @@
         vm.userId = $routeParams['userId'];
         vm.user = undefined;
         vm.userProfile = undefined;
-
+        vm.hwId = 1;
+        vm.courseId = 1;
 
         function init() {
             UserService.findByUserIdAndUserName(vm.userId)
