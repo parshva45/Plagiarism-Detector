@@ -13,6 +13,9 @@ import static org.junit.Assert.assertEquals;
  */
 public class StrategyTypesTest {
 
+    /**
+     * tests for validating strategy enums
+     */
     @Test
     public void validateEnums(){
         assertEquals("LEVENSHTEIN_DISTANCE", LEVENSHTEIN_DISTANCE.toString());
