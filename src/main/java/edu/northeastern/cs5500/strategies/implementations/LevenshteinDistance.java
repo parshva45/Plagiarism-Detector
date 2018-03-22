@@ -13,7 +13,8 @@ public class LevenshteinDistance implements SimilarityStrategy {
     private final PythonToStringParser pythonToStringParser;
 
     /**
-     * @param pythonToStringParser
+     * Method to instantiate LevenshteinDistance
+     * @param pythonToStringParser PythonToStringParser
      */
     @Autowired
     public LevenshteinDistance(PythonToStringParser pythonToStringParser) {
@@ -21,9 +22,10 @@ public class LevenshteinDistance implements SimilarityStrategy {
     }
 
     /**
-     * @param compOne
-     * @param compTwo
-     * @return edit distance between strings compOne and compTwo using Levenshtein distance
+     * Method to calculate edit distance between strings compOne and compTwo using Levenshtein distance
+     * @param compOne String
+     * @param compTwo String
+     * @return edit distance between strings compOne and compTwo using Levenshtein distance double
      */
     public int getDistance(String compOne, String compTwo) {
         int[][] matrix = new int[compOne.length() + 1][compTwo.length() + 1];
@@ -49,26 +51,29 @@ public class LevenshteinDistance implements SimilarityStrategy {
     }
  
     /**
-     * @param first
-     * @param second
-     * @return cost of substitution between chars first and second
+     * Method to determine cost of substitution between two characters
+     * @param first char
+     * @param second char
+     * @return cost of substitution between chars first and second int
      */
     private int costOfSubstitution(char first, char second) {
         return first == second ? 0 : 1;
     }
  
     /**
-     * @param numbers
-     * @return number with minimum value if exists, max integer otherwise
+     * Method to find number with minimum value
+     * @param numbers int
+     * @return number with minimum value if exists, max integer otherwise int
      */
     private int min(int... numbers) {
         return Arrays.stream(numbers).min().orElse(Integer.MAX_VALUE);
     }
     
     /**
-     * @param s1
-     * @param s2
-     * @return longer of the two strings s1 and s2
+     * Method to return longer string
+     * @param s1 String
+     * @param s2 String
+     * @return longer of the two strings s1 and s2 String
      */
     public String longer(String s1, String s2) {
     	return s1.length() >= s2.length() ? s1 : s2;
@@ -77,7 +82,10 @@ public class LevenshteinDistance implements SimilarityStrategy {
 
     /* (non-Javadoc)
      * @see edu.northeastern.cs5500.strategies.SimilarityStrategy#calculateSimilarity(java.lang.String, java.lang.String)
-     * similarity measure between file1 and file2 using Levenshtein distance strategy
+     * calculate similarity measure between file1 and file2 using Levenshtein distance strategy
+     * @param file1 String
+     * @param file2 String
+     * @return similarity measure between file1 and file2 using Levenshtein distance strategy double
      */
     @Override
     public double calculateSimilarity(String file1, String file2){

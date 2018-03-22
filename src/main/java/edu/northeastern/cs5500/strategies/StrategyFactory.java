@@ -15,8 +15,9 @@ public class StrategyFactory {
     private final LCS lcs;
 
     /**
-     * @param levenshteinDistance
-     * @param lcs
+     * Method to instantiate Strategy factory
+     * @param levenshteinDistance LevenshteinDistance
+     * @param lcs LCS
      */
     @Autowired
     public StrategyFactory(LevenshteinDistance levenshteinDistance, LCS lcs) {
@@ -25,8 +26,9 @@ public class StrategyFactory {
     }
 
     /**
-     * @param strategy
-     * @return corresponding strategy
+     * Given a string, method to return corresponding strategy
+     * @param strategy String
+     * @return corresponding strategy SimilarityStrategy
      */
     public SimilarityStrategy getStrategyByStrategyType(String strategy){
         if(StrategyTypes.LEVENSHTEIN_DISTANCE.toString().equals(strategy)){
