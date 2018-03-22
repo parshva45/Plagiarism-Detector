@@ -34,6 +34,7 @@ public class UserController {
             return ResponseEntity.ok().body(
                     new LoginResponseJSON()
                             .withId(result.get(0).getId())
+                            .withRole(result.get(0).getRole())
                             .withMessage("credential found")
             );
         }

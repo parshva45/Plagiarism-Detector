@@ -10,8 +10,8 @@
 <br/>
 <div class="container-fluid">
 
-    <form action="/api/homework/uploadFile"  method="post" enctype="multipart/form-data">
-        <input  name="uploadFile"  type="file" class="form-control"/>
+    <form action="/api/homework/uploadfile"  method="post" enctype="multipart/form-data">
+        <input  name="file" type="file" class="form-control"/>
         <input  name="userId" value="{{model.userProfile.id}}" style="display: none"/>
         <input  name="hwId" value="{{model.hwId}}" style="display: none"/>
         <input  name="courseId" value="{{model.courseId}}" style="display: none"/>
@@ -19,8 +19,5 @@
     </form>
     <br/>
 
-    <div class="center">
-        <a ng-click="#" class="btn green">Submit</a>
-    </div>
 </div>
 

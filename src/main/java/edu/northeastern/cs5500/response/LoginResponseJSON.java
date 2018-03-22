@@ -5,6 +5,7 @@ package edu.northeastern.cs5500.response;
  */
 public class LoginResponseJSON {
     private Integer id;
+    private Integer role;
     private String message;
 
     public Integer getId() {
@@ -30,6 +31,19 @@ public class LoginResponseJSON {
 
     public LoginResponseJSON withMessage(String message) {
         this.setMessage(message);
+        return this;
+    }
+
+    public Integer getRole() {
+        return role;
+    }
+
+    public void setRole(Integer role) {
+        this.role = role;
+    }
+
+    public LoginResponseJSON withRole(Integer role){
+        this.setRole(role);
         return this;
     }
 }
