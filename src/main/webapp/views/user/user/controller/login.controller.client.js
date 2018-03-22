@@ -12,7 +12,12 @@
                 .login(user)
                 .then(function (user) {
                     if(user) {
-                        $location.url('/profile/'+user.id);
+                        console.log(user);
+                        if(user.role === 1){
+                            $location.url('/profile/'+user.id);
+                        }else{
+                            $location.url('/coursestaff/'+user.id);
+                        }
                     }else{
                         vm.error = "Enter valid username and password combination";
                     }

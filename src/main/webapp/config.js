@@ -28,6 +28,11 @@
                 controller: "ProfileController",
                 controllerAs: "model"
             })
+            .when('/coursestaff/:userId', {
+                templateUrl: 'views/user/admin/templates/admin.profile.view.client.html',
+                controller: 'AdminController',
+                controllerAs: 'model'
+            })
             .otherwise({
                 redirectTo: '/'
 

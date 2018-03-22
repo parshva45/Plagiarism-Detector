@@ -43,7 +43,7 @@ public class UserControllerTest{
     @Test
     public void loginShouldPassWithValidInputs(){
         List<User> list = new ArrayList<>();
-        list.add(new User().withUserName("praveen").withPassword("singh").withId(1));
+        list.add(new User().withUserName("praveen").withPassword("singh").withId(1).withRole(1));
         when(userService.findUserByUserNameAndPassword(loginRequestJSON.getUsername(),
                 loginRequestJSON.getPassword()))
                 .thenReturn(list);
@@ -55,6 +55,7 @@ public class UserControllerTest{
                 loginRequestJSON.getPassword());
         LoginResponseJSON loginResponseJSONExpected = new LoginResponseJSON()
                 .withId(1)
+                .withRole(1)
                 .withMessage("credential found");
 
         assertNotNull(loginResponseJSON);
