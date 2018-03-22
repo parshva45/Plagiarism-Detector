@@ -7,14 +7,13 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Praveen Singh
  */
 @Component
 public class RegisterEmail {
-    private static final Logger LOGGER = Logger.getLogger(RegisterEmail.class.getName());
+//    private static final Logger LOGGER = Logger.getLogger(RegisterEmail.class.getName());
 
 
     /**
@@ -55,7 +54,7 @@ public class RegisterEmail {
             Transport.send(message);
 
         } catch (MessagingException e) {
-            LOGGER.log(Level.ALL, "Exception sending email  : {0}", e.getMessage());
+//            LOGGER.log(Level.ALL, "Exception sending email  : {0}", e.getMessage());
         }
     }
 }

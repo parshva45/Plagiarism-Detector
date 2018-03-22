@@ -6,14 +6,12 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * @author Praveen Singh
  */
 @Component
 public class PythonToStringParser {
-    private static final Logger LOGGER = Logger.getLogger(PythonToStringParser.class.getName());
     /**
      * Method to read file and return content as a string for comparison.
      * @param filePath Path of File in string.
@@ -29,7 +27,6 @@ public class PythonToStringParser {
                     contentBuilder.append(line).append("\n");
             }
         } catch (IOException ex) {
-            LOGGER.log(Level.ALL, "Exception while reading file {0}", ex.getMessage());
         }
         return contentBuilder.toString();
     }

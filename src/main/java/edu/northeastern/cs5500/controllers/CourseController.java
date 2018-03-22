@@ -1,6 +1,8 @@
 package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.service.CourseService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.json.simple.JSONObject;
@@ -20,6 +22,7 @@ import java.util.Map;
 @RequestMapping("/api/course/")
 @Api(value="Course Controller", description="Operations pertaining Courses present in the System")
 public class CourseController {
+    private static final Logger LOGGER = LogManager.getLogger(CourseController.class);
 
     private final CourseService courseService;
 
@@ -39,6 +42,7 @@ public class CourseController {
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("result", courseService.getCourseById(courseId));
         resultMap.put("response-code", "OK");
+        LOGGER.info("sent JSONObject as API Response");
         return new JSONObject(resultMap);
     }
 }

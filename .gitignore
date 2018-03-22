@@ -31,3 +31,6 @@ node_modules/
 
 #local dev
 uploads/
+
+# log folde
+logs/
