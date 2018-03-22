@@ -3,7 +3,7 @@
         .module("PlagiarismDetector")
         .controller("ProfileController", profileController);
 
-    function profileController($location, $scope, $routeParams, $uibModal,$window,  $http, UserService) {
+    function profileController($location, $scope, $routeParams, $uibModal, UserService) {
         var vm = this;
         vm.userId = $routeParams['userId'];
         vm.user = undefined;
