@@ -8,6 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public interface SimilarityStrategy {
 
+    /**
+     * @param file1
+     * @param file2
+     * @return similarity measure between file1 and file2
+     */
     double calculateSimilarity(String file1, String file2);
 
 }
