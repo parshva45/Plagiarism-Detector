@@ -10,11 +10,22 @@ public class LCS implements SimilarityStrategy {
 
     private final PythonToStringParser pythonToStringParser;
 
+    /**
+     * Method to instantiate LCS
+     * @param pythonToStringParser PythonToStringParser
+     */
     @Autowired
     public LCS(PythonToStringParser pythonToStringParser) {
         this.pythonToStringParser = pythonToStringParser;
     }
 
+    /* (non-Javadoc)
+     * @see edu.northeastern.cs5500.strategies.SimilarityStrategy#calculateSimilarity(java.lang.String, java.lang.String)
+     * Method to calculate similarity measure between file1 and file2 using LCS strategy
+     * @param file1 String
+     * @param file2 String
+     * @return similarity measure between file1 and file2 using LCS strategy double
+     */
     @Override
     public double calculateSimilarity(String file1, String file2){
     	
@@ -41,6 +52,12 @@ public class LCS implements SimilarityStrategy {
         return L[m][n]/(double)longerLength(fileContentFile1,fileContentFile2)*100;
     }
     
+    /**
+     * Method to return longer string
+     * @param s1 String
+     * @param s2 String
+     * @return length of the longer string among s1 and s2 String
+     */
     private int longerLength(String s1, String s2) {
     	return s1.length() >= s2.length() ? s1.length() : s2.length();
     }
