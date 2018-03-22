@@ -16,6 +16,12 @@ import java.util.logging.Logger;
 public class RegisterEmail {
     private static final Logger LOGGER = Logger.getLogger(RegisterEmail.class.getName());
 
+
+    /**
+     * Method to send email to user for registration.
+     * @param name String name
+     * @param email String email id
+     */
     public void sendEmail(String name, String email) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");

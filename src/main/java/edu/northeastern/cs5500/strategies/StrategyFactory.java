@@ -1,7 +1,7 @@
 package edu.northeastern.cs5500.strategies;
 
-import edu.northeastern.cs5500.strategies.implementations.LevenshteinDistance;
 import edu.northeastern.cs5500.strategies.implementations.LCS;
+import edu.northeastern.cs5500.strategies.implementations.LevenshteinDistance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

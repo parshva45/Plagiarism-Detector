@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author Praveen Singh
+ * Service Class layer for Course
  */
 @Service
 public class CourseService {
@@ -18,6 +19,11 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
+    /**
+     * Method to find a course by the given course id.
+     * @param courseId Integer
+     * @return Instance of Course
+     */
     public Course getCourseById(Integer courseId){
         return courseRepository.findById(courseId);
     }

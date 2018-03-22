@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 /**
  * @author Praveen Singh
+ * Entity for HomeWork Table.
+ * The fields are columns of the table.
  */
 @Entity
 @Table(name = "homework")

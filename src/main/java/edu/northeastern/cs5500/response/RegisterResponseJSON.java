@@ -2,6 +2,7 @@ package edu.northeastern.cs5500.response;
 
 /**
  * @author Praveen Singh
+ * Simple Register Response POJO Class.
  */
 public class RegisterResponseJSON {
     private Integer id;
