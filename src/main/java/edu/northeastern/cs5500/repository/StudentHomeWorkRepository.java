@@ -8,11 +8,33 @@ import java.util.List;
 
 /**
  * @author Praveen Singh
+ * JPA Repository class for the StudentHomeWork table related queries.
  */
 @Repository
 public interface StudentHomeWorkRepository extends JpaRepository<StudentHomeWork, Integer> {
+    /**
+     * Method to find the list of homeworks submitted by a user for a given course
+     * and given homework
+     * @param userId Integer
+     * @param courseId Integer
+     * @param homeWorkId Integer
+     * @return List of StudentHomeWork Objects
+     */
     List<StudentHomeWork> findByUserIdAndAndCourseIdAndHomeWorkId(Integer userId,
              Integer courseId, Integer homeWorkId);
+
+    /**
+     * Method finds all the StudentHomeWork rows from the database for a given user.
+     * @param userId Integer userId of the student
+     * @return List of StudentHomeWork object
+     */
     List<StudentHomeWork> findAllByUserId(Integer userId);
+
+    /**
+     * Method finds all the StudentHomeWork objects for the given course, homework no
+     * @param courseId Integer Id of the course
+     * @param homeWorkId Integer Id of the homework
+     * @return List of StudentHomeWork object
+     */
     List<StudentHomeWork> findAllByCourseIdAndAndHomeWorkId(Integer courseId, Integer homeWorkId);
 }
