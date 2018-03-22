@@ -26,6 +26,9 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 	private String s4;
 
 	@Before
+	/**
+	 * setup submission files
+	 */
 	public void setUp() {
 		s1 = pythonToStringParser.readFile(getFilePath("submission1.py")).trim();
 		s2 = pythonToStringParser.readFile(getFilePath("submission2.py")).trim();
@@ -33,6 +36,10 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 		s4 = pythonToStringParser.readFile(getFilePath("submission4.py")).trim();
 	}
 
+	/**
+	 * @param fileName of file to be get
+	 * @return absolute path of file
+	 */
 	public String getFilePath(String fileName){
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(Objects.requireNonNull(classLoader.getResource(fileName))
@@ -40,6 +47,9 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 		return file.getAbsolutePath();
 	}
 
+	/**
+	 * test similarity measure between submission1.py and submission2.py
+	 */
 	@Test
 	public void compares1s2Test() {
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s1, s2);
@@ -48,6 +58,9 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
     	assertEquals(90.338, similarityMeasure, 0.01);
 	}
 	
+	/**
+	 * test similarity measure between submission1.py and submission3.py
+	 */
 	@Test
 	public void compares1s3Test() {
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s1,s3);
@@ -56,6 +69,9 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
     	assertEquals(90.338, similarityMeasure, 0.01);
 	}
 	
+	/**
+	 * test similarity measure between submission1.py and submission4.py
+	 */
 	@Test
 	public void compares1s4Test() {
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s1,s4);
@@ -64,6 +80,9 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
     	assertEquals(86.175, similarityMeasure, 0.01);
 	}
 	
+	/**
+	 * test similarity measure between submission2.py and submission3.py
+	 */
 	@Test
 	public void compares2s3Test() {
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s2,s3);
@@ -72,6 +91,9 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
     	assertEquals(100.0, similarityMeasure, 0.01);
 	}
 	
+	/**
+	 * test similarity measure between submission2.py and submission4.py
+	 */
 	@Test
 	public void compares2s4Test() {
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s2, s4);
@@ -80,6 +102,9 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
     	assertEquals(95.392, similarityMeasure, 0.01);
 	}
 	
+	/**
+	 * test similarity measure by getting submission files
+	 */
 	@Test
 	public void compares3s4Test() {
     	double similarityMeasure = levenshteinDistanceObj.calculateSimilarity(
@@ -87,11 +112,17 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
     	assertEquals(95.392, similarityMeasure, 0.01);
 	}
 
+	/**
+	 * test for non-existent file read
+	 */
 	@Test
 	public void exceptionTest() {
 		pythonToStringParser.readFile("submission5.py");
 	}
 
+	/**
+	 * test similarity measure by getting submission files
+	 */
 	@Test
 	public void calculateSimilarityShouldGiveCorrectResult(){
 		double res = levenshteinDistanceObj.calculateSimilarity(
