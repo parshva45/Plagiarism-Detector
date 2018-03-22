@@ -2,6 +2,7 @@ package edu.northeastern.cs5500.response;
 
 /**
  * @author Praveen Singh
+ * Simple LoginRequest POJO Class.
  */
 public class LoginRequestJSON {
     private String username;

@@ -2,10 +2,8 @@ package edu.northeastern.cs5500.service;
 
 import edu.northeastern.cs5500.model.StudentHomeWork;
 import edu.northeastern.cs5500.repository.StudentHomeWorkRepository;
-import edu.northeastern.cs5500.response.UploadFileJSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,6 +16,7 @@ import java.nio.file.Paths;
 
 /**
  * @author Praveen Singh
+ * upload Assingment Service Class.
  */
 @Service
 public class UploadAssignmentService {
@@ -32,6 +31,15 @@ public class UploadAssignmentService {
         this.env = env;
     }
 
+    /**
+     * Method to upload assignment file and update the StudentHomeWork table
+     * with the given uploaded file path.
+     * @param file Multipart file
+     * @param userId integer
+     * @param courseId Integer
+     * @param hwId Integer
+     * @throws IOException In case file is not readable.
+     */
     public void uploadAssignment(MultipartFile file, int userId, int courseId, int hwId) throws IOException {
 
         String filepath;

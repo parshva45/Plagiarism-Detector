@@ -1,7 +1,5 @@
 package edu.northeastern.cs5500.model;
 
-import org.springframework.data.annotation.PersistenceConstructor;
-
 import javax.persistence.*;
 import java.io.Serializable;
 

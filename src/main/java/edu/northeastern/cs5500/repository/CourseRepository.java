@@ -6,8 +6,14 @@ import org.springframework.stereotype.Repository;
 
 /**
  * @author Praveen Singh
+ * Repository for Course
  */
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Integer> {
+    /**
+     * Finds a course bt The ID.
+     * @param id Integer
+     * @return Instance of Course
+     */
     Course findById(Integer id);
 }

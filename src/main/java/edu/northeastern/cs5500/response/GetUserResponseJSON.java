@@ -6,6 +6,7 @@ import java.util.List;
 
 /**
  * @author Praveen Singh
+ * A GetUser Response Object POJO Class.
  */
 public class GetUserResponseJSON {
     private List<User> result;

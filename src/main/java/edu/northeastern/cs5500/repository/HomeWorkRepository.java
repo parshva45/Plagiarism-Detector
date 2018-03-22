@@ -14,24 +14,24 @@ import java.util.List;
 public interface HomeWorkRepository extends JpaRepository<HomeWork, Integer> {
 
     /**
-     *
-     * @param courseId
-     * @return
+     * Method to get the list of instances of HomeWork for a given CourseId.
+     * @param courseId Integer
+     * @return List of Instance of HomeWork
      */
     List<HomeWork> findByCourseId(Integer courseId);
 
     /**
-     *
-     * @param homeWorkId
-     * @return
+     * Method to get Instance of HomeWork based on the HomeWork Id.
+     * @param homeWorkId Integer
+     * @return Instance of HomeWork
      */
     HomeWork findById(Integer homeWorkId);
 
     /**
-     *
-     * @param courseId
-     * @param homeWorkNumber
-     * @return
+     * Method to get the list Instance of HomeWork based on courseNo and HomeWorkNo.
+     * @param courseId Integer
+     * @param homeWorkNumber Integer
+     * @return List of Instance of HomeWork
      */
     List<HomeWork> findByCourseIdAndHomeWorkNumber(Integer courseId, Integer homeWorkNumber);
 }
