@@ -2,6 +2,8 @@ package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.model.HomeWork;
 import edu.northeastern.cs5500.service.HomeWorkService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/homework")
+@Api(value="HomeWork Controller", description="Operations related to homeWorks")
 public class HomeWorkController {
 
     private final HomeWorkService homeWorkService;
@@ -28,17 +31,36 @@ public class HomeWorkController {
         this.homeWorkService = homeWorkService;
     }
 
+    /**
+     * Rest End point to get list of homeworks for a given course.
+     * @param courseId Integer
+     * @return JSONObject
+     */
     @RequestMapping(path = "/getHomeWorksByCourse/{courseId}", method = RequestMethod.GET)
+    @ApiOperation(value = "Get a List of homeworks for a given courseId.")
     public JSONObject getListOfHomeWorksByCourse(@PathVariable int courseId){
         return createResponse(homeWorkService.getListOfHomeWorkByCourseNo(courseId));
     }
 
+    /**
+     * Rest Endpoint to get the homeWork details by the given homework ID.
+     * @param homeWorkId Integer
+     * @return JSONObject containing the homework details.
+     */
     @RequestMapping(path = "/getHomeWorkById/{homeWorkId}", method = RequestMethod.GET)
+    @ApiOperation(value = "Get homework details by given homework Id.")
     public JSONObject getHomeWorkById(@PathVariable("homeWorkId") int homeWorkId){
         return createResponse(Arrays.asList(homeWorkService.getHomeWorkById(homeWorkId)));
     }
 
+    /**
+     * Method returns the list of homeWorks by given
+     * @param homeWorkNo Integer
+     * @param courseId Integer
+     * @return JSONObject containing the list of Homeworks
+     */
     @RequestMapping(path = "/getListOfHomeWorkById/{courseId}/{homeWorkNo}", method = RequestMethod.GET)
+    @ApiOperation(value = "Get List of homework course and homeWorkno.")
     public JSONObject getListOfHomeWorkByCourseAndHomeWorkNo(@PathVariable("homeWorkNo") int homeWorkNo,
                                                              @PathVariable("courseId") int courseId){
         return createResponse(homeWorkService.getHomeWorkByCourseIdAndHomeWorkNumber(courseId, homeWorkNo));

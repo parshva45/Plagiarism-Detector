@@ -1,6 +1,8 @@
 package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.service.FileComparisonService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,7 @@ import static java.lang.String.valueOf;
  */
 @RestController
 @RequestMapping("api/comparison/")
+@Api(value="File Comparison Controller.", description="Operations related to file comparison")
 public class FileComparisonController {
 
     private final FileComparisonService fileComparisonService;
@@ -27,7 +30,12 @@ public class FileComparisonController {
         this.fileComparisonService = fileComparisonService;
     }
 
+    /**
+     * Rest Controller to list the different types of strategies present in the system
+     * @return List of String
+     */
     @RequestMapping(path = "/listStrategies", method = RequestMethod.GET)
+    @ApiOperation(value = "Get the list of comparison strategies present in the system.")
     public JSONObject getListOfStrategies(){
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("strategies", fileComparisonService.getAllStrategies());
@@ -35,7 +43,16 @@ public class FileComparisonController {
         return new JSONObject(resultMap);
     }
 
+    /**
+     * Rest End point that takes in the path of two files and returns the simmilarity
+     * between them based on given strategy.
+     * @param strategy String
+     * @param firstFile String
+     * @param secondFile String
+     * @return JSONObject having the similarity percentage.
+     */
     @RequestMapping(path = "/compare2filesByStrategy", method = RequestMethod.GET)
+    @ApiOperation(value = "Get similarity between the given files based on the given strategy.")
     public JSONObject getSimilarityBetweenGivenFiles(
             @RequestParam(name = "strategy") String strategy,
             @RequestParam(name = "firstFile") String firstFile,
@@ -50,6 +67,15 @@ public class FileComparisonController {
 
     }
 
+    /**
+     * Private helper method to create the JSON Response for the API;s
+     * @param strategy String
+     * @param firstFile String
+     * @param secondFile String
+     * @param similarity double
+     * @param status String
+     * @return JSONObject
+     */
     private JSONObject prepareResponseJson(String strategy, String firstFile,
                                            String secondFile, String similarity,
                                            String status){
