@@ -26,8 +26,8 @@ pipeline {
         stage('SonarQube') {
             steps {
                 withSonarQubeEnv('SonarQube') {
-                    sh ' mvn clean install -Dsonar.projectKey=a52cbdb3c3759899cd0ee009789685de5135d08f'
-                    sh ' mvn sonar:sonar -Dsonar.projectKey=a52cbdb3c3759899cd0ee009789685de5135d08f'
+                    sh ' mvn clean install '
+                    sh ' mvn sonar:sonar '
                 }
             }
         }
