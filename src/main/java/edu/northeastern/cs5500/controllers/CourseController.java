@@ -1,6 +1,8 @@
 package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.service.CourseService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +18,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/course/")
+@Api(value="Course Controller", description="Operations pertaining Courses present in the System")
 public class CourseController {
 
     private final CourseService courseService;
@@ -25,7 +28,13 @@ public class CourseController {
         this.courseService = courseService;
     }
 
+    /**
+     * Rest Controller to get the Course Detail from the system based of the courseId
+     * @param courseId Integer
+     * @return JsonResponse Object
+     */
     @RequestMapping(path = "/getCourseById/{courseId}", method = RequestMethod.GET)
+    @ApiOperation(value = "Get a course detail by course Id")
     public JSONObject getCourseById(@PathVariable int courseId){
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("result", courseService.getCourseById(courseId));
