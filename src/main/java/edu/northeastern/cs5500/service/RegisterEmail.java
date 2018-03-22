@@ -1,20 +1,20 @@
 package edu.northeastern.cs5500.service;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Component;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
-import java.util.logging.Level;
 
 /**
  * @author Praveen Singh
  */
 @Component
 public class RegisterEmail {
-//    private static final Logger LOGGER = Logger.getLogger(RegisterEmail.class.getName());
-
+    private static final Logger LOGGER = LogManager.getLogger(RegisterEmail.class);
 
     /**
      * Method to send email to user for registration.
@@ -54,7 +54,7 @@ public class RegisterEmail {
             Transport.send(message);
 
         } catch (MessagingException e) {
-//            LOGGER.log(Level.ALL, "Exception sending email  : {0}", e.getMessage());
+            LOGGER.error("Exception sending email  : {0}", e.getMessage());
         }
     }
 }
