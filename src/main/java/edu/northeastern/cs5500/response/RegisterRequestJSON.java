@@ -2,6 +2,7 @@ package edu.northeastern.cs5500.response;
 
 /**
  * @author Praveen Singh
+ * Simple RegisterRequest POJO class.
  */
 public class RegisterRequestJSON {
     private String username;

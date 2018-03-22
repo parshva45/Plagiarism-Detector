@@ -25,6 +25,12 @@ public class UserService{
         this.registerEmail = registerEmail;
     }
 
+
+    /**
+     * Method  to create a User Object from the given registerRequestJSON.
+     * @param registerRequestJSON A instance of RegisterRequestJSON Pojo
+     * @return an instance of RegisterRequestJson
+     */
     public User createUserObject(RegisterRequestJSON registerRequestJSON){
        return new User()
                .withUserName(registerRequestJSON.getUserName())
@@ -36,6 +42,13 @@ public class UserService{
                .withRole(1);
     }
 
+    /**
+     * Gets a list of users based on the given userId or userName. If both provided
+     * userId is taken on preference.
+     * @param id Integer
+     * @param userName String
+     * @return a List of User Instances.
+     */
     public List<User> findUserByUserIdOrUserName(String id, String userName){
         List<User> result = new ArrayList<>();
         if (id != null) {
@@ -46,20 +59,42 @@ public class UserService{
         return result;
     }
 
+    /**
+     * This method saves the user instance in the databse and returns the same.
+     * Also sends a email on successful save.
+     * @param user Instance of User.
+     * @return
+     */
     public User addUserAndSendEmail(User user){
         userRepository.save(user);
         registerEmail.sendEmail(user.getUserName(), user.getEmail());
         return user;
     }
 
+    /**
+     * Method returns if a user with the given username exists in the system.
+     * @param userName String
+     * @return boolean
+     */
     public boolean checkIfUserExistsByUserName(String userName){
         return userRepository.existsByUserName(userName);
     }
 
+    /**
+     * Method to find users based on provided username and password.
+     * @param userName String
+     * @param password String
+     * @return a List of User Instances.
+     */
     public List<User> findUserByUserNameAndPassword(String userName, String password){
         return userRepository.findByUserNameAndPassword(userName, password);
     }
 
+    /**
+     * Method to update a user
+     * @param user Instance of User
+     * @return the updated instance of the User
+     */
     public User updateUser(User user){
         return userRepository.save(user);
     }

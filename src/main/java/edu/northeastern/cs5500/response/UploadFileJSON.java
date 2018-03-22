@@ -2,6 +2,7 @@ package edu.northeastern.cs5500.response;
 
 /**
  * @author Praveen Singh
+ * Simple UploadFile POJO CLass.
  */
 public class UploadFileJSON {
     private String path;
