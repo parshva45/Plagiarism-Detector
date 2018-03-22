@@ -54,6 +54,7 @@ public class UserController {
         return ResponseEntity.ok().body(
                 new RegisterResponseJSON()
                         .withId(user.getId())
+                        .withRole(user.getRole())
                         .withMessage("user created")
         );
     }
@@ -79,6 +80,7 @@ public class UserController {
             return ResponseEntity.ok().body(
                     new RegisterResponseJSON()
                             .withId(user.getId())
+                            .withRole(user.getRole())
                             .withMessage("user Updated")
             );
         }

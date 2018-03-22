@@ -13,7 +13,11 @@
                     UserService
                         .createUser(user)
                         .then(function (user) {
-                            $location.url('/profile');
+                            if(user.role === 1) {
+                                $location.url('/profile/'+user.id);
+                            }else{
+                                $location.url('/coursestaff/'+user.id);
+                            }
                         }, function (err) {
                             vm.error = err.data.message;
                         });
