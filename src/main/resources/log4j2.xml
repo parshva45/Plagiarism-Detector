@@ -12,8 +12,8 @@
         </Console>
 
         <!-- Rolling File Appender -->
-        <RollingFile name="FileAppender" fileName="logs/log4j2-demo.log"
-                     filePattern="logs/log4j2-demo-%d{yyyy-MM-dd}-%i.log">
+        <RollingFile name="FileAppender" fileName="logs/PlagiarismDetector.log"
+                     filePattern="logs/PlagiarismDetector-%d{yyyy-MM-dd}-%i.log">
             <PatternLayout>
                 <Pattern>${LOG_PATTERN}</Pattern>
             </PatternLayout>
@@ -24,22 +24,22 @@
             <DefaultRolloverStrategy max="10"/>
         </RollingFile>
 
-        <!-- SMTP Appender
         <SMTP name="MailAppender"
-              subject="Log4j2 Demo [PROD]"
-              to="youremail@example.com"
-              from="log4j2-demo-alerts@example.com"
-              smtpHost="yourSMTPHost"
-              smtpPort="587"
-              smtpUsername="yourSMTPUsername"
-              smtpPassword="yourSMTPPassword"
-              bufferSize="1">
+              Subject="PlagiarismDetector [PROD]"
+              To="praveen.singhdhn@gmail.com"
+              From="msdteam207@gmail.com"
+              SMTPProtocol="smtps"
+              SMTPHost="smtp.gmail.com"
+              SMTPPort="465"
+              SMTPUsername="msdteam207@gmail.com"
+              SMTPPassword="Spring2018Team207"
+              BufferSize="1">
             <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
             <PatternLayout>
                 <Pattern>${LOG_PATTERN}</Pattern>
             </PatternLayout>
         </SMTP>
-         -->
+
     </Appenders>
 
     <Loggers>
@@ -47,11 +47,8 @@
                      additivity="false">
             <AppenderRef ref="ConsoleAppender" />
             <AppenderRef ref="FileAppender" />
+            <AppenderRef ref="MailAppender" />
         </AsyncLogger>
 
-        <Root level="info">
-            <AppenderRef ref="ConsoleAppender" />
-            <AppenderRef ref="FileAppender" />
-        </Root>
     </Loggers>
 </Configuration>
