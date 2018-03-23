@@ -61,6 +61,7 @@ public class UserControllerTest{
         assertNotNull(loginResponseJSON);
         assertEquals(loginResponseJSONExpected.getId(), loginResponseJSON.getId());
         assertEquals(loginResponseJSONExpected.getMessage(), loginResponseJSON.getMessage());
+        assertEquals(loginResponseJSONExpected.getRole(), loginResponseJSON.getRole());
     }
 
     @Test
@@ -117,6 +118,7 @@ public class UserControllerTest{
         assertNotNull(registerResponseJSON);
         assertEquals("user created", registerResponseJSON.getMessage());
         assertEquals(Integer.valueOf(1), registerResponseJSON.getId());
+        assertEquals(Integer.valueOf(1), registerResponseJSON.getRole());
     }
 
 
