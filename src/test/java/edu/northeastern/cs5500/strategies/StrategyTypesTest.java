@@ -3,9 +3,7 @@ package edu.northeastern.cs5500.strategies;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static edu.northeastern.cs5500.strategies.StrategyTypes.FILE_METADATA;
-import static edu.northeastern.cs5500.strategies.StrategyTypes.LEVENSHTEIN_DISTANCE;
-import static edu.northeastern.cs5500.strategies.StrategyTypes.LCS;
+import static edu.northeastern.cs5500.strategies.StrategyTypes.*;
 import static org.junit.Assert.assertEquals;
 
 /**

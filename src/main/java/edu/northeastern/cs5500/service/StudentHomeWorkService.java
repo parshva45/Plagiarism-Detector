@@ -104,13 +104,5 @@ public class StudentHomeWorkService {
             super(message);
             this.status = status;
         }
-
-        /**
-         * Get status from exception
-         * @return HTTPStatus exception
-         */
-        public HttpStatus getStatus() {
-            return status;
-        }
     }
 }
