@@ -4,23 +4,19 @@ package edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance;
  * @author namratabilurkar
  */
 
-import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 import java.io.StreamTokenizer;
 import java.io.StringReader;
 import java.util.ArrayList;
 
-
-@Component
 public class Tree {
     Node root = new Node();
     // function l() which gives the leftmost child
-    ArrayList<Integer> l = new ArrayList<Integer>();
+    ArrayList<Integer> l = new ArrayList<>();
     // list of keyroots, i.e., nodes with a left child and the tree root
-    ArrayList<Integer> keyroots = new ArrayList<Integer>();
+    ArrayList<Integer> keyroots = new ArrayList<>();
     // list of the labels of the nodes used for node comparison
-    ArrayList<String> labels = new ArrayList<String>();
+    ArrayList<String> labels = new ArrayList<>();
 
     // the following constructor handles preorder notation. E.g., f(a b(c))
     public Tree(String s) throws IOException {
@@ -75,7 +71,7 @@ public class Tree {
     public void l() {
         // put together a function which gives l()
         leftmost();
-        l = l(root, new ArrayList<Integer>());
+        l = l(root, new ArrayList<>());
     }
 
     private ArrayList<Integer> l(Node node, ArrayList<Integer> l) {
@@ -96,7 +92,7 @@ public class Tree {
         for (int i = 0; i < node.children.size(); i++) {
             leftmost(node.children.get(i));
         }
-        if (node.children.size() == 0) {
+        if (node.children.isEmpty()) {
             node.leftmost = node;
         } else {
             node.leftmost = node.children.get(0).leftmost;

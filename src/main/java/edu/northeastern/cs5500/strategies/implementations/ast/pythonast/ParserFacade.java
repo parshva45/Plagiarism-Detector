@@ -1,16 +1,17 @@
 package edu.northeastern.cs5500.strategies.implementations.ast.pythonast;
 
-import edu.northeastern.cs5500.strategies.implementations.ast.team207.Python3Lexer;
-import edu.northeastern.cs5500.strategies.implementations.ast.team207.Python3Parser;
+import edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Python3Lexer;
+import edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Python3Parser;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+
+import static edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Python3Parser.*;
 
 /**
  * @author namratabilurkar
@@ -23,7 +24,7 @@ public class ParserFacade {
         return new String(encoded, encoding);
     }
 
-    public Python3Parser.File_inputContext parse(File file) throws IOException {
+    public File_inputContext parse(File file) throws IOException {
         String code = readFile(file, Charset.forName("UTF-8"));
         Python3Lexer lexer = new Python3Lexer(new ANTLRInputStream(code));
 

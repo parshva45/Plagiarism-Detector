@@ -4,7 +4,7 @@ package edu.northeastern.cs5500.strategies.implementations.ast.pythonast;
  * @author namratabilurkar
  */
 
-import edu.northeastern.cs5500.strategies.implementations.ast.team207.Python3Parser;
+import edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Python3Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;

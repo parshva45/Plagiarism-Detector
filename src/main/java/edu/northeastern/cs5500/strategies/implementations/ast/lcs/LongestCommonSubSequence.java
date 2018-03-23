@@ -1,7 +1,16 @@
 package edu.northeastern.cs5500.strategies.implementations.ast.lcs;
 
 import edu.northeastern.cs5500.strategies.SimilarityStrategy;
+import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.AstBuilder;
+import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.ParserFacade;
+import edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Python3Parser;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * @author namratabilurkar
@@ -9,8 +18,19 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LongestCommonSubSequence implements SimilarityStrategy{
+    private static final Logger LOGGER = LogManager.getLogger(LongestCommonSubSequence.class);
 
-    public int[] lcsLength(String ast1, String ast2) {
+    private final ParserFacade parserFacade;
+
+    private final AstBuilder astBuilder;
+
+    @Autowired
+    public LongestCommonSubSequence(ParserFacade parserFacade, AstBuilder astBuilder) {
+        this.parserFacade = parserFacade;
+        this.astBuilder = astBuilder;
+    }
+
+    private int[] lcsLength(String ast1, String ast2) {
 
         int lengthOfAst1 = ast1.length();
         int lengthOfAst2 = ast2.length();
@@ -40,9 +60,18 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
 
     @Override
     public double calculateSimilarity(String file1, String file2) {
-        int[] lcsValues = lcsLength(file1, file2);
-        double simScore = (lcsValues[0]/lcsValues[1]) * 100;
-        return simScore;
+        Python3Parser.File_inputContext f1;
+        Python3Parser.File_inputContext f2;
+        try {
+            f1 = parserFacade.parse(new File(file1));
+            f2 = parserFacade.parse(new File(file2));
+
+            int[] lcsValues = lcsLength(astBuilder.build(f1), astBuilder.build(f2));
+            return (((double)lcsValues[0] / lcsValues[1]) * 100);
+        } catch (IOException e) {
+            LOGGER.error("Failed to get Similarity for input file {} and {}", file1, file2);
+        }
+        return 0.0;
     }
 
 }

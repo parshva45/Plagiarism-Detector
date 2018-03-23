@@ -2,6 +2,9 @@ package edu.northeastern.cs5500.strategies;
 
 import edu.northeastern.cs5500.strategies.implementations.LCS;
 import edu.northeastern.cs5500.strategies.implementations.LevenshteinDistance;
+import edu.northeastern.cs5500.strategies.implementations.ast.lcs.LongestCommonSubSequence;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -10,9 +13,11 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class StrategyFactory {
+    private static final Logger LOGGER = LogManager.getLogger(StrategyFactory.class);
 
     private final LevenshteinDistance levenshteinDistance;
     private final LCS lcs;
+    private final LongestCommonSubSequence longestCommonSubSequence;
 
     /**
      * Method to instantiate Strategy factory
@@ -20,9 +25,10 @@ public class StrategyFactory {
      * @param lcs LCS
      */
     @Autowired
-    public StrategyFactory(LevenshteinDistance levenshteinDistance, LCS lcs) {
+    public StrategyFactory(LevenshteinDistance levenshteinDistance, LCS lcs, LongestCommonSubSequence longestCommonSubSequence) {
         this.levenshteinDistance = levenshteinDistance;
         this.lcs = lcs;
+        this.longestCommonSubSequence = longestCommonSubSequence;
     }
 
     /**
@@ -31,12 +37,17 @@ public class StrategyFactory {
      * @return corresponding strategy SimilarityStrategy
      */
     public SimilarityStrategy getStrategyByStrategyType(String strategy){
-        if(StrategyTypes.LEVENSHTEIN_DISTANCE.toString().equals(strategy)){
+        if(StrategyTypes.LEVENSHTEIN_DISTANCE.toString().equals(strategy)) {
+            LOGGER.info("Using given Strategy {}", StrategyTypes.LEVENSHTEIN_DISTANCE.toString());
             return levenshteinDistance;
-        }
-        if(StrategyTypes.LCS.toString().equals(strategy)){
+        } else if(StrategyTypes.LCS.toString().equals(strategy)) {
+            LOGGER.info("Using given Strategy {}", StrategyTypes.LCS.toString());
             return lcs;
+        } else if (StrategyTypes.AST_LCS.toString().equals(strategy)) {
+            LOGGER.info("Using given Strategy {}", StrategyTypes.AST_LCS.toString());
+            return longestCommonSubSequence;
         }
+        LOGGER.info("Using default Strategy {}", StrategyTypes.LEVENSHTEIN_DISTANCE.toString());
         return levenshteinDistance;
     }
 }
