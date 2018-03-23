@@ -15,11 +15,11 @@ public class Cs5500plagiarismDetectorTeam207Application extends SpringBootServle
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		LOGGER.info("Starting application");
 		return application.sources(Cs5500plagiarismDetectorTeam207Application.class);
 	}
 
 	public static void main(String[] args) {
+		LOGGER.info("Starting application");
 		SpringApplication.run(Cs5500plagiarismDetectorTeam207Application.class, args);
 	}
 
