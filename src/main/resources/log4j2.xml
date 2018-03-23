@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+    <Properties>
+        <Property name="LOG_PATTERN">
+            %d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${hostName} --- [%15.15t] %-40.40c{1.} : %m%n%ex
+        </Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="ConsoleAppender" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <!-- Rolling File Appender -->
+        <RollingFile name="FileAppender" fileName="logs/PlagiarismDetector.log"
+                     filePattern="logs/PlagiarismDetector-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" />
+                <SizeBasedTriggeringPolicy size="10MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <SMTP name="MailAppender"
+              Subject="PlagiarismDetector [PROD]"
+              To="praveen.singhdhn@gmail.com"
+              From="msdteam207@gmail.com"
+              SMTPProtocol="smtps"
+              SMTPHost="smtp.gmail.com"
+              SMTPPort="465"
+              SMTPUsername="msdteam207@gmail.com"
+              SMTPPassword="Spring2018Team207"
+              BufferSize="1">
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>${LOG_PATTERN}</Pattern>
+            </PatternLayout>
+        </SMTP>
+
+    </Appenders>
+
+    <Loggers>
+        <AsyncLogger name="edu.northeastern.cs5500" level="info"
+                     additivity="false">
+            <AppenderRef ref="ConsoleAppender" />
+            <AppenderRef ref="FileAppender" />
+            <AppenderRef ref="MailAppender" />
+        </AsyncLogger>
+
+    </Loggers>
+</Configuration>

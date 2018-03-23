@@ -3,9 +3,7 @@ package edu.northeastern.cs5500.strategies;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static edu.northeastern.cs5500.strategies.StrategyTypes.FILE_METADATA;
-import static edu.northeastern.cs5500.strategies.StrategyTypes.LEVENSHTEIN_DISTANCE;
-import static edu.northeastern.cs5500.strategies.StrategyTypes.LCS;
+import static edu.northeastern.cs5500.strategies.StrategyTypes.*;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -13,6 +11,9 @@ import static org.junit.Assert.assertEquals;
  */
 public class StrategyTypesTest {
 
+    /**
+     * tests for validating strategy enums
+     */
     @Test
     public void validateEnums(){
         assertEquals("LEVENSHTEIN_DISTANCE", LEVENSHTEIN_DISTANCE.toString());
