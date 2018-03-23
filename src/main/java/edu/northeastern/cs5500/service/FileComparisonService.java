@@ -2,6 +2,8 @@ package edu.northeastern.cs5500.service;
 
 import edu.northeastern.cs5500.strategies.StrategyFactory;
 import edu.northeastern.cs5500.strategies.StrategyTypes;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.List;
  */
 @Service
 public class FileComparisonService {
+    private static final Logger LOGGER = LogManager.getLogger(FileComparisonService.class);
 
     private final StrategyFactory strategyFactory;
 
@@ -32,6 +35,7 @@ public class FileComparisonService {
      * @return double similarity percentage out of 100%.
      */
     public double compareTwoFilesByGivenStrategy(String strategy, String firstFile, String secondFile){
+        LOGGER.info("Running compareTwoFilesByGivenStrategy for the files {} {} with strategy {}", firstFile, secondFile, secondFile);
         return strategyFactory
                 .getStrategyByStrategyType(strategy)
                 .calculateSimilarity(firstFile, secondFile);

@@ -3,6 +3,8 @@ package edu.northeastern.cs5500.service;
 import edu.northeastern.cs5500.model.User;
 import edu.northeastern.cs5500.repository.UserRepository;
 import edu.northeastern.cs5500.response.RegisterRequestJSON;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +17,7 @@ import java.util.List;
  */
 @Component
 public class UserService{
+    private static final Logger LOGGER = LogManager.getLogger(UserService.class);
 
     private final UserRepository userRepository;
     private final RegisterEmail registerEmail;
@@ -52,8 +55,10 @@ public class UserService{
     public List<User> findUserByUserIdOrUserName(String id, String userName){
         List<User> result = new ArrayList<>();
         if (id != null) {
+            LOGGER.info("userSearch done using user id {}", id);
             result.add(userRepository.findById(Integer.parseInt(id)));
         } else if (userName != null) {
+            LOGGER.info("userSearch done using user username {}", userName);
             result.addAll(userRepository.findByUserNameLike("%" + userName + "%"));
         }
         return result;
@@ -66,7 +71,9 @@ public class UserService{
      * @return
      */
     public User addUserAndSendEmail(User user){
+        LOGGER.info("saving user in database with username {}", user.getUserName());
         userRepository.save(user);
+        LOGGER.info("sending email to user with username {}", user.getUserName());
         registerEmail.sendEmail(user.getUserName(), user.getEmail());
         return user;
     }
@@ -77,6 +84,7 @@ public class UserService{
      * @return boolean
      */
     public boolean checkIfUserExistsByUserName(String userName){
+        LOGGER.info("checking if user exists with username {}", userName);
         return userRepository.existsByUserName(userName);
     }
 
@@ -87,6 +95,7 @@ public class UserService{
      * @return a List of User Instances.
      */
     public List<User> findUserByUserNameAndPassword(String userName, String password){
+        LOGGER.info("get user with username {}", userName);
         return userRepository.findByUserNameAndPassword(userName, password);
     }
 

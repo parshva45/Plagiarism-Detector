@@ -2,6 +2,8 @@ package edu.northeastern.cs5500.service;
 
 import edu.northeastern.cs5500.model.StudentHomeWork;
 import edu.northeastern.cs5500.repository.StudentHomeWorkRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ import java.nio.file.Paths;
  */
 @Service
 public class UploadAssignmentService {
+    private static final Logger LOGGER = LogManager.getLogger(UploadAssignmentService.class);
 
     private final StudentHomeWorkRepository studentHomeWorkRepository;
 
@@ -42,6 +45,7 @@ public class UploadAssignmentService {
      */
     public void uploadAssignment(MultipartFile file, int userId, int courseId, int hwId) throws IOException {
 
+        LOGGER.info("Uploading assignment for user {}", userId);
         String filepath;
 
         // Get the filename and build the local file path
