@@ -19,13 +19,10 @@ import java.io.IOException;
 public class UploadController {
     private static final Logger LOGGER = LogManager.getLogger(UploadController.class);
 
-    private final Environment env;
-
     private final UploadAssignmentService uploadAssignmentService;
 
     @Autowired
-    public UploadController(Environment env, UploadAssignmentService uploadAssignmentService) {
-        this.env = env;
+    public UploadController(UploadAssignmentService uploadAssignmentService) {
         this.uploadAssignmentService = uploadAssignmentService;
     }
 

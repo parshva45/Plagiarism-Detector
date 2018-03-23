@@ -18,7 +18,8 @@ import java.util.List;
  * Rest Controller fot user services.
  */
 @RestController
-@Api(tags = {"course_controller"})
+
+@Api(value="User Controller", description="Operations related to user services")
 public class UserController {
     private static final Logger LOGGER = LogManager.getLogger(UserController.class);
 
