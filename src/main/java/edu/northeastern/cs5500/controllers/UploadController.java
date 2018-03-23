@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/homework")
-@Api(value="Upload Controller", description="Operations related to homework upload")
+@Api(tags = {"upload_controller"})
 public class UploadController {
     private static final Logger LOGGER = LogManager.getLogger(UploadController.class);
 
