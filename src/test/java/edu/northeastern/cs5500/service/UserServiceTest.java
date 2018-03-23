@@ -140,4 +140,12 @@ public class UserServiceTest{
 
     }
 
+    @Test
+    public void testUpdateUser(){
+        User user = new User().withId(1).withPassword("praveen").withUserName("singh")
+                .withEmail("pr@gmail.com").withFirstName("pk").withLastName("sin");
+        when(userRepository.save(user)).thenReturn(null);
+        userService.updateUser(user);
+    }
+
 }
