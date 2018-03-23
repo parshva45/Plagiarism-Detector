@@ -4,6 +4,8 @@ import edu.northeastern.cs5500.model.HomeWork;
 import edu.northeastern.cs5500.service.HomeWorkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +25,7 @@ import java.util.Map;
 @RequestMapping("/api/homework")
 @Api(value="HomeWork Controller", description="Operations related to homeWorks")
 public class HomeWorkController {
+    private static final Logger LOGGER = LogManager.getLogger(HomeWorkController.class);
 
     private final HomeWorkService homeWorkService;
 
@@ -39,6 +42,7 @@ public class HomeWorkController {
     @RequestMapping(path = "/getHomeWorksByCourse/{courseId}", method = RequestMethod.GET)
     @ApiOperation(value = "Get a List of homeworks for a given courseId.")
     public JSONObject getListOfHomeWorksByCourse(@PathVariable int courseId){
+        LOGGER.info("getListOfHomeWorksByCourse API called with courseId={}", courseId);
         return createResponse(homeWorkService.getListOfHomeWorkByCourseNo(courseId));
     }
 
@@ -50,6 +54,7 @@ public class HomeWorkController {
     @RequestMapping(path = "/getHomeWorkById/{homeWorkId}", method = RequestMethod.GET)
     @ApiOperation(value = "Get homework details by given homework Id.")
     public JSONObject getHomeWorkById(@PathVariable("homeWorkId") int homeWorkId){
+        LOGGER.info("getHomeWorkById API called with homeWorkId={}", homeWorkId);
         return createResponse(Arrays.asList(homeWorkService.getHomeWorkById(homeWorkId)));
     }
 
@@ -63,6 +68,8 @@ public class HomeWorkController {
     @ApiOperation(value = "Get List of homework course and homeWorkno.")
     public JSONObject getListOfHomeWorkByCourseAndHomeWorkNo(@PathVariable("homeWorkNo") int homeWorkNo,
                                                              @PathVariable("courseId") int courseId){
+        LOGGER.info("getListOfHomeWorkByCourseAndHomeWorkNo API called " +
+                "with homeWorkId={} and courseId={}", homeWorkNo, courseId);
         return createResponse(homeWorkService.getHomeWorkByCourseIdAndHomeWorkNumber(courseId, homeWorkNo));
     }
 

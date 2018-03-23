@@ -50,11 +50,12 @@ public class RegisterEmail {
             message.setText("Dear " + name +
                     "\n\n This is PlagDetector! Thanks for Registering! :)" +
                     "\n\n - Team 207");
-
+            LOGGER.info("sending register confirm email to user {} at email id {}",
+                    name, email);
             Transport.send(message);
 
         } catch (MessagingException e) {
-            LOGGER.error("Exception sending email  : {0}", e.getMessage());
+            LOGGER.error("Exception sending email  : {}", e.getMessage());
         }
     }
 }

@@ -43,11 +43,11 @@
     </Appenders>
 
     <Loggers>
-        <AsyncLogger name="edu.northeastern.cs5500" level="info"
-                     additivity="false">
-            <AppenderRef ref="ConsoleAppender" />
-            <AppenderRef ref="FileAppender" />
-        </AsyncLogger>
+        <!--<AsyncLogger name="edu.northeastern.cs5500" level="info"-->
+                     <!--additivity="false">-->
+            <!--<AppenderRef ref="ConsoleAppender" />-->
+            <!--<AppenderRef ref="FileAppender" />-->
+        <!--</AsyncLogger>-->
 
         <AsyncLogger name="edu.northeastern.cs5500" level="error"
                      additivity="false">

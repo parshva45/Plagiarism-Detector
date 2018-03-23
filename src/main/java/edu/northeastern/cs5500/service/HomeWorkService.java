@@ -2,6 +2,8 @@ package edu.northeastern.cs5500.service;
 
 import edu.northeastern.cs5500.model.HomeWork;
 import edu.northeastern.cs5500.repository.HomeWorkRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
  */
 @Service
 public class HomeWorkService {
+    private static final Logger LOGGER = LogManager.getLogger(HomeWorkService.class);
 
     private final HomeWorkRepository homeWorkRepository;
 
@@ -27,6 +30,7 @@ public class HomeWorkService {
      * @return List of HomeWork
      */
     public List<HomeWork> getListOfHomeWorkByCourseNo(Integer courseNo){
+        LOGGER.info("getListOfHomeWorkByCourseNo called with courseId {}", courseNo);
         return homeWorkRepository.findByCourseId(courseNo);
     }
 
@@ -36,6 +40,7 @@ public class HomeWorkService {
      * @return HomeWork instance
      */
     public HomeWork getHomeWorkById(Integer homeWorkId){
+        LOGGER.info("getHomeWorkById called with homeWorkId {}", homeWorkId);
         return homeWorkRepository.findById(homeWorkId);
     }
 
@@ -47,6 +52,8 @@ public class HomeWorkService {
      */
     public List<HomeWork> getHomeWorkByCourseIdAndHomeWorkNumber(Integer courseId,
                                                                  Integer homeWorkNo){
+        LOGGER.info("getHomeWorkByCourseIdAndHomeWorkNumber called with homeWorkId {}" +
+                        " and courseId {}", homeWorkNo, courseId);
         return homeWorkRepository.findByCourseIdAndHomeWorkNumber(courseId, homeWorkNo);
     }
 

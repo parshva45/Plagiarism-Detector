@@ -21,6 +21,7 @@ public class PythonToStringParser {
      * @return Returns the file content as a String.
      */
     public String readFile(String filePath){
+        LOGGER.info("Reading file {}", filePath);
         StringBuilder contentBuilder = new StringBuilder();
         try (FileReader fileReader = new FileReader(filePath);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
@@ -30,7 +31,7 @@ public class PythonToStringParser {
                     contentBuilder.append(line).append("\n");
             }
         } catch (IOException ex) {
-            LOGGER.error("Exception in reading files : {0}", ex.getMessage());
+            LOGGER.error("Exception in reading files : {}", ex.getMessage());
         }
         return contentBuilder.toString();
     }

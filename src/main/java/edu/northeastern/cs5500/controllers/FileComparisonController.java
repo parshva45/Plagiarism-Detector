@@ -3,6 +3,8 @@ package edu.northeastern.cs5500.controllers;
 import edu.northeastern.cs5500.service.FileComparisonService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,7 @@ import static java.lang.String.valueOf;
 @RequestMapping("api/comparison/")
 @Api(value="File Comparison Controller.", description="Operations related to file comparison")
 public class FileComparisonController {
+    private static final Logger LOGGER = LogManager.getLogger(FileComparisonController.class);
 
     private final FileComparisonService fileComparisonService;
 
@@ -37,9 +40,11 @@ public class FileComparisonController {
     @RequestMapping(path = "/listStrategies", method = RequestMethod.GET)
     @ApiOperation(value = "Get the list of comparison strategies present in the system.")
     public JSONObject getListOfStrategies(){
+        LOGGER.info("executing method getListOfStrategies ");
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("strategies", fileComparisonService.getAllStrategies());
         resultMap.put("response-code", "OK");
+        LOGGER.info("executing method getListOfStrategies successfully");
         return new JSONObject(resultMap);
     }
 
@@ -58,10 +63,13 @@ public class FileComparisonController {
             @RequestParam(name = "firstFile") String firstFile,
             @RequestParam(name = "secondFile") String secondFile) {
 
-
+        LOGGER.info("executing method getSimilarityBetweenGivenFiles with" +
+                "with parameter strategy={} firstFile={} secondFile={}",
+                strategy, firstFile, secondFile);
         double similarity = fileComparisonService
                 .compareTwoFilesByGivenStrategy(strategy, firstFile, secondFile);
 
+        LOGGER.info("getSimilarityBetweenGivenFiles API returned data successfully.");
         return prepareResponseJson(strategy, firstFile, secondFile,
                 valueOf(similarity), "OK");
 
