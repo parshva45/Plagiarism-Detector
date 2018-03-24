@@ -34,7 +34,7 @@
 			src/main/webapp/services/*,
 			src/main/java/edu/northeastern/cs5500/Cs5500plagiarismDetectorTeam207Application.java,
 			src/main/webapp/app.js,
-			src/main/webapp/config.js,
+			src/main/webapp/config.js
 		</sonar.exclusions>
 	</properties>
 
