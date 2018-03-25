@@ -21,6 +21,10 @@ public class PythonToStringParser {
      * @return Returns the file content as a String.
      */
     public String readFile(String filePath){
+    	/**
+    	 * Replacing all %20 by spaces for compatibility with Windows file paths
+    	 */
+    	filePath = filePath.replaceAll("%20", " ");
         LOGGER.info("Reading file {}", filePath);
         StringBuilder contentBuilder = new StringBuilder();
         try (FileReader fileReader = new FileReader(filePath);

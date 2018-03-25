@@ -55,7 +55,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s1, s2);
     	double similarityMeasure = (1-(double)levenshteinDistance/levenshteinDistanceObj
 				.longer(s1,s2).length())*100;
-    	assertEquals(90.338, similarityMeasure, 0.01);
+    	assertEquals(20.89, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -66,7 +66,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s1,s3);
     	double similarityMeasure = (1-(double)levenshteinDistance/levenshteinDistanceObj
 				.longer(s1,s3).length())*100;
-    	assertEquals(90.338, similarityMeasure, 0.01);
+    	assertEquals(23.63, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -77,7 +77,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s1,s4);
     	double similarityMeasure = (1-(double)levenshteinDistance/levenshteinDistanceObj
 				.longer(s1,s4).length())*100;
-    	assertEquals(86.175, similarityMeasure, 0.01);
+    	assertEquals(14.41, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -88,7 +88,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s2,s3);
     	double similarityMeasure = (1-(double)levenshteinDistance/levenshteinDistanceObj
 				.longer(s2,s3).length())*100;
-    	assertEquals(100.0, similarityMeasure, 0.01);
+    	assertEquals(19.76, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -99,7 +99,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s2, s4);
     	double similarityMeasure = (1-(double)levenshteinDistance/levenshteinDistanceObj
 				.longer(s2,s4).length())*100;
-    	assertEquals(95.392, similarityMeasure, 0.01);
+    	assertEquals(23.15, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -109,7 +109,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 	public void compares3s4Test() {
     	double similarityMeasure = levenshteinDistanceObj.calculateSimilarity(
 				getFilePath("submission3.py"), getFilePath("submission4.py"));
-    	assertEquals(95.392, similarityMeasure, 0.01);
+    	assertEquals(12.26, similarityMeasure, 0.01);
 	}
 
 	/**
@@ -127,7 +127,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 	public void calculateSimilarityShouldGiveCorrectResult(){
 		double res = levenshteinDistanceObj.calculateSimilarity(
 				getFilePath("submission3.py"), getFilePath("submission4.py"));
-		assertEquals(95.392, res, 0.01);
+		assertEquals(12.26, res, 0.01);
 	}
 
 }

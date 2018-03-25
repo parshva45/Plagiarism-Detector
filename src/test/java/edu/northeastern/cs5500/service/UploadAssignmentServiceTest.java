@@ -13,6 +13,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Objects;
 
 import static org.mockito.Matchers.any;
@@ -34,9 +35,9 @@ public class UploadAssignmentServiceTest {
     private UploadAssignmentService uploadAssignmentService;
 
     @Test
-    public void uploadAssignmentShouldWorkASExpected() throws IOException {
+    public void uploadAssignmentShouldWorkASExpected() throws IOException, URISyntaxException {
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(Objects.requireNonNull(classLoader.getResource("submission1.py")).getFile());
+        File file = new File(Objects.requireNonNull(classLoader.getResource("submission1.py").toURI().getPath()));
         FileInputStream inputFile = new FileInputStream(file);
         MockMultipartFile multipartFile = new MockMultipartFile("file", "submission1.py",
                 "multipart/form-data", inputFile);
