@@ -1,8 +1,17 @@
-def code_holder(num1, num2):
-    v = 0
-    #### YOUR CODE GOES HERE ####
-    #### make sure you save the return value in the variable: v
-    v = num1 + num2
-    #### DO NOT WRITE AFTER THIS LINE
+graph = {'A': set(['B', 'C']),
+         'B': set(['A', 'D', 'E']),
+         'C': set(['A', 'F']),
+         'D': set(['B']),
+         'E': set(['B', 'F']),
+         'F': set(['C', 'E'])}
 
-    return v
+def dfs(graph, start):
+    visited, stack = set(), [start]
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            stack.extend(graph[vertex] - visited)
+    return visited
+
+dfs(graph, 'A') # {'E', 'D', 'F', 'A', 'C', 'B'}
