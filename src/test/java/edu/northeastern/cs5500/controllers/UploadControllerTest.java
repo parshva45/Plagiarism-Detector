@@ -17,6 +17,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Objects;
 
+import java.net.URISyntaxException;
+
 import static org.junit.Assert.fail;
 
 /**
@@ -35,9 +37,9 @@ public class UploadControllerTest {
     public ExpectedException exception = ExpectedException.none();
 
     @Test
-    public void uploadControllerShouldWorkAsExpected() throws IOException {
+    public void uploadControllerShouldWorkAsExpected() throws IOException, URISyntaxException {
         ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(Objects.requireNonNull(classLoader.getResource("submission1.py")).getFile());
+        File file = new File(Objects.requireNonNull(classLoader.getResource("submission1.py").toURI().getPath()));
         FileInputStream inputFile = new FileInputStream(file);
         MockMultipartFile multipartFile = new MockMultipartFile("file", "submission1.py",
                 "multipart/form-data", inputFile);
