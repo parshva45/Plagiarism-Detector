@@ -53,7 +53,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	@Test
 	public void compares1s2Test() {
     	double similarityMeasure = lcs.calculateSimilarity(file1, file2);
-    	assertEquals(90.338, similarityMeasure, 0.01);
+    	assertEquals(21.96, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	@Test
 	public void compares1s3Test() {
 		double similarityMeasure = lcs.calculateSimilarity(file1, file3);
-    	assertEquals(90.338, similarityMeasure, 0.01);
+    	assertEquals(43.25, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	@Test
 	public void compares1s4Test() {
 		double similarityMeasure = lcs.calculateSimilarity(file1, file4);
-    	assertEquals(86.175, similarityMeasure, 0.01);
+    	assertEquals(14.67, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -80,7 +80,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	@Test
 	public void compares2s3Test() {
 		double similarityMeasure = lcs.calculateSimilarity(file2, file3);
-    	assertEquals(100.0, similarityMeasure, 0.01);
+    	assertEquals(20.82, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	@Test
 	public void compares2s4Test() {
 		double similarityMeasure = lcs.calculateSimilarity(file2, file4);
-    	assertEquals(95.392, similarityMeasure, 0.01);
+    	assertEquals(28.34, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -98,7 +98,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	@Test
 	public void compares3s4Test() {
     	double similarityMeasure = lcs.calculateSimilarity(file3, file4);
-    	assertEquals(95.392, similarityMeasure, 0.01);
+    	assertEquals(12.96, similarityMeasure, 0.01);
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	public void calculateSimilarityShouldGiveCorrectResult(){
 		double res = lcs.calculateSimilarity(
 				getFilePath("submission3.py"), getFilePath("submission4.py"));
-		assertEquals(95.392, res, 0.01);
+		assertEquals(12.96, res, 0.01);
 	}
 
 }
