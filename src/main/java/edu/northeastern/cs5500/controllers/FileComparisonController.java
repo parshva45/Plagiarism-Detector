@@ -22,7 +22,7 @@ import static java.lang.String.valueOf;
  */
 @RestController
 @RequestMapping("api/comparison/")
-@Api(tags = {"file_comparison_controller"})
+@Api(value="File Comparison Controller.", description="Operations related to file comparison")
 public class FileComparisonController {
     private static final Logger LOGGER = LogManager.getLogger(FileComparisonController.class);
 
