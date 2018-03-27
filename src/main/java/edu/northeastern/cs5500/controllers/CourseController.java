@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/course/")
-@Api(tags = {"course_controller"})
+@Api(value="Course Controller", description="Operations pertaining Courses present in the System")
 public class CourseController {
     private static final Logger LOGGER = LogManager.getLogger(CourseController.class);
 
