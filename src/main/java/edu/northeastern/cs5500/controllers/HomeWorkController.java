@@ -23,7 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/homework")
-@Api(tags = {"homework_controller"})
+@Api(value="HomeWork Controller", description="Operations related to homeWorks")
 public class HomeWorkController {
     private static final Logger LOGGER = LogManager.getLogger(HomeWorkController.class);
 
