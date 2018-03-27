@@ -15,9 +15,8 @@ import org.springframework.mock.web.MockMultipartFile;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Objects;
-
 import java.net.URISyntaxException;
+import java.util.Objects;
 
 import static org.junit.Assert.fail;
 
