@@ -1,8 +1,6 @@
 package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.service.UploadAssignmentService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +12,6 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/homework")
-@Api(value="Upload Controller", description="Operations related to homework upload")
 public class UploadController {
     private static final Logger LOGGER = LogManager.getLogger(UploadController.class);
 
@@ -36,7 +33,6 @@ public class UploadController {
      */
     @RequestMapping(value = "/uploadfile", method = RequestMethod.POST)
     @ResponseBody
-    @ApiOperation(value = "Upload homework with file.")
     public void uploadFile(HttpServletResponse response,
                            @RequestParam("file") MultipartFile file,
                            @RequestParam("userId") int userId,

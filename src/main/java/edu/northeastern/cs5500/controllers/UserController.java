@@ -3,8 +3,6 @@ package edu.northeastern.cs5500.controllers;
 import edu.northeastern.cs5500.model.User;
 import edu.northeastern.cs5500.response.*;
 import edu.northeastern.cs5500.service.UserService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +16,6 @@ import java.util.List;
  * Rest Controller fot user services.
  */
 @RestController
-@Api(value="User Controller", description="Operations related to user services")
 public class UserController {
     private static final Logger LOGGER = LogManager.getLogger(UserController.class);
 
@@ -35,7 +32,6 @@ public class UserController {
      * @return ResponseEntity
      */
     @RequestMapping(path = "/api/login", method = RequestMethod.POST)
-    @ApiOperation(value = "Log in a user in the system.")
     public ResponseEntity<LoginResponseJSON> login(@RequestBody LoginRequestJSON request) {
         LOGGER.info("Called login API for username {}", request.getUsername());
         List<User> result = userService.findUserByUserNameAndPassword(request.getUsername(), request.getPassword());
@@ -64,7 +60,6 @@ public class UserController {
      * @return RegisterResponseJSON instance
      */
     @RequestMapping(path = "/api/register", method = RequestMethod.POST)
-    @ApiOperation(value = "Register a user in the system.")
     public ResponseEntity<RegisterResponseJSON> register(@RequestBody RegisterRequestJSON request) {
         LOGGER.info("called register API");
         if (userService.checkIfUserExistsByUserName(request.getUserName())) {
@@ -94,7 +89,6 @@ public class UserController {
      * @return ResponseEntity
      */
     @RequestMapping(path = "/api/user", method = RequestMethod.GET)
-    @ApiOperation(value = "Get user details of a user based on the UserId..")
     public ResponseEntity<GetUserResponseJSON> getUser(
             @RequestParam(name = "id", required = false) String id,
             @RequestParam(name = "username", required = false) String userName) {
@@ -114,7 +108,6 @@ public class UserController {
      * @return ResponseEntity
      */
     @RequestMapping(path = "/api/user/{userId}", method = RequestMethod.PUT)
-    @ApiOperation(value = "update a user for the give userID")
     public ResponseEntity<RegisterResponseJSON> updateUser(@RequestBody RegisterRequestJSON request,
                                                            @PathVariable("userId") String userId) {
         LOGGER.info("updateUser API called for username ={}", request.getUserName());

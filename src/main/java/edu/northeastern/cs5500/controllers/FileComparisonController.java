@@ -1,8 +1,6 @@
 package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.service.FileComparisonService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
@@ -22,7 +20,6 @@ import static java.lang.String.valueOf;
  */
 @RestController
 @RequestMapping("api/comparison/")
-@Api(value="File Comparison Controller.", description="Operations related to file comparison")
 public class FileComparisonController {
     private static final Logger LOGGER = LogManager.getLogger(FileComparisonController.class);
 
@@ -38,7 +35,6 @@ public class FileComparisonController {
      * @return List of String
      */
     @RequestMapping(path = "/listStrategies", method = RequestMethod.GET)
-    @ApiOperation(value = "Get the list of comparison strategies present in the system.")
     public JSONObject getListOfStrategies(){
         LOGGER.info("executing method getListOfStrategies ");
         Map<String, Object> resultMap = new HashMap<>();
@@ -57,7 +53,6 @@ public class FileComparisonController {
      * @return JSONObject having the similarity percentage.
      */
     @RequestMapping(path = "/compare2filesByStrategy", method = RequestMethod.GET)
-    @ApiOperation(value = "Get similarity between the given files based on the given strategy.")
     public JSONObject getSimilarityBetweenGivenFiles(
             @RequestParam(name = "strategy") String strategy,
             @RequestParam(name = "firstFile") String firstFile,
