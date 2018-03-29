@@ -1,8 +1,6 @@
 package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.service.CourseService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
@@ -20,7 +18,6 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/course/")
-@Api(tags = {"course_controller"})
 public class CourseController {
     private static final Logger LOGGER = LogManager.getLogger(CourseController.class);
 
@@ -37,7 +34,6 @@ public class CourseController {
      * @return JsonResponse Object
      */
     @RequestMapping(path = "/getCourseById/{courseId}", method = RequestMethod.GET)
-    @ApiOperation(value = "Get a course detail by course Id")
     public JSONObject getCourseById(@PathVariable int courseId){
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("result", courseService.getCourseById(courseId));

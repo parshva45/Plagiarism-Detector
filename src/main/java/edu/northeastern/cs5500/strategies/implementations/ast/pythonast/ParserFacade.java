@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 
-import static edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Python3Parser.*;
+import static edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Python3Parser.File_inputContext;
 
 /**
  * @author namratabilurkar

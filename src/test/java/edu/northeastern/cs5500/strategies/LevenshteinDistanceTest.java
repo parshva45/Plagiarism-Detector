@@ -16,7 +16,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 	
 	@Autowired
 	PythonToStringParser pythonToStringParser;
-	
+
 	@Autowired
 	LevenshteinDistance levenshteinDistanceObj;
 
@@ -128,6 +128,74 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 		double res = levenshteinDistanceObj.calculateSimilarity(
 				getFilePath("submission3.py"), getFilePath("submission4.py"));
 		assertEquals(12.26, res, 0.01);
+	}
+
+	/**
+	 * test similarity measure between submission1.zip files and submission2.zip files
+	 */
+    @Test
+    public void compares1s2ZipTest() {
+        double res = levenshteinDistanceObj.calculateSimilarity(
+                getFilePath("submission1.zip"), getFilePath("submission2.zip"));
+        assertEquals(21.86, res, 0.01);
+    }
+    
+    /**
+	 * test similarity measure between submission1.zip files and submission3.zip files
+	 */
+    @Test
+    public void compares1s3ZipTest() {
+        double res = levenshteinDistanceObj.calculateSimilarity(
+                getFilePath("submission1.zip"), getFilePath("submission3.zip"));
+        assertEquals(22.06, res, 0.01);
+    }
+    
+    /**
+	 * test similarity measure between submission1.zip files and submission4.zip files
+	 */
+    @Test
+    public void compares1s4ZipTest() {
+        double res = levenshteinDistanceObj.calculateSimilarity(
+                getFilePath("submission1.zip"), getFilePath("submission4.zip"));
+        assertEquals(21.39, res, 0.01);
+    }
+    
+    /**
+	 * test similarity measure between submission2.zip files and submission3.zip files
+	 */
+    @Test
+    public void compares2s3ZipTest() {
+        double res = levenshteinDistanceObj.calculateSimilarity(
+                getFilePath("submission2.zip"), getFilePath("submission3.zip"));
+        assertEquals(16.64, res, 0.01);
+    }
+    
+    /**
+	 * test similarity measure between submission2.zip files and submission4.zip files
+	 */
+    @Test
+    public void compares2s4ZipTest() {
+        double res = levenshteinDistanceObj.calculateSimilarity(
+                getFilePath("submission2.zip"), getFilePath("submission4.zip"));
+        assertEquals(19.42, res, 0.01);
+    }
+    
+    /**
+	 * test similarity measure between submission3.zip files and submission4.zip files
+	 */
+    @Test
+    public void compares3s4ZipTest() {
+        double res = levenshteinDistanceObj.calculateSimilarity(
+                getFilePath("submission3.zip"), getFilePath("submission4.zip"));
+        assertEquals(17.85, res, 0.01);
+    }
+    
+    /**
+	 * test for non-existent zip file read
+	 */
+	@Test
+	public void exceptionZipTest() {
+		pythonToStringParser.parseFiles("submission5.zip");
 	}
 
 }
