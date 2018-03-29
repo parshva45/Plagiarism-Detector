@@ -2,10 +2,12 @@ package edu.northeastern.cs5500.strategies.implementations;
 
 import edu.northeastern.cs5500.parsers.PythonToStringParser;
 import edu.northeastern.cs5500.strategies.SimilarityStrategy;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class LevenshteinDistance implements SimilarityStrategy {
@@ -82,17 +84,38 @@ public class LevenshteinDistance implements SimilarityStrategy {
 
     /* (non-Javadoc)
      * @see edu.northeastern.cs5500.strategies.SimilarityStrategy#calculateSimilarity(java.lang.String, java.lang.String)
-     * calculate similarity measure between file1 and file2 using Levenshtein distance strategy
+     * calculate similarity measure between file1 and file2 using Levenshtein distance strategy (can be .py or .zip files)
      * @param file1 String
      * @param file2 String
      * @return similarity measure between file1 and file2 using Levenshtein distance strategy double
      */
     @Override
     public double calculateSimilarity(String file1, String file2){
-        String fileContentFile1 = pythonToStringParser.readFile(file1).trim();
-        String fileContentFile2 = pythonToStringParser.readFile(file2).trim();
-        int distance = getDistance(fileContentFile1, fileContentFile2);
-        return (1-(double)distance / longer(fileContentFile1, fileContentFile2).length()) * 100;
+        String ext = FilenameUtils.getExtension(file1);
+        /**
+         * If single file comparison between two .py files is expected 
+         */
+        if(ext.equals("py")){
+            String fileContentFile1 = pythonToStringParser.readFile(file1).trim();
+            String fileContentFile2 = pythonToStringParser.readFile(file2).trim();
+            int distance = getDistance(fileContentFile1, fileContentFile2);
+            return (1-(double)distance / longer(fileContentFile1, fileContentFile2).length()) * 100;
+        }
+        /**
+         * If multiple file comparisons across two .zip files is expected 
+         */
+        else{
+            List<String> firstSubmissionFiles = pythonToStringParser.parseFiles(file1);
+            List<String> secondSubmissionFiles = pythonToStringParser.parseFiles(file2);
+            double overallSimilaritySum = 0;
+            for (String s1 : firstSubmissionFiles) {
+                for (String s2 : secondSubmissionFiles) {
+                    int distance = getDistance(s1, s2);
+                    overallSimilaritySum += (1-(double)distance / longer(s1, s2).length()) * 100;
+                }
+            }
+            return overallSimilaritySum/(firstSubmissionFiles.size()*secondSubmissionFiles.size());
+        }
     }
 
 }
