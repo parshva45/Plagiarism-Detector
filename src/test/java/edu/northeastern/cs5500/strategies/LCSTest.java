@@ -119,4 +119,72 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 		assertEquals(12.96, res, 0.01);
 	}
 
+	/**
+	 * test similarity measure between submission1.zip files and submission2.zip files
+	 */
+    @Test
+    public void compares1s2ZipTest() {
+        double res = lcs.calculateSimilarity(
+                getFilePath("submission1.zip"), getFilePath("submission2.zip"));
+        assertEquals(23.67, res, 0.01);
+    }
+    
+    /**
+	 * test similarity measure between submission1.zip files and submission3.zip files
+	 */
+    @Test
+    public void compares1s3ZipTest() {
+        double res = lcs.calculateSimilarity(
+                getFilePath("submission1.zip"), getFilePath("submission3.zip"));
+        assertEquals(35.09, res, 0.01);
+    }
+    
+    /**
+	 * test similarity measure between submission1.zip files and submission4.zip files
+	 */
+    @Test
+    public void compares1s4ZipTest() {
+        double res = lcs.calculateSimilarity(
+                getFilePath("submission1.zip"), getFilePath("submission4.zip"));
+        assertEquals(27.48, res, 0.01);
+    }
+    
+    /**
+	 * test similarity measure between submission2.zip files and submission3.zip files
+	 */
+    @Test
+    public void compares2s3ZipTest() {
+        double res = lcs.calculateSimilarity(
+                getFilePath("submission2.zip"), getFilePath("submission3.zip"));
+        assertEquals(17.47, res, 0.01);
+    }
+    
+    /**
+	 * test similarity measure between submission2.zip files and submission4.zip files
+	 */
+    @Test
+    public void compares2s4ZipTest() {
+        double res = lcs.calculateSimilarity(
+                getFilePath("submission2.zip"), getFilePath("submission4.zip"));
+        assertEquals(23.17, res, 0.01);
+    }
+    
+    /**
+	 * test similarity measure between submission3.zip files and submission4.zip files
+	 */
+    @Test
+    public void compares3s4ZipTest() {
+        double res = lcs.calculateSimilarity(
+                getFilePath("submission3.zip"), getFilePath("submission4.zip"));
+        assertEquals(25.06, res, 0.01);
+    }
+    
+    /**
+	 * test for non-existent zip file read
+	 */
+	@Test
+	public void exceptionZipTest() {
+		pythonToStringParser.parseFiles("submission5.zip");
+	}
+
 }
