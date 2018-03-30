@@ -1,6 +1,7 @@
 package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.service.UploadAssignmentService;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,13 +40,19 @@ public class UploadController {
                            @RequestParam("hwId") int hwId,
                            @RequestParam("courseId") int courseId) throws IOException {
 
-        try{
-            uploadAssignmentService.uploadAssignment(file, userId, hwId, courseId);
-        }catch (IOException e){
-            LOGGER.error("failed to upload");
+        String extension = FilenameUtils.getExtension(file.getOriginalFilename());
+        if ("zip".equals(extension) || "py".equals(extension)) {
+            try {
+                uploadAssignmentService.uploadAssignment(file, userId, hwId, courseId);
+            } catch (IOException e) {
+                LOGGER.error("failed to upload");
+            }
+            LOGGER.info("successFull uploaded assignment");
+        }else {
+            LOGGER.info("not a python or zip file");
         }
-        LOGGER.info("successFull uploaded assignment");
-        response.sendRedirect("/#/profile/"+userId);
+        response.sendRedirect("/#/profile/" + userId);
+
     }
 
 }
