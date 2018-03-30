@@ -14,6 +14,7 @@ import org.springframework.mock.web.MockMultipartFile;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Objects;
@@ -67,6 +68,34 @@ public class UploadControllerTest {
 
         fail();
 
+    }
+
+
+
+    @Test
+    public void uploadShouldNotUploadIfFileNameNotValid() throws IOException, URISyntaxException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(Objects.requireNonNull(classLoader.getResource("submission1.txt").toURI().getPath()));
+        FileInputStream inputFile = new FileInputStream(file);
+        MockMultipartFile multipartFile = new MockMultipartFile("file", "submission1.txt",
+                "multipart/form-data", inputFile);
+
+        Mockito.doNothing().when(uploadAssignmentService).uploadAssignment(multipartFile, 2, 2, 2);
+        MockHttpServletResponse response = new MockHttpServletResponse();
+        uploadController.uploadFile(response, multipartFile, 2, 2, 2);
+    }
+
+    @Test
+    public void uploadShouldUploadZip() throws IOException, URISyntaxException {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(Objects.requireNonNull(classLoader.getResource("submission1.zip").toURI().getPath()));
+        FileInputStream inputFile = new FileInputStream(file);
+        MockMultipartFile multipartFile = new MockMultipartFile("file", "submission1.zip",
+                "multipart/form-data", inputFile);
+
+        Mockito.doNothing().when(uploadAssignmentService).uploadAssignment(multipartFile, 2, 2, 2);
+        MockHttpServletResponse response = new MockHttpServletResponse();
+        uploadController.uploadFile(response, multipartFile, 2, 2, 2);
     }
 
 }
