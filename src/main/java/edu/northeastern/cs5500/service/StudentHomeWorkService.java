@@ -63,7 +63,7 @@ public class StudentHomeWorkService {
         List<StudentHomeWork> studentHomeWork = studentHomeWorkRepository
                 .findByUserIdAndAndCourseIdAndHomeWorkId(userId, courseId, homeWorkId);
         if (studentHomeWork == null){
-            LOGGER.error("homework not found for user {} with courseID {} " +
+            LOGGER.info("homework not found for user {} with courseID {} " +
                     "and homeWorkId {}", userId, courseId, homeWorkId);
             throw new HttpStatusException(HttpStatus.BAD_REQUEST, "User did not submit assignment.");
         }
