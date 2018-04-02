@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	
@@ -186,5 +187,25 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	public void exceptionZipTest() {
 		pythonToStringParser.parseFiles("submission5.zip");
 	}
+	
+	/**
+	 * test for one .zip and another .py submission
+	 */
+	@Test(expected = IllegalArgumentException.class)
+    public void comparesOneZipOnePythonTest() {
+        lcs.calculateSimilarity(
+                getFilePath("submission3.zip"), getFilePath("submission4.py"));
+        fail();
+    }
+	
+	/**
+	 * test for one .py and another .zip submission
+	 */
+	@Test(expected = IllegalArgumentException.class)
+    public void comparesOnePythonOneZipTest() {
+        lcs.calculateSimilarity(
+                getFilePath("submission3.py"), getFilePath("submission4.zip"));
+        fail();
+    }
 
 }
