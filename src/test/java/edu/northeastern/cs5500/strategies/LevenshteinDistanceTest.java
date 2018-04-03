@@ -11,6 +11,7 @@ import java.io.File;
 import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	
@@ -197,5 +198,25 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 	public void exceptionZipTest() {
 		pythonToStringParser.parseFiles("submission5.zip");
 	}
+	
+	/**
+	 * test for one .zip and another .py submission
+	 */
+	@Test(expected = IllegalArgumentException.class)
+    public void comparesOneZipOnePythonTest() {
+        levenshteinDistanceObj.calculateSimilarity(
+                getFilePath("submission3.zip"), getFilePath("submission4.py"));
+        fail();
+    }
+	
+	/**
+	 * test for one .py and another .zip submission
+	 */
+	@Test(expected = IllegalArgumentException.class)
+    public void comparesOnePythonOneZipTest() {
+        levenshteinDistanceObj.calculateSimilarity(
+                getFilePath("submission3.py"), getFilePath("submission4.zip"));
+        fail();
+    }
 
 }
