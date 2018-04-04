@@ -51,7 +51,7 @@ public class StudentHomeWorkControllerTest {
         list.add(studentHomeWork2);
         Mockito.when(studentHomeWorkService.getListOfHomeWorksByCourseIdAndHomeWorkId(1,1)).thenReturn(list);
 
-        JSONObject jsonObject = studentHomeWorkController.getStudentHomeworksForCourseHomeWork(1,1);
+        JSONObject jsonObject = studentHomeWorkController.getStudentHomeWorksForCourseHomeWork(1,1);
 
         Assert.assertEquals("OK", jsonObject.get("response-code"));
         Assert.assertEquals(list, jsonObject.get("result"));
