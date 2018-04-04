@@ -1,6 +1,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <br>
-<div class="container">
+<div class="container" ng-controller="AdminController">
 
     <h5>Select two students</h5>
 
@@ -22,9 +22,10 @@
       </select>
     </div>
 
+    <input type="button" value="Submit" ng-click="submitForm(first_student, second_student)">
+
+    <div ng-show="result_ready">
     <h5>Results</h5>
-    <h6>Strategy 1 : Similarity is 90%</h6>
-    <h6>Strategy 2 : Similarity is 92%</h6>
-    <h6>Strategy 3 : Similarity is 84%</h6>
-    <h6>Strategy 4 : Similarity is 80%</h6>
+        <h6>LCS Strategy : Similarity is {{lcs_similarity}}</h6>
+    </div>
 </div>

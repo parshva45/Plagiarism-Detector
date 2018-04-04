@@ -9,7 +9,8 @@
             "findByUserIdAndUserName" : findByUserIdAndUserName,
             "findStudentHomeWorksForCourseHomeWork": findStudentHomeWorksForCourseHomeWork,
             "createUser": register,
-            "updateUser": updateUser
+            "updateUser": updateUser,
+            "calculateSimilarityMeasure": calculateSimilarityMeasure
         };
         return api;
 
@@ -41,6 +42,16 @@
             return $http({
                 url: "/api/studentHomeWork/getStudentHomeWorksForCourseHomeWork/"+courseId+"/"+homeWorkId,
                 method: "GET",
+            }).then(function (response) {
+                return response.data;
+            });
+        }
+
+        function calculateSimilarityMeasure(strategy, firstFile, secondFile){
+            return $http({
+                url: "/api/comparison/compare2filesByStrategy",
+                method: "GET",
+                params: {strategy:strategy, firstFile:firstFile, secondFile:secondFile}
             }).then(function (response) {
                 return response.data;
             });
