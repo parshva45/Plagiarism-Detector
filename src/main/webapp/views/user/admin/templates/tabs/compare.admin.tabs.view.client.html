@@ -7,14 +7,18 @@
     <div class="form-group">
       <label>First Student</label>
       <select class="form-control" ng-model="first_student">
-        <option ng-repeat="studentHomeWork in model.studentHomeWorks" ng-if="studentHomeWork.userId != second_student">{{studentHomeWork.userId}}</option>
+        <option ng-repeat="student in model.students" ng-value="student.id">
+            {{student.userName}}
+        </option>
       </select>
     </div>
 
     <div class="form-group">
       <label>Second Student</label>
       <select class="form-control" ng-model="second_student">
-        <option ng-repeat="studentHomeWork in model.studentHomeWorks" ng-if="studentHomeWork.userId != first_student">{{studentHomeWork.userId}}</option>
+        <option ng-repeat="student in model.students" ng-if="student.id != first_student" ng-value="student.id">
+            {{student.userName}}
+        </option>
       </select>
     </div>
 
