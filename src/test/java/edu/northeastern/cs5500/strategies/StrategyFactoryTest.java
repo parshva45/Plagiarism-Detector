@@ -2,6 +2,7 @@ package edu.northeastern.cs5500.strategies;
 
 import edu.northeastern.cs5500.strategies.implementations.LCS;
 import edu.northeastern.cs5500.strategies.implementations.LevenshteinDistance;
+import edu.northeastern.cs5500.strategies.implementations.ast.lcs.LongestCommonSubSequence;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,6 +22,9 @@ public class StrategyFactoryTest{
 
     @Autowired
     LCS lcs;
+    
+    @Autowired
+    LongestCommonSubSequence ast_lcs;
 
     @Autowired
     StrategyFactory strategyFactory;
@@ -41,6 +45,15 @@ public class StrategyFactoryTest{
     public void getLCSStrategyShouldReturnTheExpectedStrategy(){
         Assert.assertEquals(lcs,
                 strategyFactory.getStrategyByStrategyType("LCS"));
+    }
+    
+    /**
+     * test for getting AST lcs strategy when it is provided
+     */
+    @Test
+    public void getASTLCSStrategyShouldReturnTheExpectedStrategy(){
+        Assert.assertEquals(ast_lcs,
+                strategyFactory.getStrategyByStrategyType("AST_LCS"));
     }
 
     /**
