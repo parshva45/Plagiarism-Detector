@@ -23,8 +23,7 @@ public class LCS implements SimilarityStrategy {
         this.pythonToStringParser = pythonToStringParser;
     }
 
-    /* (non-Javadoc)
-     * @see edu.northeastern.cs5500.strategies.SimilarityStrategy#calculateSimilarity(java.lang.String, java.lang.String)
+    /**
      * Method to calculate similarity measure between file1 and file2 using LCS strategy
      * @param file1 String
      * @param file2 String
@@ -62,7 +61,8 @@ public class LCS implements SimilarityStrategy {
         	throw new IllegalArgumentException();
     }
     
-    /* Method to calculate distance between file1 and file2 using LCS strategy (can be .py or .zip files)
+    /**
+     * Method to calculate distance between file1 and file2 using LCS strategy (can be .py or .zip files)
      * @param file1 String
      * @param file2 String
      * @return distance between file1 and file2 using LCS strategy int
