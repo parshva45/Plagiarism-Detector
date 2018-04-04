@@ -45,9 +45,9 @@ public class StudentHomeWorkController {
     * @param homeWorkId Integer
     * @return
     */
-   @RequestMapping(path = "/getStudentsForCourseHomework/{courseId}/{homeWorkId}", method = RequestMethod.GET)
-   public JSONObject getStudentsForCourseHomework(@PathVariable int courseId, @PathVariable int homeWorkId){
-       LOGGER.info("getStudentsForCourseHomework API called with courseId={} and homeWorkId={}", courseId, homeWorkId);
+   @RequestMapping(path = "/getStudentHomeworksForCourseHomeWork/{courseId}/{homeWorkId}", method = RequestMethod.GET)
+   public JSONObject getStudentHomeworksForCourseHomeWork(@PathVariable int courseId, @PathVariable int homeWorkId){
+       LOGGER.info("getStudentHomeworksForCourseHomeWork API called with courseId={} and homeWorkId={}", courseId, homeWorkId);
        Map<String, Object> resultMap = new HashMap<>();
        resultMap.put("result", studentHomeWorkService.getListOfHomeWorksByCourseIdAndHomeWorkId(courseId, homeWorkId));
        resultMap.put("response-code", "OK");

@@ -39,6 +39,23 @@ public class StudentHomeWorkControllerTest {
         Assert.assertEquals("OK", jsonObject.get("response-code"));
         Assert.assertEquals(list, jsonObject.get("result"));
     }
+    
+    @Test
+    public void getStudentHomeworksForCourseHomeWorkShouldReturnProperResult(){
+        StudentHomeWork studentHomeWork1 = new StudentHomeWork()
+                .withCourseId(1).withUserId(1).withHomeWorkId(1).withPath("praveen");
+        StudentHomeWork studentHomeWork2 = new StudentHomeWork()
+                .withCourseId(1).withUserId(2).withHomeWorkId(1).withPath("parshva");
+        List<StudentHomeWork> list = new ArrayList<>();
+        list.add(studentHomeWork1);
+        list.add(studentHomeWork2);
+        Mockito.when(studentHomeWorkService.getListOfHomeWorksByCourseIdAndHomeWorkId(1,1)).thenReturn(list);
+
+        JSONObject jsonObject = studentHomeWorkController.getStudentHomeworksForCourseHomeWork(1,1);
+
+        Assert.assertEquals("OK", jsonObject.get("response-code"));
+        Assert.assertEquals(list, jsonObject.get("result"));
+    }
 
     @Test
     public void submitHomeWorkShouldWorkAsExpected(){
