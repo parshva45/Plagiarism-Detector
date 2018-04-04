@@ -23,8 +23,7 @@ public class LCS implements SimilarityStrategy {
         this.pythonToStringParser = pythonToStringParser;
     }
 
-    /* (non-Javadoc)
-     * @see edu.northeastern.cs5500.strategies.SimilarityStrategy#calculateSimilarity(java.lang.String, java.lang.String)
+    /**
      * Method to calculate similarity measure between file1 and file2 using LCS strategy
      * @param file1 String
      * @param file2 String
@@ -32,11 +31,12 @@ public class LCS implements SimilarityStrategy {
      */
     @Override
     public double calculateSimilarity(String file1, String file2){
-    	String ext = FilenameUtils.getExtension(file1);
+    	String ext1 = FilenameUtils.getExtension(file1);
+        String ext2 = FilenameUtils.getExtension(file2);
         /**
          * If single file comparison between two .py files is expected 
          */
-        if(ext.equals("py")){
+        if(ext1.equals("py") && ext2.equals("py")){
 	        String fileContentFile1 = pythonToStringParser.readFile(file1).trim();
 	        String fileContentFile2 = pythonToStringParser.readFile(file2).trim();
 	        int distance = getDistance(fileContentFile1, fileContentFile2);
@@ -45,7 +45,7 @@ public class LCS implements SimilarityStrategy {
         /**
          * If multiple file comparisons across two .zip files is expected 
          */
-        else{
+        else if(ext1.equals("zip") && ext2.equals("zip")){
             List<String> firstSubmissionFiles = pythonToStringParser.parseFiles(file1);
             List<String> secondSubmissionFiles = pythonToStringParser.parseFiles(file2);
             double overallSimilaritySum = 0;
@@ -57,9 +57,12 @@ public class LCS implements SimilarityStrategy {
             }
             return overallSimilaritySum/(firstSubmissionFiles.size()*secondSubmissionFiles.size());
         }
+        else
+        	throw new IllegalArgumentException();
     }
     
-    /* Method to calculate distance between file1 and file2 using LCS strategy (can be .py or .zip files)
+    /**
+     * Method to calculate distance between file1 and file2 using LCS strategy (can be .py or .zip files)
      * @param file1 String
      * @param file2 String
      * @return distance between file1 and file2 using LCS strategy int

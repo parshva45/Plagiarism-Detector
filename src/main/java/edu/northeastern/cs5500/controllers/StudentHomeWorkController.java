@@ -38,6 +38,23 @@ public class StudentHomeWorkController {
         resultMap.put("response-code", "OK");
         return new JSONObject(resultMap);
     }
+    
+    /**
+    *
+    * @param courseId Integer
+    * @param homeWorkId Integer
+    * @return
+    */
+   @RequestMapping(path = "/getStudentHomeWorksForCourseHomeWork/{courseId}/{homeWorkId}", method = RequestMethod.GET)
+   public JSONObject getStudentHomeWorksForCourseHomeWork(@PathVariable("courseId") int courseId,
+		   												  @PathVariable("homeWorkId") int homeWorkId){
+       LOGGER.info("getStudentHomeWorksForCourseHomeWork API called with courseId={} and homeWorkId={}", courseId, homeWorkId);
+       Map<String, Object> resultMap = new HashMap<>();
+       resultMap.put("result", studentHomeWorkService.getListOfHomeWorksByCourseIdAndHomeWorkId(courseId, homeWorkId));
+       resultMap.put("response-code", "OK");
+       return new JSONObject(resultMap);
+   }
+   
 
     @RequestMapping(path = "/submitHomeWork", method = RequestMethod.POST)
     public JSONObject submitHomeWork(@RequestParam("filePath") String uploadFile,
