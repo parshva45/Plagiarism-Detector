@@ -7,6 +7,7 @@
         var api = {
             "login" : login,
             "findByUserIdAndUserName" : findByUserIdAndUserName,
+            "findStudentHomeWorksForCourseHomeWork": findStudentHomeWorksForCourseHomeWork,
             "createUser": register,
             "updateUser": updateUser
         };
@@ -31,6 +32,15 @@
                 url: "/api/user",
                 method: "GET",
                 params: {id: userId}
+            }).then(function (response) {
+                return response.data;
+            });
+        }
+
+        function findStudentHomeWorksForCourseHomeWork(courseId, homeWorkId){
+            return $http({
+                url: "/api/studentHomeWork/getStudentHomeWorksForCourseHomeWork/"+courseId+"/"+homeWorkId,
+                method: "GET",
             }).then(function (response) {
                 return response.data;
             });
