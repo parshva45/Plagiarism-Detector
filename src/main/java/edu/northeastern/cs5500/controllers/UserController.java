@@ -37,7 +37,7 @@ public class UserController {
         List<User> result = userService.findUserByUserNameAndPassword(request.getUsername(), request.getPassword());
 
         if (result.isEmpty()) {
-            LOGGER.error("login failed for username {}", request.getUsername());
+            LOGGER.info("login failed for username {}", request.getUsername());
             return ResponseEntity.badRequest().body(
                     new LoginResponseJSON()
                             .withMessage("credential not found")
@@ -63,7 +63,7 @@ public class UserController {
     public ResponseEntity<RegisterResponseJSON> register(@RequestBody RegisterRequestJSON request) {
         LOGGER.info("called register API");
         if (userService.checkIfUserExistsByUserName(request.getUserName())) {
-            LOGGER.error("register failed for username ={}, username already exists",
+            LOGGER.info("register failed for username ={}, username already exists",
                     request.getUserName());
             return ResponseEntity.badRequest().body(
                     new RegisterResponseJSON()
@@ -121,7 +121,7 @@ public class UserController {
                             .withMessage("user Updated")
             );
         }
-        LOGGER.error("updateUser API failed to update for username ={}", request.getUserName());
+        LOGGER.info("updateUser API failed to update for username ={}", request.getUserName());
         return ResponseEntity.badRequest().body(
                 new RegisterResponseJSON()
                         .withMessage("user not found"));
