@@ -48,10 +48,8 @@ public class AstBuilder {
         if (!toBeIgnored) {
             String ruleName = Python3Parser.ruleNames[ctx.getRuleIndex()];
             for (int i = 0; i < indentation; i++) {
-                //System.out.print("  ");
                 this.astString += "  ";
             }
-            //System.out.println(ruleName);
             this.astString += ruleName + "\n";
         }
         for (int i=0;i<ctx.getChildCount();i++) {
