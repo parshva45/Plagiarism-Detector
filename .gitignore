@@ -16,6 +16,7 @@
 
 # project files
 *.iml
+.pydevproject
 
 # target files
 target/
