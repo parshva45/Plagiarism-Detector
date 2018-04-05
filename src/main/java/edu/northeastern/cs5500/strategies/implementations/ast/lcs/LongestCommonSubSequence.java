@@ -1,6 +1,7 @@
 package edu.northeastern.cs5500.strategies.implementations.ast.lcs;
 
 import edu.northeastern.cs5500.strategies.SimilarityStrategy;
+import edu.northeastern.cs5500.strategies.implementations.AstFactory;
 import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.AstBuilder;
 import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.ParserFacade;
 import edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Python3Parser;
@@ -60,13 +61,14 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
 
     @Override
     public double calculateSimilarity(String file1, String file2) {
-        Python3Parser.File_inputContext f1;
-        Python3Parser.File_inputContext f2;
-        try {
-            f1 = parserFacade.parse(new File(file1));
-            f2 = parserFacade.parse(new File(file2));
+        AstFactory astFactory = new AstFactory();
+        String ast1, ast2;
 
-            int[] lcsValues = lcsLength(astBuilder.build(f1), astBuilder.build(f2));
+        try {
+                ast1 = astFactory.makeAST(file1);
+                ast2 = astFactory.makeAST(file2);
+
+            int[] lcsValues = lcsLength(ast1, ast2);
             return (((double)lcsValues[0] / lcsValues[1]) * 100);
         } catch (IOException e) {
             LOGGER.error("Failed to get Similarity for input file {} and {}", file1, file2);
