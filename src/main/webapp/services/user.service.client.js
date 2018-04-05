@@ -10,7 +10,8 @@
             "findStudentHomeWorksForCourseHomeWork": findStudentHomeWorksForCourseHomeWork,
             "createUser": register,
             "updateUser": updateUser,
-            "calculateSimilarityMeasure": calculateSimilarityMeasure
+            "calculateSimilarityMeasure": calculateSimilarityMeasure,
+            "listStrategies": listStrategies
         };
         return api;
 
@@ -53,6 +54,16 @@
                 method: "GET",
                 params: {strategy:strategy, firstFile:firstFile, secondFile:secondFile}
             }).then(function (response) {
+                return response.data;
+            });
+        }
+
+        function listStrategies() {
+            return $http({
+                url: "/api/comparison/listStrategies",
+                method: "GET",
+            }).then(function (response) {
+                console.log(JSON.stringify(response.data))
                 return response.data;
             });
         }

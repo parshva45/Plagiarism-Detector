@@ -22,10 +22,22 @@
       </select>
     </div>
 
-    <input type="button" value="Submit" ng-click="submitForm(first_student, second_student)">
+    <h5>Select strategy</h5>
 
+    <div class="form-group">
+      <label>Strategy</label>
+      <select class="form-control" ng-model="strategy">
+        <option ng-repeat="strategy in model.strategies" ng-value="strategy">
+            {{strategy}}
+        </option>
+      </select>
+    </div>
+
+    <input type="button" value="Submit" ng-click="submitForm(strategy, first_student, second_student)">
+
+    <br><br>
     <div ng-show="result_ready">
-    <h5>Results</h5>
-        <h6>LCS Strategy : Similarity is {{lcs_similarity}}</h6>
+    <h5>Result</h5>
+        <h6>By {{chosen_strategy}} Strategy:<br>Similarity is {{lcs_similarity}}</h6>
     </div>
 </div>
