@@ -7,11 +7,22 @@ package edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance;
 import java.util.ArrayList;
 
 public class Node {
-    public String label; // node label
-    public int index; // preorder index
-    // note: trees need not be binary
+    /**
+     * Label of the node
+     */
+    public String label;
+    /**
+     * preorder index
+     */
+    public int index;
+    /**
+     * trees need not be binary
+     */
     public ArrayList<Node> children = new ArrayList<Node>();
-    public Node leftmost; // used by the recursive O(n) leftmost() function
+    /**
+     * used by the recursive O(n) leftMost() function
+     */
+    public Node leftMost;
 
     public Node() {
 

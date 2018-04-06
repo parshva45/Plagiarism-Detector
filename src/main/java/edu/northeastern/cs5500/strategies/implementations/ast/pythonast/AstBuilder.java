@@ -4,18 +4,20 @@ package edu.northeastern.cs5500.strategies.implementations.ast.pythonast;
  * @author namratabilurkar
  */
 
-import edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Python3Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope("prototype")
 public class AstBuilder {
 
     private boolean ignoringWrappers = true;
     // String storing the AST built for the file.
-    private String astString = "";
+    private StringBuilder astString = new StringBuilder();
+    private int previous;
 
     /**
      *
@@ -32,11 +34,11 @@ public class AstBuilder {
      */
     public String build(RuleContext ctx) {
         explore(ctx, 0);
-        return astString;
+        return completeAstString(astString.toString());
     }
 
     /**
-     *
+     * Method to explore the rulenames and build the AST
      * @param ctx is the rule context
      * @param indentation is the indentation that needs to be added while
      *                    building the AST
@@ -46,11 +48,14 @@ public class AstBuilder {
                 && ctx.getChildCount() == 1
                 && ctx.getChild(0) instanceof ParserRuleContext;
         if (!toBeIgnored) {
-            String ruleName = Python3Parser.ruleNames[ctx.getRuleIndex()];
-            for (int i = 0; i < indentation; i++) {
-                this.astString += "  ";
+            if (previous >= indentation) {
+                for (int i=0;i<=previous-indentation;i++) {
+                    astString.append(")");
+                }
             }
-            this.astString += ruleName + "\n";
+            astString.append("(");
+            previous = indentation;
+
         }
         for (int i=0;i<ctx.getChildCount();i++) {
             ParseTree element = ctx.getChild(i);
@@ -58,6 +63,22 @@ public class AstBuilder {
                 explore((RuleContext)element, indentation + (toBeIgnored ? 0 : 1));
             }
         }
+    }
+
+    private String completeAstString(String astInput) {
+        int temp = 0;
+        for (int i=0; i<astInput.length(); i++) {
+            if (astInput.charAt(i) == '(') {
+                temp++;
+            }
+        }
+        StringBuilder astInputBuilder = new StringBuilder(astInput);
+        while (temp>0) {
+            astInputBuilder.append(")");
+            temp--;
+        }
+        astInput = astInputBuilder.toString();
+        return astInput;
     }
 
 }
