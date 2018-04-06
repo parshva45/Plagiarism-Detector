@@ -3,6 +3,7 @@ package edu.northeastern.cs5500.strategies;
 import edu.northeastern.cs5500.Cs5500PlagiarismDetectorTeam207ApplicationTests;
 import edu.northeastern.cs5500.parsers.PythonToStringParser;
 import edu.northeastern.cs5500.strategies.implementations.ast.lcs.LongestCommonSubSequence;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,6 +61,11 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
         assertEquals(36.101, similarityMeasure, 0.01);
     }
 
+    @After
+    public void runAfterTestMethod(){
+
+    }
+
     /**
      * test similarity measure between submission1.py and submission3.py
      */
@@ -96,23 +102,16 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
         assertEquals(83.352, similarityMeasure, 0.01);
     }
 
-    /**
-     * test for non-existent file read
-     */
-    @Test
-    public void exceptionTest() {
-        pythonToStringParser.readFile("submission5.py");
-    }
-
-    /**
-     * test similarity measure by getting submission files
-     */
-    @Test
-    public void calculateSimilarityShouldGiveCorrectResult(){
-        double res = longestCommonSubSequence.calculateSimilarity(
-                getFilePath("submission3.py"), getFilePath("submission4.py"));
-        assertEquals(73.752, res, 0.01);
-    }
+//
+//    /**
+//     * test similarity measure by getting submission files
+//     */
+//    @Test
+//    public void calculateSimilarityShouldGiveCorrectResult(){
+//        double res = longestCommonSubSequence.calculateSimilarity(
+//                getFilePath("submission3.py"), getFilePath("submission4.py"));
+//        assertEquals(73.752, res, 0.01);
+//    }
 
 }
 
