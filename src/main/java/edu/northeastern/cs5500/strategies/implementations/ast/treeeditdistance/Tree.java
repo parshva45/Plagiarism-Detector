@@ -4,12 +4,14 @@ package edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance;
  * @author namratabilurkar
  */
 
+import edu.northeastern.cs5500.strategies.SimilarityStrategy;
+
 import java.io.IOException;
 import java.io.StreamTokenizer;
 import java.io.StringReader;
 import java.util.ArrayList;
 
-public class Tree {
+public class Tree implements SimilarityStrategy{
     Node root = new Node();
     // function l() which gives the leftmost child
     ArrayList<Integer> l = new ArrayList<>();
@@ -186,5 +188,10 @@ public class Tree {
             }
         }
         return forestdist[i][j];
+    }
+
+    @Override
+    public double calculateSimilarity(String file1, String file2) {
+        return 0;
     }
 }
