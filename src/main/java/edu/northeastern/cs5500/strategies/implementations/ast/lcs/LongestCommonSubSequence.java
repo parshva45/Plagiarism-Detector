@@ -1,10 +1,8 @@
 package edu.northeastern.cs5500.strategies.implementations.ast.lcs;
 
 import edu.northeastern.cs5500.strategies.SimilarityStrategy;
-import edu.northeastern.cs5500.strategies.implementations.AstFactory;
 import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.AstBuilder;
 import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.ParserFacade;
-import edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Python3Parser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
