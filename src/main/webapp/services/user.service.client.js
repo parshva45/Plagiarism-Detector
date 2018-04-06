@@ -15,9 +15,19 @@
             "getHomeWorksForStudent": getHomeWorksForStudent,
             "getCourseName": getCourseName,
             "getHomeWorkDescription": getHomeWorkDescription,
-            "getSystemStatus": getSystemStatus
+            "getSystemStatus": getSystemStatus,
+            "getCount":getCount
         };
         return api;
+
+        function getCount() {
+            return $http({
+                url: "/api/getCount",
+                method: "GET"
+            }).then(function (response) {
+                return response.data;
+            });
+        }
 
         function getSystemStatus() {
             return $http({

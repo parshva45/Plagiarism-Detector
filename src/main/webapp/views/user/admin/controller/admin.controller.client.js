@@ -14,6 +14,16 @@
         vm.courseId = 1;
         $scope.systemStatus = undefined;
         $scope.result_ready = false;
+        $scope.countCalls = undefined;
+        vm.getCount = getCount;
+
+        function getCount() {
+            UserService
+                .getCount()
+                .then(function (data) {
+                    $scope.getCount = data;
+                });
+        }
 
         function init() {
             UserService.findByUserIdAndUserName(vm.userId)

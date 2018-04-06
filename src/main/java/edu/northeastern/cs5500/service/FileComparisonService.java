@@ -60,4 +60,9 @@ public class FileComparisonService {
         strategyTypes = new ArrayList<>(EnumSet.allOf(StrategyTypes.class));
         return strategyTypes;
     }
+
+    public int getCount(){
+        List<SystemStatus> systemStatuses = systemStatusRepository.findAllByCourseId(1);
+        return systemStatuses.size();
+    }
 }
