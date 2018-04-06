@@ -8,6 +8,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 
 @Component
+@Scope("prototype")
 public class LongestCommonSubSequence implements SimilarityStrategy{
     private static final Logger LOGGER = LogManager.getLogger(LongestCommonSubSequence.class);
 
@@ -69,8 +71,8 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
     public double calculateSimilarity(String file1, String file2) {
         String ast1, ast2;
         try {
-            ast1 = astBuilder.build(this.parserFacade.parse(new File(file1)));
-            ast2 = astBuilder.build(this.parserFacade.parse(new File(file2)));
+            ast1 = astBuilder.build(parserFacade.parse(new File(file1)));
+            ast2 = astBuilder.build(parserFacade.parse(new File(file2)));
             int[] lcsValues = lcsLength(ast1, ast2);
             return (((double) lcsValues[0] / lcsValues[1]) * 100);
         } catch (IOException e) {
