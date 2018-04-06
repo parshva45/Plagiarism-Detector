@@ -1,0 +1,9 @@
+<div ng-show="model.error" class="alert alert-danger" role="alert">
+    {{model.error}}
+</div>
+<div class="alert alert-success" ng-show="model.message">
+    {{model.message}}
+</div>
+<div class="col s12 m12 l12">
+    <pre>{{systemStatus | json}}</pre>
+</div>

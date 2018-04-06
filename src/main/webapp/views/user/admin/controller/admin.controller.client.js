@@ -12,6 +12,7 @@
         vm.students = [];
         vm.hwId = 1;
         vm.courseId = 1;
+        $scope.systemStatus = undefined;
         $scope.result_ready = false;
 
         function init() {
@@ -19,6 +20,11 @@
                 .then(function(data){
                     vm.user = data.result[0];
                     vm.userProfile = angular.copy(vm.user);
+                });
+
+            UserService.getSystemStatus()
+                .then(function (value) {
+                    $scope.systemStatus = value;
                 });
 
             UserService.findStudentHomeWorksForCourseHomeWork(vm.courseId, vm.hwId)
@@ -41,20 +47,20 @@
         init();
 
         $scope.submitForm = function(strategy, studentId1, studentId2) {
-            if(studentId1 == undefined || studentId2 == undefined){
-                alert("Please select both the students");
+            if(studentId1 === undefined || studentId2 === undefined){
+                vm.error("Please select both the students");
             }
-            else if(strategy == undefined)
-                alert("Please select some strategy");
+            else if(strategy === undefined)
+                vm.error("Please select some strategy");
             else{
                 var filePath1 = "";
                 var filePath2 = "";
                 for(var i=0; i<vm.studentHomeWorks.length; i++){
-                    if(vm.studentHomeWorks[i].userId == studentId1)
+                    if(vm.studentHomeWorks[i].userId === studentId1)
                         filePath1 = vm.studentHomeWorks[i].filePath;
-                    else if(vm.studentHomeWorks[i].userId == studentId2)
+                    else if(vm.studentHomeWorks[i].userId === studentId2)
                         filePath2 = vm.studentHomeWorks[i].filePath;
-                    if(filePath1 != "" && filePath2 != "")
+                    if(filePath1 !== "" && filePath2 !== "")
                         break;
                 }
                 $scope.calculateSimilarityMeasure(strategy, filePath1, filePath2);

@@ -11,9 +11,19 @@
             "createUser": register,
             "updateUser": updateUser,
             "calculateSimilarityMeasure": calculateSimilarityMeasure,
-            "listStrategies": listStrategies
+            "listStrategies": listStrategies,
+            "getSystemStatus": getSystemStatus
         };
         return api;
+
+        function getSystemStatus() {
+            return $http({
+                url: "/metrics",
+                method: "GET"
+            }).then(function (response) {
+                return response.data;
+            });
+        }
 
         function login(user) {
             return $http.post('/api/login', user)
@@ -61,9 +71,8 @@
         function listStrategies() {
             return $http({
                 url: "/api/comparison/listStrategies",
-                method: "GET",
+                method: "GET"
             }).then(function (response) {
-                console.log(JSON.stringify(response.data))
                 return response.data;
             });
         }
