@@ -58,28 +58,23 @@
 
         $scope.submitForm = function(strategy, studentId1, studentId2) {
             if(studentId1 === undefined || studentId2 === undefined){
-                vm.error("Please select both the students");
+                vm.error = "Please select both the students";
             }
             else if(strategy === undefined)
-                vm.error("Please select some strategy");
+                vm.error = "Please select some strategy";
             else{
                 var filePath1 = "";
                 var filePath2 = "";
-                console.log(JSON.stringify(vm.studentHomeWorks))
-                console.log(studentId1, studentId2)
                 for(var i=0; i<vm.studentHomeWorks.length; i++){
                     if(vm.studentHomeWorks[i].userId == studentId1){
-                        console.log("hit")
                         filePath1 = vm.studentHomeWorks[i].filePath;
                     }
                     else if(vm.studentHomeWorks[i].userId == studentId2){
-                        console.log("hit2")
                         filePath2 = vm.studentHomeWorks[i].filePath;
                     }
                     if(filePath1 != "" && filePath2 != "")
                         break;
                 }
-                console.log(filePath1, filePath2)
                 $scope.calculateSimilarityMeasure(strategy, filePath1, filePath2);
             }
         }
