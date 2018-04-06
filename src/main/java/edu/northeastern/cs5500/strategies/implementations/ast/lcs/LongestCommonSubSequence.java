@@ -31,6 +31,12 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
     private final PythonToStringParser pythonToStringParser;
 
 
+    /**
+     * Parameterized constructor
+     * @param parserFacade is an object of ParserFacade
+     * @param astBuilder is an object of AstBuilder
+     * @param pythonToStringParser is an object of PythonToStringParser
+     */
     @Autowired
     public LongestCommonSubSequence(ParserFacade parserFacade, AstBuilder astBuilder,
                                     PythonToStringParser pythonToStringParser) {
@@ -41,9 +47,9 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
 
     /**
      * Determine the longest common subsequence length
-     * @param ast1
-     * @param ast2
-     * @return
+     * @param ast1 is the AST of the first file
+     * @param ast2 is the AST of the second file
+     * @return the length of the longest common subsequence
      */
     private int[] lcsLength(String ast1, String ast2) {
 

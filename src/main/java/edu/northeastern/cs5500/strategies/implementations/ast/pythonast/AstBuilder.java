@@ -15,7 +15,9 @@ import org.springframework.stereotype.Component;
 public class AstBuilder {
 
     private boolean ignoringWrappers = true;
-    // String storing the AST built for the file.
+    /**
+     * String storing the AST built for the file.
+     */
     private StringBuilder astString = new StringBuilder();
     private int previous;
 
@@ -65,6 +67,11 @@ public class AstBuilder {
         }
     }
 
+    /**
+     * Complete the AST being built
+     * @param astInput is the partially constructed AST
+     * @return a completed AST as a string
+     */
     private String completeAstString(String astInput) {
         int temp = 0;
         for (int i=0; i<astInput.length(); i++) {
