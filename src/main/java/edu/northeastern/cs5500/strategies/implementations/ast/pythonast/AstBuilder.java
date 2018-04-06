@@ -4,20 +4,20 @@ package edu.northeastern.cs5500.strategies.implementations.ast.pythonast;
  * @author namratabilurkar
  */
 
-import edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Python3Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope("prototype")
 public class AstBuilder {
 
     private boolean ignoringWrappers = true;
     // String storing the AST built for the file.
-    private String astString = "";
-    int previous;
-    int length=0;
+    private StringBuilder astString = new StringBuilder();
+    private int previous;
 
     /**
      *
@@ -34,8 +34,7 @@ public class AstBuilder {
      */
     public String build(RuleContext ctx) {
         explore(ctx, 0);
-        //return astString;
-        return completeAstString(astString);
+        return completeAstString(astString.toString());
     }
 
     /**
@@ -49,20 +48,13 @@ public class AstBuilder {
                 && ctx.getChildCount() == 1
                 && ctx.getChild(0) instanceof ParserRuleContext;
         if (!toBeIgnored) {
-            String ruleName = Python3Parser.ruleNames[ctx.getRuleIndex()];
-            /*for (int i = 0; i < indentation; i++) {
-                this.astString += "  ";
-            }
-            this.astString += ruleName + "\n";*/
-
             if (previous >= indentation) {
                 for (int i=0;i<=previous-indentation;i++) {
-                    this.astString += ")";
+                    astString.append(")");
                 }
             }
-            this.astString += "(" + ruleName;
+            astString.append("(");
             previous = indentation;
-            length++;
 
         }
         for (int i=0;i<ctx.getChildCount();i++) {
@@ -80,10 +72,12 @@ public class AstBuilder {
                 temp++;
             }
         }
+        StringBuilder astInputBuilder = new StringBuilder(astInput);
         while (temp>0) {
-            astInput += ")";
+            astInputBuilder.append(")");
             temp--;
         }
+        astInput = astInputBuilder.toString();
         return astInput;
     }
 

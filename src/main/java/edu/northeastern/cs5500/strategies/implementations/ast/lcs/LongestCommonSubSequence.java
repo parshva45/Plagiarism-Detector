@@ -8,6 +8,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 
 @Component
+@Scope("prototype")
 public class LongestCommonSubSequence implements SimilarityStrategy{
     private static final Logger LOGGER = LogManager.getLogger(LongestCommonSubSequence.class);
 
