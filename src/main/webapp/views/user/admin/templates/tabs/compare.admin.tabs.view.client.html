@@ -1,6 +1,9 @@
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <br>
 <div class="container">
+
+    <div ng-show="model.error" class="alert alert-danger" role="alert">
+        {{model.error}}
+    </div>
 
     <h5>Select two students</h5>
 
@@ -22,9 +25,22 @@
       </select>
     </div>
 
-    <h5>Results</h5>
-    <h6>Strategy 1 : Similarity is 90%</h6>
-    <h6>Strategy 2 : Similarity is 92%</h6>
-    <h6>Strategy 3 : Similarity is 84%</h6>
-    <h6>Strategy 4 : Similarity is 80%</h6>
+    <h5>Select strategy</h5>
+
+    <div class="form-group">
+      <label>Strategy</label>
+      <select class="form-control" ng-model="strategy">
+        <option ng-repeat="strategy in model.strategies" ng-value="strategy">
+            {{strategy}}
+        </option>
+      </select>
+    </div>
+
+    <input type="button" value="Submit" ng-click="submitForm(strategy, first_student, second_student)">
+
+    <br><br>
+    <div ng-show="result_ready">
+    <h5>Result</h5>
+        <h6>By {{chosen_strategy}} Strategy:<br>Similarity is {{lcs_similarity}}</h6>
+    </div>
 </div>

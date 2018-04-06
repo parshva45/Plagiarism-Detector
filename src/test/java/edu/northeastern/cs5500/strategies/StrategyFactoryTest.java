@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.strategies;
 
+import edu.northeastern.cs5500.strategies.implementations.FileMetaData;
 import edu.northeastern.cs5500.strategies.implementations.LCS;
 import edu.northeastern.cs5500.strategies.implementations.LevenshteinDistance;
 import edu.northeastern.cs5500.strategies.implementations.ast.lcs.LongestCommonSubSequence;
@@ -28,6 +29,10 @@ public class StrategyFactoryTest{
 
     @Autowired
     StrategyFactory strategyFactory;
+
+    @Autowired
+    FileMetaData fileMetaData;
+
 
     /**
      * test for getting levenshtein distance strategy when it is provided
@@ -73,5 +78,10 @@ public class StrategyFactoryTest{
         Assert.assertEquals(levenshteinDistance, strategyFactory.getStrategyByStrategyType(null));
     }
 
+    @Test
+    public void getFileMetadataStrategyShouldReturnTheExpectedStrategy(){
+        Assert.assertEquals(fileMetaData,
+                strategyFactory.getStrategyByStrategyType("FILE_METADATA"));
+    }
 
 }

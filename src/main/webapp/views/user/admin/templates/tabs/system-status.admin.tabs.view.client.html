@@ -1,0 +1,15 @@
+<div ng-show="model.error" class="alert alert-danger" role="alert">
+    {{model.error}}
+</div>
+<div class="alert alert-success" ng-show="model.message">
+    {{model.message}}
+</div>
+<div class="col s12 m12 l12">
+    <h5>Plagiarism Detection calls by you till now</h5>
+    <a ng-click="model.getCount()" class="btn green darken-5">GetCount</a>
+    {{countCalls}}
+    <br>
+    <br>
+    <h5>System Status</h5>
+    <pre>{{systemStatus | json}}</pre>
+</div>
