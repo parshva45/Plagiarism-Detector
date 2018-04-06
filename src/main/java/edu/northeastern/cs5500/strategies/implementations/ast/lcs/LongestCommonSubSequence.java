@@ -1,22 +1,26 @@
 package edu.northeastern.cs5500.strategies.implementations.ast.lcs;
 
+import edu.northeastern.cs5500.parsers.PythonToStringParser;
 import edu.northeastern.cs5500.strategies.SimilarityStrategy;
 import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.AstBuilder;
 import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.ParserFacade;
-import edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Python3Parser;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author namratabilurkar
  */
 
 @Component
+@Scope("prototype")
 public class LongestCommonSubSequence implements SimilarityStrategy{
     private static final Logger LOGGER = LogManager.getLogger(LongestCommonSubSequence.class);
 
@@ -24,10 +28,15 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
 
     private final AstBuilder astBuilder;
 
+    private final PythonToStringParser pythonToStringParser;
+
+
     @Autowired
-    public LongestCommonSubSequence(ParserFacade parserFacade, AstBuilder astBuilder) {
+    public LongestCommonSubSequence(ParserFacade parserFacade, AstBuilder astBuilder,
+                                    PythonToStringParser pythonToStringParser) {
         this.parserFacade = parserFacade;
         this.astBuilder = astBuilder;
+        this.pythonToStringParser = pythonToStringParser;
     }
 
     private int[] lcsLength(String ast1, String ast2) {
@@ -60,14 +69,12 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
 
     @Override
     public double calculateSimilarity(String file1, String file2) {
-        Python3Parser.File_inputContext f1;
-        Python3Parser.File_inputContext f2;
+        String ast1, ast2;
         try {
-            f1 = parserFacade.parse(new File(file1));
-            f2 = parserFacade.parse(new File(file2));
-
-            int[] lcsValues = lcsLength(astBuilder.build(f1), astBuilder.build(f2));
-            return (((double)lcsValues[0] / lcsValues[1]) * 100);
+            ast1 = astBuilder.build(parserFacade.parse(new File(file1)));
+            ast2 = astBuilder.build(parserFacade.parse(new File(file2)));
+            int[] lcsValues = lcsLength(ast1, ast2);
+            return (((double) lcsValues[0] / lcsValues[1]) * 100);
         } catch (IOException e) {
             LOGGER.error("Failed to get Similarity for input file {} and {}", file1, file2);
         }

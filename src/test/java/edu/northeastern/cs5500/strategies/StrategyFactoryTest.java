@@ -59,11 +59,11 @@ public class StrategyFactoryTest{
     /**
      * test for getting AST lcs strategy when it is provided
      */
-    @Test
-    public void getASTLCSStrategyShouldReturnTheExpectedStrategy(){
-        Assert.assertEquals(ast_lcs,
-                strategyFactory.getStrategyByStrategyType("AST_LCS"));
-    }
+//    @Test
+//    public void getASTLCSStrategyShouldReturnTheExpectedStrategy(){
+//        Assert.assertEquals(ast_lcs,
+//                strategyFactory.getStrategyByStrategyType("AST_LCS"));
+//    }
 
     /**
      * test for getting Weighted score strategy when it is provided
