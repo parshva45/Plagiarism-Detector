@@ -24,12 +24,23 @@ public class TreeEditDistance implements SimilarityStrategy {
     ParserFacade parserFacade;
 
 
+    /**
+     * Parameterized constructor
+     * @param astBuilder is the object used to build the ast
+     * @param parserFacade is the object used to parse the file to create the ast
+     */
     @Autowired
     public TreeEditDistance(AstBuilder astBuilder, ParserFacade parserFacade) {
         this.astBuilder = astBuilder;
         this.parserFacade = parserFacade;
     }
 
+    /**
+     * Calculate the similarity of two files using tree edit distance
+     * @param file1 String path of file1
+     * @param file2 String path of file2
+     * @return the similarity score of the two files using tree edit distance
+     */
     @Override
     public double calculateSimilarity(String file1, String file2) {
 

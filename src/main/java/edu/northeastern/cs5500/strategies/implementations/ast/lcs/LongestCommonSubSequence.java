@@ -39,6 +39,12 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
         this.pythonToStringParser = pythonToStringParser;
     }
 
+    /**
+     * Determine the longest common subsequence length
+     * @param ast1
+     * @param ast2
+     * @return
+     */
     private int[] lcsLength(String ast1, String ast2) {
 
         int lengthOfAst1 = ast1.length();
@@ -67,6 +73,12 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
         return lcsLengthAndBase;
     }
 
+    /**
+     * Calculate the similarity of two files using LCS
+     * @param file1 String path of file1
+     * @param file2 String path of file2
+     * @return the similarity score of the two files using LCS
+     */
     @Override
     public double calculateSimilarity(String file1, String file2) {
         String ast1, ast2;
