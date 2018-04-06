@@ -69,8 +69,8 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
     public double calculateSimilarity(String file1, String file2) {
         String ast1, ast2;
         try {
-            ast1 = astBuilder.build(this.parserFacade.parse(new File(file1)));
-            ast2 = astBuilder.build(this.parserFacade.parse(new File(file2)));
+            ast1 = astBuilder.build(parserFacade.parse(new File(file1)));
+            ast2 = astBuilder.build(parserFacade.parse(new File(file2)));
             int[] lcsValues = lcsLength(ast1, ast2);
             return (((double) lcsValues[0] / lcsValues[1]) * 100);
         } catch (IOException e) {

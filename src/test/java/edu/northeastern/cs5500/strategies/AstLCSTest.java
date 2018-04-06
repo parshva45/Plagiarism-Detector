@@ -102,16 +102,16 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
         assertEquals(83.352, similarityMeasure, 0.01);
     }
 
-//
-//    /**
-//     * test similarity measure by getting submission files
-//     */
-//    @Test
-//    public void calculateSimilarityShouldGiveCorrectResult(){
-//        double res = longestCommonSubSequence.calculateSimilarity(
-//                getFilePath("submission3.py"), getFilePath("submission4.py"));
-//        assertEquals(73.752, res, 0.01);
-//    }
+
+    /**
+     * test similarity measure by getting submission files
+     */
+    @Test
+    public void calculateSimilarityShouldGiveCorrectResult(){
+        double res = longestCommonSubSequence.calculateSimilarity(
+                getFilePath("submission3.py"), getFilePath("submission4.py"));
+        assertEquals(73.752, res, 0.01);
+    }
 
 }
 
