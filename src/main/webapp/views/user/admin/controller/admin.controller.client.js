@@ -65,14 +65,21 @@
             else{
                 var filePath1 = "";
                 var filePath2 = "";
+                console.log(JSON.stringify(vm.studentHomeWorks))
+                console.log(studentId1, studentId2)
                 for(var i=0; i<vm.studentHomeWorks.length; i++){
-                    if(vm.studentHomeWorks[i].userId === studentId1)
+                    if(vm.studentHomeWorks[i].userId == studentId1){
+                        console.log("hit")
                         filePath1 = vm.studentHomeWorks[i].filePath;
-                    else if(vm.studentHomeWorks[i].userId === studentId2)
+                    }
+                    else if(vm.studentHomeWorks[i].userId == studentId2){
+                        console.log("hit2")
                         filePath2 = vm.studentHomeWorks[i].filePath;
-                    if(filePath1 !== "" && filePath2 !== "")
+                    }
+                    if(filePath1 != "" && filePath2 != "")
                         break;
                 }
+                console.log(filePath1, filePath2)
                 $scope.calculateSimilarityMeasure(strategy, filePath1, filePath2);
             }
         }
