@@ -2,12 +2,11 @@ package edu.northeastern.cs5500.strategies.implementations;
 
 import edu.northeastern.cs5500.parsers.PythonToStringParser;
 import edu.northeastern.cs5500.strategies.SimilarityStrategy;
-
-import java.util.List;
-
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class LCS implements SimilarityStrategy {
