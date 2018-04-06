@@ -21,7 +21,7 @@
             UserService
                 .getCount()
                 .then(function (data) {
-                    $scope.getCount = data;
+                    $scope.countCalls = data;
                 });
         }
 
