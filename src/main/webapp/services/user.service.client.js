@@ -22,7 +22,7 @@
 
         function getCount() {
             return $http({
-                url: "/api/getCount",
+                url: "/api/comparison/getCount",
                 method: "GET"
             }).then(function (response) {
                 return response.data;
