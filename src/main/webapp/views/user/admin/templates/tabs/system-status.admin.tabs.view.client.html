@@ -5,6 +5,11 @@
     {{model.message}}
 </div>
 <div class="col s12 m12 l12">
+    <h3>Plagiarism Detection calls by you till now</h3>
+    <a ng-click="model.getCount()" class="btn green darken-5">Login</a>
+    {{countCalls}}
+    <br>
+    <br>
     <h3>System Status</h3>
     <pre>{{systemStatus | json}}</pre>
 </div>
