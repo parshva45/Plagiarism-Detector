@@ -19,5 +19,20 @@
     </form>
     <br/>
 
+    <h5>My Submissions</h5>
+
+    <div ng-if="model.submissions.length == 0">
+        No submissions
+    </div>
+
+    <div ng-repeat="submission in model.submissions" ng-if="model.submissions.length > 0">
+        <br>
+        Course: {{model.courseName}}
+        <br>
+        Assignment: {{model.homeWorkDescription}}
+        <br>
+        File: {{submission.fileName}}
+        <br>
+    </div>
 </div>
 

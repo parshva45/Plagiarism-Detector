@@ -45,6 +45,18 @@ public class FileComparisonController {
     }
 
     /**
+     * Rest Controller to list the different types of strategies present in the system
+     * @return List of String
+     */
+    @RequestMapping(path = "/getCount", method = RequestMethod.GET)
+    public int getCount(){
+        LOGGER.info("executing method getCount ");
+        int data = fileComparisonService.getCount();
+        LOGGER.info("executed method getCount successfully");
+        return data;
+    }
+
+    /**
      * Rest End point that takes in the path of two files and returns the simmilarity
      * between them based on given strategy.
      * @param strategy String
