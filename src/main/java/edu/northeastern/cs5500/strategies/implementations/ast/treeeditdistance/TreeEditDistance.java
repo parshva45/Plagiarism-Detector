@@ -7,10 +7,12 @@ import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.ParserFa
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 
+@Component
 public class TreeEditDistance implements SimilarityStrategy {
 
     private static final Logger LOGGER = LogManager.getLogger(LongestCommonSubSequence.class);
