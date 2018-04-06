@@ -2,7 +2,6 @@ package edu.northeastern.cs5500.strategies;
 
 import edu.northeastern.cs5500.Cs5500PlagiarismDetectorTeam207ApplicationTests;
 import edu.northeastern.cs5500.parsers.PythonToStringParser;
-import edu.northeastern.cs5500.strategies.implementations.LCS;
 import edu.northeastern.cs5500.strategies.implementations.ast.lcs.LongestCommonSubSequence;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +11,6 @@ import java.io.File;
 import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests {
 
