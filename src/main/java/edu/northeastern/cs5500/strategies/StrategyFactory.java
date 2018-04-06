@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.strategies;
 
+import edu.northeastern.cs5500.strategies.implementations.FileMetaData;
 import edu.northeastern.cs5500.strategies.implementations.LCS;
 import edu.northeastern.cs5500.strategies.implementations.LevenshteinDistance;
 import edu.northeastern.cs5500.strategies.implementations.ast.lcs.LongestCommonSubSequence;
@@ -18,6 +19,7 @@ public class StrategyFactory {
     private final LevenshteinDistance levenshteinDistance;
     private final LCS lcs;
     private final LongestCommonSubSequence longestCommonSubSequence;
+    private final FileMetaData fileMetaData;
 
     /**
      * Method to instantiate Strategy factory
@@ -25,10 +27,14 @@ public class StrategyFactory {
      * @param lcs LCS
      */
     @Autowired
-    public StrategyFactory(LevenshteinDistance levenshteinDistance, LCS lcs, LongestCommonSubSequence longestCommonSubSequence) {
+    public StrategyFactory(LevenshteinDistance levenshteinDistance,
+                           LCS lcs,
+                           LongestCommonSubSequence longestCommonSubSequence,
+                           FileMetaData fileMetaData) {
         this.levenshteinDistance = levenshteinDistance;
         this.lcs = lcs;
         this.longestCommonSubSequence = longestCommonSubSequence;
+        this.fileMetaData = fileMetaData;
     }
 
     /**
@@ -46,6 +52,9 @@ public class StrategyFactory {
         } else if (StrategyTypes.AST_LCS.toString().equals(strategy)) {
             LOGGER.info("Using given Strategy {}", StrategyTypes.AST_LCS.toString());
             return longestCommonSubSequence;
+        } else if(StrategyTypes.FILE_METADATA.toString().equals(strategy)){
+            LOGGER.info("Using given Strategy {}", StrategyTypes.FILE_METADATA.toString());
+            return fileMetaData;
         }
         LOGGER.info("Using default Strategy {}", StrategyTypes.LEVENSHTEIN_DISTANCE.toString());
         return levenshteinDistance;
