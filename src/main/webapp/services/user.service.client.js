@@ -12,6 +12,9 @@
             "updateUser": updateUser,
             "calculateSimilarityMeasure": calculateSimilarityMeasure,
             "listStrategies": listStrategies,
+            "getHomeWorksForStudent": getHomeWorksForStudent,
+            "getCourseName": getCourseName,
+            "getHomeWorkDescription": getHomeWorkDescription,
             "getSystemStatus": getSystemStatus
         };
         return api;
@@ -79,6 +82,33 @@
 
         function updateUser(userId, newUser) {
             return $http.put("/api/user/"+userId, newUser);
+        }
+
+        function getHomeWorksForStudent(userId){
+            return $http({
+                url: "/api/studentHomeWork/getHomeWorksForStudent/"+userId,
+                method: "GET"
+            }).then(function (response) {
+                return response.data;
+            });
+        }
+
+        function getCourseName(courseId){
+            return $http({
+                url: "/api/course/getCourseById/"+courseId,
+                method: "GET"
+            }).then(function (response) {
+                return response.data;
+            });
+        }
+
+        function getHomeWorkDescription(homeWorkId){
+            return $http({
+                url: "/api/homework/getHomeWorkById/"+homeWorkId,
+                method: "GET"
+            }).then(function (response) {
+                return response.data;
+            });
         }
 
     }
