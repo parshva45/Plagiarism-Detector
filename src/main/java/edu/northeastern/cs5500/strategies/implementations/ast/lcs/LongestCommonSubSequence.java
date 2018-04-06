@@ -1,8 +1,10 @@
 package edu.northeastern.cs5500.strategies.implementations.ast.lcs;
 
+import edu.northeastern.cs5500.parsers.PythonToStringParser;
 import edu.northeastern.cs5500.strategies.SimilarityStrategy;
 import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.AstBuilder;
 import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.ParserFacade;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author namratabilurkar
@@ -23,10 +26,15 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
 
     private final AstBuilder astBuilder;
 
+    private final PythonToStringParser pythonToStringParser;
+
+
     @Autowired
-    public LongestCommonSubSequence(ParserFacade parserFacade, AstBuilder astBuilder) {
+    public LongestCommonSubSequence(ParserFacade parserFacade, AstBuilder astBuilder,
+                                    PythonToStringParser pythonToStringParser) {
         this.parserFacade = parserFacade;
         this.astBuilder = astBuilder;
+        this.pythonToStringParser = pythonToStringParser;
     }
 
     private int[] lcsLength(String ast1, String ast2) {
@@ -64,7 +72,7 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
             ast1 = astBuilder.build(this.parserFacade.parse(new File(file1)));
             ast2 = astBuilder.build(this.parserFacade.parse(new File(file2)));
             int[] lcsValues = lcsLength(ast1, ast2);
-            return (((double)lcsValues[0] / lcsValues[1]) * 100);
+            return (((double) lcsValues[0] / lcsValues[1]) * 100);
         } catch (IOException e) {
             LOGGER.error("Failed to get Similarity for input file {} and {}", file1, file2);
         }

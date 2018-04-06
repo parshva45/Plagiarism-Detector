@@ -12,6 +12,10 @@ import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author namratabilurkar
+ */
+
 public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests {
 
     @Autowired
@@ -53,7 +57,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares1s2Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file1, file2);
-        assertEquals(36.057, similarityMeasure, 0.01);
+        assertEquals(36.101, similarityMeasure, 0.01);
     }
 
     /**
@@ -62,7 +66,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares1s3Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file1, file3);
-        assertEquals(43.71, similarityMeasure, 0.01);
+        assertEquals(76.288, similarityMeasure, 0.01);
     }
 
     /**
@@ -71,7 +75,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares1s4Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file1, file4);
-        assertEquals(20.43, similarityMeasure, 0.01);
+        assertEquals(60.172, similarityMeasure, 0.01);
     }
 
     /**
@@ -80,7 +84,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares2s3Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file2, file3);
-        assertEquals(57.92, similarityMeasure, 0.01);
+        assertEquals(93.479, similarityMeasure, 0.01);
     }
 
     /**
@@ -89,16 +93,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares2s4Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file2, file4);
-        assertEquals(31.29, similarityMeasure, 0.01);
-    }
-
-    /**
-     * test similarity measure between submission3.py and submission4.py
-     */
-    @Test
-    public void compares3s4Test() {
-        double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file3, file4);
-        assertEquals(24.86, similarityMeasure, 0.01);
+        assertEquals(83.352, similarityMeasure, 0.01);
     }
 
     /**
@@ -116,106 +111,8 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     public void calculateSimilarityShouldGiveCorrectResult(){
         double res = longestCommonSubSequence.calculateSimilarity(
                 getFilePath("submission3.py"), getFilePath("submission4.py"));
-        assertEquals(24.86, res, 0.01);
+        assertEquals(73.752, res, 0.01);
     }
-    
-    /**
-     * test similarity measure between a non-existant file
-     */
-    @Test
-    public void calculateSimilarityShouldGiveZero(){
-        double res = longestCommonSubSequence.calculateSimilarity(
-                getFilePath("submission5.py"), getFilePath("submission4.py"));
-        assertEquals(0.0, res, 0.01);
-    }
-    
-//    /**
-//     * test similarity measure between submission1.zip files and submission2.zip files
-//     */
-//    @Test
-//    public void compares1s2ZipTest() {
-//        double res = longestCommonSubSequence.calculateSimilarity(
-//                getFilePath("submission1.zip"), getFilePath("submission2.zip"));
-//        assertEquals(23.67, res, 0.01);
-//    }
-//
-//    /**
-//     * test similarity measure between submission1.zip files and submission3.zip files
-//     */
-//    @Test
-//    public void compares1s3ZipTest() {
-//        double res = longestCommonSubSequence.calculateSimilarity(
-//                getFilePath("submission1.zip"), getFilePath("submission3.zip"));
-//        assertEquals(35.09, res, 0.01);
-//    }
-//
-//    /**
-//     * test similarity measure between submission1.zip files and submission4.zip files
-//     */
-//    @Test
-//    public void compares1s4ZipTest() {
-//        double res = longestCommonSubSequence.calculateSimilarity(
-//                getFilePath("submission1.zip"), getFilePath("submission4.zip"));
-//        assertEquals(27.48, res, 0.01);
-//    }
-//
-//    /**
-//     * test similarity measure between submission2.zip files and submission3.zip files
-//     */
-//    @Test
-//    public void compares2s3ZipTest() {
-//        double res = longestCommonSubSequence.calculateSimilarity(
-//                getFilePath("submission2.zip"), getFilePath("submission3.zip"));
-//        assertEquals(17.47, res, 0.01);
-//    }
-//
-//    /**
-//     * test similarity measure between submission2.zip files and submission4.zip files
-//     */
-//    @Test
-//    public void compares2s4ZipTest() {
-//        double res = longestCommonSubSequence.calculateSimilarity(
-//                getFilePath("submission2.zip"), getFilePath("submission4.zip"));
-//        assertEquals(23.17, res, 0.01);
-//    }
-//
-//    /**
-//     * test similarity measure between submission3.zip files and submission4.zip files
-//     */
-//    @Test
-//    public void compares3s4ZipTest() {
-//        double res = longestCommonSubSequence.calculateSimilarity(
-//                getFilePath("submission3.zip"), getFilePath("submission4.zip"));
-//        assertEquals(25.06, res, 0.01);
-//    }
-//
-//    /**
-//     * test for non-existent zip file read
-//     */
-//    @Test
-//    public void exceptionZipTest() {
-//        pythonToStringParser.parseFiles("submission5.zip");
-//    }
-//
-//    /**
-//     * test for one .zip and another .py submission
-//     */
-//    @Test(expected = IllegalArgumentException.class)
-//    public void comparesOneZipOnePythonTest() {
-//        longestCommonSubSequence.calculateSimilarity(
-//                getFilePath("submission3.zip"), getFilePath("submission4.py"));
-//        fail();
-//    }
-//
-//    /**
-//     * test for one .py and another .zip submission
-//     */
-//    @Test(expected = IllegalArgumentException.class)
-//    public void comparesOnePythonOneZipTest() {
-//        longestCommonSubSequence.calculateSimilarity(
-//                getFilePath("submission3.py"), getFilePath("submission4.zip"));
-//        fail();
-//    }
 
 }
 

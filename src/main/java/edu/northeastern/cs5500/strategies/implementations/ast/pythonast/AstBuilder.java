@@ -16,6 +16,8 @@ public class AstBuilder {
     private boolean ignoringWrappers = true;
     // String storing the AST built for the file.
     private String astString = "";
+    int previous;
+    int length=0;
 
     /**
      *
@@ -32,11 +34,12 @@ public class AstBuilder {
      */
     public String build(RuleContext ctx) {
         explore(ctx, 0);
-        return astString;
+        //return astString;
+        return completeAstString(astString);
     }
 
     /**
-     *
+     * Method to explore the rulenames and build the AST
      * @param ctx is the rule context
      * @param indentation is the indentation that needs to be added while
      *                    building the AST
@@ -47,10 +50,20 @@ public class AstBuilder {
                 && ctx.getChild(0) instanceof ParserRuleContext;
         if (!toBeIgnored) {
             String ruleName = Python3Parser.ruleNames[ctx.getRuleIndex()];
-            for (int i = 0; i < indentation; i++) {
+            /*for (int i = 0; i < indentation; i++) {
                 this.astString += "  ";
             }
-            this.astString += ruleName + "\n";
+            this.astString += ruleName + "\n";*/
+
+            if (previous >= indentation) {
+                for (int i=0;i<=previous-indentation;i++) {
+                    this.astString += ")";
+                }
+            }
+            this.astString += "(" + ruleName;
+            previous = indentation;
+            length++;
+
         }
         for (int i=0;i<ctx.getChildCount();i++) {
             ParseTree element = ctx.getChild(i);
@@ -58,6 +71,20 @@ public class AstBuilder {
                 explore((RuleContext)element, indentation + (toBeIgnored ? 0 : 1));
             }
         }
+    }
+
+    private String completeAstString(String astInput) {
+        int temp = 0;
+        for (int i=0; i<astInput.length(); i++) {
+            if (astInput.charAt(i) == '(') {
+                temp++;
+            }
+        }
+        while (temp>0) {
+            astInput += ")";
+            temp--;
+        }
+        return astInput;
     }
 
 }
