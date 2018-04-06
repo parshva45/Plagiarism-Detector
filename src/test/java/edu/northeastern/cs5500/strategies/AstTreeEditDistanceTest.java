@@ -52,12 +52,12 @@ public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
         assertEquals(21.96, similarityMeasure, 0.01);
     }
 
-    /**
-     * test similarity measure between submission1.py and submission3.py
-     */
-    @Test
-    public void compares1s3Test() {
-        double similarityMeasure = treeEditDistance.calculateSimilarity(file1, file3);
-        assertEquals(43.25, similarityMeasure, 0.01);
-    }
+//    /**
+//     * test similarity measure between submission1.py and submission3.py
+//     */
+//    @Test
+//    public void compares1s3Test() {
+//        double similarityMeasure = treeEditDistance.calculateSimilarity(file1, file3);
+//        assertEquals(43.25, similarityMeasure, 0.01);
+//    }
 }
