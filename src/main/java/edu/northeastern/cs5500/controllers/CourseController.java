@@ -1,6 +1,7 @@
 package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.service.CourseService;
+import edu.northeastern.cs5500.utils.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
@@ -36,8 +37,8 @@ public class CourseController {
     @RequestMapping(path = "/getCourseById/{courseId}", method = RequestMethod.GET)
     public JSONObject getCourseById(@PathVariable int courseId){
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("result", courseService.getCourseById(courseId));
-        resultMap.put("response-code", "OK");
+        resultMap.put(Constants.RESULT, courseService.getCourseById(courseId));
+        resultMap.put(Constants.RESPONSE_CODE, "OK");
         LOGGER.info("sent JSONObject as API Response");
         return new JSONObject(resultMap);
     }

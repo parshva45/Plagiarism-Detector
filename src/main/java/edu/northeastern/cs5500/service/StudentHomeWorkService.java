@@ -92,7 +92,7 @@ public class StudentHomeWorkService {
     /**
      * Custom HTTP Exception class.
      */
-    public static class HttpStatusException extends RuntimeException {
+    static class HttpStatusException extends RuntimeException {
         private final HttpStatus status;
 
         /**

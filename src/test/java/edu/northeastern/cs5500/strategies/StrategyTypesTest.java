@@ -7,7 +7,7 @@ import static edu.northeastern.cs5500.strategies.StrategyTypes.*;
 import static org.junit.Assert.assertEquals;
 
 /**
- * @author Praveen Singh
+ * @author Praveen Singh, namratabilurkar
  */
 public class StrategyTypesTest {
 

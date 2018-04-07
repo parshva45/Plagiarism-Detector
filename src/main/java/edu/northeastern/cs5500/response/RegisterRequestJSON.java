@@ -59,7 +59,7 @@ public class RegisterRequestJSON {
     }
 
     public RegisterRequestJSON withFirstName(String firstName) {
-        this.setFirstName(email);
+        this.setFirstName(firstName);
         return this;
     }
 

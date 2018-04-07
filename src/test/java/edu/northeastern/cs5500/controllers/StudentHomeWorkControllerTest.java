@@ -37,7 +37,7 @@ public class StudentHomeWorkControllerTest {
         JSONObject jsonObject = studentHomeWorkController.getHomeWorksForStudent(1);
 
         Assert.assertEquals("OK", jsonObject.get("response-code"));
-        Assert.assertEquals(list, jsonObject.get("result"));
+        Assert.assertEquals(list, jsonObject.get("RESULT"));
     }
     
     @Test
@@ -56,7 +56,7 @@ public class StudentHomeWorkControllerTest {
         Mockito.verify(studentHomeWorkService, Mockito.times(1)).getListOfHomeWorksByCourseIdAndHomeWorkId(1,1);
 
         Assert.assertEquals("OK", jsonObject.get("response-code"));
-        Assert.assertEquals(list, jsonObject.get("result"));
+        Assert.assertEquals(list, jsonObject.get("RESULT"));
     }
 
     @Test
@@ -69,7 +69,7 @@ public class StudentHomeWorkControllerTest {
         JSONObject jsonObject = studentHomeWorkController.submitHomeWork("praveen", 1, 1, 1);
 
         Assert.assertEquals("OK", jsonObject.get("response-code"));
-        Assert.assertEquals(studentHomeWork, jsonObject.get("result"));
+        Assert.assertEquals(studentHomeWork, jsonObject.get("RESULT"));
     }
 
 }
