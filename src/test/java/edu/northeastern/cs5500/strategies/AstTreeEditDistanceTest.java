@@ -1,7 +1,7 @@
 package edu.northeastern.cs5500.strategies;
 
 import edu.northeastern.cs5500.Cs5500PlagiarismDetectorTeam207ApplicationTests;
-import edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.TreeEditDistance;
+import edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.AstTreeEditDistance;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,9 @@ import static org.junit.Assert.assertEquals;
 public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests {
 
     @Autowired
-    TreeEditDistance treeEditDistance;
-
+    AstTreeEditDistance astTreeEditDistance;
+//    TreeEditDistance treeEditDistance;
+//
     private String file1;
     private String file2;
     private String file3;
@@ -48,10 +49,10 @@ public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
      */
     @Test
     public void compares1s2Test() {
-        double similarityMeasure = treeEditDistance.calculateSimilarity(file1, file2);
+        double similarityMeasure = astTreeEditDistance.calculateSimilarity(file1, file2);
         assertEquals(21.96, similarityMeasure, 0.01);
     }
-
+//
 //    /**
 //     * test similarity measure between submission1.py and submission3.py
 //     */
@@ -60,4 +61,6 @@ public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 //        double similarityMeasure = treeEditDistance.calculateSimilarity(file1, file3);
 //        assertEquals(43.25, similarityMeasure, 0.01);
 //    }
+
+
 }

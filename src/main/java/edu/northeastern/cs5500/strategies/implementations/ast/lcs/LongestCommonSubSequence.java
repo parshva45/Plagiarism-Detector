@@ -22,12 +22,16 @@ import java.util.List;
 @Component
 @Scope("prototype")
 public class LongestCommonSubSequence implements SimilarityStrategy{
+
     private static final Logger LOGGER = LogManager.getLogger(LongestCommonSubSequence.class);
 
-    private final ParserFacade parserFacade;
+    @Autowired
+    private ParserFacade parserFacade;
 
-    private final AstBuilder astBuilder;
+    @Autowired
+    private AstBuilder astBuilder;
 
+    @Autowired
     private final PythonToStringParser pythonToStringParser;
 
 

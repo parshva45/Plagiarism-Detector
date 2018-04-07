@@ -4,6 +4,7 @@ package edu.northeastern.cs5500.strategies.implementations.ast.pythonast;
  * @author namratabilurkar
  */
 
+import edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Python3Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -20,6 +21,7 @@ public class AstBuilder {
      */
     private StringBuilder astString = new StringBuilder();
     private int previous;
+    private int length=0;
 
     /**
      *
@@ -50,13 +52,16 @@ public class AstBuilder {
                 && ctx.getChildCount() == 1
                 && ctx.getChild(0) instanceof ParserRuleContext;
         if (!toBeIgnored) {
+            String ruleName = Python3Parser.ruleNames[ctx.getRuleIndex()];
             if (previous >= indentation) {
                 for (int i=0;i<=previous-indentation;i++) {
                     astString.append(")");
                 }
             }
             astString.append("(");
+            astString.append(ruleName);
             previous = indentation;
+            length++;
 
         }
         for (int i=0;i<ctx.getChildCount();i++) {
