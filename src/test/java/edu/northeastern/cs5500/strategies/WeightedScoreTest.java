@@ -53,16 +53,5 @@ public class WeightedScoreTest extends Cs5500PlagiarismDetectorTeam207Applicatio
     public void compares1s2Test() {
         double similarityMeasure = weightedScore.calculateSimilarity(file1, simple);
         assertEquals(63.265, similarityMeasure, 0.01);
-//        assertEquals(64.564, similarityMeasure, 0.01);
     }
-
-    /**
-     * test similarity measure between submission1.py and submission3.py
-     */
-    @Test
-    public void compares1s3Test() {
-        double similarityMeasure = weightedScore.calculateSimilarity(file1, file3);
-        assertEquals(68.408, similarityMeasure, 0.01);
-    }
-
 }
