@@ -33,10 +33,10 @@ public class PythonToStringParser {
     	/**
     	 * Replacing all %20 by spaces for compatibility with Windows file paths
     	 */
-    	filePath = filePath.replaceAll("%20", " ");
-        LOGGER.info("Reading file {}", filePath);
+    	String file = filePath.replaceAll("%20", " ");
+        LOGGER.info("Reading file {}", file);
         StringBuilder contentBuilder = new StringBuilder();
-        try (FileReader fileReader = new FileReader(filePath);
+        try (FileReader fileReader = new FileReader(file);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -60,7 +60,7 @@ public class PythonToStringParser {
     	 */
     	filePath = filePath.replaceAll("%20", " ");
         LOGGER.info("Reading file {}", filePath);
-        List<String> stringFiles = new ArrayList<String>();
+        List<String> stringFiles = new ArrayList<>();
         try (ZipFile fis = new ZipFile(filePath)) {
             for (Enumeration e = fis.entries(); e.hasMoreElements(); ) {
                 ZipEntry entry = (ZipEntry) e.nextElement();

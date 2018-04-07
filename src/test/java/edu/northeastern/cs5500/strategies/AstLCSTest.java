@@ -4,6 +4,7 @@ import edu.northeastern.cs5500.Cs5500PlagiarismDetectorTeam207ApplicationTests;
 import edu.northeastern.cs5500.parsers.PythonToStringParser;
 import edu.northeastern.cs5500.strategies.implementations.ast.lcs.LongestCommonSubSequence;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares1s2Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file1, file2);
-        assertEquals(35.249, similarityMeasure, 0.01);
+        assertEquals(53.882, similarityMeasure, 0.01);
     }
 
     @After
@@ -72,7 +73,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares1s3Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file1, file3);
-        assertEquals(44.951, similarityMeasure, 0.01);
+        assertEquals(49.176, similarityMeasure, 0.01);
     }
 
     /**
@@ -81,7 +82,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares1s4Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file1, file4);
-        assertEquals(19.686, similarityMeasure, 0.01);
+        assertEquals(76.306, similarityMeasure, 0.01);
     }
 
     /**
@@ -90,7 +91,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares2s3Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file2, file3);
-        assertEquals(59.928, similarityMeasure, 0.01);
+        assertEquals(49.659, similarityMeasure, 0.01);
     }
 
     /**
@@ -99,7 +100,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares2s4Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file2, file4);
-        assertEquals(30.849, similarityMeasure, 0.01);
+        assertEquals(61.021, similarityMeasure, 0.01);
     }
 
 
@@ -110,7 +111,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     public void calculateSimilarityShouldGiveCorrectResult(){
         double res = longestCommonSubSequence.calculateSimilarity(
                 getFilePath("submission3.py"), getFilePath("submission4.py"));
-        assertEquals(22.802, res, 0.01);
+        assertEquals(73.066, res, 0.01);
     }
 
 }

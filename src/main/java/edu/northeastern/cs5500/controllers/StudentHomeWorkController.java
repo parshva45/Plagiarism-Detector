@@ -1,6 +1,7 @@
 package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.service.StudentHomeWorkService;
+import edu.northeastern.cs5500.utils.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
@@ -34,8 +35,8 @@ public class StudentHomeWorkController {
     public JSONObject getHomeWorksForStudent(@PathVariable int studentId){
         LOGGER.info("getHomeWorksForStudent API called with studentId={}", studentId);
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("result", studentHomeWorkService.getListOfHomeWorksByStudentId(studentId));
-        resultMap.put("response-code", "OK");
+        resultMap.put(Constants.RESULT, studentHomeWorkService.getListOfHomeWorksByStudentId(studentId));
+        resultMap.put(Constants.RESPONSE_CODE, "OK");
         return new JSONObject(resultMap);
     }
     
@@ -50,8 +51,8 @@ public class StudentHomeWorkController {
 		   												  @PathVariable("homeWorkId") int homeWorkId){
        LOGGER.info("getStudentHomeWorksForCourseHomeWork API called with courseId={} and homeWorkId={}", courseId, homeWorkId);
        Map<String, Object> resultMap = new HashMap<>();
-       resultMap.put("result", studentHomeWorkService.getListOfHomeWorksByCourseIdAndHomeWorkId(courseId, homeWorkId));
-       resultMap.put("response-code", "OK");
+       resultMap.put(Constants.RESULT, studentHomeWorkService.getListOfHomeWorksByCourseIdAndHomeWorkId(courseId, homeWorkId));
+       resultMap.put(Constants.RESPONSE_CODE, "OK");
        return new JSONObject(resultMap);
    }
    
@@ -64,8 +65,8 @@ public class StudentHomeWorkController {
         LOGGER.info("getHomeWorksForStudent API called with studentId={} " +
                 "homeworkId={} and courseId={}", userId, hwId, courseId);
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("result", studentHomeWorkService.submitHomeWork(userId, courseId, hwId, uploadFile));
-        resultMap.put("response-code", "OK");
+        resultMap.put(Constants.RESULT, studentHomeWorkService.submitHomeWork(userId, courseId, hwId, uploadFile));
+        resultMap.put(Constants.RESPONSE_CODE, "OK");
         return new JSONObject(resultMap);
     }
 
