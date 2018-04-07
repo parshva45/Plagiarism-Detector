@@ -54,24 +54,25 @@ public class PythonToStringParser {
      * @param filePath Path of Zip File in string.
      * @return Returns the List of files' contents as a String List.
      */
-    public List<String> parseFiles(String filePath) {
+    public List<StringBuilder> parseFiles(String filePath) {
     	/**
     	 * Replacing all %20 by spaces for compatibility with Windows file paths
     	 */
     	String file = filePath.replaceAll("%20", " ");
         LOGGER.info("Reading file {}", file);
-        List<String> stringFiles = new ArrayList<>();
+        List<StringBuilder> stringBuilderFiles = new ArrayList<>();
         try (ZipFile fis = new ZipFile(file)) {
             for (Enumeration e = fis.entries(); e.hasMoreElements(); ) {
                 ZipEntry entry = (ZipEntry) e.nextElement();
                 InputStream in = fis.getInputStream(entry);
-                String str = IOUtils.toString(in).trim();
-                stringFiles.add(str);
+                StringBuilder contentBuilder = new StringBuilder();
+                contentBuilder.append(IOUtils.toString(in).trim());
+                stringBuilderFiles.add(contentBuilder);
             }
         }
         catch (IOException ex) {
             LOGGER.error("Exception in reading files : {}", ex.getMessage());
         }
-        return stringFiles;
+        return stringBuilderFiles;
     }
 }

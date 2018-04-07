@@ -29,7 +29,7 @@ public class LevenshteinDistance implements SimilarityStrategy {
      * @param compTwo String
      * @return edit distance between strings compOne and compTwo using Levenshtein distance double
      */
-    public int getDistance(String compOne, String compTwo) {
+    public int getDistance(StringBuilder compOne, StringBuilder compTwo) {
         int[][] matrix = new int[compOne.length() + 1][compTwo.length() + 1];
         for (int i = 0; i <= compOne.length(); i++) {
             for (int j = 0; j <= compTwo.length(); j++) {
@@ -77,7 +77,7 @@ public class LevenshteinDistance implements SimilarityStrategy {
      * @param s2 String
      * @return longer of the two strings s1 and s2 String
      */
-    public String longer(String s1, String s2) {
+    public StringBuilder longer(StringBuilder s1, StringBuilder s2) {
     	return s1.length() >= s2.length() ? s1 : s2;
     }
 
@@ -93,24 +93,26 @@ public class LevenshteinDistance implements SimilarityStrategy {
     public double calculateSimilarity(String file1, String file2){
         String ext1 = FilenameUtils.getExtension(file1);
         String ext2 = FilenameUtils.getExtension(file2);
+        StringBuilder contentBuilder1 = new StringBuilder();
+        StringBuilder contentBuilder2 = new StringBuilder();
         /**
          * If single file comparison between two .py files is expected 
          */
         if(ext1.equals("py") && ext2.equals("py")){
-            String fileContentFile1 = pythonToStringParser.readFile(file1).trim();
-            String fileContentFile2 = pythonToStringParser.readFile(file2).trim();
-            int distance = getDistance(fileContentFile1, fileContentFile2);
-            return (1-(double)distance / longer(fileContentFile1, fileContentFile2).length()) * 100;
+        	contentBuilder1.append(pythonToStringParser.readFile(file1).trim());
+        	contentBuilder2.append(pythonToStringParser.readFile(file2).trim());
+            int distance = getDistance(contentBuilder1, contentBuilder2);
+            return (1-(double)distance / longer(contentBuilder1, contentBuilder2).length()) * 100;
         }
         /**
          * If multiple file comparisons across two .zip files is expected 
          */
         else if(ext1.equals("zip") && ext2.equals("zip")){
-            List<String> firstSubmissionFiles = pythonToStringParser.parseFiles(file1);
-            List<String> secondSubmissionFiles = pythonToStringParser.parseFiles(file2);
+            List<StringBuilder> firstSubmissionFiles = pythonToStringParser.parseFiles(file1);
+            List<StringBuilder> secondSubmissionFiles = pythonToStringParser.parseFiles(file2);
             double overallSimilaritySum = 0;
-            for (String s1 : firstSubmissionFiles) {
-                for (String s2 : secondSubmissionFiles) {
+            for (StringBuilder s1 : firstSubmissionFiles) {
+                for (StringBuilder s2 : secondSubmissionFiles) {
                     int distance = getDistance(s1, s2);
                     overallSimilaritySum += (1-(double)distance / longer(s1, s2).length()) * 100;
                 }

@@ -32,24 +32,26 @@ public class LCS implements SimilarityStrategy {
     public double calculateSimilarity(String file1, String file2){
     	String ext1 = FilenameUtils.getExtension(file1);
         String ext2 = FilenameUtils.getExtension(file2);
+        StringBuilder contentBuilder1 = new StringBuilder();
+        StringBuilder contentBuilder2 = new StringBuilder();
         /**
          * If single file comparison between two .py files is expected 
          */
         if(ext1.equals("py") && ext2.equals("py")){
-	        String fileContentFile1 = pythonToStringParser.readFile(file1).trim();
-	        String fileContentFile2 = pythonToStringParser.readFile(file2).trim();
-	        int distance = getDistance(fileContentFile1, fileContentFile2);
-	        return distance/(double)longerLength(fileContentFile1,fileContentFile2)*100;
+        	contentBuilder1.append(pythonToStringParser.readFile(file1).trim());
+        	contentBuilder2.append(pythonToStringParser.readFile(file2).trim());
+	        int distance = getDistance(contentBuilder1, contentBuilder2);
+	        return distance/(double)longerLength(contentBuilder1,contentBuilder2)*100;
         }
         /**
          * If multiple file comparisons across two .zip files is expected 
          */
         else if(ext1.equals("zip") && ext2.equals("zip")){
-            List<String> firstSubmissionFiles = pythonToStringParser.parseFiles(file1);
-            List<String> secondSubmissionFiles = pythonToStringParser.parseFiles(file2);
+            List<StringBuilder> firstSubmissionFiles = pythonToStringParser.parseFiles(file1);
+            List<StringBuilder> secondSubmissionFiles = pythonToStringParser.parseFiles(file2);
             double overallSimilaritySum = 0;
-            for (String s1 : firstSubmissionFiles) {
-                for (String s2 : secondSubmissionFiles) {
+            for (StringBuilder s1 : firstSubmissionFiles) {
+                for (StringBuilder s2 : secondSubmissionFiles) {
                     int distance = getDistance(s1, s2);
                     overallSimilaritySum += distance/(double)longerLength(s1, s2)*100;
                 }
@@ -66,7 +68,7 @@ public class LCS implements SimilarityStrategy {
      * @param file2 String
      * @return distance between file1 and file2 using LCS strategy int
      */
-    int getDistance(String s1, String s2) {
+    int getDistance(StringBuilder s1, StringBuilder s2) {
     	int m = s1.length();
     	int n = s2.length();
     	int[][] l = new int[m+1][n+1];
@@ -88,11 +90,11 @@ public class LCS implements SimilarityStrategy {
     
     /**
      * Method to return longer string
-     * @param s1 String
-     * @param s2 String
+     * @param s1 StringBuilder
+     * @param s2 StringBuilder
      * @return length of the longer string among s1 and s2 String
      */
-    private int longerLength(String s1, String s2) {
+    private int longerLength(StringBuilder s1, StringBuilder s2) {
     	return s1.length() >= s2.length() ? s1.length() : s2.length();
     }
 

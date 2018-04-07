@@ -21,20 +21,20 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 	@Autowired
 	LevenshteinDistance levenshteinDistanceObj;
 
-	private String s1;
-	private String s2;
-	private String s3;
-	private String s4;
+	private StringBuilder s1 = new StringBuilder();
+	private StringBuilder s2 = new StringBuilder();
+	private StringBuilder s3 = new StringBuilder();
+	private StringBuilder s4 = new StringBuilder();
 
 	@Before
 	/**
 	 * setup submission files
 	 */
 	public void setUp() {
-		s1 = pythonToStringParser.readFile(getFilePath("submission1.py")).trim();
-		s2 = pythonToStringParser.readFile(getFilePath("submission2.py")).trim();
-		s3 = pythonToStringParser.readFile(getFilePath("submission3.py")).trim();
-		s4 = pythonToStringParser.readFile(getFilePath("submission4.py")).trim();
+		s1.append(pythonToStringParser.readFile(getFilePath("submission1.py")).trim());
+		s2.append(pythonToStringParser.readFile(getFilePath("submission2.py")).trim());
+		s3.append(pythonToStringParser.readFile(getFilePath("submission3.py")).trim());
+		s4.append(pythonToStringParser.readFile(getFilePath("submission4.py")).trim());
 	}
 
 	/**
