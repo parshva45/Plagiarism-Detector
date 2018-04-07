@@ -12,6 +12,9 @@ import java.util.Objects;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * @author namratabilurkar
+ */
 public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests {
 
     @Autowired
