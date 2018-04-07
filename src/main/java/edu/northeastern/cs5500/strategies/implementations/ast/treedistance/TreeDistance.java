@@ -82,7 +82,7 @@ public final class TreeDistance {
     private static void leftmostLeafDescendantsRec(TreeNode current, TreeNode[] ref, List<TreeNode> chain,
                                                    Map<TreeNode, Integer> postorderIDs) {
 
-        if (current.getChildren().size() == 0) {
+        if (current.getChildren().isEmpty()) {
             // leftmost descendant of a leaf is the leaf itself
             ref[postorderIDs.get(current)] = current;
 
@@ -140,7 +140,7 @@ public final class TreeDistance {
      * @param chain   the current path in the tree
      */
     private static void keyrootsRec(TreeNode current, List<TreeNode> ref, List<TreeNode> chain) {
-        if (current.getChildren().size() == 0) {
+        if (current.getChildren().isEmpty()) {
 
             if (!chain.isEmpty()) {
                 ref.add(chain.get(0));
@@ -441,6 +441,7 @@ public final class TreeDistance {
      * @return the transformed tree
      */
     public static EditableTreeNode transformTree(EditableTreeNode root, List<TreeTransformation> transformations) {
+        EditableTreeNode rootNew = null;
         for (TreeTransformation t : transformations) {
             switch (t.getOperation()) {
                 case OP_INSERT_NODE:
@@ -450,7 +451,7 @@ public final class TreeDistance {
                         EditableTreeNode inserted = (EditableTreeNode) t.getFirstNode();
                         inserted.addChildAt(root, 0);
                         root.setParent(inserted);
-                        root = inserted;
+                        rootNew = inserted;
                     } else {
                         // insert a child and make demoted siblings its new children
                         EditableTreeNode parent = (EditableTreeNode) t.getSecondNode();
@@ -500,7 +501,7 @@ public final class TreeDistance {
             }
         }
 
-        return root;
+        return rootNew;
     }
 
 }
