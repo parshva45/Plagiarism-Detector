@@ -2,6 +2,7 @@ package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.model.Course;
 import edu.northeastern.cs5500.service.CourseService;
+import edu.northeastern.cs5500.utils.Constants;
 import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,9 +32,9 @@ public class CourseControllerTest {
         JSONObject jsonObject = courseController.getCourseById(1);
 
         Mockito.verify(courseService, Mockito.times(1)).getCourseById(1);
-        Assert.assertNotNull(jsonObject.get("response-code"));
-        Assert.assertEquals("OK", jsonObject.get("response-code"));
-        Assert.assertEquals(course, jsonObject.get("RESULT"));
+        Assert.assertNotNull(jsonObject.get(Constants.RESPONSE_CODE));
+        Assert.assertEquals("OK", jsonObject.get(Constants.RESPONSE_CODE));
+        Assert.assertEquals(course, jsonObject.get(Constants.RESULT));
     }
 
 }
