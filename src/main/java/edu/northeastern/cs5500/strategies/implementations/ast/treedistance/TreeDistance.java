@@ -82,7 +82,7 @@ public final class TreeDistance {
     private static void leftmostLeafDescendantsRec(TreeNode current, TreeNode[] ref, List<TreeNode> chain,
                                                    Map<TreeNode, Integer> postorderIDs) {
 
-        if (current.getChildren().size() == 0) {
+        if (current.getChildren().isEmpty()) {
             // leftmost descendant of a leaf is the leaf itself
             ref[postorderIDs.get(current)] = current;
 
@@ -140,7 +140,7 @@ public final class TreeDistance {
      * @param chain   the current path in the tree
      */
     private static void keyrootsRec(TreeNode current, List<TreeNode> ref, List<TreeNode> chain) {
-        if (current.getChildren().size() == 0) {
+        if (current.getChildren().isEmpty()) {
 
             if (!chain.isEmpty()) {
                 ref.add(chain.get(0));
