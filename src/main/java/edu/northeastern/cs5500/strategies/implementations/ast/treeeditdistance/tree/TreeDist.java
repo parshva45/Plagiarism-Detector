@@ -21,7 +21,7 @@ public abstract class TreeDist {
      * tree t1 to tree t2.
      * 
      * If {@link #isNormalized()} is true, the distance is normalized. 
-     * If there is no meaningful normalization for a distance, the result 
+     * If there is no meaningful normalization for a distance, the RESULT
      * is independant of {@link #isNormalized()}. 
      *
      * @param t1 first tree

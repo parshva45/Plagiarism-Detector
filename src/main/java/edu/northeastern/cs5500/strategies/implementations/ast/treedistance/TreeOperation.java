@@ -1,4 +1,4 @@
-package edu.northeastern.cs5500.strategies.implementations.ast.treeDistance;
+package edu.northeastern.cs5500.strategies.implementations.ast.treedistance;
 
 /**
  * Possible tree operations which transform one tree to another:

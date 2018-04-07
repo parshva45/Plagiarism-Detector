@@ -1,4 +1,4 @@
-package edu.northeastern.cs5500.strategies.implementations.ast.treeDistance;
+package edu.northeastern.cs5500.strategies.implementations.ast.treedistance;
 
 import java.util.*;
 
@@ -48,7 +48,7 @@ public final class TreeDistance {
 
     /**
      * Returns an array of leftmost leaf descendants for every node in the tree given by <code>root</code>. The
-     * indexing of the returned array follows postorder IDs given in <code>postorderIDs</code>; <code>result[0]</code>
+     * indexing of the returned array follows postorder IDs given in <code>postorderIDs</code>; <code>RESULT[0]</code>
      * returns the leftmost leaf descendant of node with postorder ID zero.
      * <br><br>
      * A leftmost leaf descendant of a node is found by following the leftmost branch from the node to a leaf.
@@ -134,8 +134,7 @@ public final class TreeDistance {
     private static void keyrootsRec(TreeNode current, List<TreeNode> ref, List<TreeNode> chain) {
         if (current.getChildren().size() == 0) {
 
-            if (chain.size() > 0) {
-                // the first node in the chain is the keyroot node
+            if (!chain.isEmpty()) {
                 ref.add(chain.get(0));
             } else
                 ref.add(current);
@@ -202,34 +201,34 @@ public final class TreeDistance {
             throw new IllegalArgumentException("Both tree structures must not be null");
 
         // prepare postorder numbering
-        ReversibleIdentityMap<TreeNode, Integer> postorder1 = getPostorderIdentifiers(t1),
-                postorder2 = getPostorderIdentifiers(t2);
+        ReversibleIdentityMap<TreeNode, Integer> postOrder1 = getPostorderIdentifiers(t1);
+        ReversibleIdentityMap<TreeNode, Integer> postOrder2 = getPostorderIdentifiers(t2);
 
         // prepare leftmost leaf descendants
-        TreeNode[] lmld1 = leftmostLeafDescendants(t1, postorder1),
-                lmld2 = leftmostLeafDescendants(t2, postorder2);
+        TreeNode[] lmld1 = leftmostLeafDescendants(t1, postOrder1);
+        TreeNode[] lmld2 = leftmostLeafDescendants(t2, postOrder2);
 
         // prepare keyroots
-        List<TreeNode> keyRoots1 = getKeyroots(t1, postorder1),
-                keyRoots2 = getKeyroots(t2, postorder2);
+        List<TreeNode> keyRoots1 = getKeyroots(t1, postOrder1);
+        List<TreeNode> keyRoots2 = getKeyroots(t2, postOrder2);
 
         // prepare tree distance table and transformation list
-        ForestTrail[][] treeDistance = new ForestTrail[postorder2.get(t2) + 1][postorder1.get(t1) + 1];
+        ForestTrail[][] treeDistance = new ForestTrail[postOrder2.get(t2) + 1][postOrder1.get(t1) + 1];
 
         // calculate tree distance
         for (TreeNode keyRoot1 : keyRoots1) {
             for (TreeNode keyRoot2 : keyRoots2) {
-                forestDistance(keyRoot1, keyRoot2, lmld1, lmld2, postorder1, postorder2, treeDistance);
+                forestDistance(keyRoot1, keyRoot2, lmld1, lmld2, postOrder1, postOrder2, treeDistance);
             }
         }
 
         if (transformations != null) {
-            applyForestTrails(treeDistance[postorder2.get(t2)][postorder1.get(t1)], transformations, new
+            applyForestTrails(treeDistance[postOrder2.get(t2)][postOrder1.get(t1)], transformations, new
                     IdentityHashMap<>());
             Collections.sort(transformations);
         }
 
-        return treeDistance[postorder2.get(t2)][postorder1.get(t1)].getTotalCost();
+        return treeDistance[postOrder2.get(t2)][postOrder1.get(t1)].getTotalCost();
     }
 
     /**
@@ -311,9 +310,11 @@ public final class TreeDistance {
 
         private int cost;
 
-        private ForestTrail nextState, treeState;
+        private ForestTrail nextState;
+        private ForestTrail treeState;
 
-        private TreeNode first, second;
+        private TreeNode first;
+        private TreeNode second;
 
         /**
          * A constructor which initializes the final forest trail state - state where both trees are empty.
@@ -352,11 +353,11 @@ public final class TreeDistance {
                                        ReversibleIdentityMap<TreeNode, Integer> postorder1,
                                        ReversibleIdentityMap<TreeNode, Integer> postorder2, ForestTrail[][] treeDist) {
 
-        int kr1 = postorder1.get(keyRoot1),
-                kr2 = postorder2.get(keyRoot2);
+        int kr1 = postorder1.get(keyRoot1);
+        int kr2 = postorder2.get(keyRoot2);
 
-        int lm1 = postorder1.get(lmld1[kr1]),
-                lm2 = postorder2.get(lmld2[kr2]);
+        int lm1 = postorder1.get(lmld1[kr1]);
+        int lm2 = postorder2.get(lmld2[kr2]);
 
         int bound1 = kr1 - lm1 + 2;
         int bound2 = kr2 - lm2 + 2;
@@ -484,8 +485,8 @@ public final class TreeDistance {
                     break;
 
                 default:
-                    EditableTreeNode first = (EditableTreeNode) t.getFirstNode(),
-                            second = (EditableTreeNode) t.getSecondNode();
+                    EditableTreeNode first = (EditableTreeNode) t.getFirstNode();
+                    EditableTreeNode second = (EditableTreeNode) t.getSecondNode();
 
                     first.renameNodeTo(second);
             }

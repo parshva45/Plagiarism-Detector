@@ -99,7 +99,7 @@
         </dependency>
 
 		<!-- Swagger UI -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
 			<version>2.8.0</version>
@@ -108,7 +108,7 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.8.0</version>
-		</dependency> -->
+		</dependency>
 
 		<!-- Add Log4j2 Dependency -->
 		<dependency>

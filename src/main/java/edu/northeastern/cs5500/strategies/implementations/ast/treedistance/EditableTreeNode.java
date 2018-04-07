@@ -1,4 +1,4 @@
-package edu.northeastern.cs5500.strategies.implementations.ast.treeDistance;
+package edu.northeastern.cs5500.strategies.implementations.ast.treedistance;
 
 /**
  * A node belonging to a tree structure, which permits transformations, such as removing/adding children

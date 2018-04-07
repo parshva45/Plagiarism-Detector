@@ -1,4 +1,4 @@
-package edu.northeastern.cs5500.strategies.implementations.ast.treeDistance;
+package edu.northeastern.cs5500.strategies.implementations.ast.treedistance;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +12,8 @@ public class TreeTransformation implements Comparable<TreeTransformation> {
 
     private TreeOperation operation;
 
-    // nodes involved in operation
-    private TreeNode firstNode, secondNode;
+    private TreeNode firstNode;
+    private TreeNode secondNode;
 
     private int position;
 
@@ -21,7 +21,6 @@ public class TreeTransformation implements Comparable<TreeTransformation> {
 
     private int childrenCount;
 
-    // the cost of performing this operation
     private int cost;
 
     public TreeTransformation(TreeOperation operation, int cost, TreeNode firstNode) {

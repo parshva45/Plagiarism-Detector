@@ -47,8 +47,8 @@ public class HomeWorkControllerTest {
 
         Mockito.verify(homeWorkService, Mockito.times(1)).getListOfHomeWorkByCourseNo(1);
         Assert.assertNotNull(jsonObject);
-        Assert.assertNotNull(jsonObject.get("result"));
-        List<HomeWork> homeWorkList = (List<HomeWork>) jsonObject.get("result");
+        Assert.assertNotNull(jsonObject.get("RESULT"));
+        List<HomeWork> homeWorkList = (List<HomeWork>) jsonObject.get("RESULT");
 
         HomeWork homeWork1 = homeWorkList.get(0);
 
@@ -68,8 +68,8 @@ public class HomeWorkControllerTest {
 
         Mockito.verify(homeWorkService, Mockito.times(1)).getHomeWorkById( 1);
         Assert.assertNotNull(jsonObject);
-        Assert.assertNotNull(jsonObject.get("result"));
-        List<HomeWork> homeWorkList = (List<HomeWork>) jsonObject.get("result");
+        Assert.assertNotNull(jsonObject.get("RESULT"));
+        List<HomeWork> homeWorkList = (List<HomeWork>) jsonObject.get("RESULT");
         HomeWork homeWork1 = homeWorkList.get(0);
         Assert.assertEquals(homeWork, homeWork1);
     }
@@ -82,8 +82,8 @@ public class HomeWorkControllerTest {
 
         Mockito.verify(homeWorkService, Mockito.times(1)).getHomeWorkByCourseIdAndHomeWorkNumber(1, 1);
         Assert.assertNotNull(jsonObject);
-        Assert.assertNotNull(jsonObject.get("result"));
-        List<HomeWork> homeWorkList = (List<HomeWork>) jsonObject.get("result");
+        Assert.assertNotNull(jsonObject.get("RESULT"));
+        List<HomeWork> homeWorkList = (List<HomeWork>) jsonObject.get("RESULT");
 
         HomeWork homeWork1 = homeWorkList.get(0);
 

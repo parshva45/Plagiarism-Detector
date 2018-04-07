@@ -2,11 +2,10 @@ package edu.northeastern.cs5500.strategies;
 
 import junit.framework.TestCase;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import edu.northeastern.cs5500.strategies.implementations.ast.treeDistance.*;
+import edu.northeastern.cs5500.strategies.implementations.ast.treedistance.*;
 
 public class TreeDistanceTest extends TestCase {
 

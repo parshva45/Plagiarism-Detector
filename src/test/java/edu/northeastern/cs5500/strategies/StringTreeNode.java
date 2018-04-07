@@ -1,8 +1,7 @@
 package edu.northeastern.cs5500.strategies;
 
-import edu.northeastern.cs5500.strategies.implementations.ast.treeDistance.*;
+import edu.northeastern.cs5500.strategies.implementations.ast.treedistance.*;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 

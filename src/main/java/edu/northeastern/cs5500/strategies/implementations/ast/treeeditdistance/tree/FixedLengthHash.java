@@ -45,7 +45,7 @@ public abstract class FixedLengthHash {
 	 * Hash two strings to one hash value. Use this to hash 
 	 * a node represented as a (label,value) pair to a hash value.
 	 * 
-	 * The node value can be null. In this case, the result
+	 * The node value can be null. In this case, the RESULT
 	 * is equivalent {to @link #h(String)}.
 	 * 
 	 * @param s1 string label of a node; can not be "null"

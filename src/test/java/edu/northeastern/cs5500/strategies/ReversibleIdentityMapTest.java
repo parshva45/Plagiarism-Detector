@@ -1,7 +1,7 @@
 package edu.northeastern.cs5500.strategies;
 
 import junit.framework.TestCase;
-import edu.northeastern.cs5500.strategies.implementations.ast.treeDistance.*;
+import edu.northeastern.cs5500.strategies.implementations.ast.treedistance.*;
 
 public class ReversibleIdentityMapTest extends TestCase {
 

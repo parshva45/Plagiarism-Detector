@@ -33,7 +33,7 @@ public class CourseControllerTest {
         Mockito.verify(courseService, Mockito.times(1)).getCourseById(1);
         Assert.assertNotNull(jsonObject.get("response-code"));
         Assert.assertEquals("OK", jsonObject.get("response-code"));
-        Assert.assertEquals(course, jsonObject.get("result"));
+        Assert.assertEquals(course, jsonObject.get("RESULT"));
     }
 
 }
