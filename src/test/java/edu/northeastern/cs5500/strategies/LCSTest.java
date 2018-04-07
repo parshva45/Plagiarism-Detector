@@ -119,6 +119,56 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 				getFilePath("submission3.py"), getFilePath("submission4.py"));
 		assertEquals(12.96, res, 0.01);
 	}
+	
+	/**
+	 * test similarity measure for "add or delete redundant elements" type of plagiarism
+	 */
+	@Test
+	public void addOrDeleteRedundantElementsPlagiarismType(){
+		double res = lcs.calculateSimilarity(
+				getFilePath("crawler.py"), getFilePath("focused_crawler.py"));
+		assertEquals(80.34, res, 0.01);
+	}
+	
+	/**
+	 * test similarity measure for "change comments" type of plagiarism
+	 */
+	@Test
+	public void changeCommentsPlagiarismType(){
+		double res = lcs.calculateSimilarity(
+				getFilePath("page_rank1.py"), getFilePath("page_rank2.py"));
+		assertEquals(90.89, res, 0.01);
+	}
+	
+	/**
+	 * test similarity measure for "change names" type of plagiarism
+	 */
+	@Test
+	public void changeNamesPlagiarismType(){
+		double res = lcs.calculateSimilarity(
+				getFilePath("crawler1.py"), getFilePath("crawler2.py"));
+		assertEquals(92.54, res, 0.01);
+	}
+	
+	/**
+	 * test similarity measure for "reorder the code" type of plagiarism
+	 */
+	@Test
+	public void reorderTheCodePlagiarismType(){
+		double res = lcs.calculateSimilarity(
+				getFilePath("student1_submission.zip"), getFilePath("student2_submission.zip"));
+		assertEquals(61.01, res, 0.01);
+	}
+	
+	/**
+	 * test similarity measure for "rewrite loops" type of plagiarism
+	 */
+	@Test
+	public void rewriteLoopsPlagiarismType(){
+		double res = lcs.calculateSimilarity(
+				getFilePath("indexer1.py"), getFilePath("indexer2.py"));
+		assertEquals(94.39, res, 0.01);
+	}
 
 	/**
 	 * test similarity measure between submission1.zip files and submission2.zip files

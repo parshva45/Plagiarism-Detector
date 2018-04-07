@@ -130,6 +130,56 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 				getFilePath("submission3.py"), getFilePath("submission4.py"));
 		assertEquals(12.26, res, 0.01);
 	}
+	
+	/**
+	 * test similarity measure for "add or delete redundant elements" type of plagiarism
+	 */
+	@Test
+	public void addOrDeleteRedundantElementsPlagiarismType(){
+		double res = levenshteinDistanceObj.calculateSimilarity(
+				getFilePath("crawler.py"), getFilePath("focused_crawler.py"));
+		assertEquals(76.57, res, 0.01);
+	}
+	
+	/**
+	 * test similarity measure for "change comments" type of plagiarism
+	 */
+	@Test
+	public void changeCommentsPlagiarismType(){
+		double res = levenshteinDistanceObj.calculateSimilarity(
+				getFilePath("page_rank1.py"), getFilePath("page_rank2.py"));
+		assertEquals(88.85, res, 0.01);
+	}
+	
+	/**
+	 * test similarity measure for "change names" type of plagiarism
+	 */
+	@Test
+	public void changeNamesPlagiarismType(){
+		double res = levenshteinDistanceObj.calculateSimilarity(
+				getFilePath("crawler1.py"), getFilePath("crawler2.py"));
+		assertEquals(91.13, res, 0.01);
+	}
+	
+	/**
+	 * test similarity measure for "reorder the code" type of plagiarism
+	 */
+	@Test
+	public void reorderTheCodePlagiarismType(){
+		double res = levenshteinDistanceObj.calculateSimilarity(
+				getFilePath("student1_submission.zip"), getFilePath("student2_submission.zip"));
+		assertEquals(53.25, res, 0.01);
+	}
+	
+	/**
+	 * test similarity measure for "rewrite loops" type of plagiarism
+	 */
+	@Test
+	public void rewriteLoopsPlagiarismType(){
+		double res = levenshteinDistanceObj.calculateSimilarity(
+				getFilePath("indexer1.py"), getFilePath("indexer2.py"));
+		assertEquals(94.37, res, 0.01);
+	}
 
 	/**
 	 * test similarity measure between submission1.zip files and submission2.zip files
