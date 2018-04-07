@@ -81,6 +81,16 @@
                 .then(function(data){
                     vm.strategies = data.strategies;
                 });
+
+            UserService.getCourseName(vm.courseId)
+                .then(function(data){
+                    vm.courseName = data.result.courseName;
+                });
+
+            UserService.getHomeWorkDescription(vm.hwId)
+                .then(function(data){
+                    vm.homeWorkDescription = data.result[0].description;
+                });
         }
         init();
 
@@ -111,7 +121,9 @@
         $scope.calculateSimilarityMeasure = function(strategy, firstFile, secondFile){
             UserService.calculateSimilarityMeasure(strategy, firstFile, secondFile)
                 .then(function(data){
-                    $scope.lcs_similarity = data.similarity;
+                    $scope.file1 = firstFile.replace(/^.*[\\\/]/, '')
+                    $scope.file2 = secondFile.replace(/^.*[\\\/]/, '')
+                    $scope.similarity_measure = data.similarity;
                     $scope.chosen_strategy = strategy;
                     $scope.result_ready = true;
                 });
