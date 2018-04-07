@@ -5,46 +5,82 @@
         {{model.error}}
     </div>
 
-    <h5>Select two students</h5>
+    <h5>Select course</h5>
 
     <div class="form-group">
-      <label>First Student</label>
-      <select class="form-control" ng-model="first_student">
-        <option ng-repeat="student in model.students" ng-value="student.id">
-            {{student.userName}}
+      <label>Course</label>
+      <select class="form-control" ng-model="course">
+        <option>
+            {{model.courseName}}
         </option>
       </select>
     </div>
 
-    <div class="form-group">
-      <label>Second Student</label>
-      <select class="form-control" ng-model="second_student">
-        <option ng-repeat="student in model.students" ng-if="student.id != first_student" ng-value="student.id">
-            {{student.userName}}
-        </option>
-      </select>
+    <div ng-show="course != undefined">
+
+      <h5>Select assignment</h5>
+
+      <div class="form-group">
+        <label>Assignment</label>
+        <select class="form-control" ng-model="assignment">
+          <option>
+              {{model.homeWorkDescription}}
+          </option>
+        </select>
+      </div>
+
     </div>
 
-    <h5>Select strategy</h5>
+    <div ng-show="assignment != undefined">
 
-    <div class="form-group">
-      <label>Strategy</label>
-      <select class="form-control" ng-model="strategy">
-        <option ng-repeat="strategy in model.strategies" ng-value="strategy">
-            {{strategy}}
-        </option>
-      </select>
+      <h5>Select two students</h5>
+
+      <div class="form-group">
+        <label>First Student</label>
+        <select class="form-control" ng-model="first_student">
+          <option ng-repeat="student in model.students" ng-value="student.id">
+              {{student.userName}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Second Student</label>
+        <select class="form-control" ng-model="second_student">
+          <option ng-repeat="student in model.students" ng-show="student.id != first_student" ng-value="student.id">
+              {{student.userName}}
+          </option>
+        </select>
+      </div>
+
     </div>
 
-    <input type="button" value="Submit" ng-click="submitForm(strategy, first_student, second_student)">
+    <div ng-show="first_student != undefined && second_student != undefined">
+
+      <h5>Select strategy</h5>
+
+      <div class="form-group">
+        <label>Strategy</label>
+        <select class="form-control" ng-model="strategy">
+          <option ng-repeat="strategy in model.strategies" ng-value="strategy">
+              {{strategy}}
+          </option>
+        </select> 
+      </div>
+
+      <input type="button" value="Submit" ng-click="submitForm(strategy, first_student, second_student)">
+
+      <br><br>
+      <a ng-click="model.getSimilarityByAll(first_student, second_student)" class="btn green darken-5">Get Similarity by All</a>
+      <div ng-show="fromAll != null"><pre>{{fromAll | json}}</pre></div>
+      <br><br>
 
 
-    <br><br>
-    <a ng-click="model.getSimilarityByAll(first_student, second_student)" class="btn green darken-5">Get Similarity by All</a>
-    <pre>{{fromAll | json}}</pre>
-    <br><br>
-    <div ng-show="result_ready">
-    <h5>Result</h5>
-        <h6>By {{chosen_strategy}} Strategy:<br>Similarity is {{lcs_similarity}}</h6>
+      <div ng-show="result_ready">
+      <h5>Result</h5>
+          <h6>By {{chosen_strategy}} Strategy:<br>Similarity between First Student's {{file1}} and
+            <br>Second Student's {{file2}} is {{similarity_measure}}</h6>
+      </div>
+
     </div>
 </div>
