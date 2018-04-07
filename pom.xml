@@ -22,7 +22,16 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		<sonar.exclusions>src/main/java/edu/northeastern/cs5500/strategies/implementations/antlr/*,src/main/java/edu/northeastern/cs5500/strategies/implementations/ast/pythonast/*,src/main/java/edu/northeastern/cs5500/strategies/implementations/ast/pythonparser/*,src/main/java/edu/northeastern/cs5500/strategies/implementations/ast/treeeditdistance/*,src/main/java/edu/northeastern/cs5500/strategies/implementations/ast/lcs/*,src/main/webapp/views/user/controller/**,src/main/webapp/views/admin/controller/**,src/main/java/edu/northeastern/cs5500/service/RegisterEmail.java,src/main/webapp/services/*,src/main/java/edu/northeastern/cs5500/Cs5500plagiarismDetectorTeam207Application.java,src/main/webapp/app.js,src/main/webapp/config.js,src/main/webapp/views/**</sonar.exclusions>
+		<sonar.exclusions>src/main/java/edu/northeastern/cs5500/strategies/implementations/antlr/*,
+			src/main/java/edu/northeastern/cs5500/strategies/implementations/ast/pythonast/*,
+			src/main/java/edu/northeastern/cs5500/strategies/implementations/ast/pythonparser/*,
+			src/main/java/edu/northeastern/cs5500/strategies/implementations/treeDistance/*,
+			src/main/java/edu/northeastern/cs5500/strategies/implementations/treeeditdistance/editDistance/*,
+			src/main/java/edu/northeastern/cs5500/strategies/implementations/treeeditdistance/tree/*,
+			src/main/webapp/views/user/controller/**,src/main/webapp/views/admin/controller/**,
+			src/main/java/edu/northeastern/cs5500/service/RegisterEmail.java,src/main/webapp/services/*,
+			src/main/java/edu/northeastern/cs5500/Cs5500plagiarismDetectorTeam207Application.java,
+			src/main/webapp/app.js,src/main/webapp/config.js,src/main/webapp/views/**</sonar.exclusions>
 	</properties>
 
 
