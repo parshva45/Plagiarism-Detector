@@ -441,7 +441,6 @@ public final class TreeDistance {
      * @return the transformed tree
      */
     public static EditableTreeNode transformTree(EditableTreeNode root, List<TreeTransformation> transformations) {
-        EditableTreeNode rootNew = null;
         for (TreeTransformation t : transformations) {
             switch (t.getOperation()) {
                 case OP_INSERT_NODE:
@@ -451,7 +450,7 @@ public final class TreeDistance {
                         EditableTreeNode inserted = (EditableTreeNode) t.getFirstNode();
                         inserted.addChildAt(root, 0);
                         root.setParent(inserted);
-                        rootNew = inserted;
+                        root = inserted;
                     } else {
                         // insert a child and make demoted siblings its new children
                         EditableTreeNode parent = (EditableTreeNode) t.getSecondNode();
@@ -501,7 +500,7 @@ public final class TreeDistance {
             }
         }
 
-        return rootNew;
+        return root;
     }
 
 }
