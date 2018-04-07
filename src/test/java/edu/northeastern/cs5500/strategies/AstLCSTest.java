@@ -73,7 +73,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares1s3Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file1, file3);
-        assertEquals(50.450, similarityMeasure, 0.01);
+        assertEquals(49.176, similarityMeasure, 0.01);
     }
 
     /**
@@ -82,7 +82,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares1s4Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file1, file4);
-        assertEquals(61.477, similarityMeasure, 0.01);
+        assertEquals(76.306, similarityMeasure, 0.01);
     }
 
     /**
@@ -91,7 +91,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares2s3Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file2, file3);
-        assertEquals(57.956, similarityMeasure, 0.01);
+        assertEquals(49.659, similarityMeasure, 0.01);
     }
 
     /**
@@ -100,7 +100,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares2s4Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file2, file4);
-        assertEquals(58.699, similarityMeasure, 0.01);
+        assertEquals(61.021, similarityMeasure, 0.01);
     }
 
 
@@ -111,7 +111,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     public void calculateSimilarityShouldGiveCorrectResult(){
         double res = longestCommonSubSequence.calculateSimilarity(
                 getFilePath("submission3.py"), getFilePath("submission4.py"));
-        assertEquals(65.586, res, 0.01);
+        assertEquals(73.066, res, 0.01);
     }
 
 }

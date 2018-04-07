@@ -8,6 +8,7 @@ import edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.e
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -18,16 +19,12 @@ import java.io.IOException;
  */
 
 @Component
+@Scope("prototype")
 public class AstTreeEditDistance implements SimilarityStrategy {
 
-    @Autowired
-    AstBuilder astBuilder1;
-
-    @Autowired
-    AstBuilder astBuilder2;
-
-    @Autowired
-    ParserFacade parserFacade;
+    private final AstBuilder astBuilder1;
+    private final AstBuilder astBuilder2;
+    private final ParserFacade parserFacade;
 
     private static final Logger LOGGER = LogManager.getLogger(AstTreeEditDistance.class);
 
@@ -68,8 +65,7 @@ public class AstTreeEditDistance implements SimilarityStrategy {
             double treeDistance = editDist.treeDist(tree1, tree2);
             int maxAstLength = Math.max(ast1Length, ast2Length);
 
-            double similarityScore = ((maxAstLength - treeDistance)/maxAstLength) * 100;
-            return similarityScore;
+            return ((maxAstLength - treeDistance)/maxAstLength) * 100;
 
         } catch (IOException e) {
             LOGGER.error("Failed to get Similarity for input file {} and {}", file1, file2);

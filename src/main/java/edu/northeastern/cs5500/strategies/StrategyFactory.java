@@ -58,7 +58,7 @@ public class StrategyFactory {
             LOGGER.info("Using given Strategy {}", StrategyTypes.LEVENSHTEIN_DISTANCE.toString());
             return levenshteinDistance;
         } else if(StrategyTypes.LCS.toString().equals(strategy)) {
-            LOGGER.info("Using given Strategy {}", StrategyTypes.LCS.toString());
+            LOGGER.info("Using given Strateg y {}", StrategyTypes.LCS.toString());
             return lcs;
         } else if (StrategyTypes.AST_LCS.toString().equals(strategy)) {
             LOGGER.info("Using given Strategy {}", StrategyTypes.AST_LCS.toString());

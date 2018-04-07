@@ -19,7 +19,6 @@ public class AstBuilder {
     /**
      * String storing the AST built for the file.
      */
-//    private String astString = "";
     private StringBuilder astString = new StringBuilder();
     private int previous = -1;
 
@@ -55,11 +54,9 @@ public class AstBuilder {
             String ruleName = Python3Parser.ruleNames[ctx.getRuleIndex()];
             if (previous >= indentation) {
                 for (int i=0;i<=previous-indentation;i++) {
-//                    astString += "}";
                     astString.append("}");
                 }
             }
-//            astString += "{" + ruleName;
             astString.append("{");
             astString.append(ruleName);
             previous = indentation;
