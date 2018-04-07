@@ -3,6 +3,7 @@ package edu.northeastern.cs5500.strategies;
 import edu.northeastern.cs5500.strategies.implementations.FileMetaData;
 import edu.northeastern.cs5500.strategies.implementations.LCS;
 import edu.northeastern.cs5500.strategies.implementations.LevenshteinDistance;
+import edu.northeastern.cs5500.strategies.implementations.WeightedScore;
 import edu.northeastern.cs5500.strategies.implementations.ast.lcs.LongestCommonSubSequence;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,6 +21,7 @@ public class StrategyFactory {
     private final LCS lcs;
     private final LongestCommonSubSequence longestCommonSubSequence;
     private final FileMetaData fileMetaData;
+    private final WeightedScore weightedScore;
 
     /**
      * Method to instantiate Strategy factory
@@ -30,11 +32,12 @@ public class StrategyFactory {
     public StrategyFactory(LevenshteinDistance levenshteinDistance,
                            LCS lcs,
                            LongestCommonSubSequence longestCommonSubSequence,
-                           FileMetaData fileMetaData) {
+                           FileMetaData fileMetaData, WeightedScore weightedScore) {
         this.levenshteinDistance = levenshteinDistance;
         this.lcs = lcs;
         this.longestCommonSubSequence = longestCommonSubSequence;
         this.fileMetaData = fileMetaData;
+        this.weightedScore = weightedScore;
     }
 
     /**
@@ -55,6 +58,9 @@ public class StrategyFactory {
         } else if(StrategyTypes.FILE_METADATA.toString().equals(strategy)){
             LOGGER.info("Using given Strategy {}", StrategyTypes.FILE_METADATA.toString());
             return fileMetaData;
+        } else if(StrategyTypes.WEIGHTED_SCORE.toString().equals(strategy)){
+            LOGGER.info("Using given Strategy {}", StrategyTypes.WEIGHTED_SCORE.toString());
+            return weightedScore;
         }
         LOGGER.info("Using default Strategy {}", StrategyTypes.LEVENSHTEIN_DISTANCE.toString());
         return levenshteinDistance;
