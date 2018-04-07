@@ -96,7 +96,7 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
             ast1 = astBuilder.build(parserFacade.parse(new File(file1)));
             ast2 = astBuilder.build(parserFacade.parse(new File(file2)));
             int[] lcsValues = lcsLength(ast1, ast2);
-            return (((double) lcsValues[0] / lcsValues[1]) * 100);
+            return (((double) (lcsValues[1] - lcsValues[0]) / lcsValues[1]) * 100);
         } catch (IOException e) {
             LOGGER.error("Failed to get Similarity for input file {} and {}", file1, file2);
         }

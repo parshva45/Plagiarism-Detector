@@ -13,6 +13,10 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * @author namratabilurkar
+ */
+
 @Component
 public class AstTreeEditDistance implements SimilarityStrategy {
 

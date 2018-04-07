@@ -55,7 +55,7 @@ public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
     @Test
     public void compares1andSimpleTest() {
         double similarityMeasure = astTreeEditDistance.calculateSimilarity(simple, file1);
-        assertEquals(98.615, similarityMeasure, 0.01);
+        assertEquals(98.890, similarityMeasure, 0.01);
     }
     /**
      * test similarity measure between submission1.py and submission2.py
@@ -63,7 +63,7 @@ public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
     @Test
     public void compares1s2Test() {
         double similarityMeasure = astTreeEditDistance.calculateSimilarity(file1, file2);
-        assertEquals(90.735, similarityMeasure, 0.01);
+        assertEquals(96.519, similarityMeasure, 0.01);
     }
 
     @After
@@ -77,7 +77,7 @@ public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
     @Test
     public void compares1s3Test() {
         double similarityMeasure = astTreeEditDistance.calculateSimilarity(file1, file3);
-        assertEquals(94.426, similarityMeasure, 0.01);
+        assertEquals(97.213, similarityMeasure, 0.01);
     }
 
     /**
@@ -86,7 +86,7 @@ public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
     @Test
     public void compares1s4Test() {
         double similarityMeasure = astTreeEditDistance.calculateSimilarity(file1, file4);
-        assertEquals(97.618, similarityMeasure, 0.01);
+        assertEquals(98.331, similarityMeasure, 0.01);
     }
 
     /**
@@ -95,7 +95,7 @@ public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
     @Test
     public void compares2s3Test() {
         double similarityMeasure = astTreeEditDistance.calculateSimilarity(file2, file3);
-        assertEquals(98.739, similarityMeasure, 0.01);
+        assertEquals(98.972, similarityMeasure, 0.01);
     }
 
     /**
@@ -104,7 +104,7 @@ public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
     @Test
     public void compares2s4Test() {
         double similarityMeasure = astTreeEditDistance.calculateSimilarity(file2, file4);
-        assertEquals(99.032, similarityMeasure, 0.01);
+        assertEquals(99.175, similarityMeasure, 0.01);
     }
 
 
@@ -115,7 +115,7 @@ public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
     public void calculateSimilarityShouldGiveCorrectResult(){
         double res = astTreeEditDistance.calculateSimilarity(
                 getFilePath("submission3.py"), getFilePath("submission4.py"));
-        assertEquals(98.485, res, 0.01);
+        assertEquals(98.809, res, 0.01);
     }
 
 }
