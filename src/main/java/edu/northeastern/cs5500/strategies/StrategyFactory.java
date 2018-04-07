@@ -25,7 +25,7 @@ public class StrategyFactory {
     private final WeightedScore weightedScore;
     private final AstTreeEditDistance astTreeEditDistance;
 
-    private static final String logString = "Using given Strategy {}";
+    private static final String LOG_MSG = "Using given Strategy {}";
 
     /**
      * Method to instantiate Strategy factory
@@ -57,25 +57,25 @@ public class StrategyFactory {
      */
     public SimilarityStrategy getStrategyByStrategyType(String strategy){
         if(StrategyTypes.LEVENSHTEIN_DISTANCE.toString().equals(strategy)) {
-            LOGGER.info(logString, StrategyTypes.LEVENSHTEIN_DISTANCE.toString());
+            LOGGER.info(LOG_MSG, StrategyTypes.LEVENSHTEIN_DISTANCE.toString());
             return levenshteinDistance;
         } else if(StrategyTypes.LCS.toString().equals(strategy)) {
-            LOGGER.info(logString, StrategyTypes.LCS.toString());
+            LOGGER.info(LOG_MSG, StrategyTypes.LCS.toString());
             return lcs;
         } else if (StrategyTypes.AST_LCS.toString().equals(strategy)) {
-            LOGGER.info(logString, StrategyTypes.AST_LCS.toString());
+            LOGGER.info(LOG_MSG, StrategyTypes.AST_LCS.toString());
             return longestCommonSubSequence;
         } else if(StrategyTypes.FILE_METADATA.toString().equals(strategy)){
-            LOGGER.info(logString, StrategyTypes.FILE_METADATA.toString());
+            LOGGER.info(LOG_MSG, StrategyTypes.FILE_METADATA.toString());
             return fileMetaData;
         } else if(StrategyTypes.WEIGHTED_SCORE.toString().equals(strategy)){
-            LOGGER.info(logString, StrategyTypes.WEIGHTED_SCORE.toString());
+            LOGGER.info(LOG_MSG, StrategyTypes.WEIGHTED_SCORE.toString());
             return weightedScore;
         } else if(StrategyTypes.AST_TREE_EDIT_DISTANCE.toString().equals(strategy)){
-            LOGGER.info(logString, StrategyTypes.AST_TREE_EDIT_DISTANCE.toString());
+            LOGGER.info(LOG_MSG, StrategyTypes.AST_TREE_EDIT_DISTANCE.toString());
             return astTreeEditDistance;
         }
-        LOGGER.info(logString, StrategyTypes.LEVENSHTEIN_DISTANCE.toString());
+        LOGGER.info(LOG_MSG, StrategyTypes.LEVENSHTEIN_DISTANCE.toString());
         return levenshteinDistance;
     }
 }

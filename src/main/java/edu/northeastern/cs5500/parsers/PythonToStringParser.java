@@ -58,10 +58,10 @@ public class PythonToStringParser {
     	/**
     	 * Replacing all %20 by spaces for compatibility with Windows file paths
     	 */
-    	filePath = filePath.replaceAll("%20", " ");
-        LOGGER.info("Reading file {}", filePath);
+    	String file = filePath.replaceAll("%20", " ");
+        LOGGER.info("Reading file {}", file);
         List<String> stringFiles = new ArrayList<>();
-        try (ZipFile fis = new ZipFile(filePath)) {
+        try (ZipFile fis = new ZipFile(file)) {
             for (Enumeration e = fis.entries(); e.hasMoreElements(); ) {
                 ZipEntry entry = (ZipEntry) e.nextElement();
                 InputStream in = fis.getInputStream(entry);
