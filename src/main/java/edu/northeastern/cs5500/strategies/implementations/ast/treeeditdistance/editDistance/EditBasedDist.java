@@ -18,7 +18,13 @@ public abstract class EditBasedDist extends TreeDist {
 		this.del = del;
 		this.update = update;
 	}
-	
+
+	/**
+	 * Determine the tree distance
+	 * @param t1 first tree
+	 * @param t2 second tree
+	 * @return the tree distance
+	 */
 	@Override
 	public double treeDist(LblTree t1, LblTree t2) {
 		if (this.isNormalized()) {
@@ -30,26 +36,50 @@ public abstract class EditBasedDist extends TreeDist {
 
 	public abstract double nonNormalizedTreeDist(LblTree t1, LblTree t2);
 
+	/**
+	 * Getter method
+	 * @return del
+	 */
 	public double getDel() {
 		return del;
 	}
 
+	/**
+	 * Setter method
+	 * @param del is set
+	 */
 	public void setDel(double del) {
 		this.del = del;
 	}
 
+	/**
+	 * Getter function
+	 * @return insert option
+	 */
 	public double getIns() {
 		return ins;
 	}
 
+	/**
+	 * setter method
+	 * @param ins value is set
+	 */
 	public void setIns(double ins) {
 		this.ins = ins;
 	}
 
+	/**
+	 * Getter method
+	 * @return update value
+	 */
 	public double getUpdate() {
 		return update;
 	}
 
+	/**
+	 * Setter method
+	 * @param update value is set
+	 */
 	public void setUpdate(double update) {
 		this.update = update;
 	}

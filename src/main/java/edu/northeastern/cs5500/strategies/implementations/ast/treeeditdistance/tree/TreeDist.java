@@ -1,6 +1,8 @@
 package edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.tree;
-import edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.tree.LblTree;
 
+/**
+ * @author namratabilurkar
+ */
 public abstract class TreeDist {
 
 	private boolean normalized;
@@ -28,14 +30,26 @@ public abstract class TreeDist {
      */
   	public abstract double treeDist(LblTree t1, LblTree t2);
 
+	/**
+	 * Checks if it is normalized
+	 * @return true, iff it is normalized
+	 */
 	public boolean isNormalized() {
 		return normalized;
 	}
 
+	/**
+	 * Setter method
+	 * @param normalized is set
+	 */
 	public void setNormalized(boolean normalized) {
 		this.normalized = normalized;
 	}
 
+	/**
+	 * Overriding the pre-defined method
+	 * @return the string
+	 */
 	@Override
 	public String toString() {
 		String strNorm = (this.isNormalized() ? "(normalized)" : "(not normalized)");

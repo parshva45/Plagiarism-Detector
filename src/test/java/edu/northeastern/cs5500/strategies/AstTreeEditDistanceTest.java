@@ -2,6 +2,7 @@ package edu.northeastern.cs5500.strategies;
 
 import edu.northeastern.cs5500.Cs5500PlagiarismDetectorTeam207ApplicationTests;
 import edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.AstTreeEditDistance;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,12 @@ public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 
     @Autowired
     AstTreeEditDistance astTreeEditDistance;
-//    TreeEditDistance treeEditDistance;
-//
+
     private String file1;
     private String file2;
     private String file3;
     private String file4;
+    private String simple;
 
     /**
      * setup submission files
@@ -31,6 +32,7 @@ public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
         file2 = getFilePath("submission2.py");
         file3 = getFilePath("submission3.py");
         file4 = getFilePath("submission4.py");
+        simple = getFilePath("simple.py");
     }
 
     /**
@@ -45,22 +47,72 @@ public class AstTreeEditDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
     }
 
     /**
+     * test similarity measure between submission1.py and simple.py
+     */
+    @Test
+    public void compares1andSimpleTest() {
+        double similarityMeasure = astTreeEditDistance.calculateSimilarity(simple, file1);
+        assertEquals(98.615, similarityMeasure, 0.01);
+    }
+    /**
      * test similarity measure between submission1.py and submission2.py
      */
     @Test
     public void compares1s2Test() {
         double similarityMeasure = astTreeEditDistance.calculateSimilarity(file1, file2);
-        assertEquals(21.96, similarityMeasure, 0.01);
+        assertEquals(90.735, similarityMeasure, 0.01);
     }
-//
-//    /**
-//     * test similarity measure between submission1.py and submission3.py
-//     */
-//    @Test
-//    public void compares1s3Test() {
-//        double similarityMeasure = treeEditDistance.calculateSimilarity(file1, file3);
-//        assertEquals(43.25, similarityMeasure, 0.01);
-//    }
 
+    @After
+    public void runAfterTestMethod(){
+
+    }
+
+    /**
+     * test similarity measure between submission1.py and submission3.py
+     */
+    @Test
+    public void compares1s3Test() {
+        double similarityMeasure = astTreeEditDistance.calculateSimilarity(file1, file3);
+        assertEquals(94.426, similarityMeasure, 0.01);
+    }
+
+    /**
+     * test similarity measure between submission1.py and submission4.py
+     */
+    @Test
+    public void compares1s4Test() {
+        double similarityMeasure = astTreeEditDistance.calculateSimilarity(file1, file4);
+        assertEquals(97.618, similarityMeasure, 0.01);
+    }
+
+    /**
+     * test similarity measure between submission2.py and submission3.py
+     */
+    @Test
+    public void compares2s3Test() {
+        double similarityMeasure = astTreeEditDistance.calculateSimilarity(file2, file3);
+        assertEquals(98.739, similarityMeasure, 0.01);
+    }
+
+    /**
+     * test similarity measure between submission2.py and submission4.py
+     */
+    @Test
+    public void compares2s4Test() {
+        double similarityMeasure = astTreeEditDistance.calculateSimilarity(file2, file4);
+        assertEquals(99.032, similarityMeasure, 0.01);
+    }
+
+
+    /**
+     * test similarity measure by getting submission files
+     */
+    @Test
+    public void calculateSimilarityShouldGiveCorrectResult(){
+        double res = astTreeEditDistance.calculateSimilarity(
+                getFilePath("submission3.py"), getFilePath("submission4.py"));
+        assertEquals(98.485, res, 0.01);
+    }
 
 }

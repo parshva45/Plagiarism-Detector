@@ -1,5 +1,6 @@
 /*
  * Created on Jun 22, 2005
+ * Updated on Apr 6, 2018
  */
 package edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.tree;
 
@@ -7,7 +8,7 @@ import java.util.ListIterator;
 import java.util.LinkedList;
 
 /**
- * @author augsten
+ * @author augsten, namratabilurkar
  */
 public abstract class FixedLengthHash {
 	
@@ -21,7 +22,7 @@ public abstract class FixedLengthHash {
 	}
 	
 	/**
-	 * @param s
+	 * @param s is the string input
 	 * @return hash value of s if s not null; null node otherwise
 	 */
 	final public HashValue h(String s) {

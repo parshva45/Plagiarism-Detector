@@ -1,10 +1,11 @@
 /*
  * Created on Jun 23, 2005
+ * Updated on Apr 6, 2018
  */
 package edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.tree;
 
 /**
- * @author augsten
+ * @author augsten, namratabilurkar
  */
 public class StringHash extends FixedLengthHash {
 
@@ -51,19 +52,6 @@ public class StringHash extends FixedLengthHash {
 		}
 
 		return new HashValue(h, length);	
-	}
-	
-	/**
-	 * hashes <code>string</code> with StringHash function to length <code>length</code>
-	 * @param args param1: <code>string</code> param2: <code>length</code> of hash
-	 */
-	public static void main(String[] args) {
-		String s = args[0];
-		int len = Integer.parseInt(args[1]);
-		StringHash hf = new StringHash(len);
-		System.out.println("'" + s + "'");
-		System.out.print("[" + hf.getHashValue(s) + "]");
-		System.out.println(" length: " + hf.getHashValue(s).toString().length());
 	}
 	
 }

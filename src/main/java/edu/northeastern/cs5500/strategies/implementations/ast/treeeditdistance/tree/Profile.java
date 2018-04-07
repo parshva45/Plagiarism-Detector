@@ -1,5 +1,6 @@
 /*
  * Created on Mar 10, 2005
+ * Updated Apr 6, 2018
  */
 package edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.tree;
 
@@ -7,7 +8,7 @@ package edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.
  * A profile is a multi-set of elements that implement the 
  * comparable interface.
  * 
- * @author augsten
+ * @author augsten, namratabilurkar
  */
 public abstract class Profile {
 	
@@ -43,15 +44,27 @@ public abstract class Profile {
 	 *
 	 */
 	abstract public void sort();
-	
+
+	/**
+	 * Size of element
+	 * @return cardinality
+	 */
 	public double cardinality() {
 		return this.size();
 	}
-	
+
+	/**
+	 * Getter method
+	 * @return gets the sorted
+	 */
 	public boolean getSorted() {
 		return sorted;
 	}
-	
+
+	/**
+	 * Setter method
+	 * @param sorted is set
+	 */
 	public void setSorted(boolean sorted) {
 		this.sorted = sorted;
 	}
