@@ -20,7 +20,6 @@ import java.util.List;
  */
 
 @Component
-@Scope("prototype")
 public class LongestCommonSubSequence implements SimilarityStrategy{
 
     private static final Logger LOGGER = LogManager.getLogger(LongestCommonSubSequence.class);
@@ -29,7 +28,10 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
     private ParserFacade parserFacade;
 
     @Autowired
-    private AstBuilder astBuilder;
+    private AstBuilder astBuilder1;
+
+    @Autowired
+    private AstBuilder astBuilder2;
 
     @Autowired
     private final PythonToStringParser pythonToStringParser;
@@ -42,10 +44,11 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
      * @param pythonToStringParser is an object of PythonToStringParser
      */
     @Autowired
-    public LongestCommonSubSequence(ParserFacade parserFacade, AstBuilder astBuilder,
-                                    PythonToStringParser pythonToStringParser) {
+    public LongestCommonSubSequence(ParserFacade parserFacade, AstBuilder astBuilder1,
+                                    AstBuilder astBuilder2, PythonToStringParser pythonToStringParser) {
         this.parserFacade = parserFacade;
-        this.astBuilder = astBuilder;
+        this.astBuilder1 = astBuilder1;
+        this.astBuilder2 = astBuilder2;
         this.pythonToStringParser = pythonToStringParser;
     }
 
@@ -93,8 +96,8 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
     public double calculateSimilarity(String file1, String file2) {
         String ast1, ast2;
         try {
-            ast1 = astBuilder.build(parserFacade.parse(new File(file1)));
-            ast2 = astBuilder.build(parserFacade.parse(new File(file2)));
+            ast1 = astBuilder1.build(parserFacade.parse(new File(file1)));
+            ast2 = astBuilder2.build(parserFacade.parse(new File(file2)));
             int[] lcsValues = lcsLength(ast1, ast2);
             return (((double) (lcsValues[1] - lcsValues[0]) / lcsValues[1]) * 100);
         } catch (IOException e) {

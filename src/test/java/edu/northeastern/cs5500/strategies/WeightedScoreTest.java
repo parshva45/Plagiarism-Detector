@@ -21,6 +21,7 @@ public class WeightedScoreTest extends Cs5500PlagiarismDetectorTeam207Applicatio
     private String file2;
     private String file3;
     private String file4;
+    private String simple;
 
     /**
      * setup submission files
@@ -31,6 +32,7 @@ public class WeightedScoreTest extends Cs5500PlagiarismDetectorTeam207Applicatio
         file2 = getFilePath("submission2.py");
         file3 = getFilePath("submission3.py");
         file4 = getFilePath("submission4.py");
+        simple = getFilePath("simple.py");
     }
 
     /**
@@ -49,8 +51,9 @@ public class WeightedScoreTest extends Cs5500PlagiarismDetectorTeam207Applicatio
      */
     @Test
     public void compares1s2Test() {
-        double similarityMeasure = weightedScore.calculateSimilarity(file1, file2);
-        assertEquals(57.734, similarityMeasure, 0.01);
+        double similarityMeasure = weightedScore.calculateSimilarity(file1, simple);
+        assertEquals(63.265, similarityMeasure, 0.01);
+//        assertEquals(64.564, similarityMeasure, 0.01);
     }
 
     /**
@@ -59,7 +62,7 @@ public class WeightedScoreTest extends Cs5500PlagiarismDetectorTeam207Applicatio
     @Test
     public void compares1s3Test() {
         double similarityMeasure = weightedScore.calculateSimilarity(file1, file3);
-        assertEquals(72.455, similarityMeasure, 0.01);
+        assertEquals(68.408, similarityMeasure, 0.01);
     }
 
 }

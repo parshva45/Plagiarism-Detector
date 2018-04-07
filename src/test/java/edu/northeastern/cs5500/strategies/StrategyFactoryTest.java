@@ -27,7 +27,7 @@ public class StrategyFactoryTest{
     LCS lcs;
     
     @Autowired
-    LongestCommonSubSequence astLcs;
+    LongestCommonSubSequence longestCommonSubSequence;
 
     @Autowired
     AstTreeEditDistance astTreeEditDistance;
@@ -63,18 +63,9 @@ public class StrategyFactoryTest{
     /**
      * test for getting AST lcs strategy when it is provided
      */
-    /*@Test
-    public void getASTLCSStrategyShouldReturnTheExpectedStrategy(){
-        Assert.assertEquals(astLcs,
-                strategyFactory.getStrategyByStrategyType("AST_LCS"));
-    }*/
-
-    /**
-     * test for getting AST tree edit distance strategy when it is provided
-     */
     @Test
     public void getASTLcsStrategyShouldReturnTheExpectedStrategy(){
-        Assert.assertEquals(astLcs,
+        Assert.assertEquals(longestCommonSubSequence,
                 strategyFactory.getStrategyByStrategyType("AST_LCS"));
     }
 
