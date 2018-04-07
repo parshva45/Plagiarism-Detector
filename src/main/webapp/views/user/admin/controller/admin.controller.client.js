@@ -12,10 +12,38 @@
         vm.students = [];
         vm.hwId = 1;
         vm.courseId = 1;
+        vm.getSimilarityByAll = getSimilarityByAll;
         $scope.systemStatus = undefined;
         $scope.result_ready = false;
         $scope.countCalls = undefined;
+        $scope.fromAll = undefined;
         vm.getCount = getCount;
+
+        function getSimilarityByAll(studentId1, studentId2) {
+            if(studentId1 === undefined || studentId2 === undefined){
+                vm.error = "Please select both the students";
+            }
+            else{
+                var filePath1 = "";
+                var filePath2 = "";
+                for(var i=0; i<vm.studentHomeWorks.length; i++){
+                    if(vm.studentHomeWorks[i].userId == studentId1){
+                        filePath1 = vm.studentHomeWorks[i].filePath;
+                    }
+                    else if(vm.studentHomeWorks[i].userId == studentId2){
+                        filePath2 = vm.studentHomeWorks[i].filePath;
+                    }
+                    if(filePath1 != "" && filePath2 != "")
+                        break;
+                }
+                UserService.calculateSimilarityAll(filePath1, filePath2)
+                    .then(function(data){
+
+                        $scope.fromAll = data;
+                    });
+            }
+
+        }
 
         function getCount() {
             UserService
@@ -57,6 +85,7 @@
         init();
 
         $scope.submitForm = function(strategy, studentId1, studentId2) {
+            $scope.fromAll = undefined;
             if(studentId1 === undefined || studentId2 === undefined){
                 vm.error = "Please select both the students";
             }
@@ -77,7 +106,7 @@
                 }
                 $scope.calculateSimilarityMeasure(strategy, filePath1, filePath2);
             }
-        }
+        };
 
         $scope.calculateSimilarityMeasure = function(strategy, firstFile, secondFile){
             UserService.calculateSimilarityMeasure(strategy, firstFile, secondFile)

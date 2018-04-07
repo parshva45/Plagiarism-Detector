@@ -16,9 +16,21 @@
             "getCourseName": getCourseName,
             "getHomeWorkDescription": getHomeWorkDescription,
             "getSystemStatus": getSystemStatus,
-            "getCount":getCount
+            "getCount":getCount,
+            "calculateSimilarityAll": calculateSimilarityAll
         };
         return api;
+
+        function calculateSimilarityAll(firstFile, secondFile){
+            return $http({
+                url: "/api/comparison/compareByAllStrategies",
+                method: "GET",
+                params: {firstFile:firstFile, secondFile:secondFile}
+            }).then(function (response) {
+                return response.data;
+
+            });
+        }
 
         function getCount() {
             return $http({

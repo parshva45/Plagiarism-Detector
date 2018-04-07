@@ -9,9 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Praveen Singh
@@ -61,8 +59,24 @@ public class FileComparisonService {
         return strategyTypes;
     }
 
+    /**
+     * Method returns the count of plagiarism detection tasks run.
+     * @return int count
+     */
     public int getCount(){
         List<SystemStatus> systemStatuses = systemStatusRepository.findAllByCourseId(1);
         return systemStatuses.size();
+    }
+
+    public Map<String, Double> getSimilarityByAllMethods(String firstFile, String secondFile){
+        Map<String, Double> res = new HashMap<>();
+        List<StrategyTypes> strategyTypes = new ArrayList<>(EnumSet.allOf(StrategyTypes.class));
+        for (StrategyTypes strategyType:strategyTypes) {
+            res.put(strategyType.toString(),
+                    strategyFactory
+                    .getStrategyByStrategyType(strategyType.toString())
+                    .calculateSimilarity(firstFile, secondFile));
+        }
+        return res;
     }
 }

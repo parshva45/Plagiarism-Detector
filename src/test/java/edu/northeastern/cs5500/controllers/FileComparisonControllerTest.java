@@ -65,4 +65,14 @@ public class FileComparisonControllerTest {
         assertEquals(strategyTypes.get(0), strategyTypes1.get(0));
     }
 
+    @Test
+    public void getCountShouldReturnTheProperCount(){
+        when(fileComparisonService.getCount()).thenReturn(1);
+
+        int count = fileComparisonController.getCount();
+
+        verify(fileComparisonService, times(1)).getCount();
+        assertEquals(1, count);
+    }
+
 }

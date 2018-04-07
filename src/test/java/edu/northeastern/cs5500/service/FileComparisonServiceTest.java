@@ -5,12 +5,14 @@ import edu.northeastern.cs5500.repository.SystemStatusRepository;
 import edu.northeastern.cs5500.strategies.SimilarityStrategy;
 import edu.northeastern.cs5500.strategies.StrategyFactory;
 import edu.northeastern.cs5500.strategies.StrategyTypes;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -60,8 +62,19 @@ public class FileComparisonServiceTest {
 
         assertEquals(String.valueOf(10.0), String.valueOf(res));
 
-
     }
+
+    @Test
+    public void fileComparisonCountShouldReturnTheCount(){
+        List<SystemStatus> list = new ArrayList<>();
+        when(systemStatusRepository.findAllByCourseId(1)).thenReturn(list);
+
+        int res = fileComparisonService.getCount();
+
+        verify(systemStatusRepository, times(1)).findAllByCourseId(1);
+        assertEquals(0, res);
+    }
+
 
 
 

@@ -38,6 +38,10 @@
 
     <input type="button" value="Submit" ng-click="submitForm(strategy, first_student, second_student)">
 
+
+    <br><br>
+    <a ng-click="model.getSimilarityByAll(first_student, second_student)" class="btn green darken-5">Get Similarity by All</a>
+    <pre>{{fromAll | json}}</pre>
     <br><br>
     <div ng-show="result_ready">
     <h5>Result</h5>
