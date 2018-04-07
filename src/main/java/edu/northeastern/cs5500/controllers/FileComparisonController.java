@@ -102,4 +102,25 @@ public class FileComparisonController {
         resultMap.put("secondFile", secondFile);
         return new JSONObject(resultMap);
     }
+
+    /**
+     * Rest End point that takes in the path of two files and returns the similarity
+     * between them based on All the strategies.
+     * @param firstFile String
+     * @param secondFile String
+     * @return JSONObject having the similarity percentage.
+     */
+    @RequestMapping(path = "/compareByAllStrategies", method = RequestMethod.GET)
+    public JSONObject getSimilarityBetweenGivenFilesByAllStrategies(
+            @RequestParam(name = "firstFile") String firstFile,
+            @RequestParam(name = "secondFile") String secondFile) {
+
+        LOGGER.info("executing method compareByAllStrategies with with " +
+                        "parameter firstFile={} secondFile={}", firstFile, secondFile);
+
+        Map<String, Double> result = fileComparisonService.getSimilarityByAllMethods(firstFile, secondFile);
+
+        LOGGER.info("compareByAllStrategies API returned data successfully.");
+        return new JSONObject(result);
+    }
 }

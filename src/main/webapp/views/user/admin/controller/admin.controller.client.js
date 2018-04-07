@@ -12,10 +12,38 @@
         vm.students = [];
         vm.hwId = 1;
         vm.courseId = 1;
+        vm.getSimilarityByAll = getSimilarityByAll;
         $scope.systemStatus = undefined;
         $scope.result_ready = false;
         $scope.countCalls = undefined;
+        $scope.fromAll = undefined;
         vm.getCount = getCount;
+
+        function getSimilarityByAll(studentId1, studentId2) {
+            if(studentId1 === undefined || studentId2 === undefined){
+                vm.error = "Please select both the students";
+            }
+            else{
+                var filePath1 = "";
+                var filePath2 = "";
+                for(var i=0; i<vm.studentHomeWorks.length; i++){
+                    if(vm.studentHomeWorks[i].userId == studentId1){
+                        filePath1 = vm.studentHomeWorks[i].filePath;
+                    }
+                    else if(vm.studentHomeWorks[i].userId == studentId2){
+                        filePath2 = vm.studentHomeWorks[i].filePath;
+                    }
+                    if(filePath1 != "" && filePath2 != "")
+                        break;
+                }
+                UserService.calculateSimilarityAll(filePath1, filePath2)
+                    .then(function(data){
+
+                        $scope.fromAll = data;
+                    });
+            }
+
+        }
 
         function getCount() {
             UserService
@@ -53,10 +81,21 @@
                 .then(function(data){
                     vm.strategies = data.strategies;
                 });
+
+            UserService.getCourseName(vm.courseId)
+                .then(function(data){
+                    vm.courseName = data.result.courseName;
+                });
+
+            UserService.getHomeWorkDescription(vm.hwId)
+                .then(function(data){
+                    vm.homeWorkDescription = data.result[0].description;
+                });
         }
         init();
 
         $scope.submitForm = function(strategy, studentId1, studentId2) {
+            $scope.fromAll = undefined;
             if(studentId1 === undefined || studentId2 === undefined){
                 vm.error = "Please select both the students";
             }
@@ -77,12 +116,14 @@
                 }
                 $scope.calculateSimilarityMeasure(strategy, filePath1, filePath2);
             }
-        }
+        };
 
         $scope.calculateSimilarityMeasure = function(strategy, firstFile, secondFile){
             UserService.calculateSimilarityMeasure(strategy, firstFile, secondFile)
                 .then(function(data){
-                    $scope.lcs_similarity = data.similarity;
+                    $scope.file1 = firstFile.replace(/^.*[\\\/]/, '')
+                    $scope.file2 = secondFile.replace(/^.*[\\\/]/, '')
+                    $scope.similarity_measure = data.similarity;
                     $scope.chosen_strategy = strategy;
                     $scope.result_ready = true;
                 });

@@ -3,7 +3,9 @@ package edu.northeastern.cs5500.strategies;
 import edu.northeastern.cs5500.strategies.implementations.FileMetaData;
 import edu.northeastern.cs5500.strategies.implementations.LCS;
 import edu.northeastern.cs5500.strategies.implementations.LevenshteinDistance;
+import edu.northeastern.cs5500.strategies.implementations.WeightedScore;
 import edu.northeastern.cs5500.strategies.implementations.ast.lcs.LongestCommonSubSequence;
+import edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.AstTreeEditDistance;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
- * @author Praveen Singh
+ * @author Praveen Singh, namratabilurkar
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -25,13 +27,19 @@ public class StrategyFactoryTest{
     LCS lcs;
     
     @Autowired
-    LongestCommonSubSequence ast_lcs;
+    LongestCommonSubSequence astLcs;
+
+    @Autowired
+    AstTreeEditDistance astTreeEditDistance;
 
     @Autowired
     StrategyFactory strategyFactory;
 
     @Autowired
     FileMetaData fileMetaData;
+
+    @Autowired
+    WeightedScore weightedScore;
 
 
     /**
@@ -55,14 +63,32 @@ public class StrategyFactoryTest{
     /**
      * test for getting AST lcs strategy when it is provided
      */
-//    @Test
-//    public void getASTLCSStrategyShouldReturnTheExpectedStrategy(){
-//        Assert.assertEquals(ast_lcs,
-//                strategyFactory.getStrategyByStrategyType("AST_LCS"));
-//    }
+    @Test
+    public void getASTLCSStrategyShouldReturnTheExpectedStrategy(){
+        Assert.assertEquals(astLcs,
+                strategyFactory.getStrategyByStrategyType("AST_LCS"));
+    }
 
     /**
-     * test for getting levenshtein distance strategy when invalid strategy is provided
+     * test for getting AST tree edit distance strategy when it is provided
+     */
+    @Test
+    public void getASTTreeEditStrategyShouldReturnTheExpectedStrategy(){
+        Assert.assertEquals(astTreeEditDistance,
+                strategyFactory.getStrategyByStrategyType("AST_TREE_EDIT_DISTANCE"));
+    }
+
+    /**
+     * test for getting Weighted score strategy when it is provided
+     */
+    @Test
+    public void getWeightedScoreStrategyShouldReturnTheExpectedStrategy(){
+        Assert.assertEquals(weightedScore,
+                strategyFactory.getStrategyByStrategyType("WEIGHTED_SCORE"));
+    }
+
+    /**
+     * test for getting Levenshtein distance strategy when invalid strategy is provided
      */
     @Test
     public void getLevenshteinDistanceStrategyShouldReturnTheDefaultStrategyIfInvalidStrategyProvided(){
@@ -71,13 +97,16 @@ public class StrategyFactoryTest{
     }
 
     /**
-     * test for getting levenshtein distance strategy when null is provided
+     * test for getting Levenshtein distance strategy when null is provided
      */
     @Test
     public void getLevenshteinDistanceStrategyShouldReturnDefaultStrategyWhenNullProvided(){
         Assert.assertEquals(levenshteinDistance, strategyFactory.getStrategyByStrategyType(null));
     }
 
+    /**
+     * test for getting file meta data strategy when it is provided
+     */
     @Test
     public void getFileMetadataStrategyShouldReturnTheExpectedStrategy(){
         Assert.assertEquals(fileMetaData,
