@@ -45,13 +45,13 @@ public class LCS implements SimilarityStrategy {
          * If multiple file comparisons across two .zip files is expected 
          */
         else if(ext1.equals("zip") && ext2.equals("zip")){
-            List<String> firstSubmissionFiles = pythonToStringParser.parseFiles(file1);
-            List<String> secondSubmissionFiles = pythonToStringParser.parseFiles(file2);
+            List<StringBuilder> firstSubmissionFiles = pythonToStringParser.parseFiles(file1);
+            List<StringBuilder> secondSubmissionFiles = pythonToStringParser.parseFiles(file2);
             double overallSimilaritySum = 0;
-            for (String s1 : firstSubmissionFiles) {
-                for (String s2 : secondSubmissionFiles) {
-                    int distance = getDistance(s1, s2);
-                    overallSimilaritySum += distance/(double)longerLength(s1, s2)*100;
+            for (StringBuilder s1 : firstSubmissionFiles) {
+                for (StringBuilder s2 : secondSubmissionFiles) {
+                    int distance = getDistance(s1.toString(), s2.toString());
+                    overallSimilaritySum += distance/(double)longerLength(s1.toString(), s2.toString())*100;
                 }
             }
             return overallSimilaritySum/(firstSubmissionFiles.size()*secondSubmissionFiles.size());
