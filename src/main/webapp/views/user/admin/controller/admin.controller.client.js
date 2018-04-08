@@ -67,7 +67,7 @@
 
             UserService.findStudentHomeWorksForCourseHomeWork(vm.courseId, vm.hwId)
                 .then(function(data){
-                    vm.studentHomeWorks = data.result;
+                    vm.studentHomeWorks = data.RESULT;
                     for(var i=0; i<vm.studentHomeWorks.length; i++){
                         var studentId = vm.studentHomeWorks[i].userId;
                         UserService.findByUserIdAndUserName(studentId)
@@ -84,12 +84,12 @@
 
             UserService.getCourseName(vm.courseId)
                 .then(function(data){
-                    vm.courseName = data.result.courseName;
+                    vm.courseName = data.RESULT.courseName;
                 });
 
             UserService.getHomeWorkDescription(vm.hwId)
                 .then(function(data){
-                    vm.homeWorkDescription = data.result[0].description;
+                    vm.homeWorkDescription = data.RESULT[0].description;
                 });
         }
         init();
