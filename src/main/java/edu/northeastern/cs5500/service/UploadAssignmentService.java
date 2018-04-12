@@ -18,7 +18,7 @@ import java.nio.file.Paths;
 
 /**
  * @author Praveen Singh
- * upload Assingment Service Class.
+ * upload Assignment Service Class.
  */
 @Service
 public class UploadAssignmentService {
@@ -65,6 +65,37 @@ public class UploadAssignmentService {
                     courseId, hwId, filepath));
         }
 
+    }
+    
+    /**
+     * Method to upload assignment file and update the StudentHomeWork table
+     * with the given file in byte array and file name.
+     * @param byte[] file in byte array
+     * @param String name of file
+     * @param userId integer
+     * @param courseId Integer
+     * @param hwId Integer
+     * @throws IOException In case file is not readable.
+     */
+    public void uploadAssignment(byte[] fileBytes, String filename, int userId, int courseId, int hwId)  throws IOException {
+    	
+    	LOGGER.info("Uploading assignment for user {}", userId);
+        String filepath;
+    	
+    	String directory = env.getProperty("fileupload.paths.uploadedFiles");
+    	String path = String.format("%s/%d/%d/%d", directory, userId, courseId, hwId);
+    	filepath = Paths.get(path, filename).toString();
+
+        File fileUpload = new File(filepath);
+        Files.deleteIfExists(fileUpload.toPath());
+        fileUpload.getParentFile().mkdirs();
+        
+        // Save the file locally
+        try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(fileUpload))) {
+            stream.write(fileBytes);
+            studentHomeWorkRepository.save(createStudentHomeWorkEntity(userId,
+                    courseId, hwId, filepath));
+        }
     }
 
     private StudentHomeWork createStudentHomeWorkEntity(int userId, int courseId,

@@ -10,12 +10,27 @@
 <br/>
 <div class="container-fluid">
 
+    <h6>Choose and upload file:</h6>
     <form action="/api/homework/uploadfile"  method="post" enctype="multipart/form-data">
         <input  name="file" type="file" class="form-control"/>
         <input  name="userId" value="{{model.userProfile.id}}" style="display: none"/>
         <input  name="hwId" value="{{model.hwId}}" style="display: none"/>
         <input  name="courseId" value="{{model.courseId}}" style="display: none"/>
-        <button type="submit" class="btn btn-block blue">Upload File</button>
+        <button type="submit" class="btn btn-block blue">Submit</button>
+    </form>
+    <br/>
+
+    <div style="text-align: center">
+        <h5>OR</h5>
+    </div>
+
+    <h6>Enter Github URL of submission file:</h6>
+    <form action="/api/homework/uploadgitfile"  method="post" enctype="multipart/form-data">
+        <input  name="link" type="text" placeholder="https://github.com/parshva45/Test/blob/master/crawler1.py" class="form-control"/>
+        <input  name="userId" value="{{model.userProfile.id}}" style="display: none"/>
+        <input  name="hwId" value="{{model.hwId}}" style="display: none"/>
+        <input  name="courseId" value="{{model.courseId}}" style="display: none"/>
+        <button type="submit" class="btn btn-block blue">Submit</button>
     </form>
     <br/>
 
