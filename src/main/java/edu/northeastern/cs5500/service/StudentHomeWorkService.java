@@ -61,7 +61,7 @@ public class StudentHomeWorkService {
                    Integer courseId, Integer homeWorkId){
         LOGGER.info("uploading homework for user {}", userId);
         List<StudentHomeWork> studentHomeWork = studentHomeWorkRepository
-                .findByUserIdAndAndCourseIdAndHomeWorkId(userId, courseId, homeWorkId);
+                .findByUserIdAndCourseIdAndHomeWorkId(userId, courseId, homeWorkId);
         if (studentHomeWork == null){
             LOGGER.info("homework not found for user {} with courseID {} " +
                     "and homeWorkId {}", userId, courseId, homeWorkId);

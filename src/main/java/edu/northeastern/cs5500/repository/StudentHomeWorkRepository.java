@@ -2,6 +2,8 @@ package edu.northeastern.cs5500.repository;
 
 import edu.northeastern.cs5500.model.StudentHomeWork;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,8 +22,9 @@ public interface StudentHomeWorkRepository extends JpaRepository<StudentHomeWork
      * @param homeWorkId Integer
      * @return List of StudentHomeWork Objects
      */
-    List<StudentHomeWork> findByUserIdAndAndCourseIdAndHomeWorkId(Integer userId,
-             Integer courseId, Integer homeWorkId);
+    List<StudentHomeWork> findByUserIdAndCourseIdAndHomeWorkId(Integer userId,
+                                                               Integer courseId,
+                                                               Integer homeWorkId);
 
     /**
      * Method finds all the StudentHomeWork rows from the database for a given user.
@@ -37,4 +40,9 @@ public interface StudentHomeWorkRepository extends JpaRepository<StudentHomeWork
      * @return List of StudentHomeWork object
      */
     List<StudentHomeWork> findAllByCourseIdAndAndHomeWorkId(Integer courseId, Integer homeWorkId);
+
+
+    @Modifying
+    @Query("update StudentHomeWork sh set sh.filePath = ?1 where sh.id = ?2")
+    void updateHomeWorkPath(String filePath,  Integer id);
 }
