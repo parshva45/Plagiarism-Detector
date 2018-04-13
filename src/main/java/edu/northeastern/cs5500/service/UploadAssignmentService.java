@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * @author Praveen Singh
@@ -61,8 +62,7 @@ public class UploadAssignmentService {
         // Save the file locally
         try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(fileUpload))) {
             stream.write(file.getBytes());
-            studentHomeWorkRepository.save(createStudentHomeWorkEntity(userId,
-                    courseId, hwId, filepath));
+            uploadAssignmentToDatabase(filepath, userId, courseId, hwId);
         }
 
     }
@@ -93,8 +93,7 @@ public class UploadAssignmentService {
         // Save the file locally
         try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(fileUpload))) {
             stream.write(fileBytes);
-            studentHomeWorkRepository.save(createStudentHomeWorkEntity(userId,
-                    courseId, hwId, filepath));
+            uploadAssignmentToDatabase(filepath, userId, courseId, hwId);
         }
     }
 
@@ -105,6 +104,20 @@ public class UploadAssignmentService {
                 .withCourseId(courseId)
                 .withHomeWorkId(hwId)
                 .withPath(path);
+    }
+
+    private void uploadAssignmentToDatabase(String filepath, int userId, int courseId, int hwId){
+        List<StudentHomeWork> studentHomeWorkList = studentHomeWorkRepository
+                .findByUserIdAndCourseIdAndHomeWorkId(userId, courseId, hwId);
+        if(studentHomeWorkList.isEmpty()) {
+            StudentHomeWork studentHomeWork = createStudentHomeWorkEntity(userId,
+                    courseId, hwId, filepath);
+
+            studentHomeWorkRepository.save(studentHomeWork);
+        }else{
+            StudentHomeWork studentHomeWork = studentHomeWorkList.get(0);
+            studentHomeWorkRepository.updateHomeWorkPath(filepath, studentHomeWork.getId());
+        }
     }
 
 }

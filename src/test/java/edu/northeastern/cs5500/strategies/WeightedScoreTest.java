@@ -46,6 +46,6 @@ public class WeightedScoreTest extends Cs5500PlagiarismDetectorTeam207Applicatio
     @Test
     public void compares1s2Test() {
         double similarityMeasure = weightedScore.calculateSimilarity(file1, simple);
-        assertEquals(62.487, similarityMeasure, 0.01);
+        assertEquals(46.041, similarityMeasure, 0.01);
     }
 }

@@ -1,6 +1,5 @@
 package edu.northeastern.cs5500.strategies;
 
-import edu.northeastern.cs5500.strategies.implementations.FileMetaData;
 import edu.northeastern.cs5500.strategies.implementations.LCS;
 import edu.northeastern.cs5500.strategies.implementations.LevenshteinDistance;
 import edu.northeastern.cs5500.strategies.implementations.WeightedScore;
@@ -35,9 +34,6 @@ public class StrategyFactoryTest{
 
     @Autowired
     StrategyFactory strategyFactory;
-
-    @Autowired
-    FileMetaData fileMetaData;
 
     @Autowired
     WeightedScore weightedScore;
@@ -103,15 +99,6 @@ public class StrategyFactoryTest{
     @Test
     public void getLevenshteinDistanceStrategyShouldReturnDefaultStrategyWhenNullProvided(){
         Assert.assertEquals(levenshteinDistance, strategyFactory.getStrategyByStrategyType(null));
-    }
-
-    /**
-     * test for getting file meta data strategy when it is provided
-     */
-    @Test
-    public void getFileMetadataStrategyShouldReturnTheExpectedStrategy(){
-        Assert.assertEquals(fileMetaData,
-                strategyFactory.getStrategyByStrategyType("FILE_METADATA"));
     }
 
 }
