@@ -2,6 +2,7 @@ package edu.northeastern.cs5500.service;
 
 import edu.northeastern.cs5500.model.StudentHomeWork;
 import edu.northeastern.cs5500.repository.StudentHomeWorkRepository;
+import org.apache.commons.io.IOUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -86,6 +87,15 @@ public class UploadAssignmentServiceTest {
 
         uploadAssignmentService.uploadAssignment(multipartFile, 1, 1, 1);
 
+    }
+
+    @Test
+    public void uploadAssignmentUsingByte() throws IOException {
+
+        when(env.getProperty("fileupload.paths.uploadedFiles")).thenReturn("./uploads");
+        when(studentHomeWorkRepository.save(any(StudentHomeWork.class))).thenReturn(new StudentHomeWork());
+
+        uploadAssignmentService.uploadAssignment(IOUtils.toByteArray("praveen"), "praveen", 1, 1, 1);
     }
 
 }

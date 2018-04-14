@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -73,6 +74,18 @@ public class FileComparisonControllerTest {
 
         verify(fileComparisonService, times(1)).getCount();
         assertEquals(1, count);
+    }
+
+    @Test
+    public void getSimilarityByAll(){
+        String firstFile = "praveen.txt";
+        String secondFile = "singh.txt";
+        when(fileComparisonService.getSimilarityByAllMethods(firstFile, secondFile)).thenReturn(new HashMap<>());
+
+        fileComparisonController.getSimilarityBetweenGivenFilesByAllStrategies(firstFile, secondFile);
+
+        verify(fileComparisonService, times(1)).getSimilarityByAllMethods(firstFile, secondFile);
+
     }
 
 }
