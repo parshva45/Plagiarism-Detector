@@ -17,7 +17,8 @@
             "getHomeWorkDescription": getHomeWorkDescription,
             "getSystemStatus": getSystemStatus,
             "getCount":getCount,
-            "calculateSimilarityAll": calculateSimilarityAll
+            "calculateSimilarityAll": calculateSimilarityAll,
+            "compareAll": compareAll
         };
         return api;
 
@@ -128,6 +129,16 @@
             return $http({
                 url: "/api/homework/getHomeWorkById/"+homeWorkId,
                 method: "GET"
+            }).then(function (response) {
+                return response.data;
+            });
+        }
+
+        function compareAll(userId) {
+            return $http({
+                url: "/api/comparison/compare-all",
+                method: "GET",
+                params: {userId: userId}
             }).then(function (response) {
                 return response.data;
             });

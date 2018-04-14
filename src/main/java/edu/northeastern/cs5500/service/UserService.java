@@ -20,12 +20,12 @@ public class UserService{
     private static final Logger LOGGER = LogManager.getLogger(UserService.class);
 
     private final UserRepository userRepository;
-    private final RegisterEmail registerEmail;
+    private final EmailService emailService;
 
     @Autowired
-    public UserService(UserRepository userRepository, RegisterEmail registerEmail) {
+    public UserService(UserRepository userRepository, EmailService emailService) {
         this.userRepository = userRepository;
-        this.registerEmail = registerEmail;
+        this.emailService = emailService;
     }
 
 
@@ -74,7 +74,7 @@ public class UserService{
         LOGGER.info("saving user in database with username {}", user.getUserName());
         userRepository.save(user);
         LOGGER.info("sending email to user with username {}", user.getUserName());
-        registerEmail.sendEmail(user.getUserName(), user.getEmail());
+        emailService.sendEmail(user.getUserName(), user.getEmail(), null);
         return user;
     }
 

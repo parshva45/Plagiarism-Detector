@@ -1,10 +1,12 @@
 package edu.northeastern.cs5500.controllers;
 
+import edu.northeastern.cs5500.service.CompareAllService;
 import edu.northeastern.cs5500.service.FileComparisonService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,9 +27,13 @@ public class FileComparisonController {
 
     private final FileComparisonService fileComparisonService;
 
+    private final CompareAllService compareAllService;
+
     @Autowired
-    public FileComparisonController(FileComparisonService fileComparisonService) {
+    public FileComparisonController(FileComparisonService fileComparisonService,
+                                    CompareAllService compareAllService) {
         this.fileComparisonService = fileComparisonService;
+        this.compareAllService = compareAllService;
     }
 
     /**
@@ -122,5 +128,16 @@ public class FileComparisonController {
 
         LOGGER.info("compareByAllStrategies API returned data successfully.");
         return new JSONObject(result);
+    }
+
+    @RequestMapping(value = "/compare-all", method = RequestMethod.GET)
+    public JSONObject asyncCompareAll(@RequestParam(name = "userId") Integer userId) {
+        LOGGER.info("running asyncCompareAll");
+        Map<String, String> response = new HashMap<>();
+        compareAllService.process(userId);
+        response.put("message", "Request is under process");
+        response.put("status" , "OK");
+        LOGGER.info("asyncCompareAll API returned data successfully.");
+        return new JSONObject(response);
     }
 }

@@ -13,11 +13,21 @@
         vm.hwId = 1;
         vm.courseId = 1;
         vm.getSimilarityByAll = getSimilarityByAll;
+        vm.compareAll = compareAll,
         $scope.systemStatus = undefined;
         $scope.result_ready = false;
         $scope.countCalls = undefined;
         $scope.fromAll = undefined;
         vm.getCount = getCount;
+        $scope.selectedCompareAll = undefined;
+
+        function compareAll() {
+            UserService
+                .compareAll(vm.userId)
+                .then(function (data) {
+                    $scope.selectedCompareAll = "Details Will be sent to your registered email";
+                });
+        }
 
         function getSimilarityByAll(studentId1, studentId2) {
             if(studentId1 === undefined || studentId2 === undefined){
