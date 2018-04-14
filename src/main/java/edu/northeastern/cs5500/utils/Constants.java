@@ -18,6 +18,6 @@ public class Constants {
     public static final String RESULT = "RESULT";
     public static final String RESPONSE_CODE = "response-code";
 
-    public final String PLAGIARISM_THRESHHOLD = "plagiarism.threshhold";
+    public static final String PLAGIARISM_THRESHHOLD = "plagiarism.threshhold";
 
 }

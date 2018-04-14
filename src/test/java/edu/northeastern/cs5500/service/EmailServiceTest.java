@@ -6,23 +6,23 @@ import org.junit.Test;
 /**
  * @author Praveen Singh
  */
-public class RegisterEmailTest {
+public class EmailServiceTest {
 
-    private RegisterEmail registerEmail;
+    private EmailService emailService;
 
     @Before
     public void setUp(){
-        registerEmail = new RegisterEmail();
+        emailService = new EmailService();
     }
 
     @Test(expected = RuntimeException.class)
     public void sendEmailShouldThrowException(){
-        registerEmail.sendEmail("praveen", null);
+        emailService.sendEmail("praveen", null, null);
     }
 
     @Test
     public void sendEmailShouldActuallySendEmail(){
-        registerEmail.sendEmail("praveen", "msdteam207@gmail.com");
+        emailService.sendEmail("praveen", "msdteam207@gmail.com", null);
     }
 
 }

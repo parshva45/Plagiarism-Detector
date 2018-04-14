@@ -131,11 +131,13 @@ public class FileComparisonController {
     }
 
     @RequestMapping(value = "/compare-all", method = RequestMethod.GET)
-    public JSONObject asyncCompareAll() {
-        compareAllService.process();
+    public JSONObject asyncCompareAll(@RequestParam(name = "userId") Integer userId) {
+        LOGGER.info("running asyncCompareAll");
         Map<String, String> response = new HashMap<>();
+        compareAllService.process(userId);
         response.put("message", "Request is under process");
         response.put("status" , "OK");
+        LOGGER.info("asyncCompareAll API returned data successfully.");
         return new JSONObject(response);
     }
 }
