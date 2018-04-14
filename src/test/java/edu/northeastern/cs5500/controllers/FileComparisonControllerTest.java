@@ -3,12 +3,14 @@ package edu.northeastern.cs5500.controllers;
 import edu.northeastern.cs5500.service.CompareAllService;
 import edu.northeastern.cs5500.service.FileComparisonService;
 import edu.northeastern.cs5500.strategies.StrategyTypes;
+import edu.northeastern.cs5500.utils.Constants;
 import org.json.simple.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.core.env.Environment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +32,9 @@ public class FileComparisonControllerTest {
     @Mock
     private CompareAllService compareAllService;
 
+    @Mock
+    private Environment env;
+
     @InjectMocks
     private FileComparisonController fileComparisonController;
 
@@ -38,6 +43,7 @@ public class FileComparisonControllerTest {
         String firstFile = "praveen.txt";
         String secondFile = "singh.txt";
         String strategy = "demo";
+        when(env.getProperty(Constants.PLAGIARISM_THRESHHOLD)).thenReturn("40.0");
         when(fileComparisonService
                 .compareTwoFilesByGivenStrategy(strategy, firstFile, secondFile))
                 .thenReturn(10.0);
@@ -47,6 +53,8 @@ public class FileComparisonControllerTest {
 
         verify(fileComparisonService, times(1))
                 .compareTwoFilesByGivenStrategy(strategy, firstFile, secondFile);
+        verify(env, times(1)).getProperty(Constants.PLAGIARISM_THRESHHOLD);
+
         assertNotNull(jsonObject);
         assertEquals(firstFile, jsonObject.get("firstFile"));
         assertEquals(secondFile, jsonObject.get("secondFile"));
