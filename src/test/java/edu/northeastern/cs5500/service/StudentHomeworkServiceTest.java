@@ -75,18 +75,18 @@ public class StudentHomeworkServiceTest {
 				.withHomeWorkId(1).withId(2).withPath("/src/submission2.py").withUserId(2);
 		List<StudentHomeWork> studentHomeworkList5 = new ArrayList<StudentHomeWork>();
 		studentHomeworkList5.add(studentHomeWork2);
-		when(studentHomeWorkRepository.findByUserIdAndAndCourseIdAndHomeWorkId(2,1,1)).thenReturn(studentHomeworkList5);
+		when(studentHomeWorkRepository.findByUserIdAndCourseIdAndHomeWorkId(2,1,1)).thenReturn(studentHomeworkList5);
 		
 		List<StudentHomeWork> studentHomeworkList6 = studentHomeWorkService.getHomeWorkByStudentIdCourseIdAndHomeWorkId(2,1,1);
 
-		verify(studentHomeWorkRepository, times(1)).findByUserIdAndAndCourseIdAndHomeWorkId(2,1,1);
+		verify(studentHomeWorkRepository, times(1)).findByUserIdAndCourseIdAndHomeWorkId(2,1,1);
 		Assert.assertEquals(studentHomeworkList5, studentHomeworkList6);
 		Assert.assertEquals(studentHomeworkList5.get(0).getCourseId(), studentHomeworkList6.get(0).getCourseId());
 	}
 	
 	@Test(expected = HttpStatusException.class)
 	public void testStudentHomeworkGetHomeWorkByStudentIdCourseIdAndHomeWorkIdForNullHomeworkId() {
-		when(studentHomeWorkRepository.findByUserIdAndAndCourseIdAndHomeWorkId(3,5,8)).thenReturn(null);
+		when(studentHomeWorkRepository.findByUserIdAndCourseIdAndHomeWorkId(3,5,8)).thenReturn(null);
 
 		studentHomeWorkService.getHomeWorkByStudentIdCourseIdAndHomeWorkId(3,5,8);
 

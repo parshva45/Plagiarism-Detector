@@ -45,6 +45,18 @@ public class FileComparisonController {
     }
 
     /**
+     * Rest Controller to list the different types of strategies present in the system
+     * @return List of String
+     */
+    @RequestMapping(path = "/getCount", method = RequestMethod.GET)
+    public int getCount(){
+        LOGGER.info("executing method getCount ");
+        int data = fileComparisonService.getCount();
+        LOGGER.info("executed method getCount successfully");
+        return data;
+    }
+
+    /**
      * Rest End point that takes in the path of two files and returns the simmilarity
      * between them based on given strategy.
      * @param strategy String
@@ -89,5 +101,26 @@ public class FileComparisonController {
         resultMap.put("firstFile", firstFile);
         resultMap.put("secondFile", secondFile);
         return new JSONObject(resultMap);
+    }
+
+    /**
+     * Rest End point that takes in the path of two files and returns the similarity
+     * between them based on All the strategies.
+     * @param firstFile String
+     * @param secondFile String
+     * @return JSONObject having the similarity percentage.
+     */
+    @RequestMapping(path = "/compareByAllStrategies", method = RequestMethod.GET)
+    public JSONObject getSimilarityBetweenGivenFilesByAllStrategies(
+            @RequestParam(name = "firstFile") String firstFile,
+            @RequestParam(name = "secondFile") String secondFile) {
+
+        LOGGER.info("executing method compareByAllStrategies with with " +
+                        "parameter firstFile={} secondFile={}", firstFile, secondFile);
+
+        Map<String, Double> result = fileComparisonService.getSimilarityByAllMethods(firstFile, secondFile);
+
+        LOGGER.info("compareByAllStrategies API returned data successfully.");
+        return new JSONObject(result);
     }
 }

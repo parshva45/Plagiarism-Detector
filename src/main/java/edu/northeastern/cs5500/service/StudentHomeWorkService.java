@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * @author Praveen Singh
- * StudentHomeWork service class to seperate the controller and Repository
+ * StudentHomeWork service class to separate the controller and Repository
  */
 @Service
 public class StudentHomeWorkService {
@@ -26,7 +26,7 @@ public class StudentHomeWorkService {
     }
 
     /**
-     * Method returs List of StudentHomeWork instances based on userId
+     * Method returns List of StudentHomeWork instances based on userId
      * @param userId Integer
      * @return List of StudentHomeWork instances
      */
@@ -36,7 +36,7 @@ public class StudentHomeWorkService {
     }
 
     /**
-     * methof returns a list of List of StudentHomeWork instances based on
+     * method returns a list of List of StudentHomeWork instances based on
      * CourseId and homeWorkId.
      * @param courseId integer
      * @param homeWorkId Integer
@@ -50,7 +50,7 @@ public class StudentHomeWorkService {
     }
 
     /**
-     * Method gets the list of homwork files submitted for a used based on userId, homeworkNo
+     * Method gets the list of homework files submitted for a used based on userId, homeworkNo
      * and CourseId.
      * @param userId Integer
      * @param courseId Integer
@@ -61,7 +61,7 @@ public class StudentHomeWorkService {
                    Integer courseId, Integer homeWorkId){
         LOGGER.info("uploading homework for user {}", userId);
         List<StudentHomeWork> studentHomeWork = studentHomeWorkRepository
-                .findByUserIdAndAndCourseIdAndHomeWorkId(userId, courseId, homeWorkId);
+                .findByUserIdAndCourseIdAndHomeWorkId(userId, courseId, homeWorkId);
         if (studentHomeWork == null){
             LOGGER.info("homework not found for user {} with courseID {} " +
                     "and homeWorkId {}", userId, courseId, homeWorkId);
@@ -92,7 +92,7 @@ public class StudentHomeWorkService {
     /**
      * Custom HTTP Exception class.
      */
-    public static class HttpStatusException extends RuntimeException {
+    static class HttpStatusException extends RuntimeException {
         private final HttpStatus status;
 
         /**

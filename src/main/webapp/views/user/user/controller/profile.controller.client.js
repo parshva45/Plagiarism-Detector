@@ -19,6 +19,25 @@
                     vm.user = data.result[0];
                     vm.userProfile = angular.copy(vm.user);
                 });
+
+            UserService.getHomeWorksForStudent(vm.userId)
+                .then(function(data){
+                    vm.submissions = data.RESULT;
+                    for(var i=0; i<vm.submissions.length; i++){
+                        var filename = vm.submissions[i].filePath.replace(/^.*[\\\/]/, '')
+                        vm.submissions[i].fileName = filename
+                    }
+                });
+
+            UserService.getCourseName(vm.courseId)
+                .then(function(data){
+                    vm.courseName = data.RESULT.courseName;
+                });
+
+            UserService.getHomeWorkDescription(vm.hwId)
+                .then(function(data){
+                    vm.homeWorkDescription = data.RESULT[0].description;
+                });
         }
         init();
 

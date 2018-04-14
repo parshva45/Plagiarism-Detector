@@ -36,7 +36,6 @@
     <main class="container">
         <div class="row">
             <div class="col-sm-10"><h1 ng-bind="(model.user.firstName)+' ' +(model.user.lastName)"></h1></div>
-            <div class="col-sm-2"><img title="profile image" class="img-circle img-responsive" ng-src="{{model.user.image}}" alt="Profile Image" ></div>
             <br/>
             <a ng-if="model.follow" ng-click="model.followUser()" class="btn green darken-4 pull-right">follow</a>
         </div>

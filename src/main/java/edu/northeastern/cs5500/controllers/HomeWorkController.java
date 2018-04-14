@@ -2,6 +2,7 @@ package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.model.HomeWork;
 import edu.northeastern.cs5500.service.HomeWorkService;
+import edu.northeastern.cs5500.utils.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
@@ -69,8 +70,8 @@ public class HomeWorkController {
 
     private JSONObject createResponse(List<HomeWork> homeWorkList){
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("result", homeWorkList);
-        resultMap.put("response-code", "OK");
+        resultMap.put(Constants.RESULT, homeWorkList);
+        resultMap.put(Constants.RESPONSE_CODE, "OK");
         return new JSONObject(resultMap);
     }
 

@@ -1,5 +1,7 @@
 package edu.northeastern.cs5500.service;
 
+import edu.northeastern.cs5500.model.SystemStatus;
+import edu.northeastern.cs5500.repository.SystemStatusRepository;
 import edu.northeastern.cs5500.strategies.StrategyFactory;
 import edu.northeastern.cs5500.strategies.StrategyTypes;
 import org.apache.logging.log4j.LogManager;
@@ -7,9 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.EnumSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Praveen Singh
@@ -21,10 +21,13 @@ public class FileComparisonService {
     private static final Logger LOGGER = LogManager.getLogger(FileComparisonService.class);
 
     private final StrategyFactory strategyFactory;
+    private final SystemStatusRepository systemStatusRepository;
 
     @Autowired
-    public FileComparisonService(StrategyFactory strategyFactory) {
+    public FileComparisonService(StrategyFactory strategyFactory,
+                                 SystemStatusRepository systemStatusRepository) {
         this.strategyFactory = strategyFactory;
+        this.systemStatusRepository = systemStatusRepository;
     }
 
     /**
@@ -35,10 +38,15 @@ public class FileComparisonService {
      * @return double similarity percentage out of 100%.
      */
     public double compareTwoFilesByGivenStrategy(String strategy, String firstFile, String secondFile){
-        LOGGER.info("Running compareTwoFilesByGivenStrategy for the files {} {} with strategy {}", firstFile, secondFile, secondFile);
-        return strategyFactory
+        LOGGER.info("Running compareTwoFilesByGivenStrategy for the files {} {} with strategy {}", firstFile, secondFile, strategy);
+        double score =  strategyFactory
                 .getStrategyByStrategyType(strategy)
                 .calculateSimilarity(firstFile, secondFile);
+        SystemStatus systemStatus = new SystemStatus().withCourse(1)
+                .withHomeWorkId(1).withProfessorId(1).withStrategy(strategy)
+                .withScore(score);
+        systemStatusRepository.save(systemStatus);
+        return score;
     }
 
     /**
@@ -49,5 +57,26 @@ public class FileComparisonService {
         List<StrategyTypes> strategyTypes;
         strategyTypes = new ArrayList<>(EnumSet.allOf(StrategyTypes.class));
         return strategyTypes;
+    }
+
+    /**
+     * Method returns the count of plagiarism detection tasks run.
+     * @return int count
+     */
+    public int getCount(){
+        List<SystemStatus> systemStatuses = systemStatusRepository.findAllByCourseId(1);
+        return systemStatuses.size();
+    }
+
+    public Map<String, Double> getSimilarityByAllMethods(String firstFile, String secondFile){
+        Map<String, Double> res = new HashMap<>();
+        List<StrategyTypes> strategyTypes = new ArrayList<>(EnumSet.allOf(StrategyTypes.class));
+        for (StrategyTypes strategyType:strategyTypes) {
+            res.put(strategyType.toString(),
+                    strategyFactory
+                    .getStrategyByStrategyType(strategyType.toString())
+                    .calculateSimilarity(firstFile, secondFile));
+        }
+        return res;
     }
 }

@@ -91,11 +91,12 @@ public class LevenshteinDistance implements SimilarityStrategy {
      */
     @Override
     public double calculateSimilarity(String file1, String file2){
-        String ext = FilenameUtils.getExtension(file1);
+        String ext1 = FilenameUtils.getExtension(file1);
+        String ext2 = FilenameUtils.getExtension(file2);
         /**
          * If single file comparison between two .py files is expected 
          */
-        if(ext.equals("py")){
+        if(ext1.equals("py") && ext2.equals("py")){
             String fileContentFile1 = pythonToStringParser.readFile(file1).trim();
             String fileContentFile2 = pythonToStringParser.readFile(file2).trim();
             int distance = getDistance(fileContentFile1, fileContentFile2);
@@ -104,18 +105,20 @@ public class LevenshteinDistance implements SimilarityStrategy {
         /**
          * If multiple file comparisons across two .zip files is expected 
          */
-        else{
-            List<String> firstSubmissionFiles = pythonToStringParser.parseFiles(file1);
-            List<String> secondSubmissionFiles = pythonToStringParser.parseFiles(file2);
+        else if(ext1.equals("zip") && ext2.equals("zip")){
+            List<StringBuilder> firstSubmissionFiles = pythonToStringParser.parseFiles(file1);
+            List<StringBuilder> secondSubmissionFiles = pythonToStringParser.parseFiles(file2);
             double overallSimilaritySum = 0;
-            for (String s1 : firstSubmissionFiles) {
-                for (String s2 : secondSubmissionFiles) {
-                    int distance = getDistance(s1, s2);
-                    overallSimilaritySum += (1-(double)distance / longer(s1, s2).length()) * 100;
+            for (StringBuilder s1 : firstSubmissionFiles) {
+                for (StringBuilder s2 : secondSubmissionFiles) {
+                    int distance = getDistance(s1.toString(), s2.toString());
+                    overallSimilaritySum += (1-(double)distance / longer(s1.toString(), s2.toString()).length()) * 100;
                 }
             }
             return overallSimilaritySum/(firstSubmissionFiles.size()*secondSubmissionFiles.size());
         }
+        else
+        	throw new IllegalArgumentException();
     }
 
 }

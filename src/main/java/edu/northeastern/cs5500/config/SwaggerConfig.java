@@ -10,19 +10,19 @@
 //import springfox.documentation.swagger2.annotations.EnableSwagger2;
 //
 ///**
-// * @author Praveen Singh
-// * Swagger Config File, for loading all the API's in swagger
-// */
+//* @author Praveen Singh
+//* Swagger Config File, for loading all the API's in swagger
+//*/
 //@Configuration
 //@EnableSwagger2
 //@EnableAutoConfiguration
 //public class SwaggerConfig {
-//    @Bean
-//    public Docket api() {
-//        return new Docket(DocumentationType.SWAGGER_2)
-//                .select()
-//                .apis(RequestHandlerSelectors.any())
-//                .paths(PathSelectors.any())
-//                .build();
-//    }
+//   @Bean
+//   public Docket api() {
+//       return new Docket(DocumentationType.SWAGGER_2)
+//               .select()
+//               .apis(RequestHandlerSelectors.any())
+//               .paths(PathSelectors.any())
+//               .build();
+//   }
 //}

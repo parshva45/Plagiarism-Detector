@@ -14,9 +14,11 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import java.io.*;
+import java.util.zip.*;
 
 /**
- * @author Praveen Singh
+ * @author Praveen Singh, namratabilurkar
  */
 @Component
 public class PythonToStringParser {
@@ -31,10 +33,10 @@ public class PythonToStringParser {
     	/**
     	 * Replacing all %20 by spaces for compatibility with Windows file paths
     	 */
-    	filePath = filePath.replaceAll("%20", " ");
-        LOGGER.info("Reading file {}", filePath);
+    	String file = filePath.replaceAll("%20", " ");
+        LOGGER.info("Reading file {}", file);
         StringBuilder contentBuilder = new StringBuilder();
-        try (FileReader fileReader = new FileReader(filePath);
+        try (FileReader fileReader = new FileReader(file);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -52,25 +54,25 @@ public class PythonToStringParser {
      * @param filePath Path of Zip File in string.
      * @return Returns the List of files' contents as a String List.
      */
-    public List<String> parseFiles(String filePath) {
+    public List<StringBuilder> parseFiles(String filePath) {
     	/**
     	 * Replacing all %20 by spaces for compatibility with Windows file paths
     	 */
-    	filePath = filePath.replaceAll("%20", " ");
-        LOGGER.info("Reading file {}", filePath);
-        List<String> stringFiles = new ArrayList<String>();
-        try (ZipFile fis = new ZipFile(filePath)) {
+    	String file = filePath.replaceAll("%20", " ");
+        LOGGER.info("Reading file {}", file);
+        List<StringBuilder> stringBuilderFiles = new ArrayList<>();
+        try (ZipFile fis = new ZipFile(file)) {
             for (Enumeration e = fis.entries(); e.hasMoreElements(); ) {
                 ZipEntry entry = (ZipEntry) e.nextElement();
                 InputStream in = fis.getInputStream(entry);
-                String str = IOUtils.toString(in).trim();
-                stringFiles.add(str);
+                StringBuilder contentBuilder = new StringBuilder();
+                contentBuilder.append(IOUtils.toString(in).trim());
+                stringBuilderFiles.add(contentBuilder);
             }
         }
         catch (IOException ex) {
             LOGGER.error("Exception in reading files : {}", ex.getMessage());
         }
-        return stringFiles;
+        return stringBuilderFiles;
     }
-
 }
