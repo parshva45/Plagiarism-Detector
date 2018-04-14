@@ -37,18 +37,10 @@
            type="password"
            placeholder="password"/>
 
-    <form action="/api/user/upload"  method="post" enctype="multipart/form-data">
-        <input  name="myFile"    type="file" class="form-control"/>
-        <input  name="userId"    value="{{model.userProfile._id}}"  style="display: none"/>
-        <input  name="url"        value="{{model.userProfile.image}}"   style="display: none"/>
-        <button type="submit"    class="btn btn-block blue">Upload Image</button>
-    </form>
-
     <br/>
 
     <div class="center">
         <a ng-click="model.update(model.userProfile)" class="btn green darken-1">Update</a>
         <a ng-click="model.logout()" class="btn red darken-5 ">Logout</a>
-        <!--<a ng-click="model.unregisterUser(model.user)" class="btn red darken-4">Delete</a>-->
     </div>
 </div>

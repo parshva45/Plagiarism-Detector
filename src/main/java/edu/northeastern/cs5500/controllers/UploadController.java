@@ -89,35 +89,33 @@ public class UploadController {
                            @RequestParam("link") String gitLink,
                            @RequestParam("userId") int userId,
                            @RequestParam("hwId") int hwId,
-                           @RequestParam("courseId") int courseId) throws IOException {
-    	
-    	String link = gitLink.replaceFirst("blob", "raw");
-        URL url = new URL(link);
-        String fileName = FilenameUtils.getName(url.getPath());
-        HttpURLConnection http = (HttpURLConnection)url.openConnection();
-        Map<String, List<String>> header = http.getHeaderFields();
-        while(isRedirected(header)) {
-           link = header.get("Location").get(0);
-           url = new URL(link);
-           http = (HttpURLConnection)url.openConnection();
-           header = http.getHeaderFields();
-        }
-        InputStream input = http.getInputStream();
-        byte[] fileBytes = IOUtils.toByteArray(input);
-
-        String extension = FilenameUtils.getExtension(url.getPath());
-        if ("zip".equals(extension) || "py".equals(extension)) {
-            try {
-                uploadAssignmentService.uploadAssignment(fileBytes, fileName, userId, hwId, courseId);
-            } catch (IOException e) {
-                LOGGER.error("failed to upload");
+                           @RequestParam("courseId") int courseId) {
+    	try {
+            String link = gitLink.replaceFirst("blob", "raw");
+            URL url = new URL(link);
+            String fileName = FilenameUtils.getName(url.getPath());
+            HttpURLConnection http = (HttpURLConnection)url.openConnection();
+            Map<String, List<String>> header = http.getHeaderFields();
+            while(isRedirected(header)) {
+                link = header.get("Location").get(0);
+                url = new URL(link);
+                http = (HttpURLConnection)url.openConnection();
+                header = http.getHeaderFields();
             }
-            LOGGER.info("successFull uploaded assignment");
-        }else {
-            LOGGER.info("not a python or zip file");
-        }
-        response.sendRedirect("/#/profile/" + userId);
+            InputStream input = http.getInputStream();
+            byte[] fileBytes = IOUtils.toByteArray(input);
 
+            String extension = FilenameUtils.getExtension(url.getPath());
+            if ("zip".equals(extension) || "py".equals(extension)) {
+                uploadAssignmentService.uploadAssignment(fileBytes, fileName, userId, hwId, courseId);
+                LOGGER.info("successFull uploaded assignment");
+            }else {
+                LOGGER.info("not a python or zip file");
+            }
+            response.sendRedirect("/#/profile/" + userId);
+        }catch (IOException e){
+            LOGGER.error("failed to upload");
+        }
     }
 
 }

@@ -14,9 +14,11 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
 /**
@@ -73,6 +75,18 @@ public class FileComparisonServiceTest {
 
         verify(systemStatusRepository, times(1)).findAllByCourseId(1);
         assertEquals(0, res);
+    }
+
+    @Test
+    public void fileComparisonByAllShouldWork(){
+
+        String file1 = "praveen";
+        String file2 = "praveen";
+
+        when(strategyFactory.getStrategyByStrategyType(anyString())).thenReturn(similarityStrategy);
+        when(similarityStrategy.calculateSimilarity(file1, file2)).thenReturn(10.0);
+        Map<String, Double> res = fileComparisonService.getSimilarityByAllMethods(file1, file2);
+        assertNotNull(res);
     }
 
 
