@@ -19,6 +19,7 @@ import java.net.URISyntaxException;
 import java.util.Objects;
 
 import static org.junit.Assert.fail;
+import static org.mockito.Matchers.any;
 
 /**
  * @author Praveen Singh
@@ -95,6 +96,39 @@ public class UploadControllerTest {
         Mockito.doNothing().when(uploadAssignmentService).uploadAssignment(multipartFile, 2, 2, 2);
         MockHttpServletResponse response = new MockHttpServletResponse();
         uploadController.uploadFile(response, multipartFile, 2, 2, 2);
+    }
+
+    @Test
+    public void uploadControllerShouldUploadGitFile() throws IOException {
+        String file = "https://github.com/toddmotto/public-apis/blob/master/build/validate_format.py";
+        Mockito.doNothing().when(uploadAssignmentService).uploadAssignment(Mockito.any(),
+                any(String.class), any(Integer.class), any(Integer.class), any(Integer.class));
+        MockHttpServletResponse response = new MockHttpServletResponse();
+        uploadController.uploadGitFile(response, file, 1, 1, 1);
+    }
+
+    @Test
+    public void uploadControllerShouldUploadGitFileShouldThrowException() {
+        String file = "https://github.com/toddmotto/public-apis/blob/master/build/validate_format.py";
+        try {
+            Mockito.doThrow(IOException.class).when(uploadAssignmentService).uploadAssignment(Mockito.any(),
+                    any(String.class), any(Integer.class), any(Integer.class), any(Integer.class));
+            MockHttpServletResponse response = new MockHttpServletResponse();
+            uploadController.uploadGitFile(response, file, 1, 1, 1);
+//            fail();
+        } catch (Exception e) {
+
+        }
+    }
+
+    @Test
+    public void uploadControllerShouldNotUploadWhenNotPythonFile() throws IOException {
+        String file = "https://github.com/praveenksingh/BookYourFlight/blob/master/mongo/app.js";
+        Mockito.doNothing().when(uploadAssignmentService).uploadAssignment(Mockito.any(),
+                any(String.class), any(Integer.class), any(Integer.class), any(Integer.class));
+        MockHttpServletResponse response = new MockHttpServletResponse();
+        uploadController.uploadGitFile(response, file, 1, 1, 1);
+
     }
 
 }

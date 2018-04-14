@@ -5,7 +5,5 @@ package edu.northeastern.cs5500.service;
  */
 public class CompareAllService {
 
-    public void compareAllUserSubmissions(){
 
-    }
 }
