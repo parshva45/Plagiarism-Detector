@@ -109,15 +109,14 @@ public class UploadAssignmentService {
     private void uploadAssignmentToDatabase(String filepath, int userId, int courseId, int hwId){
         List<StudentHomeWork> studentHomeWorkList = studentHomeWorkRepository
                 .findByUserIdAndCourseIdAndHomeWorkId(userId, courseId, hwId);
+        StudentHomeWork studentHomeWork;
         if(studentHomeWorkList.isEmpty()) {
-            StudentHomeWork studentHomeWork = createStudentHomeWorkEntity(userId,
+            studentHomeWork = createStudentHomeWorkEntity(userId,
                     courseId, hwId, filepath);
-
-            studentHomeWorkRepository.save(studentHomeWork);
         }else{
-            StudentHomeWork studentHomeWork = studentHomeWorkList.get(0);
-            studentHomeWorkRepository.updateHomeWorkPath(filepath, studentHomeWork.getId());
+            studentHomeWork = studentHomeWorkList.get(0).withPath(filepath);
         }
+        studentHomeWorkRepository.save(studentHomeWork);
     }
 
 }
