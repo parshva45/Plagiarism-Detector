@@ -69,7 +69,6 @@ public class UploadAssignmentServiceTest {
         when(env.getProperty("fileupload.paths.uploadedFiles")).thenReturn("./uploads");
         when(studentHomeWorkRepository.findByUserIdAndCourseIdAndHomeWorkId(1,1,1))
                 .thenReturn(studentHomeWorks);
-        doNothing().when(studentHomeWorkRepository).updateHomeWorkPath(isA(String.class), isA(Integer.class));
 
         uploadAssignmentService.uploadAssignment(multipartFile, 1, 1, 1);
 
