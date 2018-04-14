@@ -1,5 +1,8 @@
 package edu.northeastern.cs5500.utils;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
+
 public class Constants {
 
     private Constants(){}
@@ -14,5 +17,7 @@ public class Constants {
 
     public static final String RESULT = "RESULT";
     public static final String RESPONSE_CODE = "response-code";
+
+    public final String PLAGIARISM_THRESHHOLD = "plagiarism.threshhold";
 
 }
