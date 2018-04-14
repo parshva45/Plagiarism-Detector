@@ -8,10 +8,6 @@ public class PlagiarismReportJSON {
     private String secondUser;
     private Double similarityScore;
 
-    public String getFirstUser() {
-        return firstUser;
-    }
-
     private void setFirstUser(String firstUser) {
         this.firstUser = firstUser;
     }
@@ -21,10 +17,6 @@ public class PlagiarismReportJSON {
         return this;
     }
 
-    public String getSecondUser() {
-        return secondUser;
-    }
-
     private void setSecondUser(String secondUser) {
         this.secondUser = secondUser;
     }
@@ -32,10 +24,6 @@ public class PlagiarismReportJSON {
     public PlagiarismReportJSON withSecondUser(String secondUser){
         this.setSecondUser(secondUser);
         return this;
-    }
-
-    public Double getSimilarityScore() {
-        return similarityScore;
     }
 
     private void setSimilarityScore(Double similarityScore) {

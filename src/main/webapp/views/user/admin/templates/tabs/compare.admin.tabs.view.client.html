@@ -32,6 +32,11 @@
     </div>
 
     <div ng-show="assignment != undefined">
+        <a ng-click="model.compareAll()" class="btn red darken-5">Find for Entire Class</a>
+        <div ng-show="selectedCompareAll != null"><b>Results will be sent on your registered email address !! </b></div>
+    </div>
+
+    <div ng-show="assignment != undefined">
 
       <h5>Select two students</h5>
 
