@@ -17,4 +17,10 @@ public interface SimilarityStrategy {
      */
     double calculateSimilarity(String file1, String file2);
 
+    /**
+     *
+     * @return array of similar lines
+     */
+    int[][] getsimilarLineNos(String file1, String file2);
+
 }

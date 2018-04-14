@@ -49,6 +49,20 @@ public class FileComparisonService {
         return score;
     }
 
+    public int[][] findLineNumbersByGivenStrategy(String strategy, String firstFile, String secondFile){
+        LOGGER.info("Running findLineNumbersByGivenStrategy for the files {} {} with strategy {}", firstFile, secondFile, strategy);
+        int[][] lineNumbers =  strategyFactory
+                .getStrategyByStrategyType(strategy)
+                .getsimilarLineNos(firstFile, secondFile);
+        /*SystemStatus systemStatus = new SystemStatus().withCourse(1)
+                .withHomeWorkId(1).withProfessorId(1).withStrategy(strategy)
+                .withScore(score);
+        systemStatusRepository.save(systemStatus);*/
+        return lineNumbers;
+    }
+
+
+
     /**
      * Method to get the list of strategies present in the system
      * @return List of strategies in Strinf.

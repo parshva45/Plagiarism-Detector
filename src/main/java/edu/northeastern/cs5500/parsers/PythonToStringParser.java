@@ -40,8 +40,7 @@ public class PythonToStringParser {
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                if (line.trim().length() > 0)
-                    contentBuilder.append(line).append("\n");
+                contentBuilder.append(line).append("\n");
             }
         } catch (IOException ex) {
             LOGGER.error("Exception in reading files : {}", ex.getMessage());

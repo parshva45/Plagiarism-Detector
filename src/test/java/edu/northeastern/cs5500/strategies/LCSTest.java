@@ -54,7 +54,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	@Test
 	public void compares1s2Test() {
     	double similarityMeasure = lcs.calculateSimilarity(file1, file2);
-    	assertEquals(21.96, similarityMeasure, 0.01);
+    	assertEquals(21.83, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	@Test
 	public void compares1s3Test() {
 		double similarityMeasure = lcs.calculateSimilarity(file1, file3);
-    	assertEquals(43.25, similarityMeasure, 0.01);
+    	assertEquals(43.40, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -72,7 +72,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	@Test
 	public void compares1s4Test() {
 		double similarityMeasure = lcs.calculateSimilarity(file1, file4);
-    	assertEquals(14.67, similarityMeasure, 0.01);
+    	assertEquals(14.40, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	@Test
 	public void compares2s3Test() {
 		double similarityMeasure = lcs.calculateSimilarity(file2, file3);
-    	assertEquals(20.82, similarityMeasure, 0.01);
+    	assertEquals(20.79, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -90,7 +90,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	@Test
 	public void compares2s4Test() {
 		double similarityMeasure = lcs.calculateSimilarity(file2, file4);
-    	assertEquals(28.34, similarityMeasure, 0.01);
+    	assertEquals(28.42, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -99,7 +99,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	@Test
 	public void compares3s4Test() {
     	double similarityMeasure = lcs.calculateSimilarity(file3, file4);
-    	assertEquals(12.96, similarityMeasure, 0.01);
+    	assertEquals(12.73, similarityMeasure, 0.01);
 	}
 
 	/**
@@ -117,7 +117,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	public void calculateSimilarityShouldGiveCorrectResult(){
 		double res = lcs.calculateSimilarity(
 				getFilePath("submission3.py"), getFilePath("submission4.py"));
-		assertEquals(12.96, res, 0.01);
+		assertEquals(12.73, res, 0.01);
 	}
 	
 	/**
@@ -127,7 +127,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	public void addOrDeleteRedundantElementsPlagiarismType(){
 		double res = lcs.calculateSimilarity(
 				getFilePath("crawler.py"), getFilePath("focused_crawler.py"));
-		assertEquals(80.34, res, 0.01);
+		assertEquals(80.46, res, 0.01);
 	}
 	
 	/**
@@ -137,7 +137,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	public void changeCommentsPlagiarismType(){
 		double res = lcs.calculateSimilarity(
 				getFilePath("page_rank1.py"), getFilePath("page_rank2.py"));
-		assertEquals(90.89, res, 0.01);
+		assertEquals(90.99, res, 0.01);
 	}
 	
 	/**
@@ -147,7 +147,16 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	public void changeNamesPlagiarismType(){
 		double res = lcs.calculateSimilarity(
 				getFilePath("crawler1.py"), getFilePath("crawler2.py"));
-		assertEquals(92.54, res, 0.01);
+		assertEquals(92.62, res, 0.01);
+        System.out.println("here");
+        int[][] test = lcs.getsimilarLineNos(
+                getFilePath("crawler1.py"), getFilePath("crawler2.py"));
+        for(int i=0; i<2; i++) {
+            for (int j = 0; j < test[i].length; j++) {
+                System.out.print((test[i][j] + 1) + ",");
+            }
+            System.out.println();
+        }
 	}
 	
 	/**
@@ -167,7 +176,7 @@ public class LCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests{
 	public void rewriteLoopsPlagiarismType(){
 		double res = lcs.calculateSimilarity(
 				getFilePath("indexer1.py"), getFilePath("indexer2.py"));
-		assertEquals(94.39, res, 0.01);
+		assertEquals(94.42, res, 0.01);
 	}
 
 	/**
