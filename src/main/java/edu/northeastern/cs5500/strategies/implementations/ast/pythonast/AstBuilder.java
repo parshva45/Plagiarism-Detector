@@ -8,11 +8,7 @@ import edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Pytho
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.RuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
-@Component
-@Scope("prototype")
 public class AstBuilder {
 
     private boolean ignoringWrappers = true;
@@ -78,19 +74,21 @@ public class AstBuilder {
      */
     private String completeAstString(String astInput) {
         int temp = 0;
+        StringBuilder astString = new StringBuilder(astInput);
+
         for (int i=0; i<astInput.length(); i++) {
-            if (astInput.charAt(i) == '{') {
+            if (astString.charAt(i) == '{') {
                 temp++;
             }
-            if (astInput.charAt(i) == '}') {
+            if (astString.charAt(i) == '}') {
                 temp--;
             }
         }
         while (temp>0) {
-            astInput += "}";
+            astString.append("}");
             temp--;
         }
-        return astInput;
+        return astString.toString();
     }
 
 }
