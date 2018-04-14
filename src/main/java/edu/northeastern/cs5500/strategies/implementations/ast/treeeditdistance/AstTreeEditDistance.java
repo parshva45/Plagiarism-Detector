@@ -22,23 +22,7 @@ import java.io.IOException;
 @Scope("prototype")
 public class AstTreeEditDistance implements SimilarityStrategy {
 
-    private final AstBuilder astBuilder1;
-    private final AstBuilder astBuilder2;
-    private final ParserFacade parserFacade;
-
     private static final Logger LOGGER = LogManager.getLogger(AstTreeEditDistance.class);
-
-    /**
-     * Parameterized constructor
-     * @param astBuilder1 builder for first file
-     * @param astBuilder2 builder for second file
-     * @param parserFacade parser to create the ASTs
-     */
-    public AstTreeEditDistance(AstBuilder astBuilder1, AstBuilder astBuilder2, ParserFacade parserFacade) {
-        this.astBuilder1 = astBuilder1;
-        this.astBuilder2 = astBuilder2;
-        this.parserFacade = parserFacade;
-    }
 
     /**
      * Calculate the similarity score using the tree edit distance
@@ -49,11 +33,12 @@ public class AstTreeEditDistance implements SimilarityStrategy {
     @Override
     public double calculateSimilarity(String file1, String file2) {
 
-        String ast1, ast2;
+        String ast1;
+        String ast2;
 
         try {
-            ast1 = astBuilder1.build(parserFacade.parse(new File(file1)));
-            ast2 = astBuilder2.build(parserFacade.parse(new File(file2)));
+            ast1 = new AstBuilder().build(new ParserFacade().parse(new File(file1)));
+            ast2 = new AstBuilder().build(new ParserFacade().parse(new File(file2)));
 
             int ast1Length = ast1.length();
             int ast2Length = ast2.length();

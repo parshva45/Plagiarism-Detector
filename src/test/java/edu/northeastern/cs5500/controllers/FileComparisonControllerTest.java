@@ -1,5 +1,6 @@
 package edu.northeastern.cs5500.controllers;
 
+import edu.northeastern.cs5500.service.CompareAllService;
 import edu.northeastern.cs5500.service.FileComparisonService;
 import edu.northeastern.cs5500.strategies.StrategyTypes;
 import org.json.simple.JSONObject;
@@ -25,6 +26,9 @@ public class FileComparisonControllerTest {
 
     @Mock
     private FileComparisonService fileComparisonService;
+
+    @Mock
+    private CompareAllService compareAllService;
 
     @InjectMocks
     private FileComparisonController fileComparisonController;
@@ -86,6 +90,16 @@ public class FileComparisonControllerTest {
 
         verify(fileComparisonService, times(1)).getSimilarityByAllMethods(firstFile, secondFile);
 
+    }
+
+    @Test
+    public void getComparisonByAllShouldRunAsExpected(){
+        Integer userId = 1;
+        doNothing().when(compareAllService).process(userId);
+        JSONObject jsonObject = fileComparisonController.asyncCompareAll(userId);
+        verify(compareAllService, times(1)).process(userId);
+        assertNotNull(jsonObject);
+        assertEquals("OK", jsonObject.get("status"));
     }
 
 }

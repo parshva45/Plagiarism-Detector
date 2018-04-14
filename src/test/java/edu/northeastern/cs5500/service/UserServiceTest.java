@@ -25,7 +25,7 @@ public class UserServiceTest{
     private UserRepository userRepository;
 
     @Mock
-    private RegisterEmail registerEmail;
+    private EmailService emailService;
 
     @InjectMocks
     private UserService userService;
@@ -113,14 +113,14 @@ public class UserServiceTest{
         User user = userService.createUserObject(registerRequestJSON);
 
         when(userRepository.save(user)).thenReturn(user);
-        doNothing().when(registerEmail).sendEmail(registerRequestJSON.getUserName(),
-                registerRequestJSON.getEmail());
+        doNothing().when(emailService).sendEmail(registerRequestJSON.getUserName(),
+                registerRequestJSON.getEmail(), null);
 
         userService.addUserAndSendEmail(user);
 
         verify(userRepository, times(1)).save(user);
-        verify(registerEmail, times(1)).sendEmail(registerRequestJSON.getUserName(),
-                registerRequestJSON.getEmail());
+        verify(emailService, times(1)).sendEmail(registerRequestJSON.getUserName(),
+                registerRequestJSON.getEmail(), null);
     }
 
     @Test

@@ -25,26 +25,6 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
 
     private static final Logger LOGGER = LogManager.getLogger(LongestCommonSubSequence.class);
 
-    private final ParserFacade parserFacade;
-    private final AstBuilder astBuilder1;
-    private final AstBuilder astBuilder2;
-    private final PythonToStringParser pythonToStringParser;
-
-    /**
-     * Parameterized constructor
-     * @param parserFacade is an object of ParserFacade
-     * @param astBuilder is an object of AstBuilder
-     * @param pythonToStringParser is an object of PythonToStringParser
-     */
-    @Autowired
-    public LongestCommonSubSequence(ParserFacade parserFacade, AstBuilder astBuilder1,
-                                    AstBuilder astBuilder2, PythonToStringParser pythonToStringParser) {
-        this.parserFacade = parserFacade;
-        this.astBuilder1 = astBuilder1;
-        this.astBuilder2 = astBuilder2;
-        this.pythonToStringParser = pythonToStringParser;
-    }
-
     /**
      * Determine the longest common subsequence length
      * @param ast1 is the AST of the first file
@@ -87,10 +67,12 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
      */
     @Override
     public double calculateSimilarity(String file1, String file2) {
-        String ast1, ast2;
+        String ast1;
+        String ast2;
+
         try {
-            ast1 = astBuilder1.build(parserFacade.parse(new File(file1)));
-            ast2 = astBuilder2.build(parserFacade.parse(new File(file2)));
+            ast1 = new AstBuilder().build(new ParserFacade().parse(new File(file1)));
+            ast2 = new AstBuilder().build(new ParserFacade().parse(new File(file2)));
             int[] lcsValues = lcsLength(ast1, ast2);
             return (((double) (lcsValues[1] - lcsValues[0]) / lcsValues[1]) * 100);
         } catch (IOException e) {

@@ -40,9 +40,4 @@ public interface StudentHomeWorkRepository extends JpaRepository<StudentHomeWork
      * @return List of StudentHomeWork object
      */
     List<StudentHomeWork> findAllByCourseIdAndAndHomeWorkId(Integer courseId, Integer homeWorkId);
-
-
-    @Modifying
-    @Query("update StudentHomeWork sh set sh.filePath = ?1 where sh.id = ?2")
-    void updateHomeWorkPath(String filePath,  Integer id);
 }
