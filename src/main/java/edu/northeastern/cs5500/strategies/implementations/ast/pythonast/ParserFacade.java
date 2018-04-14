@@ -4,8 +4,6 @@ import edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Pytho
 import edu.northeastern.cs5500.strategies.implementations.ast.pythonparser.Python3Parser;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,8 +15,6 @@ import static edu.northeastern.cs5500.strategies.implementations.ast.pythonparse
 /**
  * @author namratabilurkar
  */
-@Component
-@Scope("prototype")
 public class ParserFacade {
 
     private static String readFile(File file, Charset encoding) throws IOException {
