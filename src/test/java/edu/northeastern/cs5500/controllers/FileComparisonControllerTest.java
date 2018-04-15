@@ -43,7 +43,7 @@ public class FileComparisonControllerTest {
         String firstFile = "praveen.txt";
         String secondFile = "singh.txt";
         String strategy = "demo";
-        when(env.getProperty(Constants.PLAGIARISM_THRESHHOLD)).thenReturn("40.0");
+        when(env.getProperty(Constants.PLAGIARISM_THRESHOLD)).thenReturn("40.0");
         when(fileComparisonService
                 .compareTwoFilesByGivenStrategy(strategy, firstFile, secondFile))
                 .thenReturn(10.0);
@@ -53,7 +53,7 @@ public class FileComparisonControllerTest {
 
         verify(fileComparisonService, times(1))
                 .compareTwoFilesByGivenStrategy(strategy, firstFile, secondFile);
-        verify(env, times(1)).getProperty(Constants.PLAGIARISM_THRESHHOLD);
+        verify(env, times(1)).getProperty(Constants.PLAGIARISM_THRESHOLD);
 
         assertNotNull(jsonObject);
         assertEquals(firstFile, jsonObject.get("firstFile"));

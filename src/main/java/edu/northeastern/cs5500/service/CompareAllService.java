@@ -54,7 +54,7 @@ public class CompareAllService {
         LOGGER.info("process started by user {}, email will be sent to user", professor.getId());
         List<StudentHomeWork> studentHomeWorkList = studentHomeWorkRepository.findAllByCourseIdAndAndHomeWorkId(1, 1);
         List<PlagiarismReportJSON> plagiarismReportJSONList = new ArrayList<>();
-        Double threshHold = Double.parseDouble(env.getProperty(Constants.PLAGIARISM_THRESHHOLD));
+        Double threshHold = Double.parseDouble(env.getProperty(Constants.PLAGIARISM_THRESHOLD));
         for (StudentHomeWork studentHomeWork: studentHomeWorkList) {
             for (StudentHomeWork studentHomeWorkCompare: studentHomeWorkList) {
 

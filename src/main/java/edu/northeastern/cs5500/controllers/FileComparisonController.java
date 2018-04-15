@@ -107,7 +107,7 @@ public class FileComparisonController {
     		String secondFile, double similarity,
                                            int[][] lineNumbers, String status){
         Map<String, Object> resultMap = new HashMap<>();
-        Double threshHold = Double.parseDouble(env.getProperty(Constants.PLAGIARISM_THRESHHOLD));
+        Double threshHold = Double.parseDouble(env.getProperty(Constants.PLAGIARISM_THRESHOLD));
         resultMap.put("similarity", valueOf(similarity));
         resultMap.put("lineNumbers", lineNumbers);
         resultMap.put("strategy", strategy);

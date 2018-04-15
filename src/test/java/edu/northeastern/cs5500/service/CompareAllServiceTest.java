@@ -68,7 +68,7 @@ public class CompareAllServiceTest {
 
 
         when(userRepository.findById(userId)).thenReturn(professor);
-        when(env.getProperty(Constants.PLAGIARISM_THRESHHOLD)).thenReturn("40.0");
+        when(env.getProperty(Constants.PLAGIARISM_THRESHOLD)).thenReturn("40.0");
         when(studentHomeWorkRepository.findAllByCourseIdAndAndHomeWorkId(1, 1))
                 .thenReturn(studentHomeWorkList);
         when(fileComparisonService.compareTwoFilesByGivenStrategy(StrategyTypes.LEVENSHTEIN_DISTANCE.toString(),
