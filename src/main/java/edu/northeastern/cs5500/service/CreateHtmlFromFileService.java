@@ -31,6 +31,7 @@ public class CreateHtmlFromFileService {
                 else
                     contentBuilder.append("<div>").append(line);
                 contentBuilder.append("</div>").append("\n");
+                count++;
             }
         } catch (IOException ex) {
             LOGGER.error("Exception in creating HTML from file : {} error : {}", filePath, ex.getMessage());
