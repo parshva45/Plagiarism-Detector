@@ -40,9 +40,6 @@ public class LCS implements SimilarityStrategy {
         if(ext1.equals("py") && ext2.equals("py")){
             String fileContentFile1 = pythonToStringParser.readFile(file1);
             String fileContentFile2 = pythonToStringParser.readFile(file2);
-            String[] fileLines1 = fileContentFile1.split("\\r?\\n");
-            String[] fileLines2 = fileContentFile2.split("\\r?\\n");
-            calculateLineNumbers(fileLines1, fileLines2);
             int distance = getDistance(fileContentFile1, fileContentFile2);
             return distance/(double)longerStringLength(fileContentFile1,fileContentFile2)*100;
         }
@@ -91,6 +88,12 @@ public class LCS implements SimilarityStrategy {
         return l[m][n];
     }
 
+    /**
+     * Method to compute line numbers of similar lines between file1 and file2 using LCS strategy (can be .py or .zip files)
+     * @param file1 String
+     * @param file2 String
+     * @return 2D int matrix
+     */
     @Override
     public int[][] getsimilarLineNos(String file1, String file2) {
         String ext1 = FilenameUtils.getExtension(file1);
@@ -114,10 +117,10 @@ public class LCS implements SimilarityStrategy {
     }
 
     /**
-     * Method to calculate distance between file1 and file2 using LCS strategy (can be .py or .zip files)
-     * @param s1 String array with file lines
-     * @param s2 String array with file lines
-     * @return distance between file1 and file2 using LCS strategy int
+     * Method to compute line numbers of similar lines between file1 and file2 using LCS strategy (can be .py or .zip files)
+     * @param s1 String array with file1 lines
+     * @param s2 String array with file2 lines
+     * @return 2D int matrix
      */
     int[][] calculateLineNumbers(String[] s1, String[] s2) {
         Map<Integer, Integer> selectedLinesMap;
@@ -223,15 +226,21 @@ public class LCS implements SimilarityStrategy {
         return sb.toString();
     }
 
+    /**
+     * Method to return length of longer string array
+     * @param s1 String array
+     * @param s2 String array
+     * @return length of the longer string array among s1 and s2 String arrays
+     */
     private int longerLength(String[] s1, String[] s2){
         return s1.length >= s2.length ? s1.length : s2.length;
     }
 
     /**
-     * Method to return longer string
+     * Method to return length of longer string
      * @param s1 String
      * @param s2 String
-     * @return length of the longer string among s1 and s2 String
+     * @return length of the longer string among s1 and s2 Strings
      */
     private int longerStringLength(String s1, String s2) {
         return s1.length() >= s2.length() ? s1.length() : s2.length();

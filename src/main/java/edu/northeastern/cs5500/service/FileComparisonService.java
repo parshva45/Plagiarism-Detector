@@ -49,18 +49,20 @@ public class FileComparisonService {
         return score;
     }
 
+    /**
+     * Method to find line numbers of similar lines between 2 given files based on the given strategy
+     * @param strategy ENUM
+     * @param firstFile String location of first file on server
+     * @param secondFile String location of second file on server
+     * @return 2D integer matrix.
+     */
     public int[][] findLineNumbersByGivenStrategy(String strategy, String firstFile, String secondFile){
         LOGGER.info("Running findLineNumbersByGivenStrategy for the files {} {} with strategy {}", firstFile, secondFile, strategy);
         int[][] lineNumbers =  strategyFactory
                 .getStrategyByStrategyType(strategy)
                 .getsimilarLineNos(firstFile, secondFile);
-        /*SystemStatus systemStatus = new SystemStatus().withCourse(1)
-                .withHomeWorkId(1).withProfessorId(1).withStrategy(strategy)
-                .withScore(score);
-        systemStatusRepository.save(systemStatus);*/
         return lineNumbers;
     }
-
 
 
     /**
