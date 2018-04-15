@@ -50,6 +50,22 @@ public class FileComparisonService {
     }
 
     /**
+     * Method to find line numbers of similar lines between 2 given files based on the given strategy
+     * @param strategy ENUM
+     * @param firstFile String location of first file on server
+     * @param secondFile String location of second file on server
+     * @return 2D integer matrix.
+     */
+    public int[][] findLineNumbersByGivenStrategy(String strategy, String firstFile, String secondFile){
+        LOGGER.info("Running findLineNumbersByGivenStrategy for the files {} {} with strategy {}", firstFile, secondFile, strategy);
+        int[][] lineNumbers =  strategyFactory
+                .getStrategyByStrategyType(strategy)
+                .getsimilarLineNos(firstFile, secondFile);
+        return lineNumbers;
+    }
+
+
+    /**
      * Method to get the list of strategies present in the system
      * @return List of strategies in Strinf.
      */

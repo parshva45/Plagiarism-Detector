@@ -86,11 +86,12 @@ public class FileComparisonController {
                 strategy, firstFile, secondFile);
         double similarity = fileComparisonService
                 .compareTwoFilesByGivenStrategy(strategy, firstFile, secondFile);
+        int[][] lineNumbers = fileComparisonService
+                .findLineNumbersByGivenStrategy(strategy, firstFile, secondFile);
 
         LOGGER.info("getSimilarityBetweenGivenFiles API returned data successfully.");
         return prepareResponseJson(strategy, firstFile, secondFile,
-                similarity, "OK");
-
+               similarity, lineNumbers, "OK");
     }
 
     /**
@@ -103,11 +104,12 @@ public class FileComparisonController {
      * @return JSONObject
      */
     private JSONObject prepareResponseJson(String strategy, String firstFile,
-                                           String secondFile, double similarity,
-                                           String status){
-        Map<String, String> resultMap = new HashMap<>();
+    		String secondFile, double similarity,
+                                           int[][] lineNumbers, String status){
+        Map<String, Object> resultMap = new HashMap<>();
         Double threshHold = Double.parseDouble(env.getProperty(Constants.PLAGIARISM_THRESHHOLD));
         resultMap.put("similarity", valueOf(similarity));
+        resultMap.put("lineNumbers", lineNumbers);
         resultMap.put("strategy", strategy);
         resultMap.put("response-code", status);
         resultMap.put("firstFile", firstFile);

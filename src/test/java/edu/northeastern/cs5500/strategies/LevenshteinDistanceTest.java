@@ -56,7 +56,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s1, s2);
     	double similarityMeasure = (1-(double)levenshteinDistance/levenshteinDistanceObj
 				.longer(s1,s2).length())*100;
-    	assertEquals(20.89, similarityMeasure, 0.01);
+    	assertEquals(20.65, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -67,7 +67,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s1,s3);
     	double similarityMeasure = (1-(double)levenshteinDistance/levenshteinDistanceObj
 				.longer(s1,s3).length())*100;
-    	assertEquals(23.63, similarityMeasure, 0.01);
+    	assertEquals(23.11, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -78,7 +78,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s1,s4);
     	double similarityMeasure = (1-(double)levenshteinDistance/levenshteinDistanceObj
 				.longer(s1,s4).length())*100;
-    	assertEquals(14.41, similarityMeasure, 0.01);
+    	assertEquals(14.07, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -89,7 +89,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s2,s3);
     	double similarityMeasure = (1-(double)levenshteinDistance/levenshteinDistanceObj
 				.longer(s2,s3).length())*100;
-    	assertEquals(19.76, similarityMeasure, 0.01);
+    	assertEquals(19.69, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -100,7 +100,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 		int levenshteinDistance = levenshteinDistanceObj.getDistance(s2, s4);
     	double similarityMeasure = (1-(double)levenshteinDistance/levenshteinDistanceObj
 				.longer(s2,s4).length())*100;
-    	assertEquals(23.15, similarityMeasure, 0.01);
+    	assertEquals(23.47, similarityMeasure, 0.01);
 	}
 	
 	/**
@@ -110,7 +110,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 	public void compares3s4Test() {
     	double similarityMeasure = levenshteinDistanceObj.calculateSimilarity(
 				getFilePath("submission3.py"), getFilePath("submission4.py"));
-    	assertEquals(12.26, similarityMeasure, 0.01);
+    	assertEquals(11.93, similarityMeasure, 0.01);
 	}
 
 	/**
@@ -128,7 +128,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 	public void calculateSimilarityShouldGiveCorrectResult(){
 		double res = levenshteinDistanceObj.calculateSimilarity(
 				getFilePath("submission3.py"), getFilePath("submission4.py"));
-		assertEquals(12.26, res, 0.01);
+		assertEquals(11.93, res, 0.01);
 	}
 	
 	/**
@@ -138,7 +138,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 	public void addOrDeleteRedundantElementsPlagiarismType(){
 		double res = levenshteinDistanceObj.calculateSimilarity(
 				getFilePath("crawler.py"), getFilePath("focused_crawler.py"));
-		assertEquals(76.57, res, 0.01);
+		assertEquals(76.73, res, 0.01);
 	}
 	
 	/**
@@ -148,7 +148,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 	public void changeCommentsPlagiarismType(){
 		double res = levenshteinDistanceObj.calculateSimilarity(
 				getFilePath("page_rank1.py"), getFilePath("page_rank2.py"));
-		assertEquals(88.85, res, 0.01);
+		assertEquals(88.92, res, 0.01);
 	}
 	
 	/**
@@ -158,7 +158,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 	public void changeNamesPlagiarismType(){
 		double res = levenshteinDistanceObj.calculateSimilarity(
 				getFilePath("crawler1.py"), getFilePath("crawler2.py"));
-		assertEquals(91.13, res, 0.01);
+		assertEquals(91.22, res, 0.01);
 	}
 	
 	/**
@@ -178,7 +178,7 @@ public class LevenshteinDistanceTest extends Cs5500PlagiarismDetectorTeam207Appl
 	public void rewriteLoopsPlagiarismType(){
 		double res = levenshteinDistanceObj.calculateSimilarity(
 				getFilePath("indexer1.py"), getFilePath("indexer2.py"));
-		assertEquals(94.37, res, 0.01);
+		assertEquals(94.39, res, 0.01);
 	}
 
 	/**

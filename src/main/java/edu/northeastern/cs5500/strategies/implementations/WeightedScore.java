@@ -24,7 +24,6 @@ public class WeightedScore implements SimilarityStrategy {
      * Parameterized constructor
      * @param lcs is the object to LCS strategy
      * @param levenshteinDistance  is the object to Levenshtein strategy
-     * @param fileMetaData is the object to file meta data strategy
      * @param longestCommonSubSequence is the object to AST LCS strategy
      * @param astTreeEditDistance is the object to AST Tree edit distance strategy
      */
@@ -57,4 +56,10 @@ public class WeightedScore implements SimilarityStrategy {
                 + (Constants.AST_LCS_WEIGHT * longestCommonSubScore
         + (Constants.AST_TREE_EDIT_WEIGHT * treeEditDistScore));
     }
+
+    @Override
+    public int[][] getsimilarLineNos(String file1, String file2) {
+        return new int[0][];
+    }
+
 }
