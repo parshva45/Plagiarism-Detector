@@ -136,8 +136,18 @@
                     $scope.similarity_measure = data.similarity;
                     $scope.chosen_strategy = strategy;
                     $scope.result_ready = true;
+                    var result = 'Plagiarism Found';
+                    if(data.plagiarism !== "Yes"){
+                        result = 'Plagiarism Not Found';
+                    }
+                    $scope.collapsibleElements = [{
+                        color: 'red',
+                        icon: 'mdi-image-filter-drama',
+                        title: result,
+                        content: 'Lorem ipsum dolor sit amet.'
+                    }];
                 });
-        }
+        };
 
     }
 })();
