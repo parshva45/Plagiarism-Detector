@@ -21,7 +21,7 @@ public class CreateHtmlFromFileService {
         List linesList = Arrays.asList(lines);
         LOGGER.info("Reading file {}", filePath);
         StringBuilder contentBuilder = new StringBuilder();
-        int count = 1;
+        int count = 0;
         try (FileReader fileReader = new FileReader(filePath);
              BufferedReader bufferedReader = new BufferedReader(fileReader)) {
             String line;
@@ -36,7 +36,7 @@ public class CreateHtmlFromFileService {
         } catch (IOException ex) {
             LOGGER.error("Exception in creating HTML from file : {} error : {}", filePath, ex.getMessage());
         }
-        return contentBuilder.toString();
+        return contentBuilder.toString().replaceAll("<div></div>","<br>");
     }
 
 
