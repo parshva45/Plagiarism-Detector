@@ -40,7 +40,7 @@ public class LCS implements SimilarityStrategy {
         if(ext1.equals("py") && ext2.equals("py")){
             String fileContentFile1 = pythonToStringParser.readFile(file1);
             String fileContentFile2 = pythonToStringParser.readFile(file2);
-            int distance = getDistance(fileContentFile1, fileContentFile2);
+            int distance = getMatrix(fileContentFile1, fileContentFile2)[fileContentFile1.length()][fileContentFile2.length()];
             return distance/(double)longerStringLength(fileContentFile1,fileContentFile2)*100;
         }
         /**
@@ -52,7 +52,7 @@ public class LCS implements SimilarityStrategy {
             double overallSimilaritySum = 0;
             for (StringBuilder s1 : firstSubmissionFiles) {
                 for (StringBuilder s2 : secondSubmissionFiles) {
-                    int distance = getDistance(s1.toString(), s2.toString());
+                    int distance = getMatrix(s1.toString(), s2.toString())[s1.toString().length()][s2.toString().length()];
                     overallSimilaritySum += distance/(double)longerStringLength(s1.toString(), s2.toString())*100;
                 }
             }
@@ -63,16 +63,15 @@ public class LCS implements SimilarityStrategy {
     }
 
     /**
-     * Method to calculate distance between file1 and file2 using LCS strategy (can be .py or .zip files)
+     * Method to calculate distance matrix between file1 and file2 using LCS strategy (can be .py or .zip files)
      * @param s1 String
      * @param s2 String
-     * @return distance between file1 and file2 using LCS strategy int
+     * @return distance matrix between file1 and file2 using LCS strategy int
      */
-    int getDistance(String s1, String s2) {
+    int[][] getMatrix(String s1, String s2) {
         int m = s1.length();
         int n = s2.length();
         int[][] l = new int[m+1][n+1];
-
         for (int i=0; i<=m; i++)
         {
             for (int j=0; j<=n; j++)
@@ -85,14 +84,46 @@ public class LCS implements SimilarityStrategy {
                     l[i][j] = Math.max(l[i-1][j], l[i][j-1]);
             }
         }
-        return l[m][n];
+        return l;
+    }
+    
+    /**
+     * @param str1 String from first file that needs to be compared
+     * @param str2 String from second file that needs to be compared
+     * @return LCS string length of str1 and str2 int
+     */
+    private int lcs(String str1, String str2)
+    {
+        int l1 = str1.length();
+        int l2 = str2.length();
+
+        int i = 0;
+        int j = 0;
+
+        int[][] arr = getMatrix(str1, str2);
+
+        StringBuilder sb = new StringBuilder();
+        while (i < l1 && j < l2)
+        {
+            if (str1.charAt(i) == str2.charAt(j))
+            {
+                sb.append(str1.charAt(i));
+                i++;
+                j++;
+            }
+            else if (arr[i + 1][j] >= arr[i][j + 1])
+                i++;
+            else
+                j++;
+        }
+        return sb.toString().length();
     }
 
     /**
      * Method to compute line numbers of similar lines between file1 and file2 using LCS strategy (can be .py or .zip files)
      * @param file1 String
      * @param file2 String
-     * @return 2D int matrix
+     * @return 2D Integer matrix
      */
     @Override
     public Integer[][] getsimilarLineNos(String file1, String file2) {
@@ -120,9 +151,9 @@ public class LCS implements SimilarityStrategy {
      * Method to compute line numbers of similar lines between file1 and file2 using LCS strategy (can be .py or .zip files)
      * @param s1 String array with file1 lines
      * @param s2 String array with file2 lines
-     * @return 2D int matrix
+     * @return 2D Integer matrix
      */
-    Integer[][] calculateLineNumbers(String[] s1, String[] s2) {
+    private Integer[][] calculateLineNumbers(String[] s1, String[] s2) {
         Map<Integer, Integer> selectedLinesMap;
         Integer[][] similarLineNos;
         selectedLinesMap = new HashMap<>();
@@ -135,20 +166,23 @@ public class LCS implements SimilarityStrategy {
         }
         for(String i :s1)
         {
-            int max = 0;
+            double max = 0;
             int l=0;
-            similarLineNos[1][k] = -1;
             i = i.trim();
             i = i.replaceAll("\\s+","");
             for (String j : s2)
             {
                 j = j.trim();
                 j = j.replaceAll("\\s+","");
-                String result = lcs(i.toLowerCase(), j.toLowerCase());
-                if(!selectedLinesMap.containsKey(l) && result.length() > max && result.length() >= i.length() * 0.95 && result.length() >= j.length() *0.95)
+                double result;
+                if(longerStringLength(i, j) == 0)
+                    result = 0;
+                else
+                    result = lcs(i.toLowerCase(), j.toLowerCase())/longerStringLength(i, j);
+                if(!selectedLinesMap.containsKey(l) && result > max && result >= 0.85)
                 {
                     similarLineNos[1][k] = l;
-                    max = result.length();
+                    max = result;
                 }
                 selectedLinesMap.put(similarLineNos[1][k], 1);
                 l++;
@@ -160,20 +194,23 @@ public class LCS implements SimilarityStrategy {
         k=0;
         for(String i :s2)
         {
-            int max = 0;
+            double max = 0;
             int l=0;
-            similarLineNos[0][k] = -1;
             i = i.trim();
             i = i.replaceAll("\\s+","");
             for (String j : s1)
             {
                 j = j.trim();
                 j = j.replaceAll("\\s+","");
-                String result = lcs(i.toLowerCase(), j.toLowerCase());
-                if(!selectedLinesMap.containsKey(l) && result.length() > max && result.length() >= i.length() * 0.95 && result.length() >= j.length() *0.95)
+                double result;
+                if(longerStringLength(i, j) == 0)
+                    result = 0;
+                else
+                    result = lcs(i.toLowerCase(), j.toLowerCase())/longerStringLength(i, j);
+                if(!selectedLinesMap.containsKey(l) && result > max && result >= 0.85)
                 {
                     similarLineNos[0][k] = l;
-                    max = result.length();
+                    max = result;
                 }
                 selectedLinesMap.put(similarLineNos[0][k], 1);
                 l++;
@@ -181,49 +218,6 @@ public class LCS implements SimilarityStrategy {
             k++;
         }
         return similarLineNos;
-    }
-
-    /**
-     * LCS algorithm
-     * @param str1 String from first file that needs to be compared
-     * @param str2 String from second file that needs to be compared
-     * @return
-     */
-    public String lcs(String str1, String str2)
-    {
-        int l1 = str1.length();
-        int l2 = str2.length();
-
-        int[][] arr = new int[l1 + 1][l2 + 1];
-
-        for (int i = l1 - 1; i >= 0; i--)
-        {
-            for (int j = l2 - 1; j >= 0; j--)
-            {
-                if (str1.charAt(i) == str2.charAt(j))
-                    arr[i][j] = arr[i + 1][j + 1] + 1;
-                else
-                    arr[i][j] = Math.max(arr[i + 1][j], arr[i][j + 1]);
-            }
-        }
-
-        int i = 0;
-        int j = 0;
-        StringBuilder sb = new StringBuilder();
-        while (i < l1 && j < l2)
-        {
-            if (str1.charAt(i) == str2.charAt(j))
-            {
-                sb.append(str1.charAt(i));
-                i++;
-                j++;
-            }
-            else if (arr[i + 1][j] >= arr[i][j + 1])
-                i++;
-            else
-                j++;
-        }
-        return sb.toString();
     }
 
     /**

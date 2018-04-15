@@ -7,14 +7,93 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Component
 public class LevenshteinDistance implements SimilarityStrategy {
 
     @Override
     public Integer[][] getsimilarLineNos(String file1, String file2) {
-        return new Integer[0][];
+        String ext1 = FilenameUtils.getExtension(file1);
+        String ext2 = FilenameUtils.getExtension(file2);
+        /**
+         * If single file comparison between two .py files is expected
+         */
+        if(ext1.equals("py") && ext2.equals("py")){
+            String[] fileLines1 = pythonToStringParser.readFile(file1).split("\\r?\\n");
+            String[] fileLines2 = pythonToStringParser.readFile(file2).split("\\r?\\n");
+            return calculateLineNumbers(fileLines1, fileLines2);
+        }
+        /**
+         * If multiple file comparisons across two .zip files is expected
+         */
+        else if(ext1.equals("zip") && ext2.equals("zip")){
+            return new Integer[0][0];
+        }
+        else
+            throw new IllegalArgumentException();
+    }
+
+    private Integer[][] calculateLineNumbers(String[] s1, String[] s2) {
+        Map<Integer, Integer> selectedLinesMap;
+        Integer[][] similarLineNos;
+        selectedLinesMap = new HashMap<>();
+        int k=0;
+        similarLineNos = new Integer[2][longerLength(s1,s2)];
+        for(int i=0; i<2; i++) {
+            for (int j = 0; j < similarLineNos[i].length; j++) {
+                similarLineNos[i][j] = -1;
+            }
+        }
+        for(String i : s1)
+        {
+            double max = 0;
+            int l=0;
+            i = i.trim();
+            i = i.replaceAll("\\s+","");
+            for (String j : s2)
+            {
+                j = j.trim();
+                j = j.replaceAll("\\s+","");
+                double result = (1-(double)getDistance(i.toLowerCase(), j.toLowerCase()) / longer(i, j).length());
+                if(!selectedLinesMap.containsKey(l) &&  result > max && result >= 0.85)
+                {
+                    similarLineNos[1][k] = l;
+                    max = result;
+                }
+                selectedLinesMap.put(similarLineNos[1][k], 1);
+                l++;
+            }
+            k++;
+        }
+
+        selectedLinesMap = new HashMap<>();
+        k=0;
+        for(String i : s2)
+        {
+            double max = 0;
+            int l=0;
+            i = i.trim();
+            i = i.replaceAll("\\s+","");
+            for (String j : s1)
+            {
+                j = j.trim();
+                j = j.replaceAll("\\s+","");
+                double result = (1-(double)getDistance(i.toLowerCase(), j.toLowerCase()) / longer(i, j).length());
+                if(!selectedLinesMap.containsKey(l) &&  result > max && result >= 0.85)
+                {
+                    similarLineNos[0][k] = l;
+                    max = result;
+                }
+                selectedLinesMap.put(similarLineNos[0][k], 1);
+                l++;
+            }
+            k++;
+        }
+        return similarLineNos;
+
     }
 
     private final PythonToStringParser pythonToStringParser;
@@ -86,6 +165,15 @@ public class LevenshteinDistance implements SimilarityStrategy {
     	return s1.length() >= s2.length() ? s1 : s2;
     }
 
+    /**
+     * Method to return length of longer string array
+     * @param s1 String array
+     * @param s2 String array
+     * @return length of the longer string array among s1 and s2 String arrays
+     */
+    private int longerLength(String[] s1, String[] s2){
+        return s1.length >= s2.length ? s1.length : s2.length;
+    }
 
     /* (non-Javadoc)
      * @see edu.northeastern.cs5500.strategies.SimilarityStrategy#calculateSimilarity(java.lang.String, java.lang.String)
