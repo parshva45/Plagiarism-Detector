@@ -1,6 +1,7 @@
 package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.service.CompareAllService;
+import edu.northeastern.cs5500.service.CreateHtmlFromFileService;
 import edu.northeastern.cs5500.service.FileComparisonService;
 import edu.northeastern.cs5500.utils.Constants;
 import org.apache.logging.log4j.LogManager;
@@ -27,18 +28,19 @@ public class FileComparisonController {
     private static final Logger LOGGER = LogManager.getLogger(FileComparisonController.class);
 
     private final FileComparisonService fileComparisonService;
-
     private final CompareAllService compareAllService;
-
+    private final CreateHtmlFromFileService createHtmlFromFileService;
     private final Environment env;
 
     @Autowired
     public FileComparisonController(FileComparisonService fileComparisonService,
                                     CompareAllService compareAllService,
-                                    Environment env) {
+                                    Environment env,
+                                    CreateHtmlFromFileService createHtmlFromFileService) {
         this.fileComparisonService = fileComparisonService;
         this.compareAllService = compareAllService;
         this.env = env;
+        this.createHtmlFromFileService = createHtmlFromFileService;
     }
 
     /**
@@ -86,7 +88,7 @@ public class FileComparisonController {
                 strategy, firstFile, secondFile);
         double similarity = fileComparisonService
                 .compareTwoFilesByGivenStrategy(strategy, firstFile, secondFile);
-        int[][] lineNumbers = fileComparisonService
+        Integer[][] lineNumbers = fileComparisonService
                 .findLineNumbersByGivenStrategy(strategy, firstFile, secondFile);
 
         LOGGER.info("getSimilarityBetweenGivenFiles API returned data successfully.");
@@ -104,12 +106,12 @@ public class FileComparisonController {
      * @return JSONObject
      */
     private JSONObject prepareResponseJson(String strategy, String firstFile,
-    		String secondFile, double similarity,
-                                           int[][] lineNumbers, String status){
+    		String secondFile, double similarity, Integer[][] lineNumbers, String status){
         Map<String, Object> resultMap = new HashMap<>();
-        Double threshHold = Double.parseDouble(env.getProperty(Constants.PLAGIARISM_THRESHHOLD));
+        Double threshHold = Double.parseDouble(env.getProperty(Constants.PLAGIARISM_THRESHOLD));
         resultMap.put("similarity", valueOf(similarity));
-        resultMap.put("lineNumbers", lineNumbers);
+        resultMap.put("file1Html", createHtmlFromFileService.createFileHtmString(firstFile, lineNumbers[0]));
+        resultMap.put("file2Html", createHtmlFromFileService.createFileHtmString(secondFile, lineNumbers[1]));
         resultMap.put("strategy", strategy);
         resultMap.put("response-code", status);
         resultMap.put("firstFile", firstFile);

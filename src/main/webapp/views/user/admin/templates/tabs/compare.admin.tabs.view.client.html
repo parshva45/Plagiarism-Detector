@@ -62,37 +62,54 @@
 
     <div ng-show="first_student != undefined && second_student != undefined">
 
-      <h5>Select strategy</h5>
+          <h5>Select strategy</h5>
 
-      <div class="form-group">
-        <label>Strategy</label>
-        <select class="form-control" ng-model="strategy">
-          <option ng-repeat="strategy in model.strategies" ng-value="strategy">
-              {{strategy}}
-          </option>
-        </select> 
-      </div>
+          <div class="form-group">
+            <label>Strategy</label>
+            <select class="form-control" ng-model="strategy">
+              <option ng-repeat="strategy in model.strategies" ng-value="strategy">
+                  {{strategy}}
+              </option>
+            </select>
+          </div>
 
-      <input type="button" value="Submit" ng-click="submitForm(strategy, first_student, second_student)">
+          <input type="button" value="Submit" ng-click="submitForm(strategy, first_student, second_student)">
 
-      <br><br>
-      <a ng-click="model.getSimilarityByAll(first_student, second_student)" class="btn green darken-5">Get Similarity by All</a>
-      <div ng-show="fromAll != null"><pre>{{fromAll | json}}</pre></div>
-      <br><br>
+          <br><br>
+          <a ng-click="model.getSimilarityByAll(first_student, second_student)" class="btn green darken-5">Get Similarity by All</a>
+          <div ng-show="fromAll != null"><pre>{{fromAll | json}}</pre></div>
+          <br><br>
 
 
-      <div ng-show="result_ready">
-          <ul class="collapsible popout" data-collapsible="accordion" watch>
-              <li ng-repeat="single in collapsibleElements">
-                  <div class="collapsible-header z-depth-5 hoverable"><i class="{{single.color}}"></i><b>{{single.title}}</b></div>
-                  <div class="collapsible-body ">
-                      <h6>By {{chosen_strategy}} Strategy:<br>Similarity between First Student's {{file1}} and
-                          <br>Second Student's {{file2}} is {{similarity_measure}}</h6>
-                  </div>
-              </li>
-          </ul>
+          <div ng-show="result_ready">
+              <ul class="collapsible popout" data-collapsible="accordion" watch>
+                  <li ng-repeat="single in collapsibleElements">
+                      <div class="collapsible-header z-depth-5 hoverable"><i class="{{single.color}}"></i><b>{{single.title}}</b></div>
+                      <div class="collapsible-body ">
+                          <h6>By {{chosen_strategy}} Strategy:<br>Similarity between First Student's {{file1}} and
+                              <br>Second Student's {{file2}} is {{similarity_measure}}</h6>
+                          <br>
+                          <br>
+                          <a class='btn' data-target='demoModal' modal>Show Matching Lines</a>
+
+                      </div>
+                  </li>
+              </ul>
+        </div>
+
+        <!-- Modal Structure -->
+        <div id="demoModal" class="modal">
+            <div class="modal-content">
+                <h4>Plagiarism Report</h4>
+                <div class="row">
+                    <div class="col s6" ng-bind-html="file1Content"></div>
+                    <div class="col s6" ng-bind-html="file2Content"></div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="modal-action modal-close waves-effect waves-green btn-flat floating right">Close</a>
+            </div>
+        </div>
     </div>
-
-
-
 </div>
