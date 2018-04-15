@@ -56,9 +56,9 @@ public class FileComparisonService {
      * @param secondFile String location of second file on server
      * @return 2D integer matrix.
      */
-    public int[][] findLineNumbersByGivenStrategy(String strategy, String firstFile, String secondFile){
+    public Integer[][] findLineNumbersByGivenStrategy(String strategy, String firstFile, String secondFile){
         LOGGER.info("Running findLineNumbersByGivenStrategy for the files {} {} with strategy {}", firstFile, secondFile, strategy);
-        int[][] lineNumbers =  strategyFactory
+        Integer[][] lineNumbers =  strategyFactory
                 .getStrategyByStrategyType(strategy)
                 .getsimilarLineNos(firstFile, secondFile);
         return lineNumbers;

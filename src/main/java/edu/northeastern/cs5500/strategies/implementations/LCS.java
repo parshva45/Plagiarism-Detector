@@ -95,7 +95,7 @@ public class LCS implements SimilarityStrategy {
      * @return 2D int matrix
      */
     @Override
-    public int[][] getsimilarLineNos(String file1, String file2) {
+    public Integer[][] getsimilarLineNos(String file1, String file2) {
         String ext1 = FilenameUtils.getExtension(file1);
         String ext2 = FilenameUtils.getExtension(file2);
         /**
@@ -110,7 +110,7 @@ public class LCS implements SimilarityStrategy {
          * If multiple file comparisons across two .zip files is expected
          */
         else if(ext1.equals("zip") && ext2.equals("zip")){
-            return new int[0][0];
+            return new Integer[0][0];
         }
         else
             throw new IllegalArgumentException();
@@ -122,12 +122,12 @@ public class LCS implements SimilarityStrategy {
      * @param s2 String array with file2 lines
      * @return 2D int matrix
      */
-    int[][] calculateLineNumbers(String[] s1, String[] s2) {
+    Integer[][] calculateLineNumbers(String[] s1, String[] s2) {
         Map<Integer, Integer> selectedLinesMap;
-        int[][] similarLineNos;
+        Integer[][] similarLineNos;
         selectedLinesMap = new HashMap<>();
         int k=0;
-        similarLineNos = new int[2][longerLength(s1,s2)];
+        similarLineNos = new Integer[2][longerLength(s1,s2)];
         for(int i=0; i<2; i++) {
             for (int j = 0; j < similarLineNos[i].length; j++) {
                 similarLineNos[i][j] = -1;

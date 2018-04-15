@@ -136,6 +136,9 @@
                     $scope.similarity_measure = data.similarity;
                     $scope.chosen_strategy = strategy;
                     $scope.result_ready = true;
+                    $scope.file1Content = data.file1Html;
+                    $scope.file2Content = data.file2Html;
+
                     var result = 'Plagiarism Found';
                     if(data.plagiarism !== "Yes"){
                         result = 'Plagiarism Not Found';
