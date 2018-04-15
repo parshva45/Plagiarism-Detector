@@ -82,10 +82,17 @@
 
 
       <div ng-show="result_ready">
-      <h5>Result</h5>
-          <h6>By {{chosen_strategy}} Strategy:<br>Similarity between First Student's {{file1}} and
-            <br>Second Student's {{file2}} is {{similarity_measure}}</h6>
-      </div>
-
+          <ul class="collapsible popout" data-collapsible="accordion" watch>
+              <li ng-repeat="single in collapsibleElements">
+                  <div class="collapsible-header z-depth-5 hoverable"><i class="{{single.color}}"></i><b>{{single.title}}</b></div>
+                  <div class="collapsible-body ">
+                      <h6>By {{chosen_strategy}} Strategy:<br>Similarity between First Student's {{file1}} and
+                          <br>Second Student's {{file2}} is {{similarity_measure}}</h6>
+                  </div>
+              </li>
+          </ul>
     </div>
+
+
+
 </div>

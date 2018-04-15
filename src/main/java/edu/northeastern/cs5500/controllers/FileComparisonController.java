@@ -2,11 +2,12 @@ package edu.northeastern.cs5500.controllers;
 
 import edu.northeastern.cs5500.service.CompareAllService;
 import edu.northeastern.cs5500.service.FileComparisonService;
+import edu.northeastern.cs5500.utils.Constants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,11 +30,15 @@ public class FileComparisonController {
 
     private final CompareAllService compareAllService;
 
+    private final Environment env;
+
     @Autowired
     public FileComparisonController(FileComparisonService fileComparisonService,
-                                    CompareAllService compareAllService) {
+                                    CompareAllService compareAllService,
+                                    Environment env) {
         this.fileComparisonService = fileComparisonService;
         this.compareAllService = compareAllService;
+        this.env = env;
     }
 
     /**
@@ -86,8 +91,7 @@ public class FileComparisonController {
 
         LOGGER.info("getSimilarityBetweenGivenFiles API returned data successfully.");
         return prepareResponseJson(strategy, firstFile, secondFile,
-                valueOf(similarity), lineNumbers, "OK");
-
+               similarity, lineNumbers, "OK");
     }
 
     /**
@@ -100,15 +104,21 @@ public class FileComparisonController {
      * @return JSONObject
      */
     private JSONObject prepareResponseJson(String strategy, String firstFile,
-                                           String secondFile, String similarity,
+    		String secondFile, double similarity,
                                            int[][] lineNumbers, String status){
         Map<String, Object> resultMap = new HashMap<>();
+        Double threshHold = Double.parseDouble(env.getProperty(Constants.PLAGIARISM_THRESHHOLD));
         resultMap.put("similarity", valueOf(similarity));
         resultMap.put("lineNumbers", lineNumbers);
         resultMap.put("strategy", strategy);
         resultMap.put("response-code", status);
         resultMap.put("firstFile", firstFile);
         resultMap.put("secondFile", secondFile);
+        String plagiarism = "No";
+        if(similarity > threshHold){
+            plagiarism = "Yes";
+        }
+        resultMap.put("plagiarism", plagiarism);
         return new JSONObject(resultMap);
     }
 
