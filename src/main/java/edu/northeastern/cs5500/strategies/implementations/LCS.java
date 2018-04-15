@@ -178,7 +178,7 @@ public class LCS implements SimilarityStrategy {
                 if(longerStringLength(i, j) == 0)
                     result = 0;
                 else
-                    result = lcs(i.toLowerCase(), j.toLowerCase())/longerStringLength(i, j);
+                    result = lcs(i.toLowerCase(), j.toLowerCase())/(double)longerStringLength(i, j);
                 if(!selectedLinesMap.containsKey(l) && result > max && result >= 0.85)
                 {
                     similarLineNos[1][k] = l;
@@ -206,7 +206,7 @@ public class LCS implements SimilarityStrategy {
                 if(longerStringLength(i, j) == 0)
                     result = 0;
                 else
-                    result = lcs(i.toLowerCase(), j.toLowerCase())/longerStringLength(i, j);
+                    result = lcs(i.toLowerCase(), j.toLowerCase())/(double)longerStringLength(i, j);
                 if(!selectedLinesMap.containsKey(l) && result > max && result >= 0.85)
                 {
                     similarLineNos[0][k] = l;
