@@ -102,9 +102,19 @@
             <div class="modal-content">
                 <h4>Plagiarism Report</h4>
                 <div class="row">
-                    <div class="col s6" ng-bind-html="file1Content"></div>
-                    <div class="col s6" ng-bind-html="file2Content"></div>
-
+                    <div class="col s6 mysolid">
+                        <b>{{user1}}<br>
+                            {{file1}}
+                            </b>
+                    </div>
+                    <div class="col s6 mysolid">
+                        <b>{{user2}} <br>
+                            {{file2}}</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col s6 mysolid" ng-bind-html="file1Content"></div>
+                    <div class="col s6 mysolid" ng-bind-html="file2Content"></div>
                 </div>
             </div>
             <div class="modal-footer">

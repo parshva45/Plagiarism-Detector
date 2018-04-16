@@ -19,6 +19,8 @@
         $scope.countCalls = undefined;
         $scope.fromAll = undefined;
         vm.getCount = getCount;
+        vm.findUserName1 = findUserName1;
+        vm.findUserName2 = findUserName2;
         $scope.selectedCompareAll = undefined;
 
         function compareAll() {
@@ -112,6 +114,8 @@
             else if(strategy === undefined)
                 vm.error = "Please select some strategy";
             else{
+                findUserName1(studentId1);
+                findUserName2(studentId2);
                 var filePath1 = "";
                 var filePath2 = "";
                 for(var i=0; i<vm.studentHomeWorks.length; i++){
@@ -127,6 +131,20 @@
                 $scope.calculateSimilarityMeasure(strategy, filePath1, filePath2);
             }
         };
+
+        function findUserName1(userId){
+            UserService.findByUserIdAndUserName(userId)
+                .then(function(data){
+                    $scope.user1 =  data.result[0].userName;
+                });
+        }
+
+        function findUserName2(userId){
+            UserService.findByUserIdAndUserName(userId)
+                .then(function(data){
+                    $scope.user2 =  data.result[0].userName;
+                });
+        }
 
         $scope.calculateSimilarityMeasure = function(strategy, firstFile, secondFile){
             UserService.calculateSimilarityMeasure(strategy, firstFile, secondFile)
