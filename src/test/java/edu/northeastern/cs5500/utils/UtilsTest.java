@@ -56,7 +56,7 @@ public class UtilsTest {
         Integer[][] res = Utils.getArrayFromList(list1, list2);
         assertNotNull(res);
 
-        Integer[][] expected= {{1,2,3,4},{1,2,-1,-1}};
+        Integer[][] expected= {{1,2,-1,-1},{1,2,3,4}};
         assertArrayEquals(expected, res);
     }
 
