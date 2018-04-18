@@ -78,7 +78,7 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
     public double calculateSimilarity(String file1, String file2) {
         String ast1;
         String ast2;
-
+        LOGGER.info("calculating similarity between {} and {}", file1, file2);
         try {
             ast1 = new AstBuilder().build(new ParserFacade().parse(new File(file1)));
             ast2 = new AstBuilder().build(new ParserFacade().parse(new File(file2)));
@@ -93,7 +93,7 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
     @Override
     public Integer[][] getSimilarLineNos(String file1, String file2) {
         String url = mossComparison.mossPlagiarismUrlForFiles(file1, file2);
-        return resultScraper.startScraping(url);
+        return resultScraper.startScraping(url + "match0-top.html");
     }
 
 }

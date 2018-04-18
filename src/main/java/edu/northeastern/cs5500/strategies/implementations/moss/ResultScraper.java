@@ -101,15 +101,4 @@ public class ResultScraper {
         }
         return lineNums;
     }
-
-
-    /**
-     * Comment out this method, pass the URL obtained in MossComparison to a call for the ResultScraper
-     * and append "match0-top.html" to the obtained URL and start the scraping method on it.
-     */
-//    public static void main(String...args) throws MossException {
-//        ResultScraper resultScraper = new ResultScraper();
-//        String url = "http://moss.stanford.edu/results/";
-//        resultScraper.startScraping(url + "995433649/" + "match0-top.html");
-//    }
 }

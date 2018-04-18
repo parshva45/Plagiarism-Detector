@@ -88,6 +88,7 @@ public class FileComparisonController {
                 strategy, firstFile, secondFile);
         double similarity = fileComparisonService
                 .compareTwoFilesByGivenStrategy(strategy, firstFile, secondFile);
+        LOGGER.info("Comparison completed, finding lineNos");
         Integer[][] lineNumbers = fileComparisonService
                 .findLineNumbersByGivenStrategy(strategy, firstFile, secondFile);
 

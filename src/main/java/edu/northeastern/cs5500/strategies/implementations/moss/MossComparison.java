@@ -1,23 +1,21 @@
 package edu.northeastern.cs5500.strategies.implementations.moss;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.net.URL;
-import java.nio.file.*;
-
 import edu.northeastern.cs5500.strategies.SimilarityStrategy;
 import edu.northeastern.cs5500.utils.Constants;
 import it.zielke.moji.MossException;
-import org.apache.commons.io.FileUtils;
 import it.zielke.moji.SocketClient;
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.util.Collection;
 
 /**
  * @author namratabilurkar
@@ -46,15 +44,24 @@ public class MossComparison implements SimilarityStrategy {
         socketClient.setLanguage(Constants.LANGUAGE);
         Collection<File> files = FileUtils.listFiles(new File(filePath), new String[]
                 { Constants.LANGUAGE_CODE }, true);
+        try {
+            socketClient.run();
+        } catch (IOException e) {
+            LOGGER.error("Error creating connection");
+        }
         for (File f : files) {
             try {
-                socketClient.run();
                 socketClient.uploadFile(f);
-                socketClient.sendQuery();
             } catch (IOException e) {
                 LOGGER.error("Input output exception {}", e.getMessage());
             }
         }
+        try {
+            socketClient.sendQuery();
+        } catch (IOException e) {
+            LOGGER.error("Error sending query");
+        }
+        LOGGER.info("returning socket url {}",socketClient.getResultURL());
         return socketClient.getResultURL();
     }
 
@@ -67,12 +74,6 @@ public class MossComparison implements SimilarityStrategy {
      */
     @Override
     public double calculateSimilarity(String file1, String file2) {
-        String path =  createParentDir(file1, file2);
-        try {
-            URL url = getMossURL(path);
-        } catch (MossException e) {
-            e.printStackTrace();
-        }
         return 0.0;
     }
 
@@ -83,20 +84,31 @@ public class MossComparison implements SimilarityStrategy {
      * @return the path of the parent directory
      */
     private String createParentDir(String file1, String file2) {
-        String directory = env.getProperty("fileupload.paths.uploadedFiles");
-        File f = new File(directory);
+        String directory = env.getProperty("moss.temp.location");
+        LOGGER.info("started copying files to  {}", directory);
+        File file = new File(directory);
         try {
-            FileUtils.cleanDirectory(f);
-            FileUtils.forceDelete(f); //delete directory
-            FileUtils.forceMkdir(f); //create directory
-            Files.move(Paths.get(file1), Paths.get(f.getPath()),
-                    StandardCopyOption.REPLACE_EXISTING);
-            Files.move(Paths.get(file2), Paths.get(f.getPath()),
-                    StandardCopyOption.REPLACE_EXISTING);
+            if (new File(directory).exists()) {
+                FileUtils.cleanDirectory(file);
+                FileUtils.forceDelete(file); //delete directory
+            }
+            FileUtils.forceMkdir(file); //create directory
+            LOGGER.info("copying {} to {}", new File(file1).toPath(),
+                    (new File(String.format("%s/%s", directory, new File(file1).getName()))).toPath());
+
+            Files.copy(new File(file1).toPath(),
+                    (new File(String.format("%s/%s", directory, new File(file1).getName()))).toPath());
+
+            LOGGER.info("copying {} to {}", file2, file.getPath());
+
+            Files.copy(new File(file2).toPath(),
+                    (new File(String.format("%s/%s", file, new File(file2).getName()))).toPath());
+
         } catch (IOException e) {
-            LOGGER.error("Error in moving files to a tmp location error {}", e.getMessage());
+            LOGGER.error("Error in moving files to a tmp location error {}", e);
         }
-        return f.getPath();
+        LOGGER.info("completed copying files to the location mentioned {}", file.getPath());
+        return file.getPath();
     }
 
 
@@ -111,7 +123,7 @@ public class MossComparison implements SimilarityStrategy {
             URL url = getMossURL(path);
             return url.toString();
         } catch (MossException e) {
-            LOGGER.error("exception occured in getting moss url {}", e.getMessage());
+            LOGGER.error("exception happened in getting moss url {}", e.getMessage());
         }
         return "";
     }
