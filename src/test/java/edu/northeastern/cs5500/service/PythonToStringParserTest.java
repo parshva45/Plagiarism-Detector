@@ -22,4 +22,9 @@ public class PythonToStringParserTest {
         pythonToStringParser.readFile("hello.txt");
     }
 
+    @Test
+    public void testFiles(){
+        pythonToStringParser.parseFiles("hello.txt");
+    }
+
 }

@@ -6,6 +6,16 @@ import java.util.List;
  * @author Praveen Singh
  */
 public class Utils {
+
+    private Utils(){
+    }
+
+    /**
+     * Method creates a 2-D array from 2 arrayLists
+     * @param list1 ArrayList of Integers
+     * @param list2 ArrayList of Integers
+     * @return 2-D array of Integers
+     */
     public static Integer[][] getArrayFromList(List<Integer> list1, List<Integer> list2){
         int sizeList1 = list1.size();
         int sizeList2 = list2.size();

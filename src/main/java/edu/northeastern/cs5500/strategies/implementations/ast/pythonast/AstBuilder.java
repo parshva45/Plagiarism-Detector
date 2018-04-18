@@ -74,21 +74,21 @@ public class AstBuilder {
      */
     private String completeAstString(String astInput) {
         int temp = 0;
-        StringBuilder astString = new StringBuilder(astInput);
+        StringBuilder stringBuilder = new StringBuilder(astInput);
 
         for (int i=0; i<astInput.length(); i++) {
-            if (astString.charAt(i) == '{') {
+            if (stringBuilder.charAt(i) == '{') {
                 temp++;
             }
-            if (astString.charAt(i) == '}') {
+            if (stringBuilder.charAt(i) == '}') {
                 temp--;
             }
         }
         while (temp>0) {
-            astString.append("}");
+            stringBuilder.append("}");
             temp--;
         }
-        return astString.toString();
+        return stringBuilder.toString();
     }
 
 }

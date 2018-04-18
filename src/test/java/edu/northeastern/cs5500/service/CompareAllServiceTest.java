@@ -51,8 +51,8 @@ public class CompareAllServiceTest {
         User user1 = new User().withUserName("prav");
         User user2 = new User().withUserName("sing");
 
-        StudentHomeWork studentHomeWork1 = new StudentHomeWork().withPath("file1").withUserId(1);
-        StudentHomeWork studentHomeWork2 = new StudentHomeWork().withPath("file1").withUserId(2);
+        StudentHomeWork studentHomeWork1 = new StudentHomeWork().withPath("file1").withUserId(1).withId(1);
+        StudentHomeWork studentHomeWork2 = new StudentHomeWork().withPath("file1").withUserId(2).withId(2);
         List<StudentHomeWork> studentHomeWorkList = new ArrayList<>();
         studentHomeWorkList.add(studentHomeWork1);
         studentHomeWorkList.add(studentHomeWork2);
@@ -61,11 +61,6 @@ public class CompareAllServiceTest {
         reportJSONS.add(new PlagiarismReportJSON()
                 .withFirstUser(user1.getUserName()).withSecondUser(user2.getUserName())
                 .withScore(40.0));
-        reportJSONS.add(new PlagiarismReportJSON()
-                .withFirstUser(user2.getUserName()).withSecondUser(user1.getUserName())
-                .withScore(50.0));
-
-
 
         when(userRepository.findById(userId)).thenReturn(professor);
         when(env.getProperty(Constants.PLAGIARISM_THRESHOLD)).thenReturn("40.0");
@@ -73,8 +68,6 @@ public class CompareAllServiceTest {
                 .thenReturn(studentHomeWorkList);
         when(fileComparisonService.compareTwoFilesByGivenStrategy(StrategyTypes.LEVENSHTEIN_DISTANCE.toString(),
                 studentHomeWork1.getFilePath(), studentHomeWork2.getFilePath())).thenReturn(50.0);
-        when(fileComparisonService.compareTwoFilesByGivenStrategy(StrategyTypes.LEVENSHTEIN_DISTANCE.toString(),
-                studentHomeWork2.getFilePath(), studentHomeWork1.getFilePath())).thenReturn(50.0);
         when(userRepository.findById(studentHomeWork1.getUserId())).thenReturn(user1);
         when(userRepository.findById(studentHomeWork2.getUserId())).thenReturn(user2);
 
@@ -82,6 +75,48 @@ public class CompareAllServiceTest {
                 reportJSONS);
 
         compareAllService.process(userId);
+    }
+
+    @Test
+    public void testShouldRunCron(){
+        int userId = 1;
+        User professor = new User().withUserName("praveen").withEmail("prave@gmail.com");
+        User user1 = new User().withUserName("prav");
+        User user2 = new User().withUserName("sing");
+
+        StudentHomeWork studentHomeWork1 = new StudentHomeWork().withPath("file1").withUserId(1).withId(1);
+        StudentHomeWork studentHomeWork2 = new StudentHomeWork().withPath("file1").withUserId(2).withId(2);
+        StudentHomeWork studentHomeWork3 = new StudentHomeWork().withPath("file1").withUserId(3).withId(2);
+        List<StudentHomeWork> studentHomeWorkList = new ArrayList<>();
+        studentHomeWorkList.add(studentHomeWork1);
+        studentHomeWorkList.add(studentHomeWork3);
+
+        List<PlagiarismReportJSON> reportJSONS = new ArrayList<>();
+        reportJSONS.add(new PlagiarismReportJSON()
+                .withFirstUser(user1.getUserName()).withSecondUser(user2.getUserName())
+                .withScore(50.0));
+        reportJSONS.add(new PlagiarismReportJSON()
+                .withFirstUser(user2.getUserName()).withSecondUser(user1.getUserName())
+                .withScore(50.0));
+        List<User> userList = new ArrayList<>();
+        userList.add(new User().withId(1));
+
+        when(userRepository.findByUserNameLike("courseStaff")).thenReturn(userList);
+        when(userRepository.findById(userId)).thenReturn(professor);
+        when(env.getProperty(Constants.PLAGIARISM_THRESHOLD)).thenReturn("40.0");
+        when(studentHomeWorkRepository.findAllByCourseIdAndAndHomeWorkId(1, 1))
+                .thenReturn(studentHomeWorkList);
+        when(fileComparisonService.compareTwoFilesByGivenStrategy(StrategyTypes.LEVENSHTEIN_DISTANCE.toString(),
+                studentHomeWork1.getFilePath(), studentHomeWork2.getFilePath())).thenReturn(50.0);
+        when(fileComparisonService.compareTwoFilesByGivenStrategy(StrategyTypes.LEVENSHTEIN_DISTANCE.toString(),
+                studentHomeWork1.getFilePath(), studentHomeWork3.getFilePath())).thenReturn(30.0);
+        when(userRepository.findById(studentHomeWork1.getUserId())).thenReturn(user1);
+        when(userRepository.findById(studentHomeWork2.getUserId())).thenReturn(user2);
+        when(userRepository.findById(studentHomeWork3.getUserId())).thenReturn(user2);
+
+        doNothing().when(emailService).sendEmail(professor.getUserName(), professor.getEmail(),
+                reportJSONS);
+        compareAllService.sendScheduledEmail();
     }
 
 }
