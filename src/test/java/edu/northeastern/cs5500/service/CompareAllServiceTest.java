@@ -66,7 +66,7 @@ public class CompareAllServiceTest {
         when(env.getProperty(Constants.PLAGIARISM_THRESHOLD)).thenReturn("40.0");
         when(studentHomeWorkRepository.findAllByCourseIdAndAndHomeWorkId(1, 1))
                 .thenReturn(studentHomeWorkList);
-        when(fileComparisonService.compareTwoFilesByGivenStrategy(StrategyTypes.LEVENSHTEIN_DISTANCE.toString(),
+        when(fileComparisonService.compareTwoFilesByGivenStrategy(StrategyTypes.LCS.toString(),
                 studentHomeWork1.getFilePath(), studentHomeWork2.getFilePath())).thenReturn(50.0);
         when(userRepository.findById(studentHomeWork1.getUserId())).thenReturn(user1);
         when(userRepository.findById(studentHomeWork2.getUserId())).thenReturn(user2);
@@ -106,9 +106,9 @@ public class CompareAllServiceTest {
         when(env.getProperty(Constants.PLAGIARISM_THRESHOLD)).thenReturn("40.0");
         when(studentHomeWorkRepository.findAllByCourseIdAndAndHomeWorkId(1, 1))
                 .thenReturn(studentHomeWorkList);
-        when(fileComparisonService.compareTwoFilesByGivenStrategy(StrategyTypes.LEVENSHTEIN_DISTANCE.toString(),
+        when(fileComparisonService.compareTwoFilesByGivenStrategy(StrategyTypes.LCS.toString(),
                 studentHomeWork1.getFilePath(), studentHomeWork2.getFilePath())).thenReturn(50.0);
-        when(fileComparisonService.compareTwoFilesByGivenStrategy(StrategyTypes.LEVENSHTEIN_DISTANCE.toString(),
+        when(fileComparisonService.compareTwoFilesByGivenStrategy(StrategyTypes.LCS.toString(),
                 studentHomeWork1.getFilePath(), studentHomeWork3.getFilePath())).thenReturn(30.0);
         when(userRepository.findById(studentHomeWork1.getUserId())).thenReturn(user1);
         when(userRepository.findById(studentHomeWork2.getUserId())).thenReturn(user2);

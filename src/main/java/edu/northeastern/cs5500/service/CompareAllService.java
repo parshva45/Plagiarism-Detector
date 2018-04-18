@@ -62,7 +62,7 @@ public class CompareAllService {
 
                 if(studentHomeWork.getId() != studentHomeWorkCompare.getId()){
                     Double score = fileComparisonService.compareTwoFilesByGivenStrategy(
-                            StrategyTypes.LEVENSHTEIN_DISTANCE.toString(),
+                            StrategyTypes.LCS.toString(),
                             studentHomeWork.getFilePath(),
                             studentHomeWorkCompare.getFilePath());
                     if(score >= threshHold){
