@@ -59,7 +59,7 @@ public class WeightedScore implements SimilarityStrategy {
 
     @Override
     public Integer[][] getSimilarLineNos(String file1, String file2) {
-        return new Integer[0][];
+        return new Integer[][]{{0},{1}};
     }
 
 }
