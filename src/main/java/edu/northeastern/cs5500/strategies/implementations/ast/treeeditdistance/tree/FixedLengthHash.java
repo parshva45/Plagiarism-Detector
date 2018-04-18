@@ -4,8 +4,8 @@
  */
 package edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.tree;
 
-import java.util.ListIterator;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 /**
  * @author augsten, namratabilurkar

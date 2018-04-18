@@ -1,9 +1,9 @@
 package edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.editDistance;
 
-import java.util.*;
-
-
 import edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.tree.LblTree;
+
+import java.util.Arrays;
+import java.util.Enumeration;
 
 /**
  * Zhang & Shasha algorithm
