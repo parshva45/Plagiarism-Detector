@@ -126,7 +126,7 @@ public class LCS implements SimilarityStrategy {
      * @return 2D Integer matrix
      */
     @Override
-    public Integer[][] getsimilarLineNos(String file1, String file2) {
+    public Integer[][] getSimilarLineNos(String file1, String file2) {
         String ext1 = FilenameUtils.getExtension(file1);
         String ext2 = FilenameUtils.getExtension(file2);
         /**

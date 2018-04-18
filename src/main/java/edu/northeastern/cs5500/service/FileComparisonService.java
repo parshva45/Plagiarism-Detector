@@ -60,7 +60,7 @@ public class FileComparisonService {
         LOGGER.info("Running findLineNumbersByGivenStrategy for the files {} {} with strategy {}", firstFile, secondFile, strategy);
         Integer[][] lineNumbers =  strategyFactory
                 .getStrategyByStrategyType(strategy)
-                .getsimilarLineNos(firstFile, secondFile);
+                .getSimilarLineNos(firstFile, secondFile);
         return lineNumbers;
     }
 
