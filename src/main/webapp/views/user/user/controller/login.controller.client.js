@@ -22,7 +22,7 @@
                         vm.error = "Enter valid username and password combination";
                     }
                 }, function (err) {
-                    vm.error = err;
+                    vm.error = err.data.message;
                 });
         }
     }

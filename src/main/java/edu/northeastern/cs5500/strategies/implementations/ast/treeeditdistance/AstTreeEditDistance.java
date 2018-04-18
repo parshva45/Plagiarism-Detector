@@ -61,6 +61,6 @@ public class AstTreeEditDistance implements SimilarityStrategy {
 
     @Override
     public Integer[][] getsimilarLineNos(String file1, String file2) {
-        return new Integer[0][];
+        return new Integer[][]{{-1},{-1}};
     }
 }
