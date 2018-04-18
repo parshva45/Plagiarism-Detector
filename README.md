@@ -17,3 +17,12 @@ Password: spring2018project
 Project URL: [Click here](http://ec2-52-91-227-186.compute-1.amazonaws.com:8080/#/)<br/>
 Course staff Username: coursestaff <br/>
 Password: password
+
+Student UserName : user1 <br>
+Student password: user1
+
+<br
+<h4> Final Presentations :</h4>
+Presentation Video: [Youtube]()<br/>
+Demo Video: [Youtube-Demo-Link](https://youtu.be/Gw73HDbA7bk)<br/>
+System Setup Video: [Youtube]()<br/>
