@@ -1,4 +1,4 @@
-package edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.editDistance;
+package edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.editdistance;
 
 import edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.tree.LblTree;
 

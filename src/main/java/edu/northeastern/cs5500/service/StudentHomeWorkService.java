@@ -65,7 +65,7 @@ public class StudentHomeWorkService {
         if (studentHomeWork == null){
             LOGGER.info("homework not found for user {} with courseID {} " +
                     "and homeWorkId {}", userId, courseId, homeWorkId);
-            throw new HttpStatusException(HttpStatus.BAD_REQUEST, "User did not submit assignment.");
+            throw new HttpStatusException("User did not submit assignment.");
         }
         return studentHomeWork;
     }
@@ -93,16 +93,14 @@ public class StudentHomeWorkService {
      * Custom HTTP Exception class.
      */
     static class HttpStatusException extends RuntimeException {
-        private final HttpStatus status;
 
         /**
          * Custom HTTP Exception for constructor
          * @param status HttpStatus
          * @param message String
          */
-        HttpStatusException(final HttpStatus status, final String message) {
+        HttpStatusException(final String message) {
             super(message);
-            this.status = status;
         }
     }
 }

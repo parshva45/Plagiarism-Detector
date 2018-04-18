@@ -58,10 +58,9 @@ public class FileComparisonService {
      */
     public Integer[][] findLineNumbersByGivenStrategy(String strategy, String firstFile, String secondFile){
         LOGGER.info("Running findLineNumbersByGivenStrategy for the files {} {} with strategy {}", firstFile, secondFile, strategy);
-        Integer[][] lineNumbers =  strategyFactory
+        return strategyFactory
                 .getStrategyByStrategyType(strategy)
                 .getSimilarLineNos(firstFile, secondFile);
-        return lineNumbers;
     }
 
 
