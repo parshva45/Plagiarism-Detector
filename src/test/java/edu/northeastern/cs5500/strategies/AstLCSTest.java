@@ -59,7 +59,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares1s2Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file1, file2);
-        assertEquals(53.882, similarityMeasure, 0.01);
+        assertEquals(46.117, similarityMeasure, 0.01);
     }
 
     @After
@@ -73,7 +73,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares1s3Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file1, file3);
-        assertEquals(49.176, similarityMeasure, 0.01);
+        assertEquals(50.823, similarityMeasure, 0.01);
     }
 
     /**
@@ -82,7 +82,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares1s4Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file1, file4);
-        assertEquals(76.306, similarityMeasure, 0.01);
+        assertEquals(23.693, similarityMeasure, 0.01);
     }
 
     /**
@@ -91,7 +91,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares2s3Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file2, file3);
-        assertEquals(49.659, similarityMeasure, 0.01);
+        assertEquals(50.340, similarityMeasure, 0.01);
     }
 
     /**
@@ -100,7 +100,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     @Test
     public void compares2s4Test() {
         double similarityMeasure = longestCommonSubSequence.calculateSimilarity(file2, file4);
-        assertEquals(61.021, similarityMeasure, 0.01);
+        assertEquals(38.978, similarityMeasure, 0.01);
     }
 
 
@@ -111,7 +111,7 @@ public class AstLCSTest extends Cs5500PlagiarismDetectorTeam207ApplicationTests 
     public void calculateSimilarityShouldGiveCorrectResult(){
         double res = longestCommonSubSequence.calculateSimilarity(
                 getFilePath("submission3.py"), getFilePath("submission4.py"));
-        assertEquals(73.066, res, 0.01);
+        assertEquals(26.933, res, 0.01);
     }
 
 }

@@ -87,6 +87,7 @@ public class FileComparisonService {
     public Map<String, Double> getSimilarityByAllMethods(String firstFile, String secondFile){
         Map<String, Double> res = new HashMap<>();
         List<StrategyTypes> strategyTypes = new ArrayList<>(EnumSet.allOf(StrategyTypes.class));
+        strategyTypes.remove(StrategyTypes.MOSS);
         for (StrategyTypes strategyType:strategyTypes) {
             res.put(strategyType.toString(),
                     strategyFactory
