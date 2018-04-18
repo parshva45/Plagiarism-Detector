@@ -31,7 +31,7 @@ public class ResultScraper {
      * @return the list of MatchStorerMap that includes data to generate a plagiarism report
      */
     public Integer[][] startScraping(String link){
-
+        LOGGER.info("started scraping link {}", link);
         if (link.startsWith("http://moss.stanford.edu/results/")) {
             Connection conn = Jsoup.connect(link).timeout(TIME_OUT_TIME).userAgent(USER_AGENT).followRedirects(false);
             Document document;
@@ -101,4 +101,5 @@ public class ResultScraper {
         }
         return lineNums;
     }
+
 }
