@@ -24,6 +24,6 @@ public interface SimilarityStrategy {
      * @param file2 String
      * @return array of similar lines
      */
-    Integer[][] getsimilarLineNos(String file1, String file2);
+    Integer[][] getSimilarLineNos(String file1, String file2);
 
 }

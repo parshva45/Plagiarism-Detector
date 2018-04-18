@@ -21,14 +21,16 @@ public class StrategyTypesTest {
         assertEquals("AST_LCS", AST_LCS.toString());
         assertEquals("AST_TREE_EDIT_DISTANCE", AST_TREE_EDIT_DISTANCE.toString());
         assertEquals("WEIGHTED_SCORE", WEIGHTED_SCORE.toString());
+        assertEquals("MOSS", MOSS.toString());
 
         assertEquals(LEVENSHTEIN_DISTANCE, StrategyTypes.valueOf("LEVENSHTEIN_DISTANCE"));
         assertEquals(LCS, StrategyTypes.valueOf("LCS"));
         assertEquals(AST_LCS, StrategyTypes.valueOf("AST_LCS"));
         assertEquals(AST_TREE_EDIT_DISTANCE, StrategyTypes.valueOf("AST_TREE_EDIT_DISTANCE"));
         assertEquals(WEIGHTED_SCORE, StrategyTypes.valueOf("WEIGHTED_SCORE"));
+        assertEquals(MOSS, StrategyTypes.valueOf("MOSS"));
 
-        StrategyTypes[] list = {LEVENSHTEIN_DISTANCE, LCS, AST_LCS, AST_TREE_EDIT_DISTANCE, WEIGHTED_SCORE};
+        StrategyTypes[] list = {LEVENSHTEIN_DISTANCE, LCS, AST_LCS, AST_TREE_EDIT_DISTANCE, WEIGHTED_SCORE, MOSS};
 
         Assert.assertArrayEquals(list, StrategyTypes.values());
     }

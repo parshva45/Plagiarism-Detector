@@ -5,6 +5,8 @@ import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.AstBuild
 import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.ParserFacade;
 import edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.tree.*;
 import edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.editDistance.*;
+import edu.northeastern.cs5500.strategies.implementations.moss.MossComparison;
+import edu.northeastern.cs5500.strategies.implementations.moss.ResultScraper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,17 @@ import java.io.IOException;
 @Component
 @Scope("prototype")
 public class AstTreeEditDistance implements SimilarityStrategy {
-
     private static final Logger LOGGER = LogManager.getLogger(AstTreeEditDistance.class);
+
+    private final ResultScraper resultScraper;
+    private final MossComparison mossComparison;
+
+    @Autowired
+    public AstTreeEditDistance(ResultScraper resultScraper,
+                                    MossComparison mossComparison) {
+        this.resultScraper = resultScraper;
+        this.mossComparison = mossComparison;
+    }
 
     /**
      * Calculate the similarity score using the tree edit distance
@@ -60,7 +71,9 @@ public class AstTreeEditDistance implements SimilarityStrategy {
     }
 
     @Override
-    public Integer[][] getsimilarLineNos(String file1, String file2) {
-        return new Integer[][]{{-1},{-1}};
+    public Integer[][] getSimilarLineNos(String file1, String file2) {
+        String url = mossComparison.mossPlagiarismUrlForFiles(file1, file2);
+        resultScraper.startScraping(url + "/match0-top.html");
+        return resultScraper.getMatching();
     }
 }

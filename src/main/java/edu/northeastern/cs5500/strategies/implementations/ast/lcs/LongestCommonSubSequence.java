@@ -1,10 +1,10 @@
 package edu.northeastern.cs5500.strategies.implementations.ast.lcs;
 
-import edu.northeastern.cs5500.parsers.PythonToStringParser;
 import edu.northeastern.cs5500.strategies.SimilarityStrategy;
 import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.AstBuilder;
 import edu.northeastern.cs5500.strategies.implementations.ast.pythonast.ParserFacade;
-import org.apache.commons.io.FilenameUtils;
+import edu.northeastern.cs5500.strategies.implementations.moss.MossComparison;
+import edu.northeastern.cs5500.strategies.implementations.moss.ResultScraper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * @author namratabilurkar
@@ -24,6 +23,16 @@ import java.util.List;
 public class LongestCommonSubSequence implements SimilarityStrategy{
 
     private static final Logger LOGGER = LogManager.getLogger(LongestCommonSubSequence.class);
+
+    private final ResultScraper resultScraper;
+    private final MossComparison mossComparison;
+
+    @Autowired
+    public LongestCommonSubSequence(ResultScraper resultScraper,
+                                    MossComparison mossComparison) {
+        this.resultScraper = resultScraper;
+        this.mossComparison = mossComparison;
+    }
 
     /**
      * Determine the longest common subsequence length
@@ -69,7 +78,7 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
     public double calculateSimilarity(String file1, String file2) {
         String ast1;
         String ast2;
-
+        LOGGER.info("calculating similarity between {} and {}", file1, file2);
         try {
             ast1 = new AstBuilder().build(new ParserFacade().parse(new File(file1)));
             ast2 = new AstBuilder().build(new ParserFacade().parse(new File(file2)));
@@ -82,9 +91,12 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
     }
 
     @Override
-    public Integer[][] getsimilarLineNos(String file1, String file2) {
-
-        return new Integer[][]{{-1},{-1}};
+    public Integer[][] getSimilarLineNos(String file1, String file2) {
+        LOGGER.info("getting similar line nos");
+        String url = mossComparison.mossPlagiarismUrlForFiles(file1, file2);
+        resultScraper.startScraping(url + "/match0-top.html");
+        LOGGER.info("completed similar line nos");
+        return resultScraper.getMatching();
     }
 
 }

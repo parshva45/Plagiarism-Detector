@@ -5,6 +5,7 @@ import edu.northeastern.cs5500.strategies.implementations.LevenshteinDistance;
 import edu.northeastern.cs5500.strategies.implementations.WeightedScore;
 import edu.northeastern.cs5500.strategies.implementations.ast.lcs.LongestCommonSubSequence;
 import edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.AstTreeEditDistance;
+import edu.northeastern.cs5500.strategies.implementations.moss.MossComparison;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ public class StrategyFactory {
     private final LongestCommonSubSequence longestCommonSubSequence;
     private final WeightedScore weightedScore;
     private final AstTreeEditDistance astTreeEditDistance;
+    private final MossComparison mossComparison;
 
     private static final String LOG_MSG = "Using given Strategy {}";
 
@@ -38,12 +40,14 @@ public class StrategyFactory {
                            LCS lcs,
                            LongestCommonSubSequence longestCommonSubSequence,
                            WeightedScore weightedScore,
-                           AstTreeEditDistance astTreeEditDistance) {
+                           AstTreeEditDistance astTreeEditDistance,
+                           MossComparison mossComparison) {
         this.levenshteinDistance = levenshteinDistance;
         this.lcs = lcs;
         this.longestCommonSubSequence = longestCommonSubSequence;
         this.weightedScore = weightedScore;
         this.astTreeEditDistance = astTreeEditDistance;
+        this.mossComparison = mossComparison;
     }
 
     /**
@@ -67,6 +71,9 @@ public class StrategyFactory {
         } else if(StrategyTypes.AST_TREE_EDIT_DISTANCE.toString().equals(strategy)){
             LOGGER.info(LOG_MSG, StrategyTypes.AST_TREE_EDIT_DISTANCE.toString());
             return astTreeEditDistance;
+        } else if(StrategyTypes.MOSS.toString().equals(strategy)){
+            LOGGER.info(LOG_MSG, StrategyTypes.MOSS.toString());
+            return mossComparison;
         }
         LOGGER.info(LOG_MSG, StrategyTypes.LEVENSHTEIN_DISTANCE.toString());
         return levenshteinDistance;
