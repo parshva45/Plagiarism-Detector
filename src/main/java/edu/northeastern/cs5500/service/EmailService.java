@@ -3,14 +3,12 @@ package edu.northeastern.cs5500.service;
 import edu.northeastern.cs5500.response.PlagiarismReportJSON;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.simple.JSONObject;
 import org.springframework.stereotype.Component;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.List;
-import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -63,6 +61,9 @@ public class EmailService {
                 for (PlagiarismReportJSON plagiarismReport:report) {
                     stringBuilder.append(plagiarismReport.toString()).append("\n \n");
                 }
+                stringBuilder.append("\n").append("Go to URL to check plagiarism Report")
+                        .append("http://ec2-52-91-227-186.compute-1.amazonaws.com:8080/#/coursestaff/1")
+                        .append("\n\n");
                 message.setText(stringBuilder.toString());
                 LOGGER.info("sending plagiarism report to user {} at email id {}",
                         name, email);

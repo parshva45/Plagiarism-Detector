@@ -12,9 +12,11 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -79,5 +81,13 @@ public class CompareAllService {
         LOGGER.info("sending result email");
         emailService.sendEmail(professor.getUserName(), professor.getEmail(), plagiarismReportJSONList);
     }
+
+    @Scheduled(cron = "0 1 1 * * ?")
+    public void sendScheduledEmail(){
+        LOGGER.info("Cron job to process assignments started at {}", new Date());
+        process(userRepository.findByUserNameLike("courseStaff").get(0).getId());
+    }
+
+
 
 }
