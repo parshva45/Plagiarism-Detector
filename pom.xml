@@ -150,12 +150,12 @@
 			<version>1.8.3</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/charset/charset -->
-		<dependency>
-			<groupId>charset</groupId>
-			<artifactId>charset</artifactId>
-			<version>1.2.0</version>
-		</dependency>
+		<!--&lt;!&ndash; https://mvnrepository.com/artifact/charset/charset &ndash;&gt;-->
+		<!--<dependency>-->
+			<!--<groupId>charset</groupId>-->
+			<!--<artifactId>charset</artifactId>-->
+			<!--<version>1.2.0</version>-->
+		<!--</dependency>-->
 
 		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
