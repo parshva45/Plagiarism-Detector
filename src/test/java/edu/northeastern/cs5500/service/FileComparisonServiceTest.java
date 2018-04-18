@@ -44,7 +44,7 @@ public class FileComparisonServiceTest {
         List<StrategyTypes> actual = fileComparisonService.getAllStrategies();
         StrategyTypes[] expected = {StrategyTypes.LEVENSHTEIN_DISTANCE, StrategyTypes.LCS,
                  StrategyTypes.AST_LCS, StrategyTypes.AST_TREE_EDIT_DISTANCE,
-                StrategyTypes.WEIGHTED_SCORE};
+                StrategyTypes.WEIGHTED_SCORE, StrategyTypes.MOSS};
         assertArrayEquals(expected, actual.toArray());
     }
 

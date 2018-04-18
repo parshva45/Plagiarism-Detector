@@ -9,10 +9,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,17 +22,21 @@ import java.util.List;
  */
 
 @Component
+@Scope("prototype")
 public class ResultScraper {
     private static final Logger LOGGER = LogManager.getLogger(ResultScraper.class);
     private static final String USER_AGENT = Constants.SCRAPING_AGENT;
     private static final int TIME_OUT_TIME = Constants.WAIT_TIME;
+    private Integer[][] matching;
 
     /**
      * This class takes in a url and generates a jsoup document which is passed to performCrawling method
      * @param link the link to crawl
      * @return the list of MatchStorerMap that includes data to generate a plagiarism report
      */
-    public Integer[][] startScraping(String link){
+    public Double startScraping(String link){
+        Integer[][] base = {{-1},{-1}};
+        this.setMatching(base);
         LOGGER.info("started scraping link {}", link);
         if (link.startsWith("http://moss.stanford.edu/results/")) {
             Connection conn = Jsoup.connect(link).timeout(TIME_OUT_TIME).userAgent(USER_AGENT).followRedirects(false);
@@ -39,7 +45,7 @@ public class ResultScraper {
                 document = conn.get();
             } catch (IOException e) {
                 LOGGER.error("Unable to connect to the document");
-                return new Integer[][]{{-1},{-1}};
+                return 0.0;
             }
             if (conn.response().statusCode() >= 300 && conn.response().statusCode() < 400) {
                 LOGGER.error("Abort crawling, page is redirecting");
@@ -50,10 +56,10 @@ public class ResultScraper {
         } else {
             LOGGER.error("Not a MOSS result page");
         }
-        return new Integer[][]{{-1},{-1}};
+        return 0.0;
     }
 
-    private Integer[][] performCrawling(Document document){
+    private Double performCrawling(Document document){
         LOGGER.info("inside performCrawling for document {}", document.title());
         Element resultTable;
         Elements tableRows;
@@ -63,6 +69,11 @@ public class ResultScraper {
         resultTable = document.select("table").get(0);
         tableRows = resultTable.select("tr");
         Element row1col1 = tableRows.get(0);
+        String percent = row1col1.text().split(" ")[1]
+                .replace("(","")
+                .replace(")","")
+                .replace("%","");
+        LOGGER.info("percentage {}", Double.parseDouble(percent));
         String[] urls = row1col1.text().split(" ");
         LOGGER.info("First File Name {}", urls[0]);
         LOGGER.info("Second File Name {}", urls[2]);
@@ -80,7 +91,8 @@ public class ResultScraper {
                 LOGGER.error("exception in performCrawling - {}", e.getMessage());
             }
         }
-        return Utils.getArrayFromList(firstFile, secondFile);
+        this.setMatching(Utils.getArrayFromList(firstFile, secondFile));
+        return Double.parseDouble(percent);
     }
 
     private List<Integer> processColumn(Element column){
@@ -94,12 +106,18 @@ public class ResultScraper {
             for (int i =startLineNum; i<=endLineNum; i++) {
                 lineNums.add(i);
             }
-//            String filename = line.substring(0, line.length() - 6);
-//            String pc = line.substring(line.length() - 3, line.length() - 1);
         } catch (Exception e){
             LOGGER.error("error in processColumn error {}", e.getMessage());
         }
         return lineNums;
     }
 
+
+    public Integer[][] getMatching() {
+        return matching;
+    }
+
+    public void setMatching(Integer[][] matching) {
+        this.matching = matching;
+    }
 }

@@ -92,8 +92,11 @@ public class LongestCommonSubSequence implements SimilarityStrategy{
 
     @Override
     public Integer[][] getSimilarLineNos(String file1, String file2) {
+        LOGGER.info("getting similar line nos");
         String url = mossComparison.mossPlagiarismUrlForFiles(file1, file2);
-        return resultScraper.startScraping(url + "/match0-top.html");
+        resultScraper.startScraping(url + "/match0-top.html");
+        LOGGER.info("completed similar line nos");
+        return resultScraper.getMatching();
     }
 
 }

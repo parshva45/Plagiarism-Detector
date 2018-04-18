@@ -25,10 +25,12 @@ public class MossComparison implements SimilarityStrategy {
     private static final Logger LOGGER = LogManager.getLogger(MossComparison.class);
 
     private final Environment env;
+    private final ResultScraper resultScraper;
 
     @Autowired
-    public MossComparison(Environment env) {
+    public MossComparison(Environment env, ResultScraper resultScraper) {
         this.env = env;
+        this.resultScraper = resultScraper;
     }
 
     /**
@@ -74,7 +76,8 @@ public class MossComparison implements SimilarityStrategy {
      */
     @Override
     public double calculateSimilarity(String file1, String file2) {
-        return 0.0;
+        String url = mossPlagiarismUrlForFiles(file1, file2);
+        return resultScraper.startScraping(url + "/match0-top.html");
     }
 
     /**
@@ -114,7 +117,7 @@ public class MossComparison implements SimilarityStrategy {
 
     @Override
     public Integer[][] getSimilarLineNos(String file1, String file2) {
-        return new Integer[][]{{-1},{-1}};
+        return resultScraper.getMatching();
     }
 
     public String mossPlagiarismUrlForFiles(String file1, String file2) {

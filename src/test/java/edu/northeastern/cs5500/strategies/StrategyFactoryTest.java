@@ -5,6 +5,7 @@ import edu.northeastern.cs5500.strategies.implementations.LevenshteinDistance;
 import edu.northeastern.cs5500.strategies.implementations.WeightedScore;
 import edu.northeastern.cs5500.strategies.implementations.ast.lcs.LongestCommonSubSequence;
 import edu.northeastern.cs5500.strategies.implementations.ast.treeeditdistance.AstTreeEditDistance;
+import edu.northeastern.cs5500.strategies.implementations.moss.MossComparison;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,6 +38,9 @@ public class StrategyFactoryTest{
 
     @Autowired
     WeightedScore weightedScore;
+
+    @Autowired
+    MossComparison mossComparison;
 
 
     /**
@@ -73,6 +77,12 @@ public class StrategyFactoryTest{
     public void getASTTreeEditStrategyShouldReturnTheExpectedStrategy(){
 
         strategyFactory.getStrategyByStrategyType("AST_TREE_EDIT_DISTANCE");
+    }
+
+    @Test
+    public void getMosShouldReturnTheExpectedStrategy(){
+
+        strategyFactory.getStrategyByStrategyType("MOS");
     }
 
     /**
