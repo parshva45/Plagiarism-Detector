@@ -98,7 +98,7 @@ public class MossComparison implements SimilarityStrategy {
                  */
         mossComparison.createParentDir(file1, file2);
 
-        ResultScraper resultScraper = new ResultScraper();
+//        ResultScraper resultScraper = new ResultScraper();
         return 0.0;
     }
 
