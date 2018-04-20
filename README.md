@@ -29,4 +29,4 @@ In order to run this project on your local machine, follow the steps below.
 #### Final Presentations :
 **Presentation Video**: [Youtube-Presentation](https://youtu.be/NP5hE0cL3ms)
 **Demo Video**: [Youtube-Demo-Link](https://youtu.be/Gw73HDbA7bk)
-**System Setup Video**: [Youtube-System-Setup-Link]()
+**System Setup Video**: [Youtube-System-Setup-Link](https://www.youtube.com/watch?v=IZ_UnOFQHhc)
