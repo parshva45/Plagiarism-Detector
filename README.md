@@ -22,8 +22,8 @@ In order to run this project on your local machine, follow the steps below.
 <br>
 
 **Project** URL: [Plagiariam Detector](http://ec2-52-91-227-186.compute-1.amazonaws.com:8080/#/)
-Course staff Username: coursestaff
-Password: password
+* Course staff Username: coursestaff
+* Password: password
 
 * Student UserName : user1
 * Student password : user1
