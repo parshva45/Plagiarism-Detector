@@ -1,6 +1,6 @@
 # Plagiarism detector 
 
-A web application developed by team 207 for the detection of plagiarism in two submissions of code files for the course of CS 5500 - Section 02, during the term of Spring 2018 at Northeastern Univeristy.
+A web application developed for the detection of plagiarism in two submissions of code files.
 
 Team Members:
 * Praveen Kumar Singh
@@ -10,14 +10,9 @@ Team Members:
 In order to run this project on your local machine, follow the steps below.
 
 1. Open the terminal
-2. Perform **$git clone https://github.ccs.neu.edu/cs5500/team-207** at the location where you want the project.
+2. Perform **$git clone https://github.com/parshva45/Plagiarism-Detector** at the location where you want the project.
 3. Navigate to the base location, the place where the pom file exists in the terminal, and perform
 	* $mvn spring-boot:run
-
-
-**Jenkins** URL : [Jenkins](http://ec2-18-222-73-94.us-east-2.compute.amazonaws.com:8080/)
-* Jenkins username: team207
-* Password: spring2018project
 
 **Project** URL: [Plagiariam Detector](http://ec2-52-91-227-186.compute-1.amazonaws.com:8080/#/) <br><br>
 Course staff Username: coursestaff<br>
