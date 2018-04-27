@@ -19,9 +19,7 @@ In order to run this project on your local machine, follow the steps below.
 * Jenkins username: team207
 * Password: spring2018project
 
-<br>
-
-**Project** URL: [Plagiariam Detector](http://ec2-52-91-227-186.compute-1.amazonaws.com:8080/#/) <br>
+**Project** URL: [Plagiariam Detector](http://ec2-52-91-227-186.compute-1.amazonaws.com:8080/#/) <br><br>
 Course staff Username: coursestaff<br>
 Password: password
 
